@@ -63,7 +63,7 @@ def parse_league(browser):
         finally: #TODO - catch the TimeOut exception and do something about it
             pass
     
-    for month in months:
+    for month in months[-1:]:
         for game in games_by_month[month]:
             parse_game(webdriver.Chrome(),game[0],all_teams_dict,all_teams_curr_fix)  
         else: #saving each month separately
@@ -90,16 +90,16 @@ def parse_game(browser,link,all_teams_dict,all_teams_curr_fix):
     away_team_name = list_tlinks[1].text
     
     def create_dicts_from_table(table):
-        players = table.find_elements_by_class_name("pn")
-        players_names = set([player.text.split('\n')[0] for player in players])
+        players = table.find_elements_by_class_name("player-link")
+        players_names = set([player.text for player in players])
         players_dict = {name:{"summary":{},"offensive":{},"defensive":{},"passing":{}} for name in players_names}
-        return players , players_names , players_dict
+        return players_dict
     
     home_table = browser.find_element_by_id("live-player-home-stats")
-    home_players ,home_players_names ,home_players_dict = create_dicts_from_table(home_table) 
+    home_players_dict = create_dicts_from_table(home_table) 
     
     away_table = browser.find_element_by_id("live-player-away-stats")
-    away_players ,away_players_names ,away_players_dict = create_dicts_from_table(away_table)
+    away_players_dict = create_dicts_from_table(away_table)
     
      
     parse_team(browser,"home",home_players_dict)
@@ -118,13 +118,18 @@ def parse_team(browser,curr_team,all_players_dict):
         link_table.click()
         rel_table = browser.find_element_by_id("live-player-"+curr_team+"-"+link_table.text.lower())
         table = rel_table.find_element_by_id("top-player-stats-summary-grid")
-        team_header = [h.text for h in table.find_element_by_tag_name("thead").find_elements_by_tag_name("th")[7:]]
+        team_header = [h.text for h in table.find_element_by_tag_name("thead").find_elements_by_tag_name("th")[3:-2]]
+        team_header += ["Goals"]
         team_body = table.find_element_by_tag_name("tbody")
         team_lines = team_body.find_elements_by_tag_name("tr")
         for line in team_lines:
-            player_data_line = [l.text for l in line.find_elements_by_tag_name("td")[2:]]
-            player_name = player_data_line[0].split('\n')[0]
-            player_data_line = player_data_line[1:]
+            player_data_line = [float(l.text) for l in line.find_elements_by_tag_name("td")[3:-2]]
+            key_events = line.find_elements_by_tag_name("td")[-1]
+            browser.implicitly_wait(5)
+            goals = key_events.find_elements_by_xpath('./span/span[@data-type="16" and not(@data-event-satisfier-goalown)]')
+            browser.implicitly_wait(30)
+            player_data_line += [float(len(goals))]
+            player_name = line.find_element_by_class_name("player-link").text
             all_players_dict[player_name][link_table.text.lower()] = {h:d for h,d in izip(team_header,player_data_line)}
     
         
