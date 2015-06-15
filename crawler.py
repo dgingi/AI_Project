@@ -4,7 +4,7 @@ Selenium Crawler module.
 """
  
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,6 +13,7 @@ import time
 from itertools import izip
 from pickle import dump,load
 import utils
+from _elementtree import Element
 
 def start_crawl():
     """
@@ -21,7 +22,7 @@ def start_crawl():
     TODO: more generic crawling
     """
     browser = webdriver.Chrome() # Get local session of Chrome
-    browser.implicitly_wait(30)
+    browser.implicitly_wait(15)
     browser.get("http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/3853")
     parse_league(browser)
     
@@ -32,7 +33,7 @@ def parse_league(browser):
     Start parsing the league table.
     
     """
-    wait = WebDriverWait(browser,15)
+    wait = WebDriverWait(browser,30)
     
     table = browser.find_element_by_class_name("stat-table")
     list_tlinks = table.find_elements_by_class_name("team-link")
@@ -63,31 +64,38 @@ def parse_league(browser):
         finally: #TODO - catch the TimeOut exception and do something about it
             pass
     
-    for month in months[-1:]:
+    for month in months[:7]:
         for game in games_by_month[month]:
-            parse_game(webdriver.Chrome(),game[0],all_teams_dict,all_teams_curr_fix)  
+            parse_game(webdriver.Chrome(),game[0],all_teams_dict,all_teams_curr_fix,wait)  
         else: #saving each month separately
             with open("PL-13-14-"+month+".pckl",'w') as output:
                 dump(all_teams_dict, output)  
     
     
 
-def parse_game(browser,link,all_teams_dict,all_teams_curr_fix):
+def parse_game(browser,link,all_teams_dict,all_teams_curr_fix,wait):
     """
     Start parsing a single game (Home VS Away).
 
     """
     browser.implicitly_wait(30)
     browser.get(link)
-
+    #try:
+    #    wait.until(EC.text_to_be_present_in_element((By.CLASS_NAME,"with-single-level"),"Player Statistics"))
+        
+    #finally:
+    #    pass
     players_stats_elm = browser.find_element_by_link_text("Player Statistics")
     players_stats_elm.click() #TODO - see if need to wait for page to load
-    
     time.sleep(10)
+    
+    #wait.until(EC.presence_of_element_located((By.CLASS_NAME,"rating ")))
+        
     
     list_tlinks = browser.find_elements_by_class_name("team-link")
     home_team_name = list_tlinks[0].text
     away_team_name = list_tlinks[1].text
+    
     
     def create_dicts_from_table(table):
         players = table.find_elements_by_class_name("player-link")
@@ -102,8 +110,8 @@ def parse_game(browser,link,all_teams_dict,all_teams_curr_fix):
     away_players_dict = create_dicts_from_table(away_table)
     
      
-    parse_team(browser,"home",home_players_dict)
-    parse_team(browser,"away",away_players_dict)
+    parse_team(browser,"home",home_players_dict,wait)
+    parse_team(browser,"away",away_players_dict,wait)
     
     all_teams_dict[home_team_name][all_teams_curr_fix[home_team_name]]=home_players_dict
     all_teams_curr_fix[home_team_name]+=1
@@ -111,12 +119,14 @@ def parse_game(browser,link,all_teams_dict,all_teams_curr_fix):
     all_teams_curr_fix[away_team_name]+=1
     browser.close()
     
-def parse_team(browser,curr_team,all_players_dict):
+def parse_team(browser,curr_team,all_players_dict,wait):
     opt_tabels = browser.find_element_by_id("live-player-"+curr_team+"-options")
     linked_tabels = opt_tabels.find_elements_by_xpath(".//a")
     for link_table in linked_tabels:
         link_table.click()
         rel_table = browser.find_element_by_id("live-player-"+curr_team+"-"+link_table.text.lower())
+        wait.until(EC.text_to_be_present_in_element((By.CLASS_NAME,"rank"),"R"))
+        #wait.until(EC.text_to_be_present_in_element((By.ID,"live-player-"+curr_team+"-"+link_table.text.lower()),"GK"))
         table = rel_table.find_element_by_id("top-player-stats-summary-grid")
         team_header = [h.text for h in table.find_element_by_tag_name("thead").find_elements_by_tag_name("th")[3:-2]]
         team_header += ["Goals"]
@@ -125,9 +135,9 @@ def parse_team(browser,curr_team,all_players_dict):
         for line in team_lines:
             player_data_line = [float(l.text) for l in line.find_elements_by_tag_name("td")[3:-2]]
             key_events = line.find_elements_by_tag_name("td")[-1]
-            browser.implicitly_wait(5)
+            #browser.implicitly_wait(5)
             goals = key_events.find_elements_by_xpath('./span/span[@data-type="16" and not(@data-event-satisfier-goalown)]')
-            browser.implicitly_wait(30)
+            #browser.implicitly_wait(15)
             player_data_line += [float(len(goals))]
             player_name = line.find_element_by_class_name("player-link").text
             all_players_dict[player_name][link_table.text.lower()] = {h:d for h,d in izip(team_header,player_data_line)}
