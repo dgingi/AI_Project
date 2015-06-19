@@ -69,7 +69,7 @@ def parse_league(browser,start_month):
     games_by_month = {i:None for i in months}
 
     for i in months[::-1]:
-        WebDriverWait(browser,10).until(EC.text_to_be_present_in_element((By.CLASS_NAME,"rowgroupheader"),i))
+        WebDriverWait(browser,30).until(EC.text_to_be_present_in_element((By.CLASS_NAME,"rowgroupheader"),i))
         all_res = browser.find_elements_by_xpath('//a[@class="result-1 rc"]')
         games_by_month[i] = [(res.get_attribute("href"),res.text) for res in all_res]
         prev_month.click()
@@ -113,13 +113,12 @@ def parse_game(browser,link,all_teams_dict,all_teams_curr_fix):
         return players_dict
     
     def parse_result(result_list,curr_team):
+        winner = "tie"
         if result_list[0] > result_list[1]:
-            wineer = "home"
+            winner = "home"
         elif result_list[0] < result_list[1]:
-            wineer = "away"
-        else:
-            wineer = "tie"
-        if wineer == curr_team:
+            winner = "away"
+        if winner == curr_team:
             return 1
         elif winner != "tie":
             return -1
@@ -159,7 +158,7 @@ def parse_team(browser,curr_team,all_players_dict):
     for link_table in linked_tabels:
         link_table.click()
         findStr = "live-player-"+curr_team+"-"+link_table.text.lower()
-        WebDriverWait(browser,10).until(EC.visibility_of_element_located((By.ID,findStr)))
+        WebDriverWait(browser,30).until(EC.visibility_of_element_located((By.ID,findStr)))
         rel_table = browser.find_element_by_id(findStr)
         table = rel_table.find_element_by_id("top-player-stats-summary-grid")
         team_header = [unidecode(h.text) for h in table.find_element_by_tag_name("thead").find_elements_by_tag_name("th")[3:-2]]
