@@ -7,9 +7,10 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait , Select
 from selenium.webdriver.support import expected_conditions as EC
 import time
+
 from itertools import izip
 from pickle import dump,load
 import utils
@@ -17,8 +18,9 @@ from _elementtree import Element
 from sys import argv
 from unidecode import unidecode
 from __builtin__ import str
+from sys import argv
 
-def start_crawl(start_month):
+def start_crawl(league,year,start_month):
     """
     Start crawling and collecting data. 
     
@@ -26,12 +28,14 @@ def start_crawl(start_month):
     """
     browser = webdriver.Chrome() # Get local session of Chrome
     browser.implicitly_wait(10)
-    browser.get("http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/3853")
-    parse_league(browser,start_month)
+    browser.get(league)
+    select = Select(browser.find_element_by_id("seasons"))
+    select.select_by_visible_text(str(year)+'/'+str(year+1))
+    parse_league(browser,year,start_month)
     
     browser.close()
     
-def parse_league(browser,start_month):
+def parse_league(browser,year,start_month):
     """
     Start parsing the league table.
     
@@ -51,8 +55,11 @@ def parse_league(browser,start_month):
     all_teams_names = set([unidecode(thr.text) for thr in list_tlinks])
     months = ['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May']
     
+    seq = (argv[1],str(year)+'/'+str(year+1),start_month)
+    file_pref = '-'.join(seq)
+    
     if start_month != 'Aug' :
-        with open("PL-13-14-"+get_prev_month(start_month,months)+".pckl",'r') as res:
+        with open(file_pref+get_prev_month(start_month,months)+".pckl",'r') as res:
             all_teams_dict = load(res)
             all_teams_curr_fix = {name:get_curr_fix(all_teams_dict,name) for name in all_teams_names} 
     else:
@@ -70,8 +77,12 @@ def parse_league(browser,start_month):
 
     for i in months[::-1]:
         WebDriverWait(browser,30).until(EC.text_to_be_present_in_element((By.CLASS_NAME,"rowgroupheader"),i))
-        all_res = browser.find_elements_by_xpath('//a[@class="result-1 rc"]')
-        games_by_month[i] = [(res.get_attribute("href"),res.text) for res in all_res]
+        all_res = browser.find_elements_by_xpath('//div[@id="tournament-fixture-wrapper"]/table/tbody/tr[@class!="rowgroupheader"]')
+        
+        games_by_month[i] = [{'link':unidecode(res.find_element_by_xpath('//a[@class="result-1 rc"]').get_attribute("href")),
+                              'home':unidecode(res.find_elements_by_xpath('./td[@data-id]/a')[0].text),
+                              'result':unidecode(res.find_element_by_xpath('//a[@class="result-1 rc"]').text),
+                              'away':unidecode(res.find_elements_by_xpath('./td[@data-id]/a')[1].text)} for res in all_res]
         prev_month.click()
     
     flag_of_start_month = False
@@ -81,9 +92,9 @@ def parse_league(browser,start_month):
         if not(flag_of_start_month):
             continue
         for game in games_by_month[month]:
-            parse_game(webdriver.Chrome(),game[0],all_teams_dict,all_teams_curr_fix)  
+            parse_game(webdriver.Chrome(),game['link'],all_teams_dict,all_teams_curr_fix)  
         else: #saving each month separately
-            with open("PL-13-14-"+month+".pckl",'w') as output:
+            with open(file_pref+month+".pckl",'w') as output:
                 dump(all_teams_dict, output)  
     
     
@@ -193,4 +204,23 @@ def get_player_name(str_list):
     return str
 
 if __name__ == '__main__':
-    start_crawl(argv[1]) 
+    import argparse
+    leagues_links = {'Primer_League':"http://www.whoscored.com/Regions/252/Tournaments/2/England-Premier-League",
+                     'Serie_A':"http://www.whoscored.com/Regions/108/Tournaments/5/Italy-Serie-A",
+                     'La_Liga':"http://www.whoscored.com/Regions/206/Tournaments/4/Spain-La-Liga",
+                     'Bundesliga':"http://www.whoscored.com/Regions/81/Tournaments/3/Germany-Bundesliga",
+                     'Ligue_1':"http://www.whoscored.com/Regions/74/Tournaments/22/France-Ligue-1"
+                     }
+    parser = argparse.ArgumentParser(description='Crawel whoscored.com for the specified league and year.')
+    parser.add_argument('league', metavar='League', type=str,
+                       help='A league to parse. The leagues are: '+', '.join(leagues_links.keys()),choices=leagues_links.keys())
+    parser.add_argument('year', metavar='Year',type=int, nargs='?',
+                        help='A year to parse. Valid years: '+', '.join([str(i) for i in range(1999,2015)]),
+                        default=max(range(1999,2015)),choices=range(1999,2015))
+    parser.add_argument('month', metavar='Month',type=str, nargs='?',
+                        help='The month to start the parsing. Valid months: '+', '.join(['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May']),
+                        default='Aug',choices=['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'])
+    
+    args = parser.parse_args()
+    vars(args)
+    start_crawl(leagues_links[vars(args)['league']], vars(args)['year'], vars(args)['month']) 
