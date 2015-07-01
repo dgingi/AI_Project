@@ -97,7 +97,7 @@ def parse_league(browser,year,start_month):
             with open(file_pref+"-"+month+".pckl",'w') as output:
                 dump(all_teams_dict, output)
             with open(file_pref+"-"+month+"-fixtures.pckl",'w') as output:
-                dump(games_by_month[month])      
+                dump(games_by_month[month],output)      
     
     
 
