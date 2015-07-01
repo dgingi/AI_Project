@@ -19,6 +19,7 @@ from sys import argv
 from unidecode import unidecode
 from __builtin__ import str
 from sys import argv
+from os import path, mkdir
 
 def start_crawl(league,year,start_month):
     """
@@ -55,19 +56,18 @@ def parse_league(browser,year,start_month):
     all_teams_names = set([unidecode(thr.text) for thr in list_tlinks])
     months = ['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May']
     
-    seq = (argv[1],str(year)+'/'+str(year+1),start_month)
+    seq = (argv[1],str(year))
     file_pref = '-'.join(seq)
-    
+        
     if start_month != 'Aug' :
-        with open(file_pref+get_prev_month(start_month,months)+".pckl",'r') as res:
+        with open(file_pref+"-"+get_prev_month(start_month,months)+".pckl",'r') as res:
             all_teams_dict = load(res)
             all_teams_curr_fix = {name:get_curr_fix(all_teams_dict,name) for name in all_teams_names} 
     else:
-        all_teams_dict = {name:{i:{} for i in range(1,2*len(all_teams_names)-1)} for name in all_teams_names}
+        all_teams_dict = {name:{str(i):{} for i in range(1,2*len(all_teams_names)-1)} for name in all_teams_names}
         all_teams_curr_fix = {name:1 for name in all_teams_names}
     
-    
-    
+     
     fixtures_elm = browser.find_element_by_link_text("Fixtures")
     fixtures_elm.click()
     WebDriverWait(browser,10).until(EC.text_to_be_present_in_element((By.TAG_NAME,"h2"),'Fixture'))
@@ -94,8 +94,10 @@ def parse_league(browser,year,start_month):
         for game in games_by_month[month]:
             parse_game(webdriver.Chrome(),game['link'],all_teams_dict,all_teams_curr_fix)  
         else: #saving each month separately
-            with open(file_pref+month+".pckl",'w') as output:
-                dump(all_teams_dict, output)  
+            with open(file_pref+"-"+month+".pckl",'w') as output:
+                dump(all_teams_dict, output)
+            with open(file_pref+"-"+month+"-fixtures.pckl",'w') as output:
+                dump(games_by_month[month])      
     
     
 
@@ -151,16 +153,21 @@ def parse_game(browser,link,all_teams_dict,all_teams_curr_fix):
     home_result = parse_result(result, "home")
     away_result = parse_result(result, "away")
     
-    all_teams_dict[home_team_name][all_teams_curr_fix[home_team_name]]["Players"]=home_players_dict
-    all_teams_dict[home_team_name][all_teams_curr_fix[home_team_name]]["HA"]="home"
-    all_teams_dict[home_team_name][all_teams_curr_fix[home_team_name]]["Result"]=(result[0],result[1])
-    all_teams_dict[home_team_name][all_teams_curr_fix[home_team_name]]["Tag"]=home_result
+    home_curr_fix = all_teams_curr_fix[home_team_name]
+    away_curr_fix = all_teams_curr_fix[away_team_name]
+    
+    all_teams_dict[home_team_name][str(home_curr_fix)]["Players"]=home_players_dict
+    all_teams_dict[home_team_name][str(home_curr_fix)]["HA"]="home"
+    all_teams_dict[home_team_name][str(home_curr_fix)]["Result"]=(result[0],result[1])
+    all_teams_dict[home_team_name][str(home_curr_fix)]["Tag"]=home_result
     all_teams_curr_fix[home_team_name]+=1
-    all_teams_dict[away_team_name][all_teams_curr_fix[away_team_name]]["Players"]=away_players_dict
-    all_teams_dict[away_team_name][all_teams_curr_fix[away_team_name]]["HA"]="away"
-    all_teams_dict[away_team_name][all_teams_curr_fix[away_team_name]]["Result"]=(result[0],result[1])
-    all_teams_dict[away_team_name][all_teams_curr_fix[away_team_name]]["Tag"]=away_result
+    
+    all_teams_dict[away_team_name][str(away_curr_fix)]["Players"]=away_players_dict
+    all_teams_dict[away_team_name][str(away_curr_fix)]["HA"]="away"
+    all_teams_dict[away_team_name][str(away_curr_fix)]["Result"]=(result[0],result[1])
+    all_teams_dict[away_team_name][str(away_curr_fix)]["Tag"]=away_result
     all_teams_curr_fix[away_team_name]+=1
+    
     browser.close()
     
 def parse_team(browser,curr_team,all_players_dict):
@@ -223,4 +230,6 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
     vars(args)
-    start_crawl(leagues_links[vars(args)['league']], vars(args)['year'], vars(args)['month']) 
+    start_crawl(leagues_links[vars(args)['league']], vars(args)['year'], vars(args)['month'])
+    
+     
