@@ -42,6 +42,8 @@ def parse_league(browser,year,start_month):
     
     """
     def get_prev_month(month,all_months):
+        if month=='Aug':
+            return 'Aug'
         for i in range(len(all_months)-1):
             if all_months[i+1]==month:
                 return all_months[i]
@@ -103,7 +105,8 @@ def parse_league(browser,year,start_month):
         else: #saving each month separately
             with open(file_pref+"/"+file_pref+"-"+month+".pckl",'w') as output:
                 dump(all_teams_dict, output)
-            remove(file_pref+"/"+file_pref+"-"+get_prev_month(month,months)+".pckl")
+            if month!='Aug':
+                remove(file_pref+"/"+file_pref+"-"+get_prev_month(month,months)+".pckl")
             with open(file_pref+"/"+file_pref+"-"+month+"-fixtures.pckl",'w') as output:
                 dump(games_by_month[month],output)      
     
