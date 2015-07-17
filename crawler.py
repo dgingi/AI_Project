@@ -168,7 +168,8 @@ def parse_game(browser,link,all_teams_dict,all_teams_curr_fix):
         all_teams_dict[team_name][team_curr_fix]["Players"]=players_dict
         all_teams_dict[team_name][team_curr_fix]["HA"]=HA
         all_teams_dict[team_name][team_curr_fix]["Result"]=(result[0],result[1])
-        all_teams_dict[team_name][team_curr_fix]["Players"]=parse_result(result, HA)
+        all_teams_dict[team_name][team_curr_fix]["Tag"]=parse_result(result, HA)
+        all_teams_curr_fix[team_name]+=1
         
     update_team(all_teams_dict, all_teams_curr_fix, home_team_name, home_players_dict, "home", result)
     update_team(all_teams_dict, all_teams_curr_fix, away_team_name, away_players_dict, "away", result)
