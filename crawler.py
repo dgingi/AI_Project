@@ -4,6 +4,7 @@ Selenium Crawler module.
 """
  
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -27,7 +28,9 @@ def start_crawl(league,year,start_month):
     
     TODO: more generic crawling
     """
-    browser = webdriver.Chrome() # Get local session of Chrome
+    chop = webdriver.ChromeOptions()
+    chop.add_extension('AdBlock_v2.36.2.crx')
+    browser = webdriver.Chrome(chrome_options = chop) # Get local session of Chrome
     browser.implicitly_wait(10)
     browser.get(league)
     select = Select(browser.find_element_by_id("seasons"))
@@ -60,7 +63,8 @@ def parse_league(browser,year,start_month):
     
     seq = (argv[1],str(year))
     file_pref = '-'.join(seq)
-    mkdir(file_pref)
+    if not path.exists(file_pref):
+        mkdir(file_pref)
     
     if start_month != 'Aug' :
         with open(file_pref+"/"+file_pref+"-"+get_prev_month(start_month,months)+".pckl",'r') as res:
@@ -95,13 +99,15 @@ def parse_league(browser,year,start_month):
         prev_month.click()
     
     flag_of_start_month = False
+    chop = webdriver.ChromeOptions()
+    chop.add_extension('AdBlock_v2.36.2.crx')
     for month in months:
         if month == start_month:
             flag_of_start_month = True
         if not(flag_of_start_month):
             continue
         for game in games_by_month[month]:
-            parse_game(webdriver.Chrome(),game['link'],all_teams_dict,all_teams_curr_fix)  
+            parse_game(browser,game['link'],all_teams_dict,all_teams_curr_fix)  
         else: #saving each month separately
             with open(file_pref+"/"+file_pref+"-"+month+".pckl",'w') as output:
                 dump(all_teams_dict, output)
@@ -174,7 +180,7 @@ def parse_game(browser,link,all_teams_dict,all_teams_curr_fix):
     update_team(all_teams_dict, all_teams_curr_fix, home_team_name, home_players_dict, "home", result)
     update_team(all_teams_dict, all_teams_curr_fix, away_team_name, away_players_dict, "away", result)
     
-    browser.close()
+    #browser.close()
     
 def parse_team(browser,curr_team,all_players_dict):
     opt_tabels = browser.find_element_by_id("live-player-"+curr_team+"-options")
