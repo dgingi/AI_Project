@@ -74,6 +74,14 @@ def parse_league(browser,year,start_month):
         all_teams_dict = {name:{i:{} for i in range(1,2*len(all_teams_names)-1)} for name in all_teams_names}
         all_teams_curr_fix = {name:1 for name in all_teams_names}
     
+    disp_last_week = browser.find_element_by_id("date-controller")
+    curr_last_week = disp_last_week.find_elements_by_tag_name('a')[1]
+    curr_last_week.click()
+    last_played_month = browser.find_element_by_class_name('months')
+    last_month = last_played_month.find_element_by_xpath('./tbody/tr/td[@class=" selected selectable"]')    
+    if last_month.text == 'Jun':
+        months+=['Jun']
+    curr_last_week.click()
      
     fixtures_elm = browser.find_element_by_link_text("Fixtures")
     fixtures_elm.click()
