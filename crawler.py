@@ -114,11 +114,46 @@ def parse_league(browser,year,start_month):
     else:
         all_teams_dict = {name:{i:{} for i in range(1,2*len(all_teams_names)-1)} for name in all_teams_names}
         all_teams_curr_fix = {name:1 for name in all_teams_names}
+<<<<<<< HEAD
         if not path.exists(file_pref+"/"+file_pref+"-fixtures.pckl"):
             games_by_month = get_fixtures(browser, file_pref, months)
         else:
             with open(file_pref+"/"+file_pref+"-fixtures.pckl",'r') as output:
                 games_by_month = load(output)
+=======
+    
+    disp_last_week = browser.find_element_by_id("date-controller")
+    curr_last_week = disp_last_week.find_elements_by_tag_name('a')[1]
+    curr_last_week.click()
+    last_played_month = browser.find_element_by_class_name('months')
+    last_month = last_played_month.find_element_by_xpath('./tbody/tr/td[@class=" selected selectable"]')    
+    if last_month.text == 'Jun':
+        months+=['Jun']
+    curr_last_week.click()
+     
+    fixtures_elm = browser.find_element_by_link_text("Fixtures")
+    fixtures_elm.click()
+    WebDriverWait(browser,10).until(EC.text_to_be_present_in_element((By.TAG_NAME,"h2"),'Fixture'))
+    disp_month = browser.find_element_by_id('date-controller')
+    prev_month = disp_month.find_elements_by_tag_name('a')[0]
+    games_by_month = {i:None for i in months}
+
+    for i in months[::-1]:
+        WebDriverWait(browser,30).until(EC.text_to_be_present_in_element((By.CLASS_NAME,"rowgroupheader"),i))
+        all_res = browser.find_elements_by_xpath('//div[@id="tournament-fixture-wrapper"]/table/tbody/tr[@class!="rowgroupheader"]')
+        
+        elements_list = [{'result':res.find_element_by_xpath('./td/a[@class="result-1 rc"]'),'teams':res.find_elements_by_xpath('./td[@data-id]/a')} for res in all_res]
+        
+        #games_by_month[i] = [{'link':unidecode(elm['result'].get_attribute("href")),
+        #                      'home':unidecode(elm['teams'][0].text),
+        #                      'result':unidecode(elm['result'].text),
+        #                      'away':unidecode(elm['teams'][1].text)} for elm in elements_list]
+        games_by_month[i] = [{'link':unidecode(res.find_element_by_xpath('./td/a[@class="result-1 rc"]').get_attribute("href")),
+                              'home':unidecode(res.find_elements_by_xpath('./td[@data-id]/a')[0].text),
+                              'result':unidecode(res.find_element_by_xpath('./td/a[@class="result-1 rc"]').text),
+                              'away':unidecode(res.find_elements_by_xpath('./td[@data-id]/a')[1].text)} for res in all_res]
+        prev_month.click()
+>>>>>>> 7ce87d2442ef448069e4f784d3a361bb63a87694
     
     flag_of_start_month = False
     for month in months:
