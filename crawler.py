@@ -19,9 +19,10 @@ from unidecode import unidecode
 from __builtin__ import str
 import sys
 from os import path, mkdir,remove
+import utils
 from utils import PrintException
 
-def start_crawl(league,year,start_month):
+def start_crawl(league,year,start_month='Aug'):
     """
     Start crawling and collecting data. 
     
@@ -136,6 +137,7 @@ def parse_league(browser,year,start_month):
                 dump(all_teams_dict, output)
             if month!='Aug':
                 remove(file_pref+"/"+file_pref+"-"+get_prev_month(month,months)+".pckl")
+    utils.DBHanler(league,str(year)).insert_to_db(all_teams_dict)
     raise Exception('Fin')
     
 
@@ -272,12 +274,10 @@ if __name__ == '__main__':
     parser.add_argument('year', metavar='Year',type=int, nargs='?',
                         help='A year to parse. Valid years: '+', '.join([str(i) for i in range(1999,2015)]),
                         default=max(range(1999,2015)),choices=range(1999,2015))
-    parser.add_argument('month', metavar='Month',type=str, nargs='?',
-                        help='The month to start the parsing. Valid months: '+', '.join(['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May']),
-                        default='Aug',choices=['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'])
+    
     
     args = parser.parse_args()
     vars(args)
-    start_crawl(leagues_links[vars(args)['league']], vars(args)['year'], vars(args)['month'])
+    start_crawl(leagues_links[vars(args)['league']], vars(args)['year'])
     
      

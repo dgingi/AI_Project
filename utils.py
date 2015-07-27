@@ -3,12 +3,13 @@ from pymongo import MongoClient
 import numpy as np
 
 class DBHandler():
-    def __init__(self):
+    def __init__(self,league,year):
         self.client = MongoClient() #TODO: remote DB
-        self.DB = self.client.DB
-        self.col = self.DB.col
+        self.DB = self.client[league]
+        self.col = self.DB[year]
         self.non_avg_keys = ["Position","PName","GName","Result","HA","_id","Tag","VS","Goals"]
-        self.d_pos = ["GK","DR","DL","DC","DMC","DML","DMR"]
+        self.d_pos = ["GK","DR","DL","DC","DMC","DML","DMR","MR","MC","ML"]
+        self.a_pos = ["FW","AR","AL","AC","AMC","AML","AMR"]
     
     def convert(self,data):
         """
@@ -42,8 +43,11 @@ class DBHandler():
     def insert_to_db(self,data):
         self.col.insert(self.explode(self.convert(data)))
         
-    def drop(self):
-        self.client.drop_database('DB')
+    def drop(self,league,year=None):
+        if year:
+            self.client.DB.drop_collection(year)
+        else:
+            self.dlient.drop_database(league)
     
     def create_avg_aux(self,t_name,lookback=5):
         max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name})])
@@ -85,6 +89,8 @@ class DBHandler():
         curr_pipe = create_pipe(t_name,fix,lookback,"by_p") 
         update_res(res, curr_pipe)
         curr_pipe = create_pipe(t_name, fix, lookback, "by_pos", self.d_pos)
+        update_res(res, curr_pipe)
+        curr_pipe = create_pipe(t_name, fix, lookback, "by_pos", self.a_pos)
         update_res(res, curr_pipe)
         for key in res:
             if fix-lookback < 0:
