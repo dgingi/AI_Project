@@ -1,6 +1,7 @@
 from Tkinter import *
 from crawler import *
 from pickle import load
+import subprocess
   
 TITLE_FONT = ("Helvetica", 18, "bold")
 
@@ -106,9 +107,8 @@ class crawler_page(Frame):
                      'Ligue_1':"http://www.whoscored.com/Regions/74/Tournaments/22/France-Ligue-1"
                      }
         
-        func = lambda: start_crawl(self.leagues_links[self.league_selection.get()],int(self.year_selection.get()),'Aug')
-        
-        self.start_crawl = Button(self, text="START CRAWLING",bg="blue",command=func)
+        args = ["python","crawler.py"]
+        self.start_crawl = Button(self, text="START CRAWLING",bg="blue",command=lambda : subprocess.Popen(args+[self.league_selection.get(),self.year_selection.get()]))
         self.start_crawl.pack(side=BOTTOM,pady=40)
         
         
