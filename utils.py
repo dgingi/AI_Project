@@ -1,7 +1,7 @@
 from time import clock
 from pymongo import MongoClient
 import numpy as np
-from boto.sdb.db.sequence import double
+# from boto.sdb.db.sequence import double
 
 class Features():
     def __init__(self,data):
@@ -71,7 +71,9 @@ class Features():
             res["avg_received_Goals_by_fix"+by_loc] /= num_of_games
         
         def update_avg_success_rate(res,t_name,fix,by_loc,HA_list,lookback=5):
-            
+            '''
+            @todo: fix this function (Dror)
+            '''
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
             group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result"}}}
             pipe += [group_q]
@@ -139,7 +141,9 @@ class Features():
                 return pipe
             
             if fix==1:
-                #TODO - check for history if availabe and act on it + to add if fox-lookback<0 then add by history
+                '''
+                @todo- if fix - lookback < 0 -> search previous year (Dror)
+                '''
                 return
             
             temp_res = {}
@@ -173,6 +177,9 @@ class DBHandler():
         self.client = MongoClient() #TODO: remote DB
         self.DB = self.client[league]
         self.col = self.DB[year]
+        '''
+        @todo: add all the years to the DBHandler - so a league could access a previous league (Ory)
+        '''
     
     def convert(self,data):
         """

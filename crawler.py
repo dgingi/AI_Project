@@ -81,7 +81,7 @@ def parse_league(browser,year,start_month):
         prev_month = disp_month.find_elements_by_tag_name('a')[0]
         games_by_month = {i:None for i in months}
     
-        for i in months[::-1]:
+        for i in reversed(months):
             WebDriverWait(browser,30).until(EC.text_to_be_present_in_element((By.CLASS_NAME,"rowgroupheader"),i))
             all_res = browser.find_elements_by_xpath('//div[@id="tournament-fixture-wrapper"]/table/tbody/tr[@class!="rowgroupheader"]')
     
