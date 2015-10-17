@@ -1,15 +1,178 @@
 from time import clock
 from pymongo import MongoClient
 import numpy as np
+from boto.sdb.db.sequence import double
 
+class Features():
+    def __init__(self,data):
+        self.col = data.col
+        self.non_avg_keys = ["Position","PName","GName","Result","HA","_id","Tag","VS","Goals","Fix"]
+        self.d_pos = ["GK","DR","DL","DC","DMC","DML","DMR","MR","MC","ML"]
+        self.a_pos = ["FW","AR","AL","AC","AMC","AML","AMR"]
+        self.o_pos = ["Sub"]
+
+    def create_features(self,t_name,lookback=5):
+        max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name})])
+        res_by_all = {i:self.create_avg_up_to("by_all_fix",t_name, i, lookback) for i in range(1,max_fix+1)}
+        res_by_fix = {i:self.create_avg_up_to("by_fix",t_name, i, lookback) for i in range(1,max_fix+1)}
+        res_by_non_avg = {i:self.create_avg_of_non_avg_f(t_name, i, lookback) for i in range(1,max_fix+1)}
+        return res_by_all,res_by_fix,res_by_non_avg
+           
+    def get_curr_HA(self,t_name,fix):
+        return self.col.find_one({"GName":t_name,"Fix":fix})["HA"]
+    
+    def get_agg_size(self,agg):
+                agg_size = 0
+                for cursor in agg:
+                    agg_size += 1
+                return 1 if agg_size == 0 else agg_size
+        
+    def create_avg_of_non_avg_f(self,t_name,fix,lookback=5):
+        
+        def update_avg_goals_scored(res,t_name,fix,by_loc,HA_list,lookback=5):
+            if fix==1:
+                #TODO same as beneath
+                return
+            pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix"},"avg_Goals_by_fix"+by_loc:{"$sum":"$Goals"}}}
+            pipe += [group_q]
+            res["avg_Goals_by_fix"+by_loc] = 0.0
+            agg = self.col.aggregate(pipe)
+            num_of_games = self.get_agg_size(agg)
+            agg = self.col.aggregate(pipe) 
+            for cursor in agg:
+                for key in cursor:
+                    if key!="_id":
+                        res["avg_Goals_by_fix"+by_loc] += cursor[key]
+            res["avg_Goals_by_fix"+by_loc] /= num_of_games
+        
+        def update_avg_received_goals(res,t_name,fix,by_loc,HA_list,lookback=5):
+            
+            def select_recieved_goals(HA,result):
+                if HA=="home":
+                    return int(result[1])
+                else:
+                    return int(result[0])
+            
+            if fix==1:
+                #TODO same as beneath
+                return
+                
+            pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result"}}}
+            pipe += [group_q]
+            res["avg_received_Goals_by_fix"+by_loc] = 0.0
+            agg = self.col.aggregate(pipe)
+            num_of_games = self.get_agg_size(agg)
+            agg = self.col.aggregate(pipe)
+            for cursor in agg:
+                for key in cursor:
+                    res["avg_received_Goals_by_fix"+by_loc] += select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
+            res["avg_received_Goals_by_fix"+by_loc] /= num_of_games
+        
+        def update_avg_success_rate(res,t_name,fix,by_loc,HA_list,lookback=5):
+            
+            pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result"}}}
+            pipe += [group_q]
+            res["avg_Success_rate"+by_loc] = 0.0
+            agg = self.col.aggregate(pipe)
+            num_of_games = self.get_agg_size(agg)
+            agg = self.col.aggregate(pipe)
+            for cursor in agg:
+                res["avg_Success_rate"+by_loc] += select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
+            res["avg_Success_rate"+by_loc] /= num_of_games
+            
+        res = {}
+        curr_HA = self.get_curr_HA(t_name, fix) 
+        
+        update_avg_goals_scored(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
+        update_avg_goals_scored(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
+        update_avg_received_goals(res, t_name, fix, "_by_all_HA", ["home","away"], lookback)
+        update_avg_received_goals(res, t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
+        
+        return res
+        
+    def create_avg_up_to(self,by_avg,t_name,fix,lookback=5):
+        
+        def decide_pos_list(str):
+            pos = str.split('_')[1]
+            if pos == 'all':
+                return []
+            elif pos == 'def':
+                return self.d_pos
+            elif pos == 'att':
+                return self.a_pos
+            else:
+                return self.o_pos
+        
+        def make_pos_list(str):
+            if str == "by_all_fix":
+                return ["by_all_pos","by_sub_pos"]
+            else:
+                return ["by_all_pos","by_def_pos","by_att_pos","by_sub_pos"]
+           
+        def update_res(res,t_name,fix,lookback,by_avg,by_pos,by_loc,HA_list,pos_list):
+            
+            def create_pipe(res,t_name,fix,lookback,by_avg,by_pos,by_loc,HA_list,pos_list):
+                
+                def all_features(res,by_avg,by_pos,by_loc,group_q):
+                    temp_group_q = dict(group_q)
+                    for key in self.col.find_one().keys():
+                        if key in self.non_avg_keys:
+                            continue
+                        index = "$"+key
+                        temp = ("avg_"+key+"_"+by_avg+"_"+by_pos+"_"+by_loc,{"$avg":index})
+                        res[temp[0]] = 0.0
+                        temp_group_q["$group"][temp[0]] = temp[1]
+                    return temp_group_q
+                
+                pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
+                if pos_list:
+                    pipe[0]["$match"]["Position"] = {"$in":pos_list}
+                group_q = {}
+                if by_avg == "by_all_fix":
+                    group_q = {"$group":{"_id":{"GName":"$GName"}}}
+                else:
+                    group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix"}}}
+                pipe += [all_features(res,by_avg,by_pos,by_loc, group_q)]
+                return pipe
+            
+            if fix==1:
+                #TODO - check for history if availabe and act on it + to add if fox-lookback<0 then add by history
+                return
+            
+            temp_res = {}
+            pipe = create_pipe(temp_res, t_name, fix, lookback,by_avg, by_pos, by_loc, HA_list, pos_list)
+            agg = self.col.aggregate(pipe)
+            num_of_games = self.get_agg_size(agg)
+            agg = self.col.aggregate(pipe)
+            for cursor in agg:
+                for key in cursor:
+                    if key != "_id":
+                        temp_res[key]+=cursor[key]
+            if by_avg == "by_fix":
+                for key in temp_res:
+                    temp_res[key] /= num_of_games
+            res.update(temp_res)
+                                
+        res = {}
+        curr_HA = self.get_curr_HA(t_name, fix)
+        pos_list = make_pos_list(by_avg)
+         
+        for pos in pos_list:
+            curr_pos_list = decide_pos_list(pos)
+            update_res(res,t_name,fix,lookback,by_avg,pos, "by_all_HA",["home","away"],curr_pos_list)
+            update_res(res,t_name,fix,lookback,by_avg,pos, "by_"+curr_HA, [curr_HA],curr_pos_list)
+             
+        return res                
+
+        
 class DBHandler():
     def __init__(self,league,year):
         self.client = MongoClient() #TODO: remote DB
         self.DB = self.client[league]
         self.col = self.DB[year]
-        self.non_avg_keys = ["Position","PName","GName","Result","HA","_id","Tag","VS","Goals"]
-        self.d_pos = ["GK","DR","DL","DC","DMC","DML","DMR","MR","MC","ML"]
-        self.a_pos = ["FW","AR","AL","AC","AMC","AML","AMR"]
     
     def convert(self,data):
         """
@@ -47,77 +210,14 @@ class DBHandler():
         if year:
             self.client.DB.drop_collection(year)
         else:
-            self.dlient.drop_database(league)
-    
-    def create_avg_aux(self,t_name,lookback=5):
-        max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name})])
-        res_by_all = {i:self.create_avg_up_to_by_all(t_name, i, lookback) for i in range(1,max_fix+1)}
-        res_by_fix = {i:self.create_avg_up_to_by_fix(t_name, i, lookback) for i in range(1,max_fix+1)}
-        return res_by_all,res_by_fix
-    
-    """ Add avg. goals"""
-    def create_avg_up_to_by_fix(self,t_name,fix,lookback=5):
-        
-        def all_features(res,by_f,group_q):
-            temp_group_q = dict(group_q)
-            for key in self.col.find_one().keys():
-                if key in self.non_avg_keys:
-                    continue
-                index = "$"+key
-                temp = ("avg_"+key+"_by_fix_"+by_f,{"$avg":index})
-                res[temp[0]] = 0.0
-                temp_group_q["$group"][temp[0]] = temp[1]
-            return temp_group_q
-            
-        
-        def create_pipe(t_name,fix,lookback,by_f,pos_list=[]):
-            pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback}}}]
-            if pos_list:
-                pipe[0]["$match"]["Position"] = {"$in":pos_list}
-            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix"}}}
-            pipe += [all_features(res,by_f, group_q)]
-            return pipe
-        
-        def update_res(res,pipe):
-            agg = self.col.aggregate(pipe)
-            for cursor in agg:
-                for key in cursor:
-                    if key != "_id":
-                        res[key]+=cursor[key]
-                                
-        res = {}
-        curr_pipe = create_pipe(t_name,fix,lookback,"by_p") 
-        update_res(res, curr_pipe)
-        curr_pipe = create_pipe(t_name, fix, lookback, "by_pos", self.d_pos)
-        update_res(res, curr_pipe)
-        curr_pipe = create_pipe(t_name, fix, lookback, "by_pos", self.a_pos)
-        update_res(res, curr_pipe)
-        for key in res:
-            if fix-lookback < 0:
-                res[key] = res[key]/fix
-            else:
-                res[key] = res[key]/lookback
-        return res  
-    
-    def create_avg_up_to_by_all(self,t_name,fix,lookback=5):
-        pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback}}}]
-        group_q = {"$group":{"_id":"$GName"}}
-        for key in self.col.find_one().keys():
-            if key in self.non_avg_keys:
-                continue
-            index = "$"+key
-            temp = ("avg_"+key+"by_all",{"$avg":index})
-            group_q["$group"][temp[0]] = temp[1]
-        pipe += [group_q]
-        for element in self.col.aggregate(pipe):
-            del element["_id"]
-            return element
+            self.client.drop_database(league)
     
     def create_examples(self):
         all_teams_names = [g['_id'] for g in self.col.aggregate([{"$group":{"_id":"$GName"}}])]
         all_teams_dict = {name:{} for name in all_teams_names}
+        features = Features(self)
         for team in all_teams_dict:
-            res_by_all, res_by_fix = self.create_avg_aux(team)
+            res_by_all, res_by_fix, res_by_non_avg = features.create_features(team)
             for fix in sorted(res_by_all):
                 if fix == 1:
                     continue
@@ -126,6 +226,10 @@ class DBHandler():
                 if fix == 1:
                     continue
                 all_teams_dict[team][fix] += [res_by_fix[fix][k] for k in sorted(res_by_fix[fix])]
+            for fix in sorted(res_by_non_avg):
+                if fix == 1:
+                    continue
+                all_teams_dict[team][fix] += [res_by_non_avg[fix][k] for k in sorted(res_by_non_avg[fix])]
         examples = []
         tags = []
         for team in all_teams_names:
@@ -140,19 +244,9 @@ class DBHandler():
                     tags += [curr_game["Tag"]]
         return examples,tags
         
-    def create_avg_per_game(self):
-        pipe = [{"$match":{"Touches":{"$gt":0}}}]
-        group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix"},"tot_player":{"$sum":1}}}
-        for key in self.col.find_one().keys():
-            index = "$"+key
-            temp = ("avg_"+key,{"$avg":index})
-            group_q["$group"][temp[0]] = temp[1]
-        pipe += [group_q]
-        return self.col.aggregate(pipe)
+
         
-    
-    
-                
+                    
 
 def PrintException():
     import linecache
