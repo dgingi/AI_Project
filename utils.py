@@ -1,14 +1,17 @@
 from time import clock
 from pymongo import MongoClient
 import numpy as np
-# from boto.sdb.db.sequence import double
+
 
 class Features():
     def __init__(self,data):
         self.col = data.col
         self.non_avg_keys = ["Position","PName","GName","Result","HA","_id","Tag","VS","Goals","Fix"]
         self.d_pos = ["GK","DR","DL","DC","DMC","DML","DMR","MR","MC","ML"]
+        self.sd_pos = ["DR","DL","DC"]
+        self.m_pos = ["DMC","DML","DMR","MR","MC","ML","AMC","AML","AMR"]
         self.a_pos = ["FW","AR","AL","AC","AMC","AML","AMR"]
+        self.sa_pos = ["FW","AR","AL","AC"]
         self.o_pos = ["Sub"]
 
     def create_features(self,t_name,lookback=5):
@@ -71,28 +74,26 @@ class Features():
             res["avg_received_Goals_by_fix"+by_loc] /= num_of_games
         
         def update_avg_success_rate(res,t_name,fix,by_loc,HA_list,lookback=5):
-            '''
-            @todo: fix this function (Dror)
-            '''
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
-            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result"}}}
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Tag":"$Tag"}}}
             pipe += [group_q]
             res["avg_Success_rate"+by_loc] = 0.0
             agg = self.col.aggregate(pipe)
             num_of_games = self.get_agg_size(agg)
             agg = self.col.aggregate(pipe)
             for cursor in agg:
-                res["avg_Success_rate"+by_loc] += select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
+                for key in cursor:
+                    res["avg_Success_rate"+by_loc] += 1 if cursor[key]["Tag"]==1 else 0 
             res["avg_Success_rate"+by_loc] /= num_of_games
+            res["avg_Success_rate"+by_loc] *= 100
             
         res = {}
         curr_HA = self.get_curr_HA(t_name, fix) 
         
-        update_avg_goals_scored(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
-        update_avg_goals_scored(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
-        update_avg_received_goals(res, t_name, fix, "_by_all_HA", ["home","away"], lookback)
-        update_avg_received_goals(res, t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
-        
+        for func in [update_avg_goals_scored,update_avg_received_goals,update_avg_success_rate]:
+            func(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
+            func(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
+       
         return res
         
     def create_avg_up_to(self,by_avg,t_name,fix,lookback=5):
@@ -103,16 +104,22 @@ class Features():
                 return []
             elif pos == 'def':
                 return self.d_pos
+            elif pos == 'sdef':
+                return self.sd_pos
+            elif pos == 'mid':
+                return self.m_pos
             elif pos == 'att':
                 return self.a_pos
+            elif pos == 'satt':
+                return self.sa_pos
             else:
                 return self.o_pos
         
         def make_pos_list(str):
             if str == "by_all_fix":
-                return ["by_all_pos","by_sub_pos"]
+                return ["by_all_pos","by_sub_pos","by_mid_pos","by_satt_pos"]
             else:
-                return ["by_all_pos","by_def_pos","by_att_pos","by_sub_pos"]
+                return ["by_all_pos","by_def_pos","by_att_pos","by_sub_pos","by_mid_pos","by_satt_pos","by_sdef_pos"]
            
         def update_res(res,t_name,fix,lookback,by_avg,by_pos,by_loc,HA_list,pos_list):
             
