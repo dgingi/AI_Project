@@ -260,8 +260,6 @@ class DBHandler():
         
 
         
-                    
-
 def PrintException():
     import linecache
     import sys
