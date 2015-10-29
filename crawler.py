@@ -20,7 +20,7 @@ from __builtin__ import str
 import sys
 from os import path, mkdir,remove
 import utils
-from utils import PrintException
+from utils import PrintException, DBHandler
 
 def start_crawl(league,year,start_month='Aug'):
     """
@@ -137,7 +137,7 @@ def parse_league(browser,year,start_month):
                 dump(all_teams_dict, output)
             if month!='Aug':
                 remove(file_pref+"/"+file_pref+"-"+get_prev_month(month,months)+".pckl")
-    utils.DBHanler(league,str(year)).insert_to_db(all_teams_dict)
+    DBHandler(LEAGUE_NAME,str(year)).insert_to_db(all_teams_dict)
     raise Exception('Fin')
     
 
@@ -260,6 +260,9 @@ def get_player_name(str_list):
             str+=str_list[i]
     return str
 
+
+LEAGUE_NAME = ''
+
 if __name__ == '__main__':
     import argparse
     leagues_links = {'Primer_League':"http://www.whoscored.com/Regions/252/Tournaments/2/England-Premier-League",
@@ -271,13 +274,23 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Crawel whoscored.com for the specified league and year.')
     parser.add_argument('league', metavar='League', type=str,
                        help='A league to parse. The leagues are: '+', '.join(leagues_links.keys()),choices=leagues_links.keys())
-    parser.add_argument('year', metavar='Year',type=int, nargs='?',
-                        help='A year to parse. Valid years: '+', '.join([str(i) for i in range(1999,2015)]),
-                        default=max(range(1999,2015)),choices=range(1999,2015))
+    parser.add_argument('year', metavar='Year',type=str, nargs='?',
+                        help='A year to parse. Valid years: '+', '.join([str(i) for i in range(2010,2015)]),
+                        default=str(max(range(2010,2015))),\
+                        choices=['-'.join([str(i),str(j)]) for i in range(2010,2015) for j in range(2010,2015) if i<j])
     
-    
+    global LEAGUE_NAME
     args = parser.parse_args()
-    vars(args)
-    start_crawl(leagues_links[vars(args)['league']], vars(args)['year'])
+    kwargs={}
+    LEAGUE_NAME = vars(args)['league']
+    kwargs['league'] = leagues_links[vars(args)['league']]
+    if '-' in vars(args)['year']:
+        start , end = tuple(vars(args)['year'].split('-'))
+        for year in range(int(start),int(end)+1):
+            kwargs['year'] = int(year)
+            start_crawl(**kwargs)
+    else:
+        kwargs['year'] = int(year)
+        start_crawl(**kwargs)
     
-     
+    
