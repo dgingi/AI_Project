@@ -246,7 +246,7 @@ class DBHandler():
     def __init__(self,league):
         self.client = MongoClient() #TODO: remote DB
         self.DB = self.client[league]
-        self.cols = {str(year):self.DB[str(year)] for year in range(2011,2016)}
+        self.cols = {str(year):self.DB[str(year)] for year in range(2010,2015)}
         self.league = league
     
     def convert(self,data):

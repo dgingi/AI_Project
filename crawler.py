@@ -5,9 +5,9 @@ Selenium Crawler module.
 """
  
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.chrome.options import Options
+# from selenium.common.exceptions import NoSuchElementException, TimeoutException
+# from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait , Select
 from selenium.webdriver.support import expected_conditions as EC
@@ -18,12 +18,13 @@ from pickle import dump,load
 from sys import argv
 from unidecode import unidecode
 from __builtin__ import str
-import sys
-from os import path, mkdir,remove
-import utils
-from utils import PrintException, DBHandler
+from os import path, mkdir,remove,listdir
 
-LEAGUE_NAME = ''
+from old_utils import PrintException, DBHandler
+
+from utils.argumet_parsers import CrawlerArgsParser
+
+args_parser=CrawlerArgsParser()
 
 
 def start_crawl(league,year,start_month='Aug'):
@@ -102,6 +103,10 @@ def parse_league(browser,year,start_month):
     table = browser.find_element_by_class_name("stat-table")
     list_tlinks = table.find_elements_by_class_name("team-link")
     all_teams_names = set([unidecode(thr.text) for thr in list_tlinks])
+    '''
+    @todo - A functions to get all the played months (xpath query, in the table,
+            search //td[@class="selectable"] and it should work...
+    '''
     months = ['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May']
     
     seq = (argv[1],str(year))
@@ -141,7 +146,7 @@ def parse_league(browser,year,start_month):
                 dump(all_teams_dict, output)
             if month!='Aug':
                 remove(file_pref+"/"+file_pref+"-"+get_prev_month(month,months)+".pckl")
-    DBHandler(LEAGUE_NAME,str(year)).insert_to_db(all_teams_dict)
+    DBHandler(args_parser.LEAGUE_NAME,str(year)).insert_to_db(all_teams_dict)
     raise Exception('Fin')
     
 
@@ -265,35 +270,12 @@ def get_player_name(str_list):
     return str
 
 
-
 if __name__ == '__main__':
-    import argparse
-    leagues_links = {'Primer_League':"http://www.whoscored.com/Regions/252/Tournaments/2/England-Premier-League",
-                     'Serie_A':"http://www.whoscored.com/Regions/108/Tournaments/5/Italy-Serie-A",
-                     'La_Liga':"http://www.whoscored.com/Regions/206/Tournaments/4/Spain-La-Liga",
-                     'Bundesliga':"http://www.whoscored.com/Regions/81/Tournaments/3/Germany-Bundesliga",
-                     'Ligue_1':"http://www.whoscored.com/Regions/74/Tournaments/22/France-Ligue-1"
-                     }
-    parser = argparse.ArgumentParser(description='Crawel whoscored.com for the specified league and year.')
-    parser.add_argument('league', metavar='League', type=str,
-                       help='A league to parse. The leagues are: '+', '.join(leagues_links.keys()),choices=leagues_links.keys())
-    parser.add_argument('year', metavar='Year',type=str, nargs='?',
-                        help='A year to parse. Valid years: '+', '.join([str(i) for i in range(2010,2015)]),
-                        default=str(max(range(2010,2015))),\
-                        choices=[str(i) for i in range(2010,2015)]+['-'.join([str(i),str(j)]) for i in range(2010,2015) for j in range(2010,2015) if i<j])
-    
-    global LEAGUE_NAME
-    args = parser.parse_args()
-    kwargs={}
-    LEAGUE_NAME = vars(args)['league']
-    kwargs['league'] = leagues_links[vars(args)['league']]
-    if '-' in vars(args)['year']:
-        start , end = tuple(vars(args)['year'].split('-'))
-        for year in range(int(start),int(end)+1):
-            kwargs['year'] = int(year)
+    args_parser.parse()
+    if args_parser.multi:
+        for kwargs in args_parser.range_kwargs:
             start_crawl(**kwargs)
     else:
-        kwargs['year'] = int(vars(args)['year'])
-        start_crawl(**kwargs)
+        start_crawl(**args_parser.kwargs)
     
     
