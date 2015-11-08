@@ -36,13 +36,13 @@ class Features():
     
     def check_for_history(self,fix,lookback,need_history):
         if fix == 1 and (str(self.prev_year) not in self.data.keys()):
-            return False
+            return False,need_history
         if fix == 1 and (self.data[str(self.prev_year)].count() == 0):
-            return False
+            return False,need_history
         if fix - lookback <= 0 and str(self.prev_year) in self.data.keys():
             if self.data[str(self.prev_year)].count() != 0:
                 need_history = True
-        return True
+        return True,need_history
     
     def get_history(self,res,t_name,fix,lookback,HA_list,pos_list,group_q,curr_key,curr_feat,func):
         temp_f = Features(self.data,str(self.prev_year))
@@ -57,10 +57,13 @@ class Features():
         pipe += [group_q]
         agg = temp_f.col.aggregate(pipe)
         num_of_games = self.get_agg_size(agg)
-        agg = temp_f.col.aggregate(pipe) 
+        agg = temp_f.col.aggregate(pipe)
+        orig_curr_key = curr_key 
         for cursor in agg:
             for key in cursor:
                 if key!="_id" or curr_feat=="GR" or curr_feat=="SR":
+                    if orig_curr_key == "all":
+                        curr_key=key
                     if curr_feat == "GR":
                         res[curr_key] += func(cursor[key]["HA"],cursor[key]["Result"])
                     else:
@@ -72,7 +75,8 @@ class Features():
         def update_avg_goals_scored(res,t_name,fix,by_loc,HA_list,lookback=5):
             need_history = False
             his_num_of_games = 0
-            if not self.check_for_history(fix, lookback, need_history):
+            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
+            if not break_or_continue:
                 return
             
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
@@ -101,7 +105,8 @@ class Features():
             
             need_history = False
             his_num_of_games = 0
-            if not self.check_for_history(fix, lookback, need_history):
+            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
+            if not break_or_continue:
                 return
                 
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
@@ -122,9 +127,9 @@ class Features():
         def update_avg_success_rate(res,t_name,fix,by_loc,HA_list,lookback=5):
             need_history = False
             his_num_of_games = 0
-            if not self.check_for_history(fix, lookback, need_history):
+            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
+            if not break_or_continue:
                 return
-            
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
             group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Tag":"$Tag"}}}
             pipe += [group_q]
@@ -207,7 +212,8 @@ class Features():
             
             need_history = False
             his_num_of_games = 0
-            if not self.check_for_history(fix, lookback, need_history):
+            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
+            if not break_or_continue:
                 return
             
             temp_res = {}
@@ -279,8 +285,8 @@ class DBHandler():
         return res
     
     def insert_to_db(self,data,year):
-        if self.cols[year].count() == 0:
-            self.drop(self.league, year)
+        if self.cols[year].count() != 0:
+            self.drop(year)
         self.cols[year].insert(self.explode(self.convert(data)))
         
     def drop(self,year=None):

@@ -146,7 +146,7 @@ def parse_league(browser,year,start_month):
                 dump(all_teams_dict, output)
             if month!='Aug':
                 remove(file_pref+"/"+file_pref+"-"+get_prev_month(month,months)+".pckl")
-    DBHandler(args_parser.LEAGUE_NAME,str(year)).insert_to_db(all_teams_dict)
+    DBHandler(args_parser.LEAGUE_NAME).insert_to_db(all_teams_dict,str(year))
     raise Exception('Fin')
     
 
