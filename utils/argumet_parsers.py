@@ -30,7 +30,7 @@ class CrawlerArgsParser(object):
                            help='A league to parse. The leagues are: '+', '.join(self.leagues_links.keys()),
                            choices=self.leagues_links.keys())
         self.parser.add_argument('year', metavar='Years',type=str, nargs='?',
-                            help='A year to parse. Valid years: '+', '.join([str(i) for i in range(2010,2015)]),
+                            help='A year to parse. Valid years are: '+', '.join([str(i) for i in range(2010,2015)]+[' or any range of them, separated by -.']),
                             default=str(max(range(2010,2015))),\
                             choices=self._default_ranges())
      
