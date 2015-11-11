@@ -62,7 +62,7 @@ def funcMinSL(state,i):
     
 class LearningState(SearchState):
     def __init__(self,data,examples,tags):
-        legal_operators = [funcCriterion,funcSplitter]#,funcMaxDRand,funcMaxFRand,funcMinSLRand,funcMinSSRand]
+        legal_operators = [funcCriterion]#,funcSplitter]#,funcMaxDRand,funcMaxFRand,funcMinSLRand,funcMinSSRand]
         legal_operators += [funcMaxDAux(i) for i in range(1,len(examples))]
         legal_operators += [funcMaxFAux(i) for i in range(1,len(examples[0]))]
         legal_operators += [funcMinSLAux(i) for i in range(1,len(examples))]
@@ -72,23 +72,26 @@ class LearningState(SearchState):
         self.tags = tags
         self.data = data
     
-    def evaluate(self, evaluation_set, evaluation_set_labels):
-        clf = tree.DecisionTreeClassifier(criterion=self.data["criterion"],splitter=self.data["splitter"],max_features=self.data["max_features"],max_depth=self.data["max_depth"],min_samples_split=self.data["min_samples_split"],min_samples_leaf=self.data["min_samples_leaf"])
-        clf = clf.fit(self.examples,self.tags)
-        res = clf.predict(evaluation_set)
-        sum = 0
-        for i in range(len(res)):
-            if res[i] == evaluation_set_labels[i]:
-                sum += 1
-        return float(sum)/len(res)
+    def evaluate(self, evaluation_set, evaluation_set_labels,avg_amount=20):
+        avg_succ = 0.0
+        for i in range(avg_amount):
+            clf = tree.DecisionTreeClassifier(criterion=self.data["criterion"],splitter=self.data["splitter"],max_features=self.data["max_features"],max_depth=self.data["max_depth"],min_samples_split=self.data["min_samples_split"],min_samples_leaf=self.data["min_samples_leaf"])
+            clf = clf.fit(self.examples,self.tags)
+            res = clf.predict(evaluation_set)
+            sum = 0
+            for j in range(len(res)):
+                if res[j] == evaluation_set_labels[j]:
+                    sum += 1
+            avg_succ += float(sum)/len(res)
+        return avg_succ/avg_amount
 
 
 class FirstChoiceLocalSearch(LocalSearch):
     def __init__(self,examples,tags):
-        data = {"criterion":"gini","splitter":"best","max_features":len(examples[0]),"max_depth":len(examples),"min_samples_split":2,"min_samples_leaf":1}
+        data = {"criterion":"gini","splitter":"random","max_features":len(examples[0]),"max_depth":len(examples),"min_samples_split":2,"min_samples_leaf":1}
         starting_state = LearningState(data,examples,tags)
         LocalSearch.__init__(self,starting_state)
-        self.sideSteps = 50
+        self.sideSteps = 30
     
     def make_random_state(self,state,array):
         new_data = {}
@@ -96,7 +99,7 @@ class FirstChoiceLocalSearch(LocalSearch):
         while prev_state:
             found_prev = False
             new_data["criterion"] = "gini" if random() <= 0.5 else "entropy"
-            new_data["splitter"] = "best" if random() <= 0.5 else "random"
+            new_data["splitter"] = "random" if random() <= 0.5 else "random"
             new_data["max_features"] = randint(1,len(state.examples[0]))
             new_data["max_depth"] =  len(state.examples) if random() <= 0.5 else randint(1,len(state.examples))
             new_data["min_samples_split"] = randint(2,len(state.examples))
@@ -123,35 +126,34 @@ class FirstChoiceLocalSearch(LocalSearch):
             next_states = current.get_next_states()
             shuffle(next_states)
             while not improved:
-                try:
-                    new_state = next_states.pop(0)[0]
-                except Exception,e:
-                    random_array += [(output_array[-1][1],current)]
-                    current = self.make_random_state(current,output_array)
-                    random_start += 1
-                    first_state = True
-                    improved = False
-                    break
+                new_state = next_states.pop(0)[0]
                 nRes = new_state.evaluate(evaluation_set, evaluation_set_labels)
                 cRes = current.evaluate(evaluation_set, evaluation_set_labels)
                 if first_state:
                     output_array += [(i,cRes)]
+                    print cRes
                     i += 1
                     first_state = False
                 if  nRes >= cRes :
+                    print "found better",cRes,nRes
                     if nRes == cRes and self.sideSteps > 0:
                         self.sideSteps -= 1
                         improved = True
                         current = new_state
                         output_array += [(i,nRes)]
+                        print nRes
                         i += 1
                     if nRes > cRes:
-                        self.sideSteps = 50
+                        self.sideSteps = 30
                         improved = True
                         first_state = True
-                        current = new_state
-                        output_array += [(i,nRes)]
-                        i += 1
+            if not improved and random_start <=0:
+                random_array += [(output_array[-1][1],current)]
+                print "restart2",random_array[-1][0]
+                current = self.make_random_state(current,output_array)
+                random_start += 1
+                first_state = True
+                improved = False
             if not improved and random_start > 10:
                 return max(random_array)[1],max(random_array)[0],output_array
 
