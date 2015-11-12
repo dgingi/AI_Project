@@ -1,7 +1,12 @@
 from time import clock
 from pymongo import MongoClient
 import numpy as np
+from pickle import load,dump
+import os
+import copy
 
+MIN_YEAR = 2010
+MAX_YEAR = 2015
 
 class Features():
     def __init__(self,data,year):
@@ -252,7 +257,7 @@ class DBHandler():
     def __init__(self,league):
         self.client = MongoClient() #TODO: remote DB
         self.DB = self.client[league]
-        self.cols = {str(year):self.DB[str(year)] for year in range(2010,2015)}
+        self.cols = {str(year):self.DB[str(year)] for year in range(MIN_YEAR,MAX_YEAR)}
         self.league = league
     
     def convert(self,data):
@@ -295,6 +300,7 @@ class DBHandler():
         else:
             self.client.drop_database(self.league)
     
+        
     def create_examples(self,year):
         def update_all_teams_dict(res,all_teams_dict,team,first):
             for fix in sorted(res):
@@ -332,7 +338,81 @@ class DBHandler():
         return examples,tags
         
 
-        
+
+class EXHandler():
+    def __init__(self,league):
+        self.league = league
+        self.DBH = DBHandler(self.league)
+        return
+
+    def get_features_names(self):
+        D = DBHandler(self.league)
+        team = [g['_id'] for g in D.cols["2012"].aggregate([{"$group":{"_id":"$GName"}}])][0]
+        res_by_all, res_by_fix, res_by_non_avg, res_by_fix_sum = Features(D.cols,"2012").create_features(team)
+        features_names = [k for k in sorted(res_by_all[15])]
+        features_names += [k for k in sorted(res_by_fix[15])]
+        features_names += [k for k in sorted(res_by_fix_sum[15])]
+        features_names += [k for k in sorted(res_by_non_avg[15])]
+        return features_names
+    
+    def get(self,year=None):
+        examples = []
+        tags = []
+        if not year:
+            all_years = range(MIN_YEAR,MAX_YEAR)
+        else:
+            all_years = [year]
+        for curr_year in range(MIN_YEAR,MAX_YEAR):
+            path = self.league+"-"+str(curr_year)+"\\"+self.league+"-"+str(curr_year)
+            if self.DBH.cols[str(curr_year)].count() != 0:
+                if os.path.exists(path+"_E.pckl"):
+                    with open(path+"_E.pckl",'r') as res:
+                        temp_e = load(res)
+                        examples += temp_e
+                    with open(path+"_T.pckl",'r') as res:
+                        temp_t = load(res)
+                        tags += temp_t
+                else:
+                    temp_e,temp_t = self.DBH.create_examples(str(curr_year))
+                    examples += temp_e
+                    tags += temp_t
+                    with open(path+"_E.pckl",'w') as res:
+                        dump(temp_e,res)
+                    with open(path+"_T.pckl",'w') as res:
+                        dump(temp_t,res)
+            elif os.path.exists(path+"-May.pckl"):
+                with open(path+"-May.pckl",'r') as res:
+                    data = load(res)
+                    self.DBH.insert_to_db(data, str(curr_year))
+                    temp_e,temp_t = self.DBH.create_examples(str(curr_year))
+                    examples += temp_e
+                    tags += temp_t
+                    with open(path+"_E.pckl",'w') as res:
+                        dump(temp_e,res)
+                    with open(path+"_T.pckl",'w') as res:
+                        dump(temp_t,res)
+        return examples,tags
+    
+    def convert(self,ex,amount=3):
+        new_ex = [copy.copy(x) for x in ex]
+        for i in range(len(new_ex[0])):
+            temp_list = [new_ex[j][i] for j in range(len(new_ex))]
+            max_diff = max(temp_list)
+            min_diff = min(temp_list)
+            for j in range(len(new_ex)):
+                res = new_ex[j][i]
+                if res > 0:
+                    for rel_amount in reversed(range(amount)):
+                        if res >= (rel_amount * max_diff)/amount
+                            new_ex[j][i] = rel_amount + 1
+                            break;
+                elif res < 0:
+                    for rel_amount in reversed(range(amount)):
+                        if res <= (rel_amount * min_diff)/amount
+                            new_ex[j][i] = -1 * (rel_amount + 1)
+                            break;
+        return new_ex
+    
 def PrintException():
     import linecache
     import sys
