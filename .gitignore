@@ -1,0 +1,13 @@
+# Compiled source #
+###################
+*.pyc
+ 
+# Logs and databases #
+######################
+*.log
+*.log*
+
+# GIT IGNORE #
+##############
+*.gitignore*
+

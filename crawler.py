@@ -52,6 +52,22 @@ def start_crawl(league,year,start_month='Aug'):
             time.sleep(10)
             start_month = e.args[0]
             
+def _get_played_months(browser):
+    config_button = browser.find_element_by_id('date-config-toggle-button')
+    config_button.click()
+#     months_menu = browser.find_element_by_id('date-config')
+    years = browser.find_elements_by_xpath('//*[@id="date-config"]/div[1]/div/table/tbody/tr/td[1]/div/table/tbody/tr/td')
+    rows = browser.find_elements_by_xpath('//*[@id="date-config"]/div[1]/div/table/tbody/tr/td[2]/div/table/tbody/tr')
+    months = []
+    for row in reversed(rows):
+        months += [str(e.text) for e in reversed(row.find_elements_by_class_name('selectable'))]
+    years[0].click()
+    rows = browser.find_elements_by_xpath('//*[@id="date-config"]/div[1]/div/table/tbody/tr/td[2]/div/table/tbody/tr')
+    for row in reversed(rows):
+        months += [str(e.text) for e in reversed(row.find_elements_by_class_name('selectable'))]
+    config_button.click()
+    return years, months
+            
 def parse_league(browser,year,start_month):
     """
     Start parsing the league table.
@@ -104,8 +120,8 @@ def parse_league(browser,year,start_month):
     list_tlinks = table.find_elements_by_class_name("team-link")
     all_teams_names = set([unidecode(thr.text) for thr in list_tlinks])
     '''
-    @todo - A functions to get all the played months (xpath query, in the table,
-            search //td[@class="selectable"] and it should work...
+    @todo - (*) use the new function to get the played months
+            (*) a new mechanism to dump \ load previous matches and games
     '''
     months = ['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May']
     

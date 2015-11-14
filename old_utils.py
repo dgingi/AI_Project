@@ -403,12 +403,12 @@ class EXHandler():
                 res = new_ex[j][i]
                 if res > 0:
                     for rel_amount in reversed(range(amount)):
-                        if res >= (rel_amount * max_diff)/amount
+                        if res >= (rel_amount * max_diff)/amount:
                             new_ex[j][i] = rel_amount + 1
                             break;
                 elif res < 0:
                     for rel_amount in reversed(range(amount)):
-                        if res <= (rel_amount * min_diff)/amount
+                        if res <= (rel_amount * min_diff)/amount:
                             new_ex[j][i] = -1 * (rel_amount + 1)
                             break;
         return new_ex
