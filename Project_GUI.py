@@ -6,6 +6,8 @@ import tkMessageBox
 import Tkinter
   
 TITLE_FONT = ("Helvetica", 18, "bold")
+BUTTON_FONT = ("Helvetica", 13, "bold")
+SELECTION_FONT = ("Helvetica", 11)
 
 def start_crawl_func(args,league,year):
     if league == "Nothing Selected Yet" or year == "Nothing Selected Yet":
@@ -25,7 +27,7 @@ class SampleApp(Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (home_page, crawler_page):
+        for F in (home_page, crawler_page, examples_page):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -50,13 +52,29 @@ class home_page(Frame):
         label = Label(self, text="This is the AI Project GUI", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
         
-        crawler_b = Button(self, text="Crawler",
-                            command=lambda: controller.show_frame(crawler_page))
-        quit_b = Button(self,text="QUIT",bg="red",command=self.quit)
-        crawler_b.pack()
-        quit_b.pack(side=BOTTOM)
+        crawler_b = Button(self, text="Crawler", command=lambda: controller.show_frame(crawler_page),font=BUTTON_FONT)
+        examples_b = Button(self, text="Examples Handler", command=lambda: controller.show_frame(examples_page),font=BUTTON_FONT)
+        quit_b = Button(self,text="QUIT",bg="red",command=self.quit,font=BUTTON_FONT)
+        crawler_b.place(x=170,y=100)
+        examples_b.place(x=310,y=100)
+        quit_b.pack(side=BOTTOM,pady=30)
 
-
+class examples_page(Frame):
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        
+        background_image = PhotoImage(file = "C:\Users\dror\Documents\Technion\AI-Project\GUI_BG.gif")
+        BGLabel = Label(self, image = background_image)
+        BGLabel.image = background_image
+        BGLabel.place(x=0, y=0, relwidth=1, relheight=1)
+        
+        self.label = Label(self, text="This is The Examples Handler", font=TITLE_FONT)
+        self.label.pack(side="top", fill="x", pady=10)
+        
+        self.home_b = Button(self, text="Go to the home page",command=lambda: controller.show_frame(home_page),font=BUTTON_FONT)
+        self.home_b.pack(side=BOTTOM,pady=30)
+        
+        
 class crawler_page(Frame):
 
     def __init__(self, parent, controller):
@@ -67,22 +85,21 @@ class crawler_page(Frame):
         BGLabel.image = background_image
         BGLabel.place(x=0, y=0, relwidth=1, relheight=1)
         
-        self.label = Label(self, text="This is The crawler", font=TITLE_FONT)
+        self.label = Label(self, text="This is The Crawler", font=TITLE_FONT)
         self.label.pack(side="top", fill="x", pady=10)
         self.label_league = Label(self,height=5,width=38)
         self.label_league.place(x=13,y=90)
         self.label_year = Label(self,height=5,width=38)
         self.label_year.place(x=292,y=90)
-        self.label_league_selection = Label(self,height=1,width=35)
+        self.label_league_selection = Label(self,height=1,width=38)
         self.label_league_selection.place(x=13,y=210)
-        self.label_year_selection = Label(self,height=1,width=33)
+        self.label_year_selection = Label(self,height=1,width=38)
         self.label_year_selection.place(x=292,y=210)
         
-        self.home_b = Button(self, text="Go to the home page",
-                           command=lambda: controller.show_frame(home_page))
+        self.home_b = Button(self, text="Go to the home page",command=lambda: controller.show_frame(home_page),font=BUTTON_FONT)
         self.home_b.pack(side=BOTTOM,pady=30)
         
-        self.select_league_l = Label(self,text = "Please select a League :  ")
+        self.select_league_l = Label(self,text = "Please select a"+'\n'+" League :  ",font=SELECTION_FONT)
         self.select_league_l.place(x=13,y=90)
         self.league_list = Listbox(self,height=4)
         all_leagues = ["Primer_League","Seria_A","La_Liga","Bundesliga","Ligue_1"]
@@ -94,7 +111,7 @@ class crawler_page(Frame):
         self.sb1.configure(command=self.league_list.yview)
         self.league_list.configure(yscrollcommand=self.sb1.set)
         
-        self.select_year_l = Label(self,text = "Please select a Year :  ")
+        self.select_year_l = Label(self,text = "Please select a"+'\n'+" Year :  ",font=SELECTION_FONT)
         self.select_year_l.place(x=292,y=90)
         self.year_list = Listbox(self,height=4)
         all_years = range(2010,2015)
@@ -109,23 +126,23 @@ class crawler_page(Frame):
         self.year_list.configure(yscrollcommand=self.sb2.set)
         
               
-        self.select_league_b = Button(self, text="SELECT LEAGUE",bg="cyan",command=lambda: self.return_active(self.league_list,self.league_selection))
-        self.select_league_b.place(x=140,y=175)
-        self.selected_league_l = Label(self,text="Selected League is :")
+        self.select_league_b = Button(self, text="SELECT LEAGUE",bg="cyan",command=lambda: self.return_active(self.league_list,self.league_selection),font=BUTTON_FONT)
+        self.select_league_b.place(x=77,y=175)
+        self.selected_league_l = Label(self,text="Selected League is :",font=SELECTION_FONT)
         self.selected_league_l.place(x=13,y=210)
         self.league_selection = StringVar()
         self.league_selection.set("Nothing Selected Yet")
         self.league_entry = Entry(self,textvariable=self.league_selection)
-        self.league_entry.place(x=140,y=210)
+        self.league_entry.place(x=152,y=210)
         
-        self.select_year_b = Button(self, text="SELECT YEAR",bg="cyan",command=lambda: self.return_active(self.year_list,self.year_selection))
-        self.select_year_b.place(x=407,y=175)
-        self.selected_year_l = Label(self,text="Selected Year is :")
+        self.select_year_b = Button(self, text="SELECT YEAR",bg="cyan",command=lambda: self.return_active(self.year_list,self.year_selection),font=BUTTON_FONT)
+        self.select_year_b.place(x=365,y=175)
+        self.selected_year_l = Label(self,text="Selected Year is :",font=SELECTION_FONT)
         self.selected_year_l.place(x=292,y=210)
         self.year_selection = StringVar()
         self.year_selection.set("Nothing Selected Yet")
         self.year_entry = Entry(self,textvariable=self.year_selection)
-        self.year_entry.place(x=407,y=210)
+        self.year_entry.place(x=415,y=210)
         
         self.leagues_links = {'Primer_League':"http://www.whoscored.com/Regions/252/Tournaments/2/England-Premier-League",
                      'Serie_A':"http://www.whoscored.com/Regions/108/Tournaments/5/Italy-Serie-A",
@@ -135,8 +152,8 @@ class crawler_page(Frame):
                      }
         
         args = ["python","crawler.py"]
-        self.start_crawl = Button(self, text="START CRAWLING",bg="green",command=lambda : start_crawl_func(args, self.league_selection.get(), self.year_selection.get()))
-        self.start_crawl.pack(side=BOTTOM,pady=40)
+        self.start_crawl = Button(self, text="START CRAWLING",bg="green",command=lambda : start_crawl_func(args, self.league_selection.get(), self.year_selection.get()),font=BUTTON_FONT)
+        self.start_crawl.pack(side=BOTTOM,pady=31)
         
         
 
