@@ -58,8 +58,7 @@ class crawler_page(Frame):
         self.select_league_l = Label(self,text = "Please select a League :  ")
         self.select_league_l.place(x=13,y=90)
         self.league_list = Listbox(self,height=4)
-        with open("DataBase/leagues.pckl",'r') as res:
-            all_leagues = load(res)
+        all_leagues = ["Primer_League","Seria_A","La_Liga","Bundesliga","Ligue_1"]
         for league in all_leagues:
             self.league_list.insert(END,league)
         self.league_list.place(x=140,y=92)
@@ -71,7 +70,7 @@ class crawler_page(Frame):
         self.select_year_l = Label(self,text = "Please select a Year :  ")
         self.select_year_l.place(x=292,y=90)
         self.year_list = Listbox(self,height=4)
-        all_years = range(2008,2015)
+        all_years = range(2010,2015)
         all_years.reverse()
         for year in all_years:
             self.year_list.insert(END,year)
