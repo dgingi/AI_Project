@@ -66,7 +66,7 @@ class Features():
         orig_curr_key = curr_key 
         for cursor in agg:
             for key in cursor:
-                if key!="_id" or curr_feat=="GR" or curr_feat=="SR":
+                if key!="_id" or curr_feat=="GR" or curr_feat=="SR" or curr_feat=="PR":
                     if orig_curr_key == "all":
                         curr_key=key
                     if curr_feat == "GR":
@@ -150,11 +150,33 @@ class Features():
                 his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Success_rate"+by_loc, "SR", lambda c,k: 1 if c[k]["Tag"]==1 else 0)
             res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
             res["avg_Success_rate"+by_loc] *= 100
+        
+        def update_avg_possesion_rate(res,t_name,fix,by_loc,HA_list,lookback=5):   
+            need_history = False
+            his_num_of_games = 0
+            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
+            if not break_or_continue:
+                return
+            pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Possesion":"$Possesion"}}}
+            pipe += [group_q]
+            res["avg_Possesion_rate"+by_loc] = 0.0
+            agg = self.col.aggregate(pipe)
+            num_of_games = self.get_agg_size(agg)
+            agg = self.col.aggregate(pipe)
+            for cursor in agg:
+                for key in cursor:
+                    res["avg_Possesion_rate"+by_loc] += cursor[key]["Possesion"] 
             
+            if need_history:
+                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Possesion_rate"+by_loc, "PR", lambda c,k: c[k]["Possesion"])
+            res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
+            
+        
         res = {}
         curr_HA = self.get_curr_HA(t_name, fix) 
         
-        for func in [update_avg_goals_scored,update_avg_received_goals,update_avg_success_rate]:
+        for func in [update_avg_goals_scored,update_avg_received_goals,update_avg_success_rate,update_avg_possesion_rate]:
             func(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
             func(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
        
@@ -413,6 +435,14 @@ class EXHandler():
                             break;
         return new_ex
     
+    def predict(self,clf,examples,tags):
+        res = clf.predict(examples)
+        sum = 0
+        for i in range(len(res)):
+            if res[i]==tags[i]:
+                sum+=1
+        return (sum*1.0)/len(res)
+    
 def PrintException():
     import linecache
     import sys
@@ -423,6 +453,15 @@ def PrintException():
     linecache.checkcache(filename)
     line = linecache.getline(filename, lineno, f.f_globals)
     print 'EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj)            
+
+def PlotGraph(x_data,y_data,y_max_range,x_title,y_title,graph_name,plot_type):
+    import matplotlib.pyplot as plt
+    plt.xlabel(x_title)
+    plt.ylabel(y_title)
+    plt.title(graph_name)
+    plt.plot(x_data,y_data,plot_type)
+    plt.axis([0,len(x_data)+1,0,y_max_range])
+    plt.savefig(graph_name+".png")
 
 def timed(f):
     '''decorator for printing the timing of functions
