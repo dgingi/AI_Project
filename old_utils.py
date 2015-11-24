@@ -158,18 +158,18 @@ class Features():
             if not break_or_continue:
                 return
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
-            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Possesion":"$Possesion"}}}
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Possession":"$Possession"}}}
             pipe += [group_q]
-            res["avg_Possesion_rate"+by_loc] = 0.0
+            res["avg_Possession_rate"+by_loc] = 0.0
             agg = self.col.aggregate(pipe)
             num_of_games = self.get_agg_size(agg)
             agg = self.col.aggregate(pipe)
             for cursor in agg:
                 for key in cursor:
-                    res["avg_Possesion_rate"+by_loc] += cursor[key]["Possesion"] 
+                    res["avg_Possession_rate"+by_loc] += cursor[key]["Possession"] 
             
             if need_history:
-                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Possesion_rate"+by_loc, "PR", lambda c,k: c[k]["Possesion"])
+                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Possession_rate"+by_loc, "PR", lambda c,k: c[k]["Possession"])
             res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
             
         
@@ -321,9 +321,8 @@ class DBHandler():
             self.client[self.league].drop_collection(year)
         else:
             self.client.drop_database(self.league)
-    
-        
-    def create_examples(self,year):
+           
+    def create_examples(self,year,lookback=5):
         def update_all_teams_dict(res,all_teams_dict,team,first):
             for fix in sorted(res):
                 if fix == 1 and res[fix] == {}:
@@ -338,7 +337,7 @@ class DBHandler():
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(self.cols,year)
         for team in all_teams_dict:
-            res_by_all, res_by_fix, res_by_non_avg, res_by_fix_sum = features.create_features(team)
+            res_by_all, res_by_fix, res_by_non_avg, res_by_fix_sum = features.create_features(team,lookback)
             update_all_teams_dict(res_by_all, all_teams_dict, team, True)
             update_all_teams_dict(res_by_fix, all_teams_dict, team, False)
             update_all_teams_dict(res_by_fix_sum, all_teams_dict, team, False)
@@ -359,7 +358,6 @@ class DBHandler():
                     tags += [curr_game["Tag"]]
         return examples,tags
         
-
 
 class EXHandler():
     def __init__(self,league):
@@ -460,8 +458,9 @@ def PlotGraph(x_data,y_data,y_max_range,x_title,y_title,graph_name,plot_type):
     plt.ylabel(y_title)
     plt.title(graph_name)
     plt.plot(x_data,y_data,plot_type)
-    plt.axis([0,len(x_data)+1,0,y_max_range])
-    plt.savefig(graph_name+".png")
+    plt.axis([0,max(x_data)+1,0,y_max_range])
+    plt.savefig("tests/pictures/"+graph_name+".png")
+    plt.close()
 
 def timed(f):
     '''decorator for printing the timing of functions

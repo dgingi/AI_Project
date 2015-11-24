@@ -4,6 +4,7 @@ from pickle import load
 import subprocess
 import tkMessageBox
 import Tkinter
+import ttk
   
 TITLE_FONT = ("Helvetica", 18, "bold")
 BUTTON_FONT = ("Helvetica", 13, "bold")
@@ -13,7 +14,11 @@ def start_crawl_func(args,league,year):
     if league == "Nothing Selected Yet" or year == "Nothing Selected Yet":
         tkMessageBox.showinfo("ATTENTION!!!!", "Please select both league and year")
     else:
-        subprocess.Popen(args+[league,year])
+        proc = subprocess.Popen(args+[league,year])
+        '''progressbar = ttk.Progressbar(orient=HORIZONTAL, length=200, mode='indeterminate')
+        progressbar.pack(side="bottom")
+        progressbar.start()
+        proc.wait()'''
     
 class SampleApp(Tk):
 

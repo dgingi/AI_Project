@@ -156,7 +156,7 @@ class FirstChoiceLocalSearch(LocalSearch):
                     improved = True
             
             if not improved:
-                if random_start <= 10:
+                if random_start <= 5:
                     random_array += [(cRes,current)]
                     current = self.make_random_state(current,output_array)
                     random_start += 1
