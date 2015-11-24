@@ -8,6 +8,7 @@ import tkMessageBox
 import Tkinter
 import ttk
 import datetime
+import os
   
 TITLE_FONT = ("Helvetica", 18, "bold")
 BUTTON_FONT = ("Helvetica", 13, "bold")
@@ -24,16 +25,30 @@ def start_crawl_func(args,league,year):
         proc.wait()'''
 
 def get_examples(league,year,file_name):
-    E = EXHandler(league)
-    ex, ta = E.get()
-    with open(file_name+"_E.pckl",'w') as res:
-        dump(ex,res)
-    with open(file_name+"_T.pckl",'w') as res:
-        dump(ta,res)
-        
+    if league == "Nothing Selected Yet" or year == "Nothing Selected Yet" or file_name =="":
+        tkMessageBox.showinfo("ATTENTION!!!!", "Please select both league,year and file name")
+    else:
+        if len(year.split('-')) == 1:
+            if not os.path.exists(league+'-'+year+'\\'+league+'-'+year+'-May.pckl'):
+                tkMessageBox.showinfo("ATTENTION!!!!", "No data for current year to get examples")
+                return
+        else:
+            for rel_year in range(int(year.split('-')[0]),int(year.split('-')[1])):
+                if not os.path.exists(league+'-'+str(rel_year)+'\\'+league+'-'+str(rel_year)+'-May.pckl'):
+                    tkMessageBox.showinfo("ATTENTION!!!!", "No data for year "+str(rel_year)+" to get examples")
+                    return
+        E = EXHandler(league)
+        ex, ta = E.get()
+        with open("GUI_OUTPUT/"+file_name+"_E.pckl",'w') as res:
+            dump(ex,res)
+        with open("GUI_OUTPUT/"+file_name+"_T.pckl",'w') as res:
+            dump(ta,res)
+            
 def return_active(list,selection):
     if list.get(ACTIVE) == "all":
-        selection.set("2010-2014")
+        now = datetime.datetime.now()
+        curr_year = now.year
+        selection.set(str(curr_year-5)+"-"+str(curr_year-1))
     elif list.get(ACTIVE) == "current":
         now = datetime.datetime.now()
         curr_year = now.year
@@ -158,13 +173,12 @@ class examples_page(Frame):
         
         self.selected_file_l = Label(self,text="Please Enter file name to save :",font=SELECTION_FONT)
         self.selected_file_l.place(x=13,y=260)
-        self.league_selection = StringVar()
-        self.league_selection.set("No file name given yet")
-        self.league_entry = Entry(self,textvariable=self.league_selection)
-        self.league_entry.place(x=230,y=260)
+        self.selected_file_selection = StringVar()
+        self.selected_file_selection.set("")
+        self.selected_file_entry = Entry(self,textvariable=self.selected_file_selection)
+        self.selected_file_entry.place(x=230,y=260)
         
-        args = ["python","crawler.py"]
-        self.start_crawl = Button(self, text="GET EXAMPLES & TAGS",bg="green",command=lambda : start_crawl_func(args, self.league_selection.get(), self.year_selection.get()),font=BUTTON_FONT)
+        self.start_crawl = Button(self, text="GET EXAMPLES & TAGS",bg="green",command=lambda : get_examples(self.league_selection.get(), self.year_selection.get(),self.selected_file_entry.get()),font=BUTTON_FONT)
         self.start_crawl.place(x=370,y=260)
         
         
