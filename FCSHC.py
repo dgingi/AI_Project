@@ -2,10 +2,16 @@ from abstract_search import *
 from random import shuffle,randint,random
 import numpy as np
 from sklearn import tree
- 
+import copy
+
+def check_borders(state,key,lbord,ubord):
+    if state.data[key] < lbord:
+        state.data[key] = lbord
+    if state.data[key] > ubord:
+        state.data[key] = ubord
+
 def funcCriterion(state):
-    new_data = state.data.copy()
-    new_state = LearningState(new_data,state.examples,state.tags)
+    new_state = copy.deepcopy(state)
     if state.data["criterion"]=="gini":
         new_state.data["criterion"] = "entropy"
     else:
@@ -13,8 +19,7 @@ def funcCriterion(state):
     return new_state 
 
 def funcSplitter(state):
-    new_data = state.data.copy()
-    new_state = LearningState(new_data,state.examples,state.tags)
+    new_state = copy.deepcopy(state)
     if state.data["splitter"]=="best":
         new_state.data["splitter"] = "random"
     else:
@@ -25,48 +30,50 @@ def funcMaxFAux(i):
     return lambda state: funcMaxF(state, i)
 
 def funcMaxF(state,i):
-    new_data = state.data.copy()
-    new_state = LearningState(new_data,state.examples,state.tags)
-    new_state.data["max_features"] = i
+    new_state = copy.deepcopy(state)
+    new_state.data["max_features"] += i
+    check_borders(new_state, "max_features", 1, len(new_state.examples[0]))
     return new_state
-
 
 def funcMaxDAux(i):
     return lambda state: funcMaxD(state,i)
 
 def funcMaxD(state,i):
-    new_data = state.data.copy()
-    new_state = LearningState(new_data,state.examples,state.tags)
-    new_state.data["max_depth"] = i
+    new_state = copy.deepcopy(state)
+    new_state.data["max_depth"] += i
+    check_borders(new_state, "max_depth", 1, len(new_state.examples))
     return new_state
 
 def funcMinSSAux(i):
     return lambda state: funcMinSS(state,i)
 
 def funcMinSS(state,i):
-    new_data = state.data.copy()
-    new_state = LearningState(new_data,state.examples,state.tags)
-    new_state.data["min_samples_split"] = i
+    new_state = copy.deepcopy(state)
+    new_state.data["min_samples_split"] += i
+    check_borders(new_state, "min_samples_split", 2, len(new_state.examples))
     return new_state
     
-
 def funcMinSLAux(i):
     return lambda state: funcMinSL(state, i)
 
 def funcMinSL(state,i):
-    new_data = state.data.copy()
-    new_state = LearningState(new_data,state.examples,state.tags)
-    new_state.data["min_samples_leaf"] = i
+    new_state = copy.deepcopy(state)
+    new_state.data["min_samples_leaf"] += i
+    check_borders(new_state, "min_samples_leaf", 1, len(new_state.examples))
     return new_state
 
     
 class LearningState(SearchState):
     def __init__(self,data,examples,tags):
-        legal_operators = [funcCriterion]#,funcSplitter]#,funcMaxDRand,funcMaxFRand,funcMinSLRand,funcMinSSRand]
-        legal_operators += [funcMaxDAux(i) for i in range(1,len(examples))]
-        legal_operators += [funcMaxFAux(i) for i in range(1,len(examples[0]))]
-        legal_operators += [funcMinSLAux(i) for i in range(1,len(examples))]
-        legal_operators += [funcMinSSAux(i) for i in range(2,len(examples))]
+        legal_operators = [funcCriterion,funcSplitter]
+        legal_operators += [funcMaxDAux(i) for i in range(1,15)]
+        legal_operators += [funcMaxDAux(-i) for i in range(1,15)]
+        legal_operators += [funcMaxFAux(i) for i in range(1,15)]
+        legal_operators += [funcMaxFAux(-i) for i in range(1,15)]
+        legal_operators += [funcMinSLAux(i) for i in range(1,15)]
+        legal_operators += [funcMinSLAux(-i) for i in range(1,15)]
+        legal_operators += [funcMinSSAux(i) for i in range(1,15)]
+        legal_operators += [funcMinSSAux(-i) for i in range(1,15)]
         SearchState.__init__(self,legal_operators)
         self.examples = examples
         self.tags = tags
@@ -99,7 +106,7 @@ class FirstChoiceLocalSearch(LocalSearch):
         while prev_state:
             found_prev = False
             new_data["criterion"] = "gini" if random() <= 0.5 else "entropy"
-            new_data["splitter"] = "random" if random() <= 0.5 else "random"
+            new_data["splitter"] = "random" if random() <= 0.5 else "best"
             new_data["max_features"] = randint(1,len(state.examples[0]))
             new_data["max_depth"] =  len(state.examples) if random() <= 0.5 else randint(1,len(state.examples))
             new_data["min_samples_split"] = randint(2,len(state.examples))
@@ -121,42 +128,42 @@ class FirstChoiceLocalSearch(LocalSearch):
         i = 1
         random_start = 1
         first_state = True
+        
         while True:
             improved = False
             next_states = current.get_next_states()
             shuffle(next_states)
-            while not improved:
-                new_state = next_states.pop(0)[0]
-                nRes = new_state.evaluate(evaluation_set, evaluation_set_labels)
+            if first_state:
                 cRes = current.evaluate(evaluation_set, evaluation_set_labels)
-                if first_state:
-                    output_array += [(i,cRes)]
-                    print cRes
-                    i += 1
-                    first_state = False
-                if  nRes >= cRes :
-                    print "found better",cRes,nRes
-                    if nRes == cRes and self.sideSteps > 0:
+            output_array += [(i,cRes)]
+            i += 1
+            
+            while not improved and self.sideSteps >= 0:
+                try:
+                    new_state = next_states.pop(0)[0]
+                except Exception,e:
+                    break
+                nRes = new_state.evaluate(evaluation_set, evaluation_set_labels)
+                if nRes >= cRes :
+                    if nRes == cRes:
                         self.sideSteps -= 1
-                        improved = True
-                        current = new_state
-                        output_array += [(i,nRes)]
-                        print nRes
-                        i += 1
                     if nRes > cRes:
                         self.sideSteps = 30
-                        improved = True
-                        first_state = True
-            if not improved and random_start <=0:
-                random_array += [(output_array[-1][1],current)]
-                print "restart2",random_array[-1][0]
-                current = self.make_random_state(current,output_array)
-                random_start += 1
-                first_state = True
-                improved = False
-            if not improved and random_start > 10:
-                return max(random_array)[1],max(random_array)[0],output_array
-
+                    
+                    current = new_state
+                    cRes = nRes
+                    first_state = False
+                    improved = True
+            
+            if not improved:
+                if random_start <= 5:
+                    random_array += [(cRes,current)]
+                    current = self.make_random_state(current,output_array)
+                    random_start += 1
+                    first_state = True
+                    self.sideSteps = 30
+                else:
+                    return max(random_array)[1],max(random_array)[0],output_array
 
 
 
