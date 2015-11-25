@@ -1,10 +1,14 @@
 from Tkinter import *
 from crawler import *
+from old_utils import *
 from pickle import load
+from pickle import dump
 import subprocess
 import tkMessageBox
 import Tkinter
 import ttk
+import datetime
+import os
   
 TITLE_FONT = ("Helvetica", 18, "bold")
 BUTTON_FONT = ("Helvetica", 13, "bold")
@@ -19,6 +23,38 @@ def start_crawl_func(args,league,year):
         progressbar.pack(side="bottom")
         progressbar.start()
         proc.wait()'''
+
+def get_examples(league,year,file_name):
+    if league == "Nothing Selected Yet" or year == "Nothing Selected Yet" or file_name =="":
+        tkMessageBox.showinfo("ATTENTION!!!!", "Please select both league,year and file name")
+    else:
+        if len(year.split('-')) == 1:
+            if not os.path.exists(league+'-'+year+'\\'+league+'-'+year+'-May.pckl'):
+                tkMessageBox.showinfo("ATTENTION!!!!", "No data for current year to get examples")
+                return
+        else:
+            for rel_year in range(int(year.split('-')[0]),int(year.split('-')[1])):
+                if not os.path.exists(league+'-'+str(rel_year)+'\\'+league+'-'+str(rel_year)+'-May.pckl'):
+                    tkMessageBox.showinfo("ATTENTION!!!!", "No data for year "+str(rel_year)+" to get examples")
+                    return
+        E = EXHandler(league)
+        ex, ta = E.get()
+        with open("GUI_OUTPUT/"+file_name+"_E.pckl",'w') as res:
+            dump(ex,res)
+        with open("GUI_OUTPUT/"+file_name+"_T.pckl",'w') as res:
+            dump(ta,res)
+            
+def return_active(list,selection):
+    if list.get(ACTIVE) == "all":
+        now = datetime.datetime.now()
+        curr_year = now.year
+        selection.set(str(curr_year-5)+"-"+str(curr_year-1))
+    elif list.get(ACTIVE) == "current":
+        now = datetime.datetime.now()
+        curr_year = now.year
+        selection.set(str(curr_year))
+    else:
+        selection.set(list.get(ACTIVE))
     
 class SampleApp(Tk):
 
@@ -75,9 +111,75 @@ class examples_page(Frame):
         
         self.label = Label(self, text="This is The Examples Handler", font=TITLE_FONT)
         self.label.pack(side="top", fill="x", pady=10)
+        self.label_league = Label(self,height=5,width=38)
+        self.label_league.place(x=13,y=90)
+        self.label_year = Label(self,height=5,width=38)
+        self.label_year.place(x=292,y=90)
+        self.label_league_selection = Label(self,height=1,width=38)
+        self.label_league_selection.place(x=13,y=210)
+        self.label_year_selection = Label(self,height=1,width=38)
+        self.label_year_selection.place(x=292,y=210)
         
         self.home_b = Button(self, text="Go to the home page",command=lambda: controller.show_frame(home_page),font=BUTTON_FONT)
         self.home_b.pack(side=BOTTOM,pady=30)
+        
+        self.select_league_l = Label(self,text = "Please select a"+'\n'+" League :  ",font=SELECTION_FONT)
+        self.select_league_l.place(x=13,y=90)
+        self.league_list = Listbox(self,height=4)
+        all_leagues = ["Primer_League","Seria_A","La_Liga","Bundesliga","Ligue_1"]
+        for league in all_leagues:
+            self.league_list.insert(END,league)
+        self.league_list.place(x=140,y=92)
+        self.sb1 = Scrollbar(self,orient=VERTICAL)
+        self.sb1.place(x=265,y=94)
+        self.sb1.configure(command=self.league_list.yview)
+        self.league_list.configure(yscrollcommand=self.sb1.set)
+        
+        self.select_year_l = Label(self,text = "Please select a"+'\n'+" Year :  ",font=SELECTION_FONT)
+        self.select_year_l.place(x=292,y=90)
+        self.year_list = Listbox(self,height=4)
+        now = datetime.datetime.now()
+        curr_year = now.year
+        all_years = range(curr_year-5,curr_year)
+        all_years.reverse()
+        for year in all_years:
+            self.year_list.insert(END,year)
+        self.year_list.insert(0,"all")
+        self.year_list.insert(1,"current")
+        self.year_list.place(x=407,y=92)
+        self.sb2 = Scrollbar(self,orient=VERTICAL)
+        self.sb2.place(x=532,y=94)
+        self.sb2.configure(command=self.year_list.yview)
+        self.year_list.configure(yscrollcommand=self.sb2.set)
+        
+              
+        self.select_league_b = Button(self, text="SELECT LEAGUE",bg="cyan",command=lambda: return_active(self.league_list,self.league_selection),font=BUTTON_FONT)
+        self.select_league_b.place(x=77,y=175)
+        self.selected_league_l = Label(self,text="Selected League is :",font=SELECTION_FONT)
+        self.selected_league_l.place(x=13,y=210)
+        self.league_selection = StringVar()
+        self.league_selection.set("Nothing Selected Yet")
+        self.league_entry = Entry(self,textvariable=self.league_selection)
+        self.league_entry.place(x=152,y=210)
+        
+        self.select_year_b = Button(self, text="SELECT YEAR",bg="cyan",command=lambda: return_active(self.year_list,self.year_selection),font=BUTTON_FONT)
+        self.select_year_b.place(x=365,y=175)
+        self.selected_year_l = Label(self,text="Selected Year is :",font=SELECTION_FONT)
+        self.selected_year_l.place(x=292,y=210)
+        self.year_selection = StringVar()
+        self.year_selection.set("Nothing Selected Yet")
+        self.year_entry = Entry(self,textvariable=self.year_selection)
+        self.year_entry.place(x=415,y=210)
+        
+        self.selected_file_l = Label(self,text="Please Enter file name to save :",font=SELECTION_FONT)
+        self.selected_file_l.place(x=13,y=260)
+        self.selected_file_selection = StringVar()
+        self.selected_file_selection.set("")
+        self.selected_file_entry = Entry(self,textvariable=self.selected_file_selection)
+        self.selected_file_entry.place(x=230,y=260)
+        
+        self.start_crawl = Button(self, text="GET EXAMPLES & TAGS",bg="green",command=lambda : get_examples(self.league_selection.get(), self.year_selection.get(),self.selected_file_entry.get()),font=BUTTON_FONT)
+        self.start_crawl.place(x=370,y=260)
         
         
 class crawler_page(Frame):
@@ -119,11 +221,14 @@ class crawler_page(Frame):
         self.select_year_l = Label(self,text = "Please select a"+'\n'+" Year :  ",font=SELECTION_FONT)
         self.select_year_l.place(x=292,y=90)
         self.year_list = Listbox(self,height=4)
-        all_years = range(2010,2015)
+        now = datetime.datetime.now()
+        curr_year = now.year
+        all_years = range(curr_year-5,curr_year)
         all_years.reverse()
         for year in all_years:
             self.year_list.insert(END,year)
-        self.year_list.insert(END,"all")
+        self.year_list.insert(0,"all")
+        self.year_list.insert(1,"current")
         self.year_list.place(x=407,y=92)
         self.sb2 = Scrollbar(self,orient=VERTICAL)
         self.sb2.place(x=532,y=94)
@@ -131,7 +236,7 @@ class crawler_page(Frame):
         self.year_list.configure(yscrollcommand=self.sb2.set)
         
               
-        self.select_league_b = Button(self, text="SELECT LEAGUE",bg="cyan",command=lambda: self.return_active(self.league_list,self.league_selection),font=BUTTON_FONT)
+        self.select_league_b = Button(self, text="SELECT LEAGUE",bg="cyan",command=lambda: return_active(self.league_list,self.league_selection),font=BUTTON_FONT)
         self.select_league_b.place(x=77,y=175)
         self.selected_league_l = Label(self,text="Selected League is :",font=SELECTION_FONT)
         self.selected_league_l.place(x=13,y=210)
@@ -140,7 +245,7 @@ class crawler_page(Frame):
         self.league_entry = Entry(self,textvariable=self.league_selection)
         self.league_entry.place(x=152,y=210)
         
-        self.select_year_b = Button(self, text="SELECT YEAR",bg="cyan",command=lambda: self.return_active(self.year_list,self.year_selection),font=BUTTON_FONT)
+        self.select_year_b = Button(self, text="SELECT YEAR",bg="cyan",command=lambda: return_active(self.year_list,self.year_selection),font=BUTTON_FONT)
         self.select_year_b.place(x=365,y=175)
         self.selected_year_l = Label(self,text="Selected Year is :",font=SELECTION_FONT)
         self.selected_year_l.place(x=292,y=210)
@@ -162,12 +267,6 @@ class crawler_page(Frame):
         
         
 
-    def return_active(self,list,selection):
-        if list.get(ACTIVE) == "all":
-            selection.set("2010-2014")
-        else:
-            selection.set(list.get(ACTIVE))
-    
     
 if __name__ == "__main__":
     app = SampleApp()

@@ -33,6 +33,9 @@ class Features():
     def get_curr_HA(self,t_name,fix):
         return self.col.find_one({"GName":t_name,"Fix":fix})["HA"]
     
+    def get_curr_VS(self,t_name,fix):
+        return self.col.find_one({"GName":t_name,"Fix":fix})["VS"]
+    
     def get_agg_size(self,agg):
                 agg_size = 0
                 for cursor in agg:
@@ -66,7 +69,7 @@ class Features():
         orig_curr_key = curr_key 
         for cursor in agg:
             for key in cursor:
-                if key!="_id" or curr_feat=="GR" or curr_feat=="SR" or curr_feat=="PR":
+                if key!="_id" or curr_feat in ["GR","SR","PR","SSR"]:
                     if orig_curr_key == "all":
                         curr_key=key
                     if curr_feat == "GR":
@@ -151,6 +154,28 @@ class Features():
             res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
             res["avg_Success_rate"+by_loc] *= 100
         
+        def update_avg_specific_success_rate(res,t_name,vs_t_name,fix,by_loc,HA_list,lookback=5):
+            need_history = False
+            his_num_of_games = 0
+            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
+            if not break_or_continue:
+                return
+            pipe = [{"$match":{"GName":t_name,"VS":vs_t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Tag":"$Tag"}}}
+            pipe += [group_q]
+            res["avg_Specific_Success_rate"+by_loc] = 0.0
+            agg = self.col.aggregate(pipe)
+            num_of_games = self.get_agg_size(agg)
+            agg = self.col.aggregate(pipe)
+            for cursor in agg:
+                for key in cursor:
+                    res["avg_Specific_Success_rate"+by_loc] += 1 if cursor[key]["Tag"]==1 else 0 
+            
+            if need_history:
+                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Specific_Success_rate"+by_loc, "SSR", lambda c,k: 1 if c[k]["Tag"]==1 else 0)
+            res["avg_Specific_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
+            res["avg_Specific_Success_rate"+by_loc] *= 100
+              
         def update_avg_possesion_rate(res,t_name,fix,by_loc,HA_list,lookback=5):   
             need_history = False
             his_num_of_games = 0
@@ -172,14 +197,17 @@ class Features():
                 his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Possession_rate"+by_loc, "PR", lambda c,k: c[k]["Possession"])
             res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
             
-        
         res = {}
         curr_HA = self.get_curr_HA(t_name, fix) 
+        curr_VS = self.get_curr_VS(t_name, fix)
         
         for func in [update_avg_goals_scored,update_avg_received_goals,update_avg_success_rate,update_avg_possesion_rate]:
             func(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
             func(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
-       
+        
+        update_avg_specific_success_rate(res, t_name, curr_VS, fix, "_by_all_HA", ["home","away"], lookback)
+        update_avg_specific_success_rate(res, t_name, curr_VS, fix, "_by_"+curr_HA, [curr_HA], lookback)
+        
         return res
         
     def create_avg_up_to(self,by_avg,t_name,fix,lookback=5):
