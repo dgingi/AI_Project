@@ -1,9 +1,11 @@
-from time import clock
-from pymongo import MongoClient
-import numpy as np
-from pickle import load,dump
-import os
 import copy
+import os
+from pickle import load, dump
+from pymongo import MongoClient
+from time import clock
+
+import numpy as np
+
 
 MIN_YEAR = 2010
 MAX_YEAR = 2015
@@ -490,18 +492,7 @@ def PlotGraph(x_data,y_data,y_max_range,x_title,y_title,graph_name,plot_type):
     plt.savefig("tests/pictures/"+graph_name+".png")
     plt.close()
 
-def timed(f):
-    '''decorator for printing the timing of functions
-    usage: 
-    @timed
-    def some_funcion(args...):'''
-    
-    def wrap(*x, **d):
-        start = clock()
-        res = f(*x, **d)
-        print(f.__name__, ':', clock() - start)
-        return res
-    return wrap
+
 
     
     

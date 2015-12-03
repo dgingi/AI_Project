@@ -19,6 +19,7 @@ from sys import argv
 from unidecode import unidecode
 from __builtin__ import str
 from os import path, mkdir,remove,listdir
+from calendar import month_abbr as _months
 
 from old_utils import PrintException, DBHandler
 
@@ -50,7 +51,7 @@ def start_crawl(league,year,start_month='Aug'):
             if str(e)=='Fin':
                 return
             time.sleep(10)
-            start_month = e.args[0]
+            start_month = str(e) if e in _months[1:]+['Fin'] else 'Aug'
             
 def _get_played_months(browser):
     config_button = browser.find_element_by_id('date-config-toggle-button')
