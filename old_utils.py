@@ -1,3 +1,9 @@
+"""
+..module:: old_utils
+
+..moduleauthor:: Ory Jonay & Dror Porat
+"""
+
 from time import clock
 from pymongo import MongoClient
 import numpy as np
@@ -9,7 +15,21 @@ MIN_YEAR = 2010
 MAX_YEAR = 2015
 
 class Features():
+    """This Class Hendels the creation of the features 
+
+    """
     def __init__(self,data,year):
+        """This is the Init function
+
+        Args:
+           data(dictiobary):  A dictionary of {"year": all data for this year}.
+           
+           year(str): This is the year that we want to create the features for.
+        
+        This function inits several lists of positions, such as:
+        attack position list = ["FW","AR","AL","AC","AMC","AML","AMR"]
+        it also saves the current year and previous year as an int.
+        """
         self.data = data
         self.col = data[year]
         self.non_avg_keys = ["Position","PName","GName","Result","HA","_id","Tag","VS","Goals","Fix"]
@@ -23,6 +43,20 @@ class Features():
         self.prev_year = self.curr_year - 1
 
     def create_features(self,t_name,lookback=5):
+        """This function runs all the functions of creating the different features.
+
+        Args:
+           t_name (str):  The name of the group we want to make the features for.
+           
+           lookback(int): The amount of lookback to make all the aggregation.
+        
+        Returns:
+        This function returns 4 different dictionaries.
+        Each dicitionary is in the form of {fix_num(int) : [(key,key_result)] }
+        There are 4 dictionaries:
+        res_by_all: this dicitionary has features that are aggregated and avareged first by aeach fix and then the avg of all fixtures.
+
+        """
         max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name})])
         res_by_all = {i:self.create_avg_up_to("by_all_fix",t_name, i, lookback) for i in range(1,max_fix+1)}
         res_by_fix = {i:self.create_avg_up_to("by_fix",t_name, i, lookback) for i in range(1,max_fix+1)}
@@ -311,9 +345,6 @@ class DBHandler():
         self.league = league
     
     def convert(self,data):
-        """
-        Convert the crawler data keys into string for insertion into MongoDB
-        """
         return {name:{str(i):data[name][i] for i in range(1,2*len(data.keys())-1)} for name in data.keys()}
     
     def explode(self,data):

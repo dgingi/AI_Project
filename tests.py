@@ -18,8 +18,12 @@ def find_best_params(X1,X2,Y1,Y2,psize):
         
 def find_best_partition():
     E = EXHandler("Primer_League")
-    ex, ta = E.get()
-    X1,X2,Y1,Y2 = ex[:1409],ex[1409:],ta[:1409],ta[1409:]
+    ex_11 , ta_11 = E.get(2011)
+    ex_12 , ta_12 = E.get(2012)
+    ex_13 , ta_13 = E.get(2013)
+    ex_14 , ta_14 = E.get(2014)
+    X1,Y1 = ex_11+ex_12+ex_13, ta_11+ta_12+ta_13
+    X2,Y2 = ex_14, ta_14
     best_i = 0
     find_best_params(X1, X2, Y1, Y2, "0")
     with open("tests/best_params_test/0_best_params_test_fs.pckl",'r') as res:
@@ -68,4 +72,30 @@ def find_best_lookback():
     x_data = [d[0] for d in output_array]
     y_data = [d[1] for d in output_array]
     PlotGraph(x_data, y_data, 1, "lookback size", "success rate", "best_lookback", "k")
+
+def find_best_lookback_and_params():
+    D = DBHandler("Primer_League")
+    E = EXHandler("Primer_League")
+    output_array = []
+    for i in [3,5,7,10,15,20]:
+        ex_11 , ta_11 = D.create_examples("2011", i)
+        ex_12 , ta_12 = D.create_examples("2012", i)
+        ex_13 , ta_13 = D.create_examples("2013", i)
+        ex_14 , ta_14 = D.create_examples("2014", i)
+        X1 = ex_11 + ex_12 + ex_13
+        Y1 = ta_11 + ta_12 + ta_13
+        find_best_params(X1, ex_14, Y1, ta_14, "0L")
+        with open("tests/best_params_test/0L_best_params_test_fs.pckl",'r') as res:
+            data = load(res)
+        clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
+        clf = clf.fit(X1,Y1)
+        res = E.predict(clf, ex_14, ta_14)
+        output_array += [(i,res)]
+    with open("tests/best_lookback_and_params_test/best_lookback_and_params.pckl",'w') as res:
+        dump(output_array, res)
+    x_data = [d[0] for d in output_array]
+    y_data = [d[1] for d in output_array]
+    PlotGraph(x_data, y_data, 1, "lookback size", "success rate", "best_lookback_and_params", "k")
+
+
     
