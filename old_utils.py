@@ -1,9 +1,13 @@
+"""
+..module:: old_utils
+
+..moduleauthor:: Ory Jonay & Dror Porat
+"""
+
 import copy
 import os
 from pickle import load, dump
 from pymongo import MongoClient
-from time import clock
-
 import numpy as np
 
 
@@ -11,7 +15,23 @@ MIN_YEAR = 2010
 MAX_YEAR = 2015
 
 class Features():
+    """This Class Hendels the creation of the features 
+
+    """
     def __init__(self,data,year):
+        """This is the Init function
+
+        Args:
+           data(dictiobary):  A dictionary of {"year": all data for this year}.
+           
+           year(str): This is the year that we want to create the features for.
+        
+        This function inits several lists of positions, such as:
+        
+        attack position list = ["FW","AR","AL","AC","AMC","AML","AMR"]
+        
+        it also saves the current year and previous year as an int.
+        """
         self.data = data
         self.col = data[year]
         self.non_avg_keys = ["Position","PName","GName","Result","HA","_id","Tag","VS","Goals","Fix"]
@@ -25,6 +45,36 @@ class Features():
         self.prev_year = self.curr_year - 1
 
     def create_features(self,t_name,lookback=5):
+        """This function runs all the functions of creating the different features.
+
+        Args:
+           * t_name (str):  The name of the group we want to make the features for.
+           
+           * lookback(int): The amount of lookback to make all the aggregation.
+        
+        Returns:
+        
+        This function returns 4 different dictionaries.
+        
+        Each dicitionary is in the form of --> {fix_num(int) : {key:key_result} }
+        
+        There are 4 dictionaries:
+            1. res_by_all: this dicitionary has features that are aggregated and avareged first by each fix and then the avg of all fixtures.
+            
+            2. res_by_fix: this dicitionary has features that are aggregated and avareged by all fixtures togther.
+            
+            3. res_by_non_avg: this dicitionary has features that are aggregated and avareged by summing up all values and avarging by amount of players.
+            
+            4. res_by_fix_sum: this dicitionary has features that are aggregated and avareged by first summing all fixtures toghter and making an avarege by amount of fixtures.
+            
+        Example of use:
+        
+        ::
+            
+             res_by_all,res_by_fix,res_by_non_avg,res_by_fix_sum = create_features("Chelsea",15)
+             res_by_non_avg[3]["avg_Goals_Scored"] = 2.7
+             
+        """
         max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name})])
         res_by_all = {i:self.create_avg_up_to("by_all_fix",t_name, i, lookback) for i in range(1,max_fix+1)}
         res_by_fix = {i:self.create_avg_up_to("by_fix",t_name, i, lookback) for i in range(1,max_fix+1)}
@@ -33,18 +83,108 @@ class Features():
         return res_by_all,res_by_fix,res_by_non_avg,res_by_fix_sum
            
     def get_curr_HA(self,t_name,fix):
+        """This function returns the if the Team=t_name played Home\Away in Fix=fix
+
+        Args:
+           * t_name (str):  The name of the group we want to find the current location of the game.
+           
+           * fix(int): The fix that we want to search.
+        
+        Returns:
+        
+        This function returns the location of the requested game.
+        
+        Example of use:
+        
+        ::
+            
+             curr_HA = get_curr_HA("Chelsea",3)
+             curr_HA
+             --> away
+             curr_HA = get_curr_HA("liverpool",3)
+             curr_HA
+             --> home
+             
+        """
         return self.col.find_one({"GName":t_name,"Fix":fix})["HA"]
     
     def get_curr_VS(self,t_name,fix):
+        """This function returns the matching team name that played against Team=(t_name) in Fix=fix.
+
+        Args:
+           * t_name (str):  The name of the group we want to find it's opponent.
+           
+           * fix(int): The fix that we want to search.
+        
+        Returns:
+        
+        This function returns the name of the relative team.
+        
+        Example of use:
+        
+        ::
+            
+             curr_VS = get_curr_HA("Chelsea",3)
+             curr_VS
+             --> Liverpool
+             
+        """
         return self.col.find_one({"GName":t_name,"Fix":fix})["VS"]
     
     def get_agg_size(self,agg):
-                agg_size = 0
-                for cursor in agg:
-                    agg_size += 1
-                return 1 if agg_size == 0 else agg_size
+        """This function returns size of giving aggregation.
+
+        Args:
+           * agg(MongoCursor) : The aggregation we want to check.
+        
+        Returns:
+        
+        This function returns the size of the aggregation as int.
+        
+        Example of use:
+        
+        ::
+            
+             agg_size = get_agg_size(some_agg)
+             agg_size
+             --> 7
+             
+        """
+        agg_size = 0
+        for cursor in agg:
+            agg_size += 1
+        return 1 if agg_size == 0 else agg_size
     
     def check_for_history(self,fix,lookback,need_history):
+        """This function returns if for the current fixture that we are checking and according to the size of lookback 
+        requested, we have enough games in this current year or not.
+        
+        for example if we are trying to search some features for fixture 5 and the lookback is 10 then we need to add 5 more games from the previous season.
+
+        Args:
+           * fix(int): The fix that we want to check.
+           
+           * lookback(int): The size of the requested lookback.
+           
+           * need_history(bool): This paramter will also save this function result for further usage.
+        
+        Returns:
+        
+        This function returns True if we need to add games from previous year for the requested aggregation and False otherwise.
+        
+        Example of use:
+        
+        ::
+        
+            need_history = False
+            if check_for_history(5,7,need_history):
+                ....
+            else:
+                ....
+            need_history
+            --> True
+            
+        """
         if fix == 1 and (str(self.prev_year) not in self.data.keys()):
             return False,need_history
         if fix == 1 and (self.data[str(self.prev_year)].count() == 0):
@@ -313,9 +453,6 @@ class DBHandler():
         self.league = league
     
     def convert(self,data):
-        """
-        Convert the crawler data keys into string for insertion into MongoDB
-        """
         return {name:{str(i):data[name][i] for i in range(1,2*len(data.keys())-1)} for name in data.keys()}
     
     def explode(self,data):
