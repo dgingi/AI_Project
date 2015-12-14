@@ -12,7 +12,7 @@ class CrawlerArgsParser(object):
     '''
     Arguments parser for the Selenium based web crawler module.
     '''
-    leagues = ['Primer_League','Serire_A','La_Liga','Ligue1','Bundesliga']
+    leagues = ['Primer_League','Serie_A','La_Liga','Ligue1','Bundesliga']
     leagues_links = {'PL_2010':'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/2458/Stages/4345/Show/England-Premier-League-2010-2011',\
                         'PL_2011':'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/2935/Stages/5476/Show/England-Premier-League-2011-2012',\
                         'PL_2012':'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/3389/Stages/6531/Show/England-Premier-League-2012-2013',\
@@ -71,6 +71,7 @@ class CrawlerArgsParser(object):
                 self.range_kwargs.append(dict(self.kwargs))
         else:
             self.kwargs['year'] = int(vars(args)['year'])
+            self.kwargs['league'] = self.leagues_links[self._hash_league_names_and_years(self.LEAGUE_NAME,self.kwargs['year'])]
         
     def _hash_league_names_and_years(self,league,year):
         abv_league = ''
@@ -84,4 +85,4 @@ class CrawlerArgsParser(object):
             abv_league = 'L1'
         elif league == 'Serie_A':
             abv_league = 'SA'
-        return '_'.join([abv_league,year])
+        return '_'.join([abv_league,str(year)])

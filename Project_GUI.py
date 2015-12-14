@@ -85,7 +85,7 @@ class home_page(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         
-        background_image = PhotoImage(file = "GUI_Data\GUI_BG.gif")
+        background_image = PhotoImage(file = os.path.join("GUI_Data","GUI_BG.gif"))
         BGLabel = Label(self, image = background_image)
         BGLabel.image = background_image
         BGLabel.place(x=0, y=0, relwidth=1, relheight=1)
@@ -104,7 +104,7 @@ class examples_page(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         
-        background_image = PhotoImage(file = "GUI_Data\GUI_BG.gif")
+        background_image = PhotoImage(file = os.path.join("GUI_Data","GUI_BG.gif"))
         BGLabel = Label(self, image = background_image)
         BGLabel.image = background_image
         BGLabel.place(x=0, y=0, relwidth=1, relheight=1)
@@ -126,7 +126,7 @@ class examples_page(Frame):
         self.select_league_l = Label(self,text = "Please select a"+'\n'+" League :  ",font=SELECTION_FONT)
         self.select_league_l.place(x=13,y=90)
         self.league_list = Listbox(self,height=4)
-        with open("GUI_Data\GUI_Leagues.pckl",'r') as res:
+        with open(os.path.join("GUI_Data","GUI_Leagues.pckl"),'r') as res:
             all_leagues = load(res)
         for league in all_leagues:
             self.league_list.insert(END,league)
@@ -188,7 +188,7 @@ class crawler_page(Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         
-        background_image = PhotoImage(file = "GUI_Data\GUI_BG.gif")
+        background_image = PhotoImage(file = os.path.join("GUI_Data","GUI_BG.gif"))
         BGLabel = Label(self, image = background_image)
         BGLabel.image = background_image
         BGLabel.place(x=0, y=0, relwidth=1, relheight=1)
@@ -210,7 +210,7 @@ class crawler_page(Frame):
         self.select_league_l = Label(self,text = "Please select a"+'\n'+" League :  ",font=SELECTION_FONT)
         self.select_league_l.place(x=13,y=90)
         self.league_list = Listbox(self,height=4)
-        with open("GUI_Data\GUI_Leagues.pckl",'r') as res:
+        with open(os.path.join("GUI_Data","GUI_Leagues.pckl"),'r') as res:
             all_leagues = load(res)
         for league in all_leagues:
             self.league_list.insert(END,league)

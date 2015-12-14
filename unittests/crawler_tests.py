@@ -93,7 +93,7 @@ from whoscored_crawler import WhoScoredCrawler
 class TestWhoScoredCrawler(unittest.TestCase):
     pass
 
-    def test_crawler_creation(self):
+    def xtest_crawler_creation(self):
         crawler = WhoScoredCrawler('Primer_League',2014,'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/4311/Stages/9155/Show/England-Premier-League-2014-2015')
         self.assertEqual(crawler.league, 'Primer_League')
         self.assertEqual(crawler.year, 2014)
@@ -105,9 +105,10 @@ class TestWhoScoredCrawler(unittest.TestCase):
         crawler.crawl()
         self.assertEqual(len(crawler.team_names), 20)
         self.assertEqual(crawler.played_months, _months[1:6][::-1]+_months[8:13][::-1])
+        
         crawler.driver.quit()
         
-    def test_finding_first_month(self):
+    def xtest_finding_first_month(self):
         crawler = WhoScoredCrawler('Primer_League',2014,'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/4311/Stages/9155/Show/England-Premier-League-2014-2015')
         crawler.driver.get(crawler.league_link)
         crawler.driver.find_element(By.XPATH, '//*[@id="sub-navigation"]').find_element(By.PARTIAL_LINK_TEXT, 'Fixtures').click()
