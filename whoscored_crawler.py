@@ -121,8 +121,7 @@ class WhoScoredCrawler(object):
                 logging.info('Finished game, moving to the next one')
             else:
                 logging.info('Finished month, saving to disk')
-                with open(path.join(self._bkup_folder,month+'.pckl'),'wb') as _bkup_f:
-                    pickle.dump(self.all_teams_dict, _bkup_f)
+                self.save_month(month)
         else: #we're done - we can save to the DB now
             DBHandler(args_parser.LEAGUE_NAME).insert_to_db(self.all_teams_dict,str(self.year))
         prog_bar.finish()
@@ -282,6 +281,11 @@ class WhoScoredCrawler(object):
     def save_fixtures(self):
         with open(self._bkup_fixtures_links,'wb') as fixutres_bkup:
             pickle.dump(self.fixtures, fixutres_bkup)
+    
+    def save_month(self,month):
+        with open(path.join(self._bkup_folder,month+'.pckl'),'wb') as month_bkup:
+            pickle.dump(self.all_teams_dict,month_bkup)
+        os.remove(path.join(self._bkup_folder,self.last_save_month+'.pckl'))
             
     @retry        
     def parse_fixture(self,fixture):
@@ -333,4 +337,4 @@ if __name__ == '__main__':
 #         for kwargs in args_parser.range_kwargs:
 #             start_crawl(**kwargs)
     else:
-        start_crawl(**args_parser.kwargs)
+        start_crawl(args_parser.kwargs)
