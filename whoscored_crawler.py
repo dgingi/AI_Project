@@ -252,7 +252,7 @@ class WhoScoredCrawler(object):
         if self.start_month != self.played_months[-1]:
             with open(path.join(self._bkup_folder,self.last_save_month+'.pckl'),'rb') as _bkup_f:
                 self.all_teams_dict = pickle.load(_bkup_f)
-                self.all_teams_curr_fix = {name:self._get_curr_fix(name) for name in self.teams_names}
+                self.all_teams_curr_fix = {name:self._get_curr_fix(name) for name in self.team_names}
         else:
             self.all_teams_dict = {name:{i:{} for i in range(1,2*len(self.team_names)-1)} for name in self.team_names}
             self.all_teams_curr_fix = {name:1 for name in self.team_names}
