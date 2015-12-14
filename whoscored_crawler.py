@@ -46,7 +46,7 @@ class WhoScoredCrawler(object):
         self.year = year
         self.league_link = link
         self.chrome_oprtions = webdriver.ChromeOptions()
-        self.chrome_oprtions.add_extension('AdBlock_v2.36.2.crx')
+        self.chrome_oprtions.add_extension('1.4.0_0.crx')
         self.driver = webdriver.Chrome(chrome_options=self.chrome_oprtions)
         self.driver.implicitly_wait(30)
         self._create_backup()
