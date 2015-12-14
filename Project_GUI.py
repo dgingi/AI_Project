@@ -9,20 +9,27 @@ import Tkinter
 import ttk
 import datetime
 import os
+import threading
   
 TITLE_FONT = ("Helvetica", 18, "bold")
 BUTTON_FONT = ("Helvetica", 13, "bold")
 SELECTION_FONT = ("Helvetica", 11)
 
+class myThread (threading.Thread):
+    def __init__(self, func, args):
+        threading.Thread.__init__(self)
+        self.func = func
+        self.args = args
+        self.ex = None
+        self.ta = None
+    def run(self):
+        self.ex, self.ta = self.func(self.args)
+        
 def start_crawl_func(args,league,year):
     if league == "Nothing Selected Yet" or year == "Nothing Selected Yet":
         tkMessageBox.showinfo("ATTENTION!!!!", "Please select both league and year")
     else:
-        proc = subprocess.Popen(args+[league,year])
-        '''progressbar = ttk.Progressbar(orient=HORIZONTAL, length=200, mode='indeterminate')
-        progressbar.pack(side="bottom")
-        progressbar.start()
-        proc.wait()'''
+        subprocess.Popen(args+[league,year])
 
 def get_examples(league,year,file_name):
     if league == "Nothing Selected Yet" or year == "Nothing Selected Yet" or file_name =="":
@@ -38,10 +45,20 @@ def get_examples(league,year,file_name):
                     tkMessageBox.showinfo("ATTENTION!!!!", "No data for year "+str(rel_year)+" to get examples")
                     return
         E = EXHandler(league)
-        ex, ta = E.get()
-        with open("GUI_OUTPUT/"+file_name+"_E.pckl",'w') as res:
+        progressbar = ttk.Progressbar(orient=HORIZONTAL, length=200, mode='indeterminate')
+        progressbar.pack(side="bottom")
+        progressbar.start()
+        if len(year.split('-')) == 1:
+            thread = myThread(E.get,year)
+            thread.start()
+            thread.join()
+            ex, ta = thread.ex, thread.ta
+        else:
+            ex, ta = E.get()
+        progressbar.stop()
+        with open(path.join("GUI_OUTPUT/"+file_name+"_E.pckl"),'w') as res:
             dump(ex,res)
-        with open("GUI_OUTPUT/"+file_name+"_T.pckl",'w') as res:
+        with open(path.join("GUI_OUTPUT/"+file_name+"_T.pckl"),'w') as res:
             dump(ta,res)
             
 def return_active(list,selection):
@@ -263,7 +280,7 @@ class crawler_page(Frame):
                      'Ligue_1':"http://www.whoscored.com/Regions/74/Tournaments/22/France-Ligue-1"
                      }
         
-        args = ["python","crawler.py"]
+        args = ["python","whoscored_crawler.py"]
         self.start_crawl = Button(self, text="START CRAWLING",bg="green",command=lambda : start_crawl_func(args, self.league_selection.get(), self.year_selection.get()),font=BUTTON_FONT)
         self.start_crawl.pack(side=BOTTOM,pady=31)
         

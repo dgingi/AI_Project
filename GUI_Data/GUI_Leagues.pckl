@@ -1,12 +1,12 @@
 (lp0
 S'Primer_League'
 p1
-aS'Seria_A'
-p2
 aS'La_Liga'
-p3
+p2
 aS'Bundesliga'
-p4
+p3
 aS'Ligue_1'
+p4
+aS'Serie_A'
 p5
 a.

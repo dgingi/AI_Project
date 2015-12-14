@@ -7,6 +7,7 @@ Welcome to AI_Project's documentation!
 ======================================
 
 Contents:
++++++++++
 
 .. toctree::
    :maxdepth: 2

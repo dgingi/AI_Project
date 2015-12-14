@@ -550,33 +550,34 @@ class EXHandler():
         else:
             all_years = [year]
         for curr_year in range(MIN_YEAR,MAX_YEAR):
-            path = self.league+"-"+str(curr_year)+"\\"+self.league+"-"+str(curr_year)
+            path_to_ex_ta = "Examples_Tags\\"+self.league+"-"+str(curr_year)
+            path_to_db = self.league+"-"+str(curr_year)+"\\"+self.league+"-"+str(curr_year)
             if self.DBH.cols[str(curr_year)].count() != 0:
-                if os.path.exists(path+"_E.pckl"):
-                    with open(path+"_E.pckl",'r') as res:
+                if os.path.exists(path_to_ex_ta+"_E.pckl"):
+                    with open(os.path.join(path_to_ex_ta+"_E.pckl"),'r') as res:
                         temp_e = load(res)
                         examples += temp_e
-                    with open(path+"_T.pckl",'r') as res:
+                    with open(os.path.join(path_to_ex_ta+"_T.pckl"),'r') as res:
                         temp_t = load(res)
                         tags += temp_t
                 else:
                     temp_e,temp_t = self.DBH.create_examples(str(curr_year))
                     examples += temp_e
                     tags += temp_t
-                    with open(path+"_E.pckl",'w') as res:
+                    with open(os.path.join(path_to_ex_ta+"_E.pckl"),'w') as res:
                         dump(temp_e,res)
-                    with open(path+"_T.pckl",'w') as res:
+                    with open(os.path.join(path_to_ex_ta+"_T.pckl"),'w') as res:
                         dump(temp_t,res)
-            elif os.path.exists(path+"-May.pckl"):
-                with open(path+"-May.pckl",'r') as res:
+            elif os.path.exists(path_to_db+"-May.pckl"):
+                with open(os.path.join(path_to_db+"-May.pckl"),'r') as res:
                     data = load(res)
                     self.DBH.insert_to_db(data, str(curr_year))
                     temp_e,temp_t = self.DBH.create_examples(str(curr_year))
                     examples += temp_e
                     tags += temp_t
-                    with open(path+"_E.pckl",'w') as res:
+                    with open(os.path.join(path_to_ex_ta+"_E.pckl"),'w') as res:
                         dump(temp_e,res)
-                    with open(path+"_T.pckl",'w') as res:
+                    with open(os.path.join(path_to_ex_ta+"_T.pckl"),'w') as res:
                         dump(temp_t,res)
         return examples,tags
     
