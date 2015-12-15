@@ -15,18 +15,18 @@ MIN_YEAR = 2010
 MAX_YEAR = 2015
 
 class Features():
-    """This Class Hendels the creation of the features 
+    """This class handles the creation of the features for the classifier. 
 
     """
     def __init__(self,data,year):
-        """This is the Init function
+        """Init method - used to create new instance of Features.
 
         Args:
-           data(dictiobary):  A dictionary of {"year": all data for this year}.
+           data(dictionary):  A dictionary of {"year": all data for this year}.
            
            year(str): This is the year that we want to create the features for.
         
-        This function inits several lists of positions, such as:
+        This function initializes several lists of positions, such as:
         
         attack position list = ["FW","AR","AL","AC","AMC","AML","AMR"]
         
@@ -45,16 +45,16 @@ class Features():
         self.prev_year = self.curr_year - 1
 
     def create_features(self,t_name,lookback=5):
-        """This function runs all the functions of creating the different features.
+        """A method to create features for a team, according to the lookback.
 
         Args:
-           * t_name (str):  The name of the group we want to make the features for.
+           * t_name (str):  The name of the team we want to make the features for.
            
            * lookback(int): The amount of lookback to make all the aggregation.
         
         Returns:
         
-        This function returns 4 different dictionaries.
+        This method returns 4 different dictionaries.
         
         Each dicitionary is in the form of --> {fix_num(int) : {key:key_result} }
         
@@ -83,16 +83,16 @@ class Features():
         return res_by_all,res_by_fix,res_by_non_avg,res_by_fix_sum
            
     def get_curr_HA(self,t_name,fix):
-        """This function returns the if the Team=t_name played Home\Away in Fix=fix
+        """This method returns whether t_name played as home / away in the game fix. 
 
         Args:
-           * t_name (str):  The name of the group we want to find the current location of the game.
+           * t_name (str):  The name of the team we want to find the current location of the game.
            
            * fix(int): The fix that we want to search.
         
         Returns:
         
-        This function returns the location of the requested game.
+        This function returns the tag (home / away) of the requested team for the requested game.
         
         Example of use:
         

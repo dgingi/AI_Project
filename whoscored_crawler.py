@@ -111,7 +111,7 @@ class WhoScoredCrawler(object):
         self.driver.find_element(By.XPATH, '//*[@id="sub-navigation"]').find_element(By.PARTIAL_LINK_TEXT, 'Fixtures').click()
         self.played_months = self.get_played_months()
         self.load_previous_data()
-        prog_bar = ChargingBar('Progress of %s crawling:'%' '.join([self.league,str(self.year)]),max=sum([len(self.fixtures[month]) for month in self.fixtures]))
+        prog_bar = ChargingBar('Progress of %s crawling:'%' '.join([self.league,str(self.year)]),max=sum([len(self.fixtures[month]) for month in self.played_months[self.played_months.index(self.start_month)::-1]]))
         for month in self.played_months[self.played_months.index(self.start_month)::-1]:
             for game in self.fixtures[month]:
                 logging.info('Starting to parse game')
@@ -124,6 +124,7 @@ class WhoScoredCrawler(object):
                 self.save_month(month)
         else: #we're done - we can save to the DB now
             DBHandler(args_parser.LEAGUE_NAME).insert_to_db(self.all_teams_dict,str(self.year))
+        self.driver.quit()
         prog_bar.finish()
         
     @force        
@@ -285,7 +286,8 @@ class WhoScoredCrawler(object):
     def save_month(self,month):
         with open(path.join(self._bkup_folder,month+'.pckl'),'wb') as month_bkup:
             pickle.dump(self.all_teams_dict,month_bkup)
-        os.remove(path.join(self._bkup_folder,self.last_save_month+'.pckl'))
+        if month != self.played_months[-1]:
+            os.remove(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+1]+'.pckl'))
             
     @retry        
     def parse_fixture(self,fixture):
