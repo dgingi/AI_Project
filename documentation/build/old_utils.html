@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="AI_Project 0.0.1 documentation" href="index.html" />
-    <link rel="prev" title="Welcome to AI_Project’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Things you need to install before getting started" href="before.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -34,7 +34,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="index.html" title="Welcome to AI_Project’s documentation!"
+          <a href="before.html" title="Things you need to install before getting started"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">AI_Project 0.0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -53,18 +53,18 @@
 <dl class="class">
 <dt id="old_utils.Features">
 <em class="property">class </em><code class="descclassname">old_utils.</code><code class="descname">Features</code><span class="sig-paren">(</span><em>data</em>, <em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/old_utils.html#Features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#old_utils.Features" title="Permalink to this definition">¶</a></dt>
-<dd><p>This Class Hendels the creation of the features</p>
+<dd><p>This class handles the creation of the features for the classifier.</p>
 <dl class="method">
 <dt id="old_utils.Features.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>data</em>, <em>year</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/old_utils.html#Features.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#old_utils.Features.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the Init function</p>
+<dd><p>Init method - used to create new instance of Features.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd><p class="first">data(dictiobary):  A dictionary of {&#8220;year&#8221;: all data for this year}.</p>
+<dd><p class="first">data(dictionary):  A dictionary of {&#8220;year&#8221;: all data for this year}.</p>
 <p class="last">year(str): This is the year that we want to create the features for.</p>
 </dd>
 </dl>
-<p>This function inits several lists of positions, such as:</p>
+<p>This function initializes several lists of positions, such as:</p>
 <p>attack position list = [&#8220;FW&#8221;,&#8221;AR&#8221;,&#8221;AL&#8221;,&#8221;AC&#8221;,&#8221;AMC&#8221;,&#8221;AML&#8221;,&#8221;AMR&#8221;]</p>
 <p>it also saves the current year and previous year as an int.</p>
 </dd></dl>
@@ -101,17 +101,17 @@ need_history
 <dl class="method">
 <dt id="old_utils.Features.create_features">
 <code class="descname">create_features</code><span class="sig-paren">(</span><em>t_name</em>, <em>lookback=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/old_utils.html#Features.create_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#old_utils.Features.create_features" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function runs all the functions of creating the different features.</p>
+<dd><p>A method to create features for a team, according to the lookback.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><ul class="first last simple">
-<li>t_name (str):  The name of the group we want to make the features for.</li>
+<li>t_name (str):  The name of the team we want to make the features for.</li>
 <li>lookback(int): The amount of lookback to make all the aggregation.</li>
 </ul>
 </dd>
 </dl>
 <p>Returns:</p>
-<p>This function returns 4 different dictionaries.</p>
+<p>This method returns 4 different dictionaries.</p>
 <p>Each dicitionary is in the form of &#8211;&gt; {fix_num(int) : {key:key_result} }</p>
 <dl class="docutils">
 <dt>There are 4 dictionaries:</dt>
@@ -154,17 +154,17 @@ agg_size
 <dl class="method">
 <dt id="old_utils.Features.get_curr_HA">
 <code class="descname">get_curr_HA</code><span class="sig-paren">(</span><em>t_name</em>, <em>fix</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/old_utils.html#Features.get_curr_HA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#old_utils.Features.get_curr_HA" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function returns the if the Team=t_name played HomeAway in Fix=fix</p>
+<dd><p>This method returns whether t_name played as home / away in the game fix.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><ul class="first last simple">
-<li>t_name (str):  The name of the group we want to find the current location of the game.</li>
+<li>t_name (str):  The name of the team we want to find the current location of the game.</li>
 <li>fix(int): The fix that we want to search.</li>
 </ul>
 </dd>
 </dl>
 <p>Returns:</p>
-<p>This function returns the location of the requested game.</p>
+<p>This function returns the tag (home / away) of the requested team for the requested game.</p>
 <p>Example of use:</p>
 <div class="highlight-python"><div class="highlight"><pre>curr_HA = get_curr_HA(&quot;Chelsea&quot;,3)
 curr_HA
@@ -218,8 +218,8 @@ curr_VS
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to AI_Project&#8217;s documentation!</a></p>
+  <p class="topless"><a href="before.html"
+                        title="previous chapter">Things you need to install before getting started</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -251,14 +251,14 @@ curr_VS
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="index.html" title="Welcome to AI_Project’s documentation!"
+          <a href="before.html" title="Things you need to install before getting started"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">AI_Project 0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Ory Jonay, Dror Porat.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>
