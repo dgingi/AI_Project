@@ -58,10 +58,10 @@ class WhoScoredCrawler(object):
         '''
         Restarts the driver.
         
-        In case of the driver getting laggy and it needs a restart, quits, sleeps for 30 seconds and reopens the browser.
+        In case of the driver getting laggy and it needs a restart, quits, sleeps for 10 seconds and reopens the browser.
         '''
         self.driver.quit()
-        sleep(30)
+        sleep(10)
         self.driver = webdriver.Chrome(chrome_options=self.chrome_oprtions)
         self.driver.implicitly_wait(30)
         
@@ -127,7 +127,7 @@ class WhoScoredCrawler(object):
         self.driver.quit()
         prog_bar.finish()
         
-    @force        
+    @retry(True)        
     def parse_game(self,game):
         '''
         Parses a game and updates the dictionaries all_team_dict and all_teams_curr_fix
