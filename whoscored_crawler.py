@@ -289,7 +289,7 @@ class WhoScoredCrawler(object):
         if month != self.played_months[-1]:
             os.remove(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+1]+'.pckl'))
             
-    @retry        
+    @retry()       
     def parse_fixture(self,fixture):
         '''
         Parses a fixture and return a dictionary containing all data concerning that fixture.
