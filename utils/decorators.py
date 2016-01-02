@@ -1,8 +1,9 @@
 '''
-Created on Nov 27, 2015
+Decorators and various generic utilities for the project.
 
 @author: Ory Jonay
 '''
+
 from time import clock,sleep
 import logging
 
@@ -48,21 +49,5 @@ def retry(restart=False,num_retries=3):
         return wrap
     return _wrap
 
-def force(f):
-    '''
-    Decorator for forcing a function to success in case of webdriver failing.
+
     
-    Usage:
-    
-    @force
-    def some_function(*args,**kwargs):
-    '''
-    def wrap(*x,**d):
-        while True:
-            try:
-                res = f(*x,**d)
-                return res
-            except Exception as e:
-                logging.error(str(e))
-                x[0].restart_driver()
-    return wrap
