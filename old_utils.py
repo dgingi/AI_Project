@@ -11,11 +11,9 @@ from pymongo import MongoClient
 import numpy as np
 import datetime
 
-now = datetime.datetime.now()
-curr_year = now.year
+from utils.decorators import timed
+from utils.constants import *
 
-MIN_YEAR = curr_year - 5
-MAX_YEAR = curr_year
 
 class Features():
     """This class handles the creation of the features for the classifier. 
@@ -46,7 +44,7 @@ class Features():
         self.o_pos = ["Sub"]
         self.curr_year = int(year)
         self.prev_year = self.curr_year - 1
-
+    @timed
     def create_features(self,t_name,lookback=15):
         """A method to create features for a team, according to the lookback.
 
@@ -494,8 +492,10 @@ class DBHandler():
             self.client[self.league].drop_collection(year)
         else:
             self.client.drop_database(self.league)
+    
            
     def create_examples(self,year,lookback=15):
+        @timed
         def update_all_teams_dict(res,all_teams_dict,team,first):
             for fix in sorted(res):
                 if fix == 1 and res[fix] == {}:
@@ -536,7 +536,7 @@ class EXHandler():
     def __init__(self,league):
         self.league = league
         self.DBH = DBHandler(self.league)
-        return
+        
 
     def get_features_names(self):
         D = DBHandler(self.league)
@@ -548,47 +548,17 @@ class EXHandler():
         features_names += [k for k in sorted(res_by_non_avg[15])]
         return features_names
     
+    
     def get(self,year=None):
         examples = []
         tags = []
-        if not year:
-            all_years = range(MIN_YEAR,MAX_YEAR)
-        else:
-            all_years = [year]
+
         for curr_year in range(MIN_YEAR,MAX_YEAR):
-            path_to_ex_ta = "Examples_Tags\\"+self.league+"-"+str(curr_year)
-            path_to_db = self.league+"-"+str(curr_year)
             if self.DBH.cols[str(curr_year)].count() != 0:
-                if os.path.exists(path_to_ex_ta+"_E.pckl"):
-                    with open(os.path.join(path_to_ex_ta+"_E.pckl"),'r') as res:
-                        temp_e = load(res)
-                        examples += temp_e
-                    with open(os.path.join(path_to_ex_ta+"_T.pckl"),'r') as res:
-                        temp_t = load(res)
-                        tags += temp_t
-                else:
-                    temp_e,temp_t = self.DBH.create_examples(str(curr_year))
-                    examples += temp_e
-                    tags += temp_t
-                    with open(os.path.join(path_to_ex_ta+"_E.pckl"),'w') as res:
-                        dump(temp_e,res)
-                    with open(os.path.join(path_to_ex_ta+"_T.pckl"),'w') as res:
-                        dump(temp_t,res)
-            elif os.path.exists(path_to_db):
-                req_file = None
-                for file in os.listdir(path_to_db):
-                    if file.split('.')[0] != "fixtures":
-                        req_file = file
-                with open(os.path.join(path_to_db+"\\"+req_file),'r') as res:
-                    data = load(res)
-                    self.DBH.insert_to_db(data, str(curr_year))
-                    temp_e,temp_t = self.DBH.create_examples(str(curr_year))
-                    examples += temp_e
-                    tags += temp_t
-                    with open(os.path.join(path_to_ex_ta+"_E.pckl"),'w') as res:
-                        dump(temp_e,res)
-                    with open(os.path.join(path_to_ex_ta+"_T.pckl"),'w') as res:
-                        dump(temp_t,res)
+                temp_e,temp_t = self.DBH.create_examples(str(curr_year))
+                examples += temp_e
+                tags += temp_t
+
         return examples,tags
     
     def convert(self,ex,amount=3):
@@ -642,5 +612,7 @@ def PlotGraph(x_data,y_data,y_max_range,x_title,y_title,graph_name,plot_type):
 
 
 
-    
+'''
+@todo: add arg parser for EXH , DBH
+'''
     
