@@ -9,10 +9,13 @@ import os
 from pickle import load, dump
 from pymongo import MongoClient
 import numpy as np
+import datetime
 
+now = datetime.datetime.now()
+curr_year = now.year
 
-MIN_YEAR = 2010
-MAX_YEAR = 2015
+MIN_YEAR = curr_year - 5
+MAX_YEAR = curr_year
 
 class Features():
     """This class handles the creation of the features for the classifier. 
@@ -44,7 +47,7 @@ class Features():
         self.curr_year = int(year)
         self.prev_year = self.curr_year - 1
 
-    def create_features(self,t_name,lookback=5):
+    def create_features(self,t_name,lookback=15):
         """A method to create features for a team, according to the lookback.
 
         Args:
@@ -220,15 +223,15 @@ class Features():
                         res[curr_key] += func(cursor,key)
         return num_of_games
         
-    def create_avg_of_non_avg_f(self,t_name,fix,lookback=5):
+    def create_avg_of_non_avg_f(self,t_name,fix,lookback):
         
-        def update_avg_goals_scored(res,t_name,fix,by_loc,HA_list,lookback=5):
+        def update_avg_goals_scored(res,t_name,fix,by_loc,HA_list,lookback):
             need_history = False
             his_num_of_games = 0
             break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
             if not break_or_continue:
                 return
-            
+            lookback = fix if not need_history else lookback
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
             group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix"},"avg_Goals_by_fix"+by_loc:{"$sum":"$Goals"}}}
             pipe += [group_q]
@@ -245,7 +248,7 @@ class Features():
                 his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Goals_by_fix"+by_loc, "GS", lambda c,k: c[k])
             res["avg_Goals_by_fix"+by_loc] /= (num_of_games+his_num_of_games)
         
-        def update_avg_received_goals(res,t_name,fix,by_loc,HA_list,lookback=5):
+        def update_avg_received_goals(res,t_name,fix,by_loc,HA_list,lookback):
             
             def select_recieved_goals(HA,result):
                 if HA=="home":
@@ -258,7 +261,7 @@ class Features():
             break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
             if not break_or_continue:
                 return
-                
+            lookback = fix if not need_history else lookback    
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
             group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result"}}}
             pipe += [group_q]
@@ -274,12 +277,13 @@ class Features():
                 his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_received_Goals_by_fix"+by_loc, "GR", select_recieved_goals)
             res["avg_received_Goals_by_fix"+by_loc] /= (num_of_games+his_num_of_games)
         
-        def update_avg_success_rate(res,t_name,fix,by_loc,HA_list,lookback=5):
+        def update_avg_success_rate(res,t_name,fix,by_loc,HA_list,lookback):
             need_history = False
             his_num_of_games = 0
             break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
             if not break_or_continue:
                 return
+            lookback = fix if not need_history else lookback
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
             group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Tag":"$Tag"}}}
             pipe += [group_q]
@@ -296,12 +300,13 @@ class Features():
             res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
             res["avg_Success_rate"+by_loc] *= 100
         
-        def update_avg_specific_success_rate(res,t_name,vs_t_name,fix,by_loc,HA_list,lookback=5):
+        def update_avg_specific_success_rate(res,t_name,vs_t_name,fix,by_loc,HA_list,lookback):
             need_history = False
             his_num_of_games = 0
             break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
             if not break_or_continue:
                 return
+            lookback = fix if not need_history else lookback
             pipe = [{"$match":{"GName":t_name,"VS":vs_t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
             group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Tag":"$Tag"}}}
             pipe += [group_q]
@@ -318,12 +323,13 @@ class Features():
             res["avg_Specific_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
             res["avg_Specific_Success_rate"+by_loc] *= 100
               
-        def update_avg_possesion_rate(res,t_name,fix,by_loc,HA_list,lookback=5):   
+        def update_avg_possesion_rate(res,t_name,fix,by_loc,HA_list,lookback):   
             need_history = False
             his_num_of_games = 0
             break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
             if not break_or_continue:
                 return
+            lookback = fix if not need_history else lookback
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
             group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Possession":"$Possession"}}}
             pipe += [group_q]
@@ -352,7 +358,7 @@ class Features():
         
         return res
         
-    def create_avg_up_to(self,by_avg,t_name,fix,lookback=5):
+    def create_avg_up_to(self,by_avg,t_name,fix,lookback):
         
         def decide_pos_list(str):
             pos = str.split('_')[1]
@@ -412,7 +418,7 @@ class Features():
             break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
             if not break_or_continue:
                 return
-            
+            lookback = fix if not need_history else lookback
             temp_res = {}
             pipe,group_q = create_pipe(temp_res, t_name, fix, lookback,by_avg, by_pos, by_loc, HA_list, pos_list)
             agg = self.col.aggregate(pipe)
@@ -489,7 +495,7 @@ class DBHandler():
         else:
             self.client.drop_database(self.league)
            
-    def create_examples(self,year,lookback=5):
+    def create_examples(self,year,lookback=15):
         def update_all_teams_dict(res,all_teams_dict,team,first):
             for fix in sorted(res):
                 if fix == 1 and res[fix] == {}:
@@ -551,7 +557,7 @@ class EXHandler():
             all_years = [year]
         for curr_year in range(MIN_YEAR,MAX_YEAR):
             path_to_ex_ta = "Examples_Tags\\"+self.league+"-"+str(curr_year)
-            path_to_db = self.league+"-"+str(curr_year)+"\\"+self.league+"-"+str(curr_year)
+            path_to_db = self.league+"-"+str(curr_year)
             if self.DBH.cols[str(curr_year)].count() != 0:
                 if os.path.exists(path_to_ex_ta+"_E.pckl"):
                     with open(os.path.join(path_to_ex_ta+"_E.pckl"),'r') as res:
@@ -568,8 +574,12 @@ class EXHandler():
                         dump(temp_e,res)
                     with open(os.path.join(path_to_ex_ta+"_T.pckl"),'w') as res:
                         dump(temp_t,res)
-            elif os.path.exists(path_to_db+"-May.pckl"):
-                with open(os.path.join(path_to_db+"-May.pckl"),'r') as res:
+            elif os.path.exists(path_to_db):
+                req_file = None
+                for file in os.listdir(path_to_db):
+                    if file.split('.')[0] != "fixtures":
+                        req_file = file
+                with open(os.path.join(path_to_db+"\\"+req_file),'r') as res:
                     data = load(res)
                     self.DBH.insert_to_db(data, str(curr_year))
                     temp_e,temp_t = self.DBH.create_examples(str(curr_year))
