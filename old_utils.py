@@ -35,15 +35,20 @@ class Features():
         """
         self.data = data
         self.col = data[year]
+        
         self.non_avg_keys = ["Position","PName","GName","Result","HA","_id","Tag","VS","Goals","Fix"]
-        self.d_pos = ["GK","DR","DL","DC","DMC","DML","DMR","MR","MC","ML"]
-        self.sd_pos = ["DR","DL","DC"]
-        self.m_pos = ["DMC","DML","DMR","MR","MC","ML","AMC","AML","AMR"]
-        self.a_pos = ["FW","AR","AL","AC","AMC","AML","AMR"]
-        self.sa_pos = ["FW","AR","AL","AC"]
+        self.all_keys = ["PA%","AerialsWon","Touches","Passes","Crosses","AccCrosses","LB","AccLB","ThB","AccThB"]
+        self.att_keys = ["Shots","ShotsOT","KeyPasses","Dribbles","Fouled","Offsides","Disp","UnsTouches"]
+        self.def_keys = ["TotalTackles","Interceptions","Clearances","BlockedShots","Fouls"]
+        
+        self.d_pos = ["DR","DL","DC","DMC","DML","DMR","MR","MC","ML"]
+        self.a_pos = ["FW","AR","AL","AC","AMC","AML","AMR","MR","MC","ML"]
+        
         self.o_pos = ["Sub"]
+        
         self.curr_year = int(year)
         self.prev_year = self.curr_year - 1
+    
     @timed
     def create_features(self,t_name,lookback=15):
         """A method to create features for a team, according to the lookback.
@@ -77,11 +82,9 @@ class Features():
              
         """
         max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name})])
-        res_by_all = {i:self.create_avg_up_to("by_all_fix",t_name, i, lookback) for i in range(1,max_fix+1)}
-        res_by_fix = {i:self.create_avg_up_to("by_fix",t_name, i, lookback) for i in range(1,max_fix+1)}
-        res_by_fix_sum = {i:self.create_avg_up_to("by_fixSum",t_name, i, lookback) for i in range(1,max_fix+1)}
+        res_by_all = {i:self.create_avg_up_to(t_name, i, lookback) for i in range(1,max_fix+1)}
         res_by_non_avg = {i:self.create_avg_of_non_avg_f(t_name, i, lookback) for i in range(1,max_fix+1)}
-        return res_by_all,res_by_fix,res_by_non_avg,res_by_fix_sum
+        return res_by_all,res_by_non_avg
            
     def get_curr_HA(self,t_name,fix):
         """This method returns whether t_name played as home / away in the game fix. 
@@ -195,6 +198,33 @@ class Features():
                 need_history = True
         return True,need_history
     
+    def get_history_non_avg(self,res,t_name,fix,lookback,HA_list,group_q,by_loc):
+        def select_recieved_goals(HA,result):
+                if HA=="home":
+                    return int(result[1])
+                else:
+                    return int(result[0])
+        temp_f = Features(self.data,str(self.prev_year))
+        try:
+            max_fix = max([g["Fix"] for g in temp_f.col.find({"GName":t_name})])
+        except Exception,e:
+            return 0
+        diff = (fix-lookback)*(-1) + 1
+        pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lte":max_fix,"$gt":max_fix-diff},"HA":{"$in":HA_list}}}]
+        pipe += [group_q]
+        agg = temp_f.col.aggregate(pipe)
+        num_of_games = self.get_agg_size(agg)
+        agg = temp_f.col.aggregate(pipe)
+        for cursor in agg:
+            for key in cursor:
+                if key!="_id":
+                    res["avg_Goals_by_fix"+by_loc] += cursor[key]
+                else:
+                    res["avg_received_Goals_by_fix"+by_loc] += select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
+                    res["avg_Success_rate"+by_loc] += 1 if cursor[key]["Tag"]==1 else 0
+                    res["avg_Possession_rate"+by_loc] += cursor[key]["Possession"]
+        return num_of_games
+        
     def get_history(self,res,t_name,fix,lookback,HA_list,pos_list,group_q,curr_key,curr_feat,func):
         temp_f = Features(self.data,str(self.prev_year))
         try:
@@ -204,7 +234,7 @@ class Features():
         diff = (fix-lookback)*(-1) + 1
         pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lte":max_fix,"$gt":max_fix-diff},"HA":{"$in":HA_list}}}]
         if pos_list:
-                    pipe[0]["$match"]["Position"] = {"$in":pos_list}
+            pipe[0]["$match"]["Position"] = {"$in":pos_list}
         pipe += [group_q]
         agg = temp_f.col.aggregate(pipe)
         num_of_games = self.get_agg_size(agg)
@@ -223,30 +253,7 @@ class Features():
         
     def create_avg_of_non_avg_f(self,t_name,fix,lookback):
         
-        def update_avg_goals_scored(res,t_name,fix,by_loc,HA_list,lookback):
-            need_history = False
-            his_num_of_games = 0
-            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
-            if not break_or_continue:
-                return
-            lookback = fix if not need_history else lookback
-            pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
-            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix"},"avg_Goals_by_fix"+by_loc:{"$sum":"$Goals"}}}
-            pipe += [group_q]
-            res["avg_Goals_by_fix"+by_loc] = 0.0
-            agg = self.col.aggregate(pipe)
-            num_of_games = self.get_agg_size(agg)
-            agg = self.col.aggregate(pipe) 
-            for cursor in agg:
-                for key in cursor:
-                    if key!="_id":
-                        res["avg_Goals_by_fix"+by_loc] += cursor[key]
-            
-            if need_history:
-                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Goals_by_fix"+by_loc, "GS", lambda c,k: c[k])
-            res["avg_Goals_by_fix"+by_loc] /= (num_of_games+his_num_of_games)
-        
-        def update_avg_received_goals(res,t_name,fix,by_loc,HA_list,lookback):
+        def func_temp(res,t_name,fix,by_loc,HA_list,lookback):
             
             def select_recieved_goals(HA,result):
                 if HA=="home":
@@ -259,45 +266,37 @@ class Features():
             break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
             if not break_or_continue:
                 return
-            lookback = fix if not need_history else lookback    
-            pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
-            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result"}}}
-            pipe += [group_q]
-            res["avg_received_Goals_by_fix"+by_loc] = 0.0
-            agg = self.col.aggregate(pipe)
-            num_of_games = self.get_agg_size(agg)
-            agg = self.col.aggregate(pipe)
-            for cursor in agg:
-                for key in cursor:
-                    res["avg_received_Goals_by_fix"+by_loc] += select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
-            
-            if need_history:
-                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_received_Goals_by_fix"+by_loc, "GR", select_recieved_goals)
-            res["avg_received_Goals_by_fix"+by_loc] /= (num_of_games+his_num_of_games)
-        
-        def update_avg_success_rate(res,t_name,fix,by_loc,HA_list,lookback):
-            need_history = False
-            his_num_of_games = 0
-            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
-            if not break_or_continue:
-                return
             lookback = fix if not need_history else lookback
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
-            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Tag":"$Tag"}}}
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result","Tag":"$Tag","Possession":"$Possession"},"avg_Goals_by_fix"+by_loc:{"$sum":"$Goals"}}}
             pipe += [group_q]
+            
+            res["avg_Goals_by_fix"+by_loc] = 0.0
+            res["avg_received_Goals_by_fix"+by_loc] = 0.0
             res["avg_Success_rate"+by_loc] = 0.0
+            res["avg_Possession_rate"+by_loc] = 0.0
+            
             agg = self.col.aggregate(pipe)
             num_of_games = self.get_agg_size(agg)
-            agg = self.col.aggregate(pipe)
+            agg = self.col.aggregate(pipe) 
             for cursor in agg:
                 for key in cursor:
-                    res["avg_Success_rate"+by_loc] += 1 if cursor[key]["Tag"]==1 else 0 
-            
+                    if key!="_id":
+                        res["avg_Goals_by_fix"+by_loc] += cursor[key]
+                    else:
+                        res["avg_received_Goals_by_fix"+by_loc] += select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
+                        res["avg_Success_rate"+by_loc] += 1 if cursor[key]["Tag"]==1 else 0
+                        res["avg_Possession_rate"+by_loc] += cursor[key]["Possession"]
+                        
             if need_history:
-                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Success_rate"+by_loc, "SR", lambda c,k: 1 if c[k]["Tag"]==1 else 0)
+                his_num_of_games = self.get_history_non_avg(res, t_name, fix, lookback, HA_list, group_q, by_loc)
+            
+            res["avg_Goals_by_fix"+by_loc] /= (num_of_games+his_num_of_games)
+            res["avg_received_Goals_by_fix"+by_loc] /= (num_of_games+his_num_of_games)
             res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
             res["avg_Success_rate"+by_loc] *= 100
-        
+            res["avg_Possession_rate"+by_loc] /= (num_of_games+his_num_of_games)
+            
         def update_avg_specific_success_rate(res,t_name,vs_t_name,fix,by_loc,HA_list,lookback):
             need_history = False
             his_num_of_games = 0
@@ -321,80 +320,43 @@ class Features():
             res["avg_Specific_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
             res["avg_Specific_Success_rate"+by_loc] *= 100
               
-        def update_avg_possesion_rate(res,t_name,fix,by_loc,HA_list,lookback):   
-            need_history = False
-            his_num_of_games = 0
-            break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
-            if not break_or_continue:
-                return
-            lookback = fix if not need_history else lookback
-            pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
-            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","Possession":"$Possession"}}}
-            pipe += [group_q]
-            res["avg_Possession_rate"+by_loc] = 0.0
-            agg = self.col.aggregate(pipe)
-            num_of_games = self.get_agg_size(agg)
-            agg = self.col.aggregate(pipe)
-            for cursor in agg:
-                for key in cursor:
-                    res["avg_Possession_rate"+by_loc] += cursor[key]["Possession"] 
-            
-            if need_history:
-                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, [], group_q, "avg_Possession_rate"+by_loc, "PR", lambda c,k: c[k]["Possession"])
-            res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
-            
         res = {}
         curr_HA = self.get_curr_HA(t_name, fix) 
         curr_VS = self.get_curr_VS(t_name, fix)
         
-        for func in [update_avg_goals_scored,update_avg_received_goals,update_avg_success_rate,update_avg_possesion_rate]:
-            func(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
-            func(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
+        func_temp(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
+        func_temp(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
         
         update_avg_specific_success_rate(res, t_name, curr_VS, fix, "_by_all_HA", ["home","away"], lookback)
         update_avg_specific_success_rate(res, t_name, curr_VS, fix, "_by_"+curr_HA, [curr_HA], lookback)
         
         return res
         
-    def create_avg_up_to(self,by_avg,t_name,fix,lookback):
+    def create_avg_up_to(self,t_name,fix,lookback):
         
-        def decide_pos_list(str):
+        def make_curr_lists(str):
             pos = str.split('_')[1]
             if pos == 'all':
-                return []
+                return [],self.all_keys
             elif pos == 'def':
-                return self.d_pos
-            elif pos == 'sdef':
-                return self.sd_pos
-            elif pos == 'mid':
-                return self.m_pos
-            elif pos == 'att':
-                return self.a_pos
-            elif pos == 'satt':
-                return self.sa_pos
+                return self.d_pos,self.def_keys
             else:
-                return self.o_pos
-        
-        def make_pos_list(str):
-            if str == "by_all_fix":
-                return ["by_all_pos","by_sub_pos","by_mid_pos","by_satt_pos"]
-            else:
-                return ["by_all_pos","by_def_pos","by_att_pos","by_sub_pos","by_mid_pos","by_satt_pos","by_sdef_pos"]
-           
-        def update_res(res,t_name,fix,lookback,by_avg,by_pos,by_loc,HA_list,pos_list):
+                return self.a_pos,self.att_keys
+          
+        def update_res(res,t_name,fix,lookback,by_pos,by_loc,HA_list,pos_list,key_list):
             
-            def create_pipe(res,t_name,fix,lookback,by_avg,by_pos,by_loc,HA_list,pos_list):
+            def create_pipe(res,t_name,fix,lookback,by_pos,by_loc,HA_list,pos_list,key_list):
                 
-                def all_features(res,by_avg,by_pos,by_loc,group_q):
+                def all_features(res,by_pos,by_loc,group_q,key_list):
                     temp_group_q = dict(group_q)
                     for key in self.col.find_one().keys():
-                        if key in self.non_avg_keys:
+                        if key not in key_list:
                             continue
                         index = "$"+key
-                        if by_avg!="by_fixSum":
-                            temp = ("avg_"+key+"_"+by_avg+"_"+by_pos+"_"+by_loc,{"$avg":index})
+                        if key == "PA%":
+                            temp = ("avg_"+key+"_"+by_pos+"_"+by_loc,{"$avg":index})
                         else:
-                            temp = ("avg_"+key+"_"+by_avg+"_"+by_pos+"_"+by_loc,{"$sum":index})
+                            temp = ("avg_"+key+"_"+by_pos+"_"+by_loc,{"$sum":index})
                         res[temp[0]] = 0.0
                         temp_group_q["$group"][temp[0]] = temp[1]
                     return temp_group_q
@@ -402,12 +364,8 @@ class Features():
                 pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
                 if pos_list:
                     pipe[0]["$match"]["Position"] = {"$in":pos_list}
-                group_q = {}
-                if by_avg == "by_all_fix":
-                    group_q = {"$group":{"_id":{"GName":"$GName"}}}
-                else:
-                    group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix"}}}
-                new_group_q = all_features(res,by_avg,by_pos,by_loc, group_q) 
+                group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix"}}}
+                new_group_q = all_features(res,by_pos,by_loc, group_q,key_list) 
                 pipe += [new_group_q]
                 return pipe,new_group_q
             
@@ -417,8 +375,10 @@ class Features():
             if not break_or_continue:
                 return
             lookback = fix if not need_history else lookback
+            
             temp_res = {}
-            pipe,group_q = create_pipe(temp_res, t_name, fix, lookback,by_avg, by_pos, by_loc, HA_list, pos_list)
+            pipe,group_q = create_pipe(temp_res, t_name, fix, lookback, by_pos, by_loc, HA_list, pos_list,key_list)
+            
             agg = self.col.aggregate(pipe)
             num_of_games = self.get_agg_size(agg)
             agg = self.col.aggregate(pipe)
@@ -429,22 +389,19 @@ class Features():
             
             if need_history:
                 his_num_of_games = self.get_history(temp_res, t_name, fix, lookback, HA_list, pos_list, group_q, "all", "AF", lambda c,k: c[k])
-            if by_avg != "by_all_fix":
-                for key in temp_res:
-                    temp_res[key] /= (num_of_games+his_num_of_games)
-            if by_avg == "by_all_fix" and need_history and his_num_of_games!= 0:
-                for key in temp_res:
-                    temp_res[key] /= 2
+            
+            for key in temp_res:
+                temp_res[key] /= (num_of_games+his_num_of_games)
             res.update(temp_res)
                                 
         res = {}
         curr_HA = self.get_curr_HA(t_name, fix)
-        pos_list = make_pos_list(by_avg)
-         
+        pos_list = ["by_all_pos","by_def_pos","by_att_pos"]
+        
         for pos in pos_list:
-            curr_pos_list = decide_pos_list(pos)
-            update_res(res,t_name,fix,lookback,by_avg,pos, "by_all_HA",["home","away"],curr_pos_list)
-            update_res(res,t_name,fix,lookback,by_avg,pos, "by_"+curr_HA, [curr_HA],curr_pos_list)
+            curr_pos_list,curr_key_list = make_curr_lists(pos)
+            update_res(res,t_name,fix,lookback,pos, "by_all_HA",["home","away"],curr_pos_list,curr_key_list)
+            update_res(res,t_name,fix,lookback,pos, "by_"+curr_HA, [curr_HA],curr_pos_list,curr_key_list)
              
         return res                
 
@@ -493,9 +450,9 @@ class DBHandler():
         else:
             self.client.drop_database(self.league)
     
-           
+    @timed        
     def create_examples(self,year,lookback=15):
-        @timed
+        
         def update_all_teams_dict(res,all_teams_dict,team,first):
             for fix in sorted(res):
                 if fix == 1 and res[fix] == {}:
@@ -510,10 +467,8 @@ class DBHandler():
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(self.cols,year)
         for team in all_teams_dict:
-            res_by_all, res_by_fix, res_by_non_avg, res_by_fix_sum = features.create_features(team,lookback)
+            res_by_all, res_by_non_avg = features.create_features(team,lookback)
             update_all_teams_dict(res_by_all, all_teams_dict, team, True)
-            update_all_teams_dict(res_by_fix, all_teams_dict, team, False)
-            update_all_teams_dict(res_by_fix_sum, all_teams_dict, team, False)
             update_all_teams_dict(res_by_non_avg, all_teams_dict, team, False)
         examples = []
         tags = []

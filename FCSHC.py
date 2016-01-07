@@ -41,7 +41,7 @@ def funcMaxDAux(i):
 def funcMaxD(state,i):
     new_state = copy.deepcopy(state)
     new_state.data["max_depth"] += i
-    check_borders(new_state, "max_depth", 1, len(new_state.examples))
+    check_borders(new_state, "max_depth", 1, len(new_state.examples[0]))
     return new_state
 
 def funcMinSSAux(i):
