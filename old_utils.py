@@ -35,6 +35,7 @@ class Features():
         """
         self.data = data
         self.col = data[year]
+        self.all_col = data["all"]
         
         self.non_avg_keys = ["Position","PName","GName","Result","HA","_id","Tag","VS","Goals","Fix"]
         self.all_keys = ["PA%","AerialsWon","Touches","Passes","Crosses","AccCrosses","LB","AccLB","ThB","AccThB"]
@@ -253,7 +254,7 @@ class Features():
         
     def create_avg_of_non_avg_f(self,t_name,fix,lookback):
         
-        def func_temp(res,t_name,fix,by_loc,HA_list,lookback):
+        def create_avg(res,t_name,fix,by_loc,HA_list,lookback,vs=""):
             
             def select_recieved_goals(HA,result):
                 if HA=="home":
@@ -266,36 +267,44 @@ class Features():
             break_or_continue,need_history = self.check_for_history(fix, lookback, need_history)
             if not break_or_continue:
                 return
-            lookback = fix if not need_history else lookback
+            lookback = fix if not need_history else lookback                
             pipe = [{"$match":{"GName":t_name,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
+            
+            if vs != "":
+                pipe[0]["$match"]["VS"] = vs
+                
+            add_to_key = by_loc if vs == "" else by_loc + "_specific"
+            
             group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result","Tag":"$Tag","Possession":"$Possession"},"avg_Goals_by_fix"+by_loc:{"$sum":"$Goals"}}}
             pipe += [group_q]
             
-            res["avg_Goals_by_fix"+by_loc] = 0.0
-            res["avg_received_Goals_by_fix"+by_loc] = 0.0
-            res["avg_Success_rate"+by_loc] = 0.0
-            res["avg_Possession_rate"+by_loc] = 0.0
+            res["avg_Goals_by_fix"+add_to_key] = 0.0
+            res["avg_received_Goals_by_fix"+add_to_key] = 0.0
+            res["avg_Success_rate"+add_to_key] = 0.0
+            res["avg_Possession_rate"+add_to_key] = 0.0
             
-            agg = self.col.aggregate(pipe)
+            temp_col = self.col if vs =="" else self.all_col
+            
+            agg = temp_col.aggregate(pipe)
             num_of_games = self.get_agg_size(agg)
-            agg = self.col.aggregate(pipe) 
+            agg = temp_col.aggregate(pipe) 
             for cursor in agg:
                 for key in cursor:
                     if key!="_id":
-                        res["avg_Goals_by_fix"+by_loc] += cursor[key]
+                        res["avg_Goals_by_fix"+add_to_key] += cursor[key]
                     else:
-                        res["avg_received_Goals_by_fix"+by_loc] += select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
-                        res["avg_Success_rate"+by_loc] += 1 if cursor[key]["Tag"]==1 else 0
-                        res["avg_Possession_rate"+by_loc] += cursor[key]["Possession"]
+                        res["avg_received_Goals_by_fix"+add_to_key] += select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
+                        res["avg_Success_rate"+add_to_key] += 1 if cursor[key]["Tag"]==1 else 0
+                        res["avg_Possession_rate"+add_to_key] += cursor[key]["Possession"]
                         
             if need_history:
-                his_num_of_games = self.get_history_non_avg(res, t_name, fix, lookback, HA_list, group_q, by_loc)
+                his_num_of_games = self.get_history_non_avg(res, t_name, fix, lookback, HA_list, group_q, add_to_key)
             
-            res["avg_Goals_by_fix"+by_loc] /= (num_of_games+his_num_of_games)
-            res["avg_received_Goals_by_fix"+by_loc] /= (num_of_games+his_num_of_games)
-            res["avg_Success_rate"+by_loc] /= (num_of_games+his_num_of_games)
-            res["avg_Success_rate"+by_loc] *= 100
-            res["avg_Possession_rate"+by_loc] /= (num_of_games+his_num_of_games)
+            res["avg_Goals_by_fix"+add_to_key] /= (num_of_games+his_num_of_games)
+            res["avg_received_Goals_by_fix"+add_to_key] /= (num_of_games+his_num_of_games)
+            res["avg_Success_rate"+add_to_key] /= (num_of_games+his_num_of_games)
+            res["avg_Success_rate"+add_to_key] *= 100
+            res["avg_Possession_rate"+add_to_key] /= (num_of_games+his_num_of_games)
             
         def update_avg_specific_success_rate(res,t_name,vs_t_name,fix,by_loc,HA_list,lookback):
             need_history = False
@@ -324,11 +333,14 @@ class Features():
         curr_HA = self.get_curr_HA(t_name, fix) 
         curr_VS = self.get_curr_VS(t_name, fix)
         
-        func_temp(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
-        func_temp(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
+        create_avg(res,t_name, fix, "_by_all_HA", ["home","away"], lookback)
+        create_avg(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback)
         
-        update_avg_specific_success_rate(res, t_name, curr_VS, fix, "_by_all_HA", ["home","away"], lookback)
-        update_avg_specific_success_rate(res, t_name, curr_VS, fix, "_by_"+curr_HA, [curr_HA], lookback)
+        create_avg(res,t_name, fix, "_by_all_HA", ["home","away"], lookback, curr_VS)
+        create_avg(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback, curr_VS)
+        
+        #update_avg_specific_success_rate(res, t_name, curr_VS, fix, "_by_all_HA", ["home","away"], lookback)
+        #update_avg_specific_success_rate(res, t_name, curr_VS, fix, "_by_"+curr_HA, [curr_HA], lookback)
         
         return res
         
@@ -411,12 +423,13 @@ class DBHandler():
         self.client = MongoClient() #TODO: remote DB
         self.DB = self.client[league]
         self.cols = {str(year):self.DB[str(year)] for year in range(MIN_YEAR,MAX_YEAR)}
+        self.cols["all"] = self.DB["all"]
         self.league = league
     
     def convert(self,data):
         return {name:{str(i):data[name][i] for i in range(1,2*len(data.keys())-1)} for name in data.keys()}
     
-    def explode(self,data):
+    def explode(self,data,year):
         res = []
         for team in data:
             for fix in sorted(data[team]):
@@ -436,13 +449,16 @@ class DBHandler():
                         line['Possession'] = float(data[team][fix]['Possession'].split('%')[0])
                         line['VS'] = data[team][fix]['VS']
                         line['Tag'] = int(data[team][fix]['Tag'])
+                        line['Year'] = int(year)
                         res.append(line)
         return res
     
     def insert_to_db(self,data,year):
         if self.cols[year].count() != 0:
             self.drop(year)
-        self.cols[year].insert(self.explode(self.convert(data)))
+        res = self.explode(self.convert(data),year)
+        self.cols[year].insert(res)
+        self.cols["all"].insert(res)
         
     def drop(self,year=None):
         if year:
@@ -496,7 +512,7 @@ class EXHandler():
     def get_features_names(self):
         D = DBHandler(self.league)
         team = [g['_id'] for g in D.cols["2012"].aggregate([{"$group":{"_id":"$GName"}}])][0]
-        res_by_all, res_by_fix, res_by_non_avg, res_by_fix_sum = Features(D.cols,"2012").create_features(team)
+        res_by_fix, res_by_non_avg = Features(D.cols,"2012").create_features(team)
         features_names = [k for k in sorted(res_by_all[15])]
         features_names += [k for k in sorted(res_by_fix[15])]
         features_names += [k for k in sorted(res_by_fix_sum[15])]
