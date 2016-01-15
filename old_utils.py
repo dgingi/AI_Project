@@ -485,9 +485,26 @@ class DBHandler():
                 else:
                     all_teams_dict[team][fix] += [res[fix][k] for k in sorted(res[fix])]
         
+        def relative_features(arr1,arr2,fn):
+            combined_list_all_1 = [value for (value,key) in zip(arr1,fn) if key.split("all_pos")>1 ]
+            combined_list_att_1 = [value for (value,key) in zip(arr1,fn) if key.split("att_pos")>1 ]
+            combined_list_def_1 = [value for (value,key) in zip(arr1,fn) if key.split("def_pos")>1 ]
+            
+            combined_list_all_2 = [value for (value,key) in zip(arr2,fn) if key.split("all_pos")>1 ]
+            combined_list_att_2 = [value for (value,key) in zip(arr2,fn) if key.split("att_pos")>1 ]
+            combined_list_def_2 = [value for (value,key) in zip(arr2,fn) if key.split("def_pos")>1 ]
+            
+            all_rel = [1 for (val1,val2) in zip (combined_list_all_1,combined_list_all_2) if val1 > val2]
+            att_rel = [1 for (val1,val2) in zip (combined_list_att_1,combined_list_att_2) if val1 > val2]
+            def_rel = [1 for (val1,val2) in zip (combined_list_def_1,combined_list_def_2) if val1 > val2]
+            
+            return float(len(all_rel))/len(combined_list_all_1), float(len(att_rel))/len(combined_list_att_1), float(len(def_rel))/len(combined_list_def_1)
+            
+            
         all_teams_names = [g['_id'] for g in self.cols[year].aggregate([{"$group":{"_id":"$GName"}}])]
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(self.cols,year)
+        features_names = EXHandler(self.league).get_features_names()
         for team in all_teams_dict:
             res_by_all, res_by_non_avg = features.create_features(team,lookback)
             update_all_teams_dict(res_by_all, all_teams_dict, team, True)
@@ -504,7 +521,9 @@ class DBHandler():
                     vs_curr_fix = vs_curr_game["Fix"]
                     if all_teams_dict[curr_game["VS"]][vs_curr_fix] == []:
                         continue
+                    rel_all, rel_att, rel_def = relative_features(all_teams_dict[team][fix], all_teams_dict[curr_game["VS"]][vs_curr_fix], features_names)
                     examples += [np.array(all_teams_dict[team][fix])-np.array(all_teams_dict[curr_game["VS"]][vs_curr_fix])]
+                    examples[-1] += [rel_all, rel_att, rel_def]
                     tags += [curr_game["Tag"]]
         return examples,tags
         

@@ -17,13 +17,12 @@ def get_examples_and_tags(league):
     X2, Y2 = E.get(LAST_YEAR)
     idx = -1*len(X2)
     X1,Y1 = X[:idx], Y[:idx]
-    
     return X1,Y1,X2,Y2
 
 def find_best_params(league):
     X1,Y1,X2,Y2 = get_examples_and_tags(league)
     s = FirstChoiceLocalSearch(X1,Y1)
-    final_state, final_state_score, output_array = s.search(X2, Y2)
+    final_state, final_state_score, output_array, random_array = s.search(X2, Y2)
     with open(os.path.join("tests/best_params_test/best_params_test_fs.pckl"),'w') as res:
         dump(final_state.data, res)
     with open(os.path.join("tests/best_params_test/best_params_test_fss.pckl"),'w') as res:

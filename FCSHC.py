@@ -66,14 +66,14 @@ def funcMinSL(state,i):
 class LearningState(SearchState):
     def __init__(self,data,examples,tags):
         legal_operators = [funcCriterion,funcSplitter]
-        legal_operators += [funcMaxDAux(i) for i in range(1,15)]
-        legal_operators += [funcMaxDAux(-i) for i in range(1,15)]
-        legal_operators += [funcMaxFAux(i) for i in range(1,15)]
-        legal_operators += [funcMaxFAux(-i) for i in range(1,15)]
-        legal_operators += [funcMinSLAux(i) for i in range(1,15)]
-        legal_operators += [funcMinSLAux(-i) for i in range(1,15)]
-        legal_operators += [funcMinSSAux(i) for i in range(1,15)]
-        legal_operators += [funcMinSSAux(-i) for i in range(1,15)]
+        legal_operators += [funcMaxDAux(i) for i in range(1,35)]
+        legal_operators += [funcMaxDAux(-i) for i in range(1,35)]
+        legal_operators += [funcMaxFAux(i) for i in range(1,35)]
+        legal_operators += [funcMaxFAux(-i) for i in range(1,35)]
+        legal_operators += [funcMinSLAux(i) for i in range(1,35)]
+        legal_operators += [funcMinSLAux(-i) for i in range(1,35)]
+        legal_operators += [funcMinSSAux(i) for i in range(1,35)]
+        legal_operators += [funcMinSSAux(-i) for i in range(1,35)]
         SearchState.__init__(self,legal_operators)
         self.examples = examples
         self.tags = tags
@@ -156,14 +156,15 @@ class FirstChoiceLocalSearch(LocalSearch):
                     improved = True
             
             if not improved:
-                if random_start <= 5:
+                if random_start <= 10:
+                    print "random"
                     random_array += [(cRes,current)]
                     current = self.make_random_state(current,output_array)
                     random_start += 1
                     first_state = True
                     self.sideSteps = 30
                 else:
-                    return max(random_array)[1],max(random_array)[0],output_array
+                    return max(random_array)[1],max(random_array)[0],output_array,random_array
 
 
 
