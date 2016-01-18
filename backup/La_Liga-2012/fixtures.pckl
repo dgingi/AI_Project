@@ -1,0 +1,4979 @@
+(dp0
+S'Mar'
+p1
+(lp2
+(dp3
+S'home'
+p4
+S'Getafe'
+p5
+sS'away'
+p6
+S'Zaragoza'
+p7
+sS'link'
+p8
+S'http://www.whoscored.com/Matches/633738/Live'
+p9
+sS'result'
+p10
+S'2 : 0'
+p11
+sa(dp12
+g4
+S'Real Madrid'
+p13
+sg6
+S'Barcelona'
+p14
+sg8
+S'http://www.whoscored.com/Matches/633746/Live'
+p15
+sg10
+S'2 : 1'
+p16
+sa(dp17
+g4
+S'Deportivo La Coruna'
+p18
+sg6
+S'Rayo Vallecano'
+p19
+sg8
+S'http://www.whoscored.com/Matches/633754/Live'
+p20
+sg10
+S'0 : 0'
+p21
+sa(dp22
+g4
+S'Osasuna'
+p23
+sg6
+S'Athletic Club'
+p24
+sg8
+S'http://www.whoscored.com/Matches/633736/Live'
+p25
+sg10
+S'0 : 1'
+p26
+sa(dp27
+g4
+S'Valencia'
+p28
+sg6
+S'Levante'
+p29
+sg8
+S'http://www.whoscored.com/Matches/633737/Live'
+p30
+sg10
+S'2 : 2'
+p31
+sa(dp32
+g4
+S'Granada'
+p33
+sg6
+S'Mallorca'
+p34
+sg8
+S'http://www.whoscored.com/Matches/633740/Live'
+p35
+sg10
+S'1 : 2'
+p36
+sa(dp37
+g4
+S'Espanyol'
+p38
+sg6
+S'Valladolid'
+p39
+sg8
+S'http://www.whoscored.com/Matches/633733/Live'
+p40
+sg10
+S'0 : 0'
+p41
+sa(dp42
+g4
+S'Malaga'
+p43
+sg6
+S'Atletico Madrid'
+p44
+sg8
+S'http://www.whoscored.com/Matches/633734/Live'
+p45
+sg10
+S'0 : 0'
+p46
+sa(dp47
+g4
+S'Real Sociedad'
+p48
+sg6
+S'Real Betis'
+p49
+sg8
+S'http://www.whoscored.com/Matches/633735/Live'
+p50
+sg10
+S'3 : 3'
+p51
+sa(dp52
+g4
+S'Sevilla'
+p53
+sg6
+S'Celta Vigo'
+p54
+sg8
+S'http://www.whoscored.com/Matches/633745/Live'
+p55
+sg10
+S'4 : 1'
+p56
+sa(dp57
+g4
+S'Real Betis'
+p58
+sg6
+S'Osasuna'
+p59
+sg8
+S'http://www.whoscored.com/Matches/633763/Live'
+p60
+sg10
+S'2 : 1'
+p61
+sa(dp62
+g4
+S'Rayo Vallecano'
+p63
+sg6
+S'Espanyol'
+p64
+sg8
+S'http://www.whoscored.com/Matches/633760/Live'
+p65
+sg10
+S'2 : 0'
+p66
+sa(dp67
+g4
+S'Valladolid'
+p68
+sg6
+S'Malaga'
+p69
+sg8
+S'http://www.whoscored.com/Matches/633761/Live'
+p70
+sg10
+S'1 : 1'
+p71
+sa(dp72
+g4
+S'Barcelona'
+p73
+sg6
+S'Deportivo La Coruna'
+p74
+sg8
+S'http://www.whoscored.com/Matches/633780/Live'
+p75
+sg10
+S'2 : 0'
+p76
+sa(dp77
+g4
+S'Mallorca'
+p78
+sg6
+S'Sevilla'
+p79
+sg8
+S'http://www.whoscored.com/Matches/633776/Live'
+p80
+sg10
+S'2 : 1'
+p81
+sa(dp82
+g4
+S'Athletic Club'
+p83
+sg6
+S'Valencia'
+p84
+sg8
+S'http://www.whoscored.com/Matches/633766/Live'
+p85
+sg10
+S'1 : 0'
+p86
+sa(dp87
+g4
+S'Levante'
+p88
+sg6
+S'Getafe'
+p89
+sg8
+S'http://www.whoscored.com/Matches/633771/Live'
+p90
+sg10
+S'0 : 0'
+p91
+sa(dp92
+g4
+S'Celta Vigo'
+p93
+sg6
+S'Real Madrid'
+p94
+sg8
+S'http://www.whoscored.com/Matches/633778/Live'
+p95
+sg10
+S'1 : 2'
+p96
+sa(dp97
+g4
+S'Atletico Madrid'
+p98
+sg6
+S'Real Sociedad'
+p99
+sg8
+S'http://www.whoscored.com/Matches/633762/Live'
+p100
+sg10
+S'0 : 1'
+p101
+sa(dp102
+g4
+S'Zaragoza'
+p103
+sg6
+S'Granada'
+p104
+sg8
+S'http://www.whoscored.com/Matches/633772/Live'
+p105
+sg10
+S'0 : 0'
+p106
+sa(dp107
+g4
+S'Deportivo La Coruna'
+p108
+sg6
+S'Celta Vigo'
+p109
+sg8
+S'http://www.whoscored.com/Matches/633807/Live'
+p110
+sg10
+S'3 : 1'
+p111
+sa(dp112
+g4
+S'Real Sociedad'
+p113
+sg6
+S'Valladolid'
+p114
+sg8
+S'http://www.whoscored.com/Matches/633788/Live'
+p115
+sg10
+S'4 : 1'
+p116
+sa(dp117
+g4
+S'Getafe'
+p118
+sg6
+S'Athletic Club'
+p119
+sg8
+S'http://www.whoscored.com/Matches/633796/Live'
+p120
+sg10
+S'1 : 0'
+p121
+sa(dp122
+g4
+S'Real Madrid'
+p123
+sg6
+S'Mallorca'
+p124
+sg8
+S'http://www.whoscored.com/Matches/633804/Live'
+p125
+sg10
+S'5 : 2'
+p126
+sa(dp127
+g4
+S'Valencia'
+p128
+sg6
+S'Real Betis'
+p129
+sg8
+S'http://www.whoscored.com/Matches/633792/Live'
+p130
+sg10
+S'3 : 0'
+p131
+sa(dp132
+g4
+S'Malaga'
+p133
+sg6
+S'Espanyol'
+p134
+sg8
+S'http://www.whoscored.com/Matches/633782/Live'
+p135
+sg10
+S'0 : 2'
+p136
+sa(dp137
+g4
+S'Sevilla'
+p138
+sg6
+S'Zaragoza'
+p139
+sg8
+S'http://www.whoscored.com/Matches/633801/Live'
+p140
+sg10
+S'4 : 0'
+p141
+sa(dp142
+g4
+S'Osasuna'
+p143
+sg6
+S'Atletico Madrid'
+p144
+sg8
+S'http://www.whoscored.com/Matches/633790/Live'
+p145
+sg10
+S'0 : 2'
+p146
+sa(dp147
+g4
+S'Granada'
+p148
+sg6
+S'Levante'
+p149
+sg8
+S'http://www.whoscored.com/Matches/633798/Live'
+p150
+sg10
+S'1 : 1'
+p151
+sa(dp152
+g4
+S'Barcelona'
+p153
+sg6
+S'Rayo Vallecano'
+p154
+sg8
+S'http://www.whoscored.com/Matches/633809/Live'
+p155
+sg10
+S'3 : 1'
+p156
+sa(dp157
+g4
+S'Rayo Vallecano'
+p158
+sg6
+S'Malaga'
+p159
+sg8
+S'http://www.whoscored.com/Matches/633813/Live'
+p160
+sg10
+S'1 : 3'
+p161
+sa(dp162
+g4
+S'Celta Vigo'
+p163
+sg6
+S'Barcelona'
+p164
+sg8
+S'http://www.whoscored.com/Matches/633833/Live'
+p165
+sg10
+S'2 : 2'
+p166
+sa(dp167
+g4
+S'Zaragoza'
+p168
+sg6
+S'Real Madrid'
+p169
+sg8
+S'http://www.whoscored.com/Matches/633830/Live'
+p170
+sg10
+S'1 : 1'
+p171
+sa(dp172
+g4
+S'Levante'
+p173
+sg6
+S'Sevilla'
+p174
+sg8
+S'http://www.whoscored.com/Matches/633825/Live'
+p175
+sg10
+S'1 : 0'
+p176
+sa(dp177
+g4
+S'Valladolid'
+p178
+sg6
+S'Osasuna'
+p179
+sg8
+S'http://www.whoscored.com/Matches/633817/Live'
+p180
+sg10
+S'1 : 3'
+p181
+sa(dp182
+g4
+S'Mallorca'
+p183
+sg6
+S'Deportivo La Coruna'
+p184
+sg8
+S'http://www.whoscored.com/Matches/633832/Live'
+p185
+sg10
+S'2 : 3'
+p186
+sa(dp187
+g4
+S'Espanyol'
+p188
+sg6
+S'Real Sociedad'
+p189
+sg8
+S'http://www.whoscored.com/Matches/633815/Live'
+p190
+sg10
+S'2 : 2'
+p191
+sa(dp192
+g4
+S'Atletico Madrid'
+p193
+sg6
+S'Valencia'
+p194
+sg8
+S'http://www.whoscored.com/Matches/633819/Live'
+p195
+sg10
+S'1 : 1'
+p196
+sasS'Feb'
+p197
+(lp198
+(dp199
+g4
+S'Valladolid'
+p200
+sg6
+S'Athletic Club'
+p201
+sg8
+S'http://www.whoscored.com/Matches/633649/Live'
+p202
+sg10
+S'2 : 2'
+p203
+sa(dp204
+g4
+S'Osasuna'
+p205
+sg6
+S'Celta Vigo'
+p206
+sg8
+S'http://www.whoscored.com/Matches/633658/Live'
+p207
+sg10
+S'1 : 0'
+p208
+sa(dp209
+g4
+S'Getafe'
+p210
+sg6
+S'Deportivo La Coruna'
+p211
+sg8
+S'http://www.whoscored.com/Matches/633660/Live'
+p212
+sg10
+S'3 : 1'
+p213
+sa(dp214
+g4
+S'Espanyol'
+p215
+sg6
+S'Levante'
+p216
+sg8
+S'http://www.whoscored.com/Matches/633650/Live'
+p217
+sg10
+S'3 : 2'
+p218
+sa(dp219
+g4
+S'Granada'
+p220
+sg6
+S'Real Madrid'
+p221
+sg8
+S'http://www.whoscored.com/Matches/633661/Live'
+p222
+sg10
+S'1 : 0'
+p223
+sa(dp224
+g4
+S'Malaga'
+p225
+sg6
+S'Zaragoza'
+p226
+sg8
+S'http://www.whoscored.com/Matches/633652/Live'
+p227
+sg10
+S'1 : 1'
+p228
+sa(dp229
+g4
+S'Sevilla'
+p230
+sg6
+S'Rayo Vallecano'
+p231
+sg8
+S'http://www.whoscored.com/Matches/633662/Live'
+p232
+sg10
+S'2 : 1'
+p233
+sa(dp234
+g4
+S'Valencia'
+p235
+sg6
+S'Barcelona'
+p236
+sg8
+S'http://www.whoscored.com/Matches/633659/Live'
+p237
+sg10
+S'1 : 1'
+p238
+sa(dp239
+g4
+S'Atletico Madrid'
+p240
+sg6
+S'Real Betis'
+p241
+sg8
+S'http://www.whoscored.com/Matches/633647/Live'
+p242
+sg10
+S'1 : 0'
+p243
+sa(dp244
+g4
+S'Real Sociedad'
+p245
+sg6
+S'Mallorca'
+p246
+sg8
+S'http://www.whoscored.com/Matches/633654/Live'
+p247
+sg10
+S'3 : 0'
+p248
+sa(dp249
+g4
+S'Mallorca'
+p250
+sg6
+S'Osasuna'
+p251
+sg8
+S'http://www.whoscored.com/Matches/633677/Live'
+p252
+sg10
+S'1 : 1'
+p253
+sa(dp254
+g4
+S'Celta Vigo'
+p255
+sg6
+S'Valencia'
+p256
+sg8
+S'http://www.whoscored.com/Matches/633678/Live'
+p257
+sg10
+S'0 : 1'
+p258
+sa(dp259
+g4
+S'Levante'
+p260
+sg6
+S'Malaga'
+p261
+sg8
+S'http://www.whoscored.com/Matches/633672/Live'
+p262
+sg10
+S'1 : 2'
+p263
+sa(dp264
+g4
+S'Deportivo La Coruna'
+p265
+sg6
+S'Granada'
+p266
+sg8
+S'http://www.whoscored.com/Matches/633681/Live'
+p267
+sg10
+S'0 : 3'
+p268
+sa(dp269
+g4
+S'Real Madrid'
+p270
+sg6
+S'Sevilla'
+p271
+sg8
+S'http://www.whoscored.com/Matches/633683/Live'
+p272
+sg10
+S'4 : 1'
+p273
+sa(dp274
+g4
+S'Barcelona'
+p275
+sg6
+S'Getafe'
+p276
+sg8
+S'http://www.whoscored.com/Matches/633680/Live'
+p277
+sg10
+S'6 : 1'
+p278
+sa(dp279
+g4
+S'Zaragoza'
+p280
+sg6
+S'Real Sociedad'
+p281
+sg8
+S'http://www.whoscored.com/Matches/633674/Live'
+p282
+sg10
+S'1 : 2'
+p283
+sa(dp284
+g4
+S'Athletic Club'
+p285
+sg6
+S'Espanyol'
+p286
+sg8
+S'http://www.whoscored.com/Matches/633670/Live'
+p287
+sg10
+S'0 : 4'
+p288
+sa(dp289
+g4
+S'Rayo Vallecano'
+p290
+sg6
+S'Atletico Madrid'
+p291
+sg8
+S'http://www.whoscored.com/Matches/633667/Live'
+p292
+sg10
+S'2 : 1'
+p293
+sa(dp294
+g4
+S'Real Betis'
+p295
+sg6
+S'Valladolid'
+p296
+sg8
+S'http://www.whoscored.com/Matches/633669/Live'
+p297
+sg10
+S'0 : 0'
+p298
+sa(dp299
+g4
+S'Sevilla'
+p300
+sg6
+S'Deportivo La Coruna'
+p301
+sg8
+S'http://www.whoscored.com/Matches/633701/Live'
+p302
+sg10
+S'3 : 1'
+p303
+sa(dp304
+g4
+S'Getafe'
+p305
+sg6
+S'Celta Vigo'
+p306
+sg8
+S'http://www.whoscored.com/Matches/633699/Live'
+p307
+sg10
+S'3 : 1'
+p308
+sa(dp309
+g4
+S'Malaga'
+p310
+sg6
+S'Athletic Club'
+p311
+sg8
+S'http://www.whoscored.com/Matches/633690/Live'
+p312
+sg10
+S'1 : 0'
+p313
+sa(dp314
+g4
+S'Granada'
+p315
+sg6
+S'Barcelona'
+p316
+sg8
+S'http://www.whoscored.com/Matches/633700/Live'
+p317
+sg10
+S'1 : 2'
+p318
+sa(dp319
+g4
+S'Osasuna'
+p320
+sg6
+S'Zaragoza'
+p321
+sg8
+S'http://www.whoscored.com/Matches/633695/Live'
+p322
+sg10
+S'1 : 0'
+p323
+sa(dp324
+g4
+S'Real Sociedad'
+p325
+sg6
+S'Levante'
+p326
+sg8
+S'http://www.whoscored.com/Matches/633692/Live'
+p327
+sg10
+S'1 : 1'
+p328
+sa(dp329
+g4
+S'Valencia'
+p330
+sg6
+S'Mallorca'
+p331
+sg8
+S'http://www.whoscored.com/Matches/633697/Live'
+p332
+sg10
+S'2 : 0'
+p333
+sa(dp334
+g4
+S'Valladolid'
+p335
+sg6
+S'Atletico Madrid'
+p336
+sg8
+S'http://www.whoscored.com/Matches/633686/Live'
+p337
+sg10
+S'0 : 3'
+p338
+sa(dp339
+g4
+S'Espanyol'
+p340
+sg6
+S'Real Betis'
+p341
+sg8
+S'http://www.whoscored.com/Matches/633688/Live'
+p342
+sg10
+S'1 : 0'
+p343
+sa(dp344
+g4
+S'Real Madrid'
+p345
+sg6
+S'Rayo Vallecano'
+p346
+sg8
+S'http://www.whoscored.com/Matches/633702/Live'
+p347
+sg10
+S'2 : 0'
+p348
+sa(dp349
+g4
+S'Athletic Club'
+p350
+sg6
+S'Real Sociedad'
+p351
+sg8
+S'http://www.whoscored.com/Matches/633715/Live'
+p352
+sg10
+S'1 : 3'
+p353
+sa(dp354
+g4
+S'Mallorca'
+p355
+sg6
+S'Getafe'
+p356
+sg8
+S'http://www.whoscored.com/Matches/633719/Live'
+p357
+sg10
+S'1 : 3'
+p358
+sa(dp359
+g4
+S'Zaragoza'
+p360
+sg6
+S'Valencia'
+p361
+sg8
+S'http://www.whoscored.com/Matches/633718/Live'
+p362
+sg10
+S'2 : 2'
+p363
+sa(dp364
+g4
+S'Deportivo La Coruna'
+p365
+sg6
+S'Real Madrid'
+p366
+sg8
+S'http://www.whoscored.com/Matches/633723/Live'
+p367
+sg10
+S'1 : 2'
+p368
+sa(dp369
+g4
+S'Barcelona'
+p370
+sg6
+S'Sevilla'
+p371
+sg8
+S'http://www.whoscored.com/Matches/633722/Live'
+p372
+sg10
+S'2 : 1'
+p373
+sa(dp374
+g4
+S'Rayo Vallecano'
+p375
+sg6
+S'Valladolid'
+p376
+sg8
+S'http://www.whoscored.com/Matches/633707/Live'
+p377
+sg10
+S'1 : 2'
+p378
+sa(dp379
+g4
+S'Celta Vigo'
+p380
+sg6
+S'Granada'
+p381
+sg8
+S'http://www.whoscored.com/Matches/633720/Live'
+p382
+sg10
+S'2 : 1'
+p383
+sa(dp384
+g4
+S'Atletico Madrid'
+p385
+sg6
+S'Espanyol'
+p386
+sg8
+S'http://www.whoscored.com/Matches/633710/Live'
+p387
+sg10
+S'1 : 0'
+p388
+sa(dp389
+g4
+S'Real Betis'
+p390
+sg6
+S'Malaga'
+p391
+sg8
+S'http://www.whoscored.com/Matches/633712/Live'
+p392
+sg10
+S'3 : 0'
+p393
+sa(dp394
+g4
+S'Levante'
+p395
+sg6
+S'Osasuna'
+p396
+sg8
+S'http://www.whoscored.com/Matches/633716/Live'
+p397
+sg10
+S'0 : 2'
+p398
+sasS'Aug'
+p399
+(lp400
+(dp401
+g4
+S'Celta Vigo'
+p402
+sg6
+S'Malaga'
+p403
+sg8
+S'http://www.whoscored.com/Matches/633599/Live'
+p404
+sg10
+S'0 : 1'
+p405
+sa(dp406
+g4
+S'Sevilla'
+p407
+sg6
+S'Getafe'
+p408
+sg8
+S'http://www.whoscored.com/Matches/633596/Live'
+p409
+sg10
+S'2 : 1'
+p410
+sa(dp411
+g4
+S'Mallorca'
+p412
+sg6
+S'Espanyol'
+p413
+sg8
+S'http://www.whoscored.com/Matches/633600/Live'
+p414
+sg10
+S'2 : 1'
+p415
+sa(dp416
+g4
+S'Athletic Club'
+p417
+sg6
+S'Real Betis'
+p418
+sg8
+S'http://www.whoscored.com/Matches/633593/Live'
+p419
+sg10
+S'3 : 5'
+p420
+sa(dp421
+g4
+S'Real Madrid'
+p422
+sg6
+S'Valencia'
+p423
+sg8
+S'http://www.whoscored.com/Matches/633594/Live'
+p424
+sg10
+S'1 : 1'
+p425
+sa(dp426
+g4
+S'Barcelona'
+p427
+sg6
+S'Real Sociedad'
+p428
+sg8
+S'http://www.whoscored.com/Matches/633595/Live'
+p429
+sg10
+S'5 : 1'
+p430
+sa(dp431
+g4
+S'Levante'
+p432
+sg6
+S'Atletico Madrid'
+p433
+sg8
+S'http://www.whoscored.com/Matches/633597/Live'
+p434
+sg10
+S'1 : 1'
+p435
+sa(dp436
+g4
+S'Deportivo La Coruna'
+p437
+sg6
+S'Osasuna'
+p438
+sg8
+S'http://www.whoscored.com/Matches/633602/Live'
+p439
+sg10
+S'2 : 0'
+p440
+sa(dp441
+g4
+S'Rayo Vallecano'
+p442
+sg6
+S'Granada'
+p443
+sg8
+S'http://www.whoscored.com/Matches/633601/Live'
+p444
+sg10
+S'1 : 0'
+p445
+sa(dp446
+g4
+S'Zaragoza'
+p447
+sg6
+S'Valladolid'
+p448
+sg8
+S'http://www.whoscored.com/Matches/633598/Live'
+p449
+sg10
+S'0 : 1'
+p450
+sa(dp451
+g4
+S'Real Sociedad'
+p452
+sg6
+S'Celta Vigo'
+p453
+sg8
+S'http://www.whoscored.com/Matches/633614/Live'
+p454
+sg10
+S'2 : 1'
+p455
+sa(dp456
+g4
+S'Real Betis'
+p457
+sg6
+S'Rayo Vallecano'
+p458
+sg8
+S'http://www.whoscored.com/Matches/633603/Live'
+p459
+sg10
+S'1 : 2'
+p460
+sa(dp461
+g4
+S'Espanyol'
+p462
+sg6
+S'Zaragoza'
+p463
+sg8
+S'http://www.whoscored.com/Matches/633611/Live'
+p464
+sg10
+S'1 : 2'
+p465
+sa(dp466
+g4
+S'Malaga'
+p467
+sg6
+S'Mallorca'
+p468
+sg8
+S'http://www.whoscored.com/Matches/633613/Live'
+p469
+sg10
+S'1 : 1'
+p470
+sa(dp471
+g4
+S'Osasuna'
+p472
+sg6
+S'Barcelona'
+p473
+sg8
+S'http://www.whoscored.com/Matches/633616/Live'
+p474
+sg10
+S'1 : 2'
+p475
+sa(dp476
+g4
+S'Getafe'
+p477
+sg6
+S'Real Madrid'
+p478
+sg8
+S'http://www.whoscored.com/Matches/633621/Live'
+p479
+sg10
+S'2 : 1'
+p480
+sa(dp481
+g4
+S'Granada'
+p482
+sg6
+S'Sevilla'
+p483
+sg8
+S'http://www.whoscored.com/Matches/633622/Live'
+p484
+sg10
+S'1 : 1'
+p485
+sa(dp486
+g4
+S'Valencia'
+p487
+sg6
+S'Deportivo La Coruna'
+p488
+sg8
+S'http://www.whoscored.com/Matches/633620/Live'
+p489
+sg10
+S'3 : 3'
+p490
+sa(dp491
+g4
+S'Valladolid'
+p492
+sg6
+S'Levante'
+p493
+sg8
+S'http://www.whoscored.com/Matches/633609/Live'
+p494
+sg10
+S'2 : 0'
+p495
+sa(dp496
+g4
+S'Atletico Madrid'
+p497
+sg6
+S'Athletic Club'
+p498
+sg8
+S'http://www.whoscored.com/Matches/633608/Live'
+p499
+sg10
+S'4 : 0'
+p500
+sasS'Sep'
+p501
+(lp502
+(dp503
+g4
+S'Celta Vigo'
+p504
+sg6
+S'Osasuna'
+p505
+sg8
+S'http://www.whoscored.com/Matches/633635/Live'
+p506
+sg10
+S'2 : 0'
+p507
+sa(dp508
+g4
+S'Zaragoza'
+p509
+sg6
+S'Malaga'
+p510
+sg8
+S'http://www.whoscored.com/Matches/633632/Live'
+p511
+sg10
+S'0 : 1'
+p512
+sa(dp513
+g4
+S'Deportivo La Coruna'
+p514
+sg6
+S'Getafe'
+p515
+sg8
+S'http://www.whoscored.com/Matches/633637/Live'
+p516
+sg10
+S'1 : 1'
+p517
+sa(dp518
+g4
+S'Mallorca'
+p519
+sg6
+S'Real Sociedad'
+p520
+sg8
+S'http://www.whoscored.com/Matches/633633/Live'
+p521
+sg10
+S'1 : 0'
+p522
+sa(dp523
+g4
+S'Rayo Vallecano'
+p524
+sg6
+S'Sevilla'
+p525
+sg8
+S'http://www.whoscored.com/Matches/633641/Live'
+p526
+sg10
+S'0 : 0'
+p527
+sa(dp528
+g4
+S'Athletic Club'
+p529
+sg6
+S'Valladolid'
+p530
+sg8
+S'http://www.whoscored.com/Matches/633629/Live'
+p531
+sg10
+S'2 : 0'
+p532
+sa(dp533
+g4
+S'Levante'
+p534
+sg6
+S'Espanyol'
+p535
+sg8
+S'http://www.whoscored.com/Matches/633630/Live'
+p536
+sg10
+S'3 : 2'
+p537
+sa(dp538
+g4
+S'Real Madrid'
+p539
+sg6
+S'Granada'
+p540
+sg8
+S'http://www.whoscored.com/Matches/633639/Live'
+p541
+sg10
+S'3 : 0'
+p542
+sa(dp543
+g4
+S'Barcelona'
+p544
+sg6
+S'Valencia'
+p545
+sg8
+S'http://www.whoscored.com/Matches/633636/Live'
+p546
+sg10
+S'1 : 0'
+p547
+sa(dp548
+g4
+S'Malaga'
+p549
+sg6
+S'Levante'
+p550
+sg8
+S'http://www.whoscored.com/Matches/633646/Live'
+p551
+sg10
+S'3 : 1'
+p552
+sa(dp553
+g4
+S'Valencia'
+p554
+sg6
+S'Celta Vigo'
+p555
+sg8
+S'http://www.whoscored.com/Matches/633653/Live'
+p556
+sg10
+S'2 : 1'
+p557
+sa(dp558
+g4
+S'Getafe'
+p559
+sg6
+S'Barcelona'
+p560
+sg8
+S'http://www.whoscored.com/Matches/633655/Live'
+p561
+sg10
+S'1 : 4'
+p562
+sa(dp563
+g4
+S'Sevilla'
+p564
+sg6
+S'Real Madrid'
+p565
+sg8
+S'http://www.whoscored.com/Matches/633657/Live'
+p566
+sg10
+S'1 : 0'
+p567
+sa(dp568
+g4
+S'Espanyol'
+p569
+sg6
+S'Athletic Club'
+p570
+sg8
+S'http://www.whoscored.com/Matches/633645/Live'
+p571
+sg10
+S'3 : 3'
+p572
+sa(dp573
+g4
+S'Granada'
+p574
+sg6
+S'Deportivo La Coruna'
+p575
+sg8
+S'http://www.whoscored.com/Matches/633656/Live'
+p576
+sg10
+S'1 : 1'
+p577
+sa(dp578
+g4
+S'Osasuna'
+p579
+sg6
+S'Mallorca'
+p580
+sg8
+S'http://www.whoscored.com/Matches/633651/Live'
+p581
+sg10
+S'1 : 1'
+p582
+sa(dp583
+g4
+S'Real Sociedad'
+p584
+sg6
+S'Zaragoza'
+p585
+sg8
+S'http://www.whoscored.com/Matches/633648/Live'
+p586
+sg10
+S'2 : 0'
+p587
+sa(dp588
+g4
+S'Atletico Madrid'
+p589
+sg6
+S'Rayo Vallecano'
+p590
+sg8
+S'http://www.whoscored.com/Matches/633643/Live'
+p591
+sg10
+S'4 : 3'
+p592
+sa(dp593
+g4
+S'Valladolid'
+p594
+sg6
+S'Real Betis'
+p595
+sg8
+S'http://www.whoscored.com/Matches/633644/Live'
+p596
+sg10
+S'0 : 1'
+p597
+sa(dp598
+g4
+S'Zaragoza'
+p599
+sg6
+S'Osasuna'
+p600
+sg8
+S'http://www.whoscored.com/Matches/633668/Live'
+p601
+sg10
+S'3 : 1'
+p602
+sa(dp603
+g4
+S'Celta Vigo'
+p604
+sg6
+S'Getafe'
+p605
+sg8
+S'http://www.whoscored.com/Matches/633673/Live'
+p606
+sg10
+S'2 : 1'
+p607
+sa(dp608
+g4
+S'Real Betis'
+p609
+sg6
+S'Espanyol'
+p610
+sg8
+S'http://www.whoscored.com/Matches/633664/Live'
+p611
+sg10
+S'1 : 0'
+p612
+sa(dp613
+g4
+S'Barcelona'
+p614
+sg6
+S'Granada'
+p615
+sg8
+S'http://www.whoscored.com/Matches/633675/Live'
+p616
+sg10
+S'2 : 0'
+p617
+sa(dp618
+g4
+S'Mallorca'
+p619
+sg6
+S'Valencia'
+p620
+sg8
+S'http://www.whoscored.com/Matches/633671/Live'
+p621
+sg10
+S'2 : 0'
+p622
+sa(dp623
+g4
+S'Levante'
+p624
+sg6
+S'Real Sociedad'
+p625
+sg8
+S'http://www.whoscored.com/Matches/633666/Live'
+p626
+sg10
+S'2 : 1'
+p627
+sa(dp628
+g4
+S'Atletico Madrid'
+p629
+sg6
+S'Valladolid'
+p630
+sg8
+S'http://www.whoscored.com/Matches/633663/Live'
+p631
+sg10
+S'2 : 1'
+p632
+sa(dp633
+g4
+S'Athletic Club'
+p634
+sg6
+S'Malaga'
+p635
+sg8
+S'http://www.whoscored.com/Matches/633665/Live'
+p636
+sg10
+S'0 : 0'
+p637
+sa(dp638
+g4
+S'Rayo Vallecano'
+p639
+sg6
+S'Real Madrid'
+p640
+sg8
+S'http://www.whoscored.com/Matches/633679/Live'
+p641
+sg10
+S'0 : 2'
+p642
+sa(dp643
+g4
+S'Deportivo La Coruna'
+p644
+sg6
+S'Sevilla'
+p645
+sg8
+S'http://www.whoscored.com/Matches/633676/Live'
+p646
+sg10
+S'0 : 2'
+p647
+sa(dp648
+g4
+S'Real Betis'
+p649
+sg6
+S'Atletico Madrid'
+p650
+sg8
+S'http://www.whoscored.com/Matches/633627/Live'
+p651
+sg10
+S'2 : 4'
+p652
+sa(dp653
+g4
+S'Valencia'
+p654
+sg6
+S'Zaragoza'
+p655
+sg8
+S'http://www.whoscored.com/Matches/633691/Live'
+p656
+sg10
+S'2 : 0'
+p657
+sa(dp658
+g4
+S'Malaga'
+p659
+sg6
+S'Real Betis'
+p660
+sg8
+S'http://www.whoscored.com/Matches/633685/Live'
+p661
+sg10
+S'4 : 0'
+p662
+sa(dp663
+g4
+S'Real Sociedad'
+p664
+sg6
+S'Athletic Club'
+p665
+sg8
+S'http://www.whoscored.com/Matches/633687/Live'
+p666
+sg10
+S'2 : 0'
+p667
+sa(dp668
+g4
+S'Sevilla'
+p669
+sg6
+S'Barcelona'
+p670
+sg8
+S'http://www.whoscored.com/Matches/633696/Live'
+p671
+sg10
+S'2 : 3'
+p672
+sa(dp673
+g4
+S'Granada'
+p674
+sg6
+S'Celta Vigo'
+p675
+sg8
+S'http://www.whoscored.com/Matches/633694/Live'
+p676
+sg10
+S'2 : 1'
+p677
+sa(dp678
+g4
+S'Valladolid'
+p679
+sg6
+S'Rayo Vallecano'
+p680
+sg8
+S'http://www.whoscored.com/Matches/633682/Live'
+p681
+sg10
+S'6 : 1'
+p682
+sa(dp683
+g4
+S'Osasuna'
+p684
+sg6
+S'Levante'
+p685
+sg8
+S'http://www.whoscored.com/Matches/633689/Live'
+p686
+sg10
+S'4 : 0'
+p687
+sa(dp688
+g4
+S'Real Madrid'
+p689
+sg6
+S'Deportivo La Coruna'
+p690
+sg8
+S'http://www.whoscored.com/Matches/633698/Live'
+p691
+sg10
+S'5 : 1'
+p692
+sa(dp693
+g4
+S'Espanyol'
+p694
+sg6
+S'Atletico Madrid'
+p695
+sg8
+S'http://www.whoscored.com/Matches/633684/Live'
+p696
+sg10
+S'0 : 1'
+p697
+sasS'May'
+p698
+(lp699
+(dp700
+g4
+S'Celta Vigo'
+p701
+sg6
+S'Athletic Club'
+p702
+sg8
+S'http://www.whoscored.com/Matches/633885/Live'
+p703
+sg10
+S'1 : 1'
+p704
+sa(dp705
+g4
+S'Valencia'
+p706
+sg6
+S'Osasuna'
+p707
+sg8
+S'http://www.whoscored.com/Matches/633863/Live'
+p708
+sg10
+S'4 : 0'
+p709
+sa(dp710
+g4
+S'Granada'
+p711
+sg6
+S'Malaga'
+p712
+sg8
+S'http://www.whoscored.com/Matches/633871/Live'
+p713
+sg10
+S'1 : 0'
+p714
+sa(dp715
+g4
+S'Real Madrid'
+p716
+sg6
+S'Valladolid'
+p717
+sg8
+S'http://www.whoscored.com/Matches/633875/Live'
+p718
+sg10
+S'4 : 3'
+p719
+sa(dp720
+g4
+S'Deportivo La Coruna'
+p721
+sg6
+S'Atletico Madrid'
+p722
+sg8
+S'http://www.whoscored.com/Matches/633880/Live'
+p723
+sg10
+S'0 : 0'
+p724
+sa(dp725
+g4
+S'Mallorca'
+p726
+sg6
+S'Levante'
+p727
+sg8
+S'http://www.whoscored.com/Matches/633890/Live'
+p728
+sg10
+S'1 : 1'
+p729
+sa(dp730
+g4
+S'Zaragoza'
+p731
+sg6
+S'Rayo Vallecano'
+p732
+sg8
+S'http://www.whoscored.com/Matches/633889/Live'
+p733
+sg10
+S'3 : 0'
+p734
+sa(dp735
+g4
+S'Sevilla'
+p736
+sg6
+S'Espanyol'
+p737
+sg8
+S'http://www.whoscored.com/Matches/633872/Live'
+p738
+sg10
+S'3 : 0'
+p739
+sa(dp740
+g4
+S'Barcelona'
+p741
+sg6
+S'Real Betis'
+p742
+sg8
+S'http://www.whoscored.com/Matches/633883/Live'
+p743
+sg10
+S'4 : 2'
+p744
+sa(dp745
+g4
+S'Getafe'
+p746
+sg6
+S'Real Sociedad'
+p747
+sg8
+S'http://www.whoscored.com/Matches/633867/Live'
+p748
+sg10
+S'2 : 1'
+p749
+sa(dp750
+g4
+S'Celta Vigo'
+p751
+sg6
+S'Atletico Madrid'
+p752
+sg8
+S'http://www.whoscored.com/Matches/633892/Live'
+p753
+sg10
+S'1 : 3'
+p754
+sa(dp755
+g4
+S'Real Madrid'
+p756
+sg6
+S'Malaga'
+p757
+sg8
+S'http://www.whoscored.com/Matches/633881/Live'
+p758
+sg10
+S'6 : 2'
+p759
+sa(dp760
+g4
+S'Levante'
+p761
+sg6
+S'Zaragoza'
+p762
+sg8
+S'http://www.whoscored.com/Matches/633927/Live'
+p763
+sg10
+S'0 : 0'
+p764
+sa(dp765
+g4
+S'Athletic Club'
+p766
+sg6
+S'Mallorca'
+p767
+sg8
+S'http://www.whoscored.com/Matches/633924/Live'
+p768
+sg10
+S'2 : 1'
+p769
+sa(dp770
+g4
+S'Valladolid'
+p771
+sg6
+S'Deportivo La Coruna'
+p772
+sg8
+S'http://www.whoscored.com/Matches/633918/Live'
+p773
+sg10
+S'1 : 0'
+p774
+sa(dp775
+g4
+S'Osasuna'
+p776
+sg6
+S'Getafe'
+p777
+sg8
+S'http://www.whoscored.com/Matches/633903/Live'
+p778
+sg10
+S'1 : 0'
+p779
+sa(dp780
+g4
+S'Espanyol'
+p781
+sg6
+S'Real Madrid'
+p782
+sg8
+S'http://www.whoscored.com/Matches/633917/Live'
+p783
+sg10
+S'1 : 1'
+p784
+sa(dp785
+g4
+S'Rayo Vallecano'
+p786
+sg6
+S'Valencia'
+p787
+sg8
+S'http://www.whoscored.com/Matches/633902/Live'
+p788
+sg10
+S'0 : 4'
+p789
+sa(dp790
+g4
+S'Real Betis'
+p791
+sg6
+S'Celta Vigo'
+p792
+sg8
+S'http://www.whoscored.com/Matches/633923/Live'
+p793
+sg10
+S'1 : 0'
+p794
+sa(dp795
+g4
+S'Atletico Madrid'
+p796
+sg6
+S'Barcelona'
+p797
+sg8
+S'http://www.whoscored.com/Matches/633921/Live'
+p798
+sg10
+S'1 : 2'
+p799
+sa(dp800
+g4
+S'Malaga'
+p801
+sg6
+S'Sevilla'
+p802
+sg8
+S'http://www.whoscored.com/Matches/633914/Live'
+p803
+sg10
+S'0 : 0'
+p804
+sa(dp805
+g4
+S'Real Sociedad'
+p806
+sg6
+S'Granada'
+p807
+sg8
+S'http://www.whoscored.com/Matches/633908/Live'
+p808
+sg10
+S'2 : 2'
+p809
+sa(dp810
+g4
+S'Getafe'
+p811
+sg6
+S'Valencia'
+p812
+sg8
+S'http://www.whoscored.com/Matches/633874/Live'
+p813
+sg10
+S'0 : 1'
+p814
+sa(dp815
+g4
+S'Granada'
+p816
+sg6
+S'Osasuna'
+p817
+sg8
+S'http://www.whoscored.com/Matches/633877/Live'
+p818
+sg10
+S'3 : 0'
+p819
+sa(dp820
+g4
+S'Sevilla'
+p821
+sg6
+S'Real Sociedad'
+p822
+sg8
+S'http://www.whoscored.com/Matches/633879/Live'
+p823
+sg10
+S'1 : 2'
+p824
+sa(dp825
+g4
+S'Levante'
+p826
+sg6
+S'Rayo Vallecano'
+p827
+sg8
+S'http://www.whoscored.com/Matches/633896/Live'
+p828
+sg10
+S'2 : 3'
+p829
+sa(dp830
+g4
+S'Deportivo La Coruna'
+p831
+sg6
+S'Espanyol'
+p832
+sg8
+S'http://www.whoscored.com/Matches/633884/Live'
+p833
+sg10
+S'2 : 0'
+p834
+sa(dp835
+g4
+S'Zaragoza'
+p836
+sg6
+S'Athletic Club'
+p837
+sg8
+S'http://www.whoscored.com/Matches/633895/Live'
+p838
+sg10
+S'1 : 2'
+p839
+sa(dp840
+g4
+S'Barcelona'
+p841
+sg6
+S'Valladolid'
+p842
+sg8
+S'http://www.whoscored.com/Matches/633887/Live'
+p843
+sg10
+S'2 : 1'
+p844
+sa(dp845
+g4
+S'Mallorca'
+p846
+sg6
+S'Real Betis'
+p847
+sg8
+S'http://www.whoscored.com/Matches/633893/Live'
+p848
+sg10
+S'1 : 0'
+p849
+sa(dp850
+g4
+S'Getafe'
+p851
+sg6
+S'Rayo Vallecano'
+p852
+sg8
+S'http://www.whoscored.com/Matches/633901/Live'
+p853
+sg10
+S'1 : 2'
+p854
+sa(dp855
+g4
+S'Valencia'
+p856
+sg6
+S'Granada'
+p857
+sg8
+S'http://www.whoscored.com/Matches/633905/Live'
+p858
+sg10
+S'1 : 0'
+p859
+sa(dp860
+g4
+S'Osasuna'
+p861
+sg6
+S'Sevilla'
+p862
+sg8
+S'http://www.whoscored.com/Matches/633907/Live'
+p863
+sg10
+S'2 : 1'
+p864
+sa(dp865
+g4
+S'Real Sociedad'
+p866
+sg6
+S'Real Madrid'
+p867
+sg8
+S'http://www.whoscored.com/Matches/633912/Live'
+p868
+sg10
+S'3 : 3'
+p869
+sa(dp870
+g4
+S'Malaga'
+p871
+sg6
+S'Deportivo La Coruna'
+p872
+sg8
+S'http://www.whoscored.com/Matches/633916/Live'
+p873
+sg10
+S'3 : 1'
+p874
+sa(dp875
+g4
+S'Espanyol'
+p876
+sg6
+S'Barcelona'
+p877
+sg8
+S'http://www.whoscored.com/Matches/633919/Live'
+p878
+sg10
+S'0 : 2'
+p879
+sa(dp880
+g4
+S'Valladolid'
+p881
+sg6
+S'Celta Vigo'
+p882
+sg8
+S'http://www.whoscored.com/Matches/633920/Live'
+p883
+sg10
+S'0 : 2'
+p884
+sa(dp885
+g4
+S'Atletico Madrid'
+p886
+sg6
+S'Mallorca'
+p887
+sg8
+S'http://www.whoscored.com/Matches/633925/Live'
+p888
+sg10
+S'0 : 0'
+p889
+sa(dp890
+g4
+S'Real Betis'
+p891
+sg6
+S'Zaragoza'
+p892
+sg8
+S'http://www.whoscored.com/Matches/633928/Live'
+p893
+sg10
+S'4 : 0'
+p894
+sa(dp895
+g4
+S'Athletic Club'
+p896
+sg6
+S'Levante'
+p897
+sg8
+S'http://www.whoscored.com/Matches/633929/Live'
+p898
+sg10
+S'0 : 1'
+p899
+sasS'Jun'
+p900
+(lp901
+(dp902
+g4
+S'Real Madrid'
+p903
+sg6
+S'Osasuna'
+p904
+sg8
+S'http://www.whoscored.com/Matches/633937/Live'
+p905
+sg10
+S'4 : 2'
+p906
+sa(dp907
+g4
+S'Barcelona'
+p908
+sg6
+S'Malaga'
+p909
+sg8
+S'http://www.whoscored.com/Matches/633942/Live'
+p910
+sg10
+S'4 : 1'
+p911
+sa(dp912
+g4
+S'Celta Vigo'
+p913
+sg6
+S'Espanyol'
+p914
+sg8
+S'http://www.whoscored.com/Matches/633747/Live'
+p915
+sg10
+S'1 : 0'
+p916
+sa(dp917
+g4
+S'Granada'
+p918
+sg6
+S'Getafe'
+p919
+sg8
+S'http://www.whoscored.com/Matches/633934/Live'
+p920
+sg10
+S'2 : 0'
+p921
+sa(dp922
+g4
+S'Sevilla'
+p923
+sg6
+S'Valencia'
+p924
+sg8
+S'http://www.whoscored.com/Matches/633935/Live'
+p925
+sg10
+S'4 : 3'
+p926
+sa(dp927
+g4
+S'Deportivo La Coruna'
+p928
+sg6
+S'Real Sociedad'
+p929
+sg8
+S'http://www.whoscored.com/Matches/633940/Live'
+p930
+sg10
+S'0 : 1'
+p931
+sa(dp932
+g4
+S'Mallorca'
+p933
+sg6
+S'Valladolid'
+p934
+sg8
+S'http://www.whoscored.com/Matches/633962/Live'
+p935
+sg10
+S'4 : 2'
+p936
+sa(dp937
+g4
+S'Zaragoza'
+p938
+sg6
+S'Atletico Madrid'
+p939
+sg8
+S'http://www.whoscored.com/Matches/633965/Live'
+p940
+sg10
+S'1 : 3'
+p941
+sa(dp942
+g4
+S'Levante'
+p943
+sg6
+S'Real Betis'
+p944
+sg8
+S'http://www.whoscored.com/Matches/633968/Live'
+p945
+sg10
+S'1 : 1'
+p946
+sa(dp947
+g4
+S'Rayo Vallecano'
+p948
+sg6
+S'Athletic Club'
+p949
+sg8
+S'http://www.whoscored.com/Matches/633973/Live'
+p950
+sg10
+S'2 : 2'
+p951
+sasS'Jan'
+p952
+(lp953
+(dp954
+g4
+S'Zaragoza'
+p955
+sg6
+S'Real Betis'
+p956
+sg8
+S'http://www.whoscored.com/Matches/633958/Live'
+p957
+sg10
+S'1 : 2'
+p958
+sa(dp959
+g4
+S'Levante'
+p960
+sg6
+S'Athletic Club'
+p961
+sg8
+S'http://www.whoscored.com/Matches/633959/Live'
+p962
+sg10
+S'3 : 1'
+p963
+sa(dp964
+g4
+S'Granada'
+p965
+sg6
+S'Valencia'
+p966
+sg8
+S'http://www.whoscored.com/Matches/633951/Live'
+p967
+sg10
+S'1 : 2'
+p968
+sa(dp969
+g4
+S'Deportivo La Coruna'
+p970
+sg6
+S'Malaga'
+p971
+sg8
+S'http://www.whoscored.com/Matches/633954/Live'
+p972
+sg10
+S'1 : 0'
+p973
+sa(dp974
+g4
+S'Sevilla'
+p975
+sg6
+S'Osasuna'
+p976
+sg8
+S'http://www.whoscored.com/Matches/633952/Live'
+p977
+sg10
+S'1 : 0'
+p978
+sa(dp979
+g4
+S'Celta Vigo'
+p980
+sg6
+S'Valladolid'
+p981
+sg8
+S'http://www.whoscored.com/Matches/633956/Live'
+p982
+sg10
+S'3 : 1'
+p983
+sa(dp984
+g4
+S'Real Madrid'
+p985
+sg6
+S'Real Sociedad'
+p986
+sg8
+S'http://www.whoscored.com/Matches/633953/Live'
+p987
+sg10
+S'4 : 3'
+p988
+sa(dp989
+g4
+S'Barcelona'
+p990
+sg6
+S'Espanyol'
+p991
+sg8
+S'http://www.whoscored.com/Matches/633955/Live'
+p992
+sg10
+S'4 : 0'
+p993
+sa(dp994
+g4
+S'Mallorca'
+p995
+sg6
+S'Atletico Madrid'
+p996
+sg8
+S'http://www.whoscored.com/Matches/633957/Live'
+p997
+sg10
+S'1 : 1'
+p998
+sa(dp999
+g4
+S'Rayo Vallecano'
+p1000
+sg6
+S'Getafe'
+p1001
+sg8
+S'http://www.whoscored.com/Matches/633950/Live'
+p1002
+sg10
+S'3 : 1'
+p1003
+sa(dp1004
+g4
+S'Athletic Club'
+p1005
+sg6
+S'Rayo Vallecano'
+p1006
+sg8
+S'http://www.whoscored.com/Matches/633972/Live'
+p1007
+sg10
+S'1 : 2'
+p1008
+sa(dp1009
+g4
+S'Valladolid'
+p1010
+sg6
+S'Mallorca'
+p1011
+sg8
+S'http://www.whoscored.com/Matches/633969/Live'
+p1012
+sg10
+S'3 : 1'
+p1013
+sa(dp1014
+g4
+S'Espanyol'
+p1015
+sg6
+S'Celta Vigo'
+p1016
+sg8
+S'http://www.whoscored.com/Matches/633967/Live'
+p1017
+sg10
+S'1 : 0'
+p1018
+sa(dp1019
+g4
+S'Osasuna'
+p1020
+sg6
+S'Real Madrid'
+p1021
+sg8
+S'http://www.whoscored.com/Matches/633963/Live'
+p1022
+sg10
+S'0 : 0'
+p1023
+sa(dp1024
+g4
+S'Valencia'
+p1025
+sg6
+S'Sevilla'
+p1026
+sg8
+S'http://www.whoscored.com/Matches/633961/Live'
+p1027
+sg10
+S'2 : 0'
+p1028
+sa(dp1029
+g4
+S'Real Betis'
+p1030
+sg6
+S'Levante'
+p1031
+sg8
+S'http://www.whoscored.com/Matches/633971/Live'
+p1032
+sg10
+S'2 : 0'
+p1033
+sa(dp1034
+g4
+S'Real Sociedad'
+p1035
+sg6
+S'Deportivo La Coruna'
+p1036
+sg8
+S'http://www.whoscored.com/Matches/633964/Live'
+p1037
+sg10
+S'1 : 1'
+p1038
+sa(dp1039
+g4
+S'Atletico Madrid'
+p1040
+sg6
+S'Zaragoza'
+p1041
+sg8
+S'http://www.whoscored.com/Matches/633970/Live'
+p1042
+sg10
+S'2 : 0'
+p1043
+sa(dp1044
+g4
+S'Malaga'
+p1045
+sg6
+S'Barcelona'
+p1046
+sg8
+S'http://www.whoscored.com/Matches/633966/Live'
+p1047
+sg10
+S'1 : 3'
+p1048
+sa(dp1049
+g4
+S'Getafe'
+p1050
+sg6
+S'Granada'
+p1051
+sg8
+S'http://www.whoscored.com/Matches/633960/Live'
+p1052
+sg10
+S'2 : 2'
+p1053
+sa(dp1054
+g4
+S'Espanyol'
+p1055
+sg6
+S'Mallorca'
+p1056
+sg8
+S'http://www.whoscored.com/Matches/633607/Live'
+p1057
+sg10
+S'3 : 2'
+p1058
+sa(dp1059
+g4
+S'Granada'
+p1060
+sg6
+S'Rayo Vallecano'
+p1061
+sg8
+S'http://www.whoscored.com/Matches/633619/Live'
+p1062
+sg10
+S'2 : 0'
+p1063
+sa(dp1064
+g4
+S'Real Sociedad'
+p1065
+sg6
+S'Barcelona'
+p1066
+sg8
+S'http://www.whoscored.com/Matches/633612/Live'
+p1067
+sg10
+S'3 : 2'
+p1068
+sa(dp1069
+g4
+S'Getafe'
+p1070
+sg6
+S'Sevilla'
+p1071
+sg8
+S'http://www.whoscored.com/Matches/633618/Live'
+p1072
+sg10
+S'1 : 1'
+p1073
+sa(dp1074
+g4
+S'Malaga'
+p1075
+sg6
+S'Celta Vigo'
+p1076
+sg8
+S'http://www.whoscored.com/Matches/633610/Live'
+p1077
+sg10
+S'1 : 1'
+p1078
+sa(dp1079
+g4
+S'Osasuna'
+p1080
+sg6
+S'Deportivo La Coruna'
+p1081
+sg8
+S'http://www.whoscored.com/Matches/633615/Live'
+p1082
+sg10
+S'2 : 1'
+p1083
+sa(dp1084
+g4
+S'Valladolid'
+p1085
+sg6
+S'Zaragoza'
+p1086
+sg8
+S'http://www.whoscored.com/Matches/633606/Live'
+p1087
+sg10
+S'2 : 0'
+p1088
+sa(dp1089
+g4
+S'Atletico Madrid'
+p1090
+sg6
+S'Levante'
+p1091
+sg8
+S'http://www.whoscored.com/Matches/633605/Live'
+p1092
+sg10
+S'2 : 0'
+p1093
+sa(dp1094
+g4
+S'Valencia'
+p1095
+sg6
+S'Real Madrid'
+p1096
+sg8
+S'http://www.whoscored.com/Matches/633617/Live'
+p1097
+sg10
+S'0 : 5'
+p1098
+sa(dp1099
+g4
+S'Real Betis'
+p1100
+sg6
+S'Athletic Club'
+p1101
+sg8
+S'http://www.whoscored.com/Matches/633604/Live'
+p1102
+sg10
+S'1 : 1'
+p1103
+sa(dp1104
+g4
+S'Celta Vigo'
+p1105
+sg6
+S'Real Sociedad'
+p1106
+sg8
+S'http://www.whoscored.com/Matches/633631/Live'
+p1107
+sg10
+S'1 : 1'
+p1108
+sa(dp1109
+g4
+S'Levante'
+p1110
+sg6
+S'Valladolid'
+p1111
+sg8
+S'http://www.whoscored.com/Matches/633625/Live'
+p1112
+sg10
+S'2 : 1'
+p1113
+sa(dp1114
+g4
+S'Zaragoza'
+p1115
+sg6
+S'Espanyol'
+p1116
+sg8
+S'http://www.whoscored.com/Matches/633626/Live'
+p1117
+sg10
+S'0 : 0'
+p1118
+sa(dp1119
+g4
+S'Deportivo La Coruna'
+p1120
+sg6
+S'Valencia'
+p1121
+sg8
+S'http://www.whoscored.com/Matches/633638/Live'
+p1122
+sg10
+S'2 : 3'
+p1123
+sa(dp1124
+g4
+S'Real Madrid'
+p1125
+sg6
+S'Getafe'
+p1126
+sg8
+S'http://www.whoscored.com/Matches/633640/Live'
+p1127
+sg10
+S'4 : 0'
+p1128
+sa(dp1129
+g4
+S'Rayo Vallecano'
+p1130
+sg6
+S'Real Betis'
+p1131
+sg8
+S'http://www.whoscored.com/Matches/633623/Live'
+p1132
+sg10
+S'3 : 0'
+p1133
+sa(dp1134
+g4
+S'Barcelona'
+p1135
+sg6
+S'Osasuna'
+p1136
+sg8
+S'http://www.whoscored.com/Matches/633634/Live'
+p1137
+sg10
+S'5 : 1'
+p1138
+sa(dp1139
+g4
+S'Athletic Club'
+p1140
+sg6
+S'Atletico Madrid'
+p1141
+sg8
+S'http://www.whoscored.com/Matches/633624/Live'
+p1142
+sg10
+S'3 : 0'
+p1143
+sa(dp1144
+g4
+S'Mallorca'
+p1145
+sg6
+S'Malaga'
+p1146
+sg8
+S'http://www.whoscored.com/Matches/633628/Live'
+p1147
+sg10
+S'2 : 3'
+p1148
+sa(dp1149
+g4
+S'Sevilla'
+p1150
+sg6
+S'Granada'
+p1151
+sg8
+S'http://www.whoscored.com/Matches/633642/Live'
+p1152
+sg10
+S'3 : 0'
+p1153
+sasS'Apr'
+p1154
+(lp1155
+(dp1156
+g4
+S'Athletic Club'
+p1157
+sg6
+S'Granada'
+p1158
+sg8
+S'http://www.whoscored.com/Matches/633823/Live'
+p1159
+sg10
+S'1 : 0'
+p1160
+sa(dp1161
+g4
+S'Real Betis'
+p1162
+sg6
+S'Getafe'
+p1163
+sg8
+S'http://www.whoscored.com/Matches/633821/Live'
+p1164
+sg10
+S'0 : 0'
+p1165
+sa(dp1166
+g4
+S'Granada'
+p1167
+sg6
+S'Real Betis'
+p1168
+sg8
+S'http://www.whoscored.com/Matches/633852/Live'
+p1169
+sg10
+S'1 : 5'
+p1170
+sa(dp1171
+g4
+S'Real Sociedad'
+p1172
+sg6
+S'Malaga'
+p1173
+sg8
+S'http://www.whoscored.com/Matches/633843/Live'
+p1174
+sg10
+S'4 : 2'
+p1175
+sa(dp1176
+g4
+S'Real Madrid'
+p1177
+sg6
+S'Levante'
+p1178
+sg8
+S'http://www.whoscored.com/Matches/633857/Live'
+p1179
+sg10
+S'5 : 1'
+p1180
+sa(dp1181
+g4
+S'Deportivo La Coruna'
+p1182
+sg6
+S'Zaragoza'
+p1183
+sg8
+S'http://www.whoscored.com/Matches/633860/Live'
+p1184
+sg10
+S'3 : 2'
+p1185
+sa(dp1186
+g4
+S'Barcelona'
+p1187
+sg6
+S'Mallorca'
+p1188
+sg8
+S'http://www.whoscored.com/Matches/633862/Live'
+p1189
+sg10
+S'5 : 0'
+p1190
+sa(dp1191
+g4
+S'Celta Vigo'
+p1192
+sg6
+S'Rayo Vallecano'
+p1193
+sg8
+S'http://www.whoscored.com/Matches/633866/Live'
+p1194
+sg10
+S'0 : 2'
+p1195
+sa(dp1196
+g4
+S'Osasuna'
+p1197
+sg6
+S'Espanyol'
+p1198
+sg8
+S'http://www.whoscored.com/Matches/633845/Live'
+p1199
+sg10
+S'0 : 2'
+p1200
+sa(dp1201
+g4
+S'Getafe'
+p1202
+sg6
+S'Atletico Madrid'
+p1203
+sg8
+S'http://www.whoscored.com/Matches/633850/Live'
+p1204
+sg10
+S'0 : 0'
+p1205
+sa(dp1206
+g4
+S'Valencia'
+p1207
+sg6
+S'Valladolid'
+p1208
+sg8
+S'http://www.whoscored.com/Matches/633846/Live'
+p1209
+sg10
+S'2 : 1'
+p1210
+sa(dp1211
+g4
+S'Sevilla'
+p1212
+sg6
+S'Athletic Club'
+p1213
+sg8
+S'http://www.whoscored.com/Matches/633855/Live'
+p1214
+sg10
+S'2 : 1'
+p1215
+sa(dp1216
+g4
+S'Real Betis'
+p1217
+sg6
+S'Sevilla'
+p1218
+sg8
+S'http://www.whoscored.com/Matches/633759/Live'
+p1219
+sg10
+S'3 : 3'
+p1220
+sa(dp1221
+g4
+S'Valladolid'
+p1222
+sg6
+S'Getafe'
+p1223
+sg8
+S'http://www.whoscored.com/Matches/633753/Live'
+p1224
+sg10
+S'2 : 1'
+p1225
+sa(dp1226
+g4
+S'Levante'
+p1227
+sg6
+S'Deportivo La Coruna'
+p1228
+sg8
+S'http://www.whoscored.com/Matches/633768/Live'
+p1229
+sg10
+S'0 : 4'
+p1230
+sa(dp1231
+g4
+S'Espanyol'
+p1232
+sg6
+S'Valencia'
+p1233
+sg8
+S'http://www.whoscored.com/Matches/633751/Live'
+p1234
+sg10
+S'3 : 3'
+p1235
+sa(dp1236
+g4
+S'Malaga'
+p1237
+sg6
+S'Osasuna'
+p1238
+sg8
+S'http://www.whoscored.com/Matches/633749/Live'
+p1239
+sg10
+S'1 : 0'
+p1240
+sa(dp1241
+g4
+S'Rayo Vallecano'
+p1242
+sg6
+S'Real Sociedad'
+p1243
+sg8
+S'http://www.whoscored.com/Matches/633743/Live'
+p1244
+sg10
+S'0 : 2'
+p1245
+sa(dp1246
+g4
+S'Atletico Madrid'
+p1247
+sg6
+S'Granada'
+p1248
+sg8
+S'http://www.whoscored.com/Matches/633756/Live'
+p1249
+sg10
+S'5 : 0'
+p1250
+sa(dp1251
+g4
+S'Zaragoza'
+p1252
+sg6
+S'Barcelona'
+p1253
+sg8
+S'http://www.whoscored.com/Matches/633770/Live'
+p1254
+sg10
+S'0 : 3'
+p1255
+sa(dp1256
+g4
+S'Athletic Club'
+p1257
+sg6
+S'Real Madrid'
+p1258
+sg8
+S'http://www.whoscored.com/Matches/633765/Live'
+p1259
+sg10
+S'0 : 3'
+p1260
+sa(dp1261
+g4
+S'Mallorca'
+p1262
+sg6
+S'Celta Vigo'
+p1263
+sg8
+S'http://www.whoscored.com/Matches/633774/Live'
+p1264
+sg10
+S'1 : 0'
+p1265
+sa(dp1266
+g4
+S'Mallorca'
+p1267
+sg6
+S'Rayo Vallecano'
+p1268
+sg8
+S'http://www.whoscored.com/Matches/633806/Live'
+p1269
+sg10
+S'1 : 1'
+p1270
+sa(dp1271
+g4
+S'Granada'
+p1272
+sg6
+S'Valladolid'
+p1273
+sg8
+S'http://www.whoscored.com/Matches/633789/Live'
+p1274
+sg10
+S'1 : 1'
+p1275
+sa(dp1276
+g4
+S'Real Madrid'
+p1277
+sg6
+S'Real Betis'
+p1278
+sg8
+S'http://www.whoscored.com/Matches/633794/Live'
+p1279
+sg10
+S'3 : 1'
+p1280
+sa(dp1281
+g4
+S'Barcelona'
+p1282
+sg6
+S'Levante'
+p1283
+sg8
+S'http://www.whoscored.com/Matches/633799/Live'
+p1284
+sg10
+S'1 : 0'
+p1285
+sa(dp1286
+g4
+S'Valencia'
+p1287
+sg6
+S'Malaga'
+p1288
+sg8
+S'http://www.whoscored.com/Matches/633786/Live'
+p1289
+sg10
+S'5 : 1'
+p1290
+sa(dp1291
+g4
+S'Getafe'
+p1292
+sg6
+S'Espanyol'
+p1293
+sg8
+S'http://www.whoscored.com/Matches/633787/Live'
+p1294
+sg10
+S'0 : 2'
+p1295
+sa(dp1296
+g4
+S'Deportivo La Coruna'
+p1297
+sg6
+S'Athletic Club'
+p1298
+sg8
+S'http://www.whoscored.com/Matches/633795/Live'
+p1299
+sg10
+S'1 : 1'
+p1300
+sa(dp1301
+g4
+S'Osasuna'
+p1302
+sg6
+S'Real Sociedad'
+p1303
+sg8
+S'http://www.whoscored.com/Matches/633783/Live'
+p1304
+sg10
+S'0 : 0'
+p1305
+sa(dp1306
+g4
+S'Sevilla'
+p1307
+sg6
+S'Atletico Madrid'
+p1308
+sg8
+S'http://www.whoscored.com/Matches/633793/Live'
+p1309
+sg10
+S'0 : 1'
+p1310
+sa(dp1311
+g4
+S'Celta Vigo'
+p1312
+sg6
+S'Zaragoza'
+p1313
+sg8
+S'http://www.whoscored.com/Matches/633802/Live'
+p1314
+sg10
+S'2 : 1'
+p1315
+sa(dp1316
+g4
+S'Rayo Vallecano'
+p1317
+sg6
+S'Osasuna'
+p1318
+sg8
+S'http://www.whoscored.com/Matches/633818/Live'
+p1319
+sg10
+S'2 : 2'
+p1320
+sa(dp1321
+g4
+S'Levante'
+p1322
+sg6
+S'Celta Vigo'
+p1323
+sg8
+S'http://www.whoscored.com/Matches/633844/Live'
+p1324
+sg10
+S'0 : 1'
+p1325
+sa(dp1326
+g4
+S'Athletic Club'
+p1327
+sg6
+S'Barcelona'
+p1328
+sg8
+S'http://www.whoscored.com/Matches/633840/Live'
+p1329
+sg10
+S'2 : 2'
+p1330
+sa(dp1331
+g4
+S'Atletico Madrid'
+p1332
+sg6
+S'Real Madrid'
+p1333
+sg8
+S'http://www.whoscored.com/Matches/633836/Live'
+p1334
+sg10
+S'1 : 2'
+p1335
+sa(dp1336
+g4
+S'Zaragoza'
+p1337
+sg6
+S'Mallorca'
+p1338
+sg8
+S'http://www.whoscored.com/Matches/633848/Live'
+p1339
+sg10
+S'3 : 2'
+p1340
+sa(dp1341
+g4
+S'Espanyol'
+p1342
+sg6
+S'Granada'
+p1343
+sg8
+S'http://www.whoscored.com/Matches/633824/Live'
+p1344
+sg10
+S'0 : 1'
+p1345
+sa(dp1346
+g4
+S'Malaga'
+p1347
+sg6
+S'Getafe'
+p1348
+sg8
+S'http://www.whoscored.com/Matches/633822/Live'
+p1349
+sg10
+S'2 : 1'
+p1350
+sa(dp1351
+g4
+S'Valladolid'
+p1352
+sg6
+S'Sevilla'
+p1353
+sg8
+S'http://www.whoscored.com/Matches/633826/Live'
+p1354
+sg10
+S'1 : 1'
+p1355
+sa(dp1356
+g4
+S'Real Sociedad'
+p1357
+sg6
+S'Valencia'
+p1358
+sg8
+S'http://www.whoscored.com/Matches/633820/Live'
+p1359
+sg10
+S'4 : 2'
+p1360
+sa(dp1361
+g4
+S'Real Betis'
+p1362
+sg6
+S'Deportivo La Coruna'
+p1363
+sg8
+S'http://www.whoscored.com/Matches/633838/Live'
+p1364
+sg10
+S'1 : 1'
+p1365
+sasS'Nov'
+p1366
+(lp1367
+(dp1368
+g4
+S'Malaga'
+p1369
+sg6
+S'Rayo Vallecano'
+p1370
+sg8
+S'http://www.whoscored.com/Matches/633764/Live'
+p1371
+sg10
+S'1 : 2'
+p1372
+sa(dp1373
+g4
+S'Barcelona'
+p1374
+sg6
+S'Celta Vigo'
+p1375
+sg8
+S'http://www.whoscored.com/Matches/633785/Live'
+p1376
+sg10
+S'3 : 1'
+p1377
+sa(dp1378
+g4
+S'Real Madrid'
+p1379
+sg6
+S'Zaragoza'
+p1380
+sg8
+S'http://www.whoscored.com/Matches/633781/Live'
+p1381
+sg10
+S'4 : 0'
+p1382
+sa(dp1383
+g4
+S'Valencia'
+p1384
+sg6
+S'Atletico Madrid'
+p1385
+sg8
+S'http://www.whoscored.com/Matches/633773/Live'
+p1386
+sg10
+S'2 : 0'
+p1387
+sa(dp1388
+g4
+S'Real Sociedad'
+p1389
+sg6
+S'Espanyol'
+p1390
+sg8
+S'http://www.whoscored.com/Matches/633767/Live'
+p1391
+sg10
+S'0 : 1'
+p1392
+sa(dp1393
+g4
+S'Deportivo La Coruna'
+p1394
+sg6
+S'Mallorca'
+p1395
+sg8
+S'http://www.whoscored.com/Matches/633784/Live'
+p1396
+sg10
+S'1 : 0'
+p1397
+sa(dp1398
+g4
+S'Osasuna'
+p1399
+sg6
+S'Valladolid'
+p1400
+sg8
+S'http://www.whoscored.com/Matches/633769/Live'
+p1401
+sg10
+S'0 : 1'
+p1402
+sa(dp1403
+g4
+S'Granada'
+p1404
+sg6
+S'Athletic Club'
+p1405
+sg8
+S'http://www.whoscored.com/Matches/633777/Live'
+p1406
+sg10
+S'1 : 2'
+p1407
+sa(dp1408
+g4
+S'Sevilla'
+p1409
+sg6
+S'Levante'
+p1410
+sg8
+S'http://www.whoscored.com/Matches/633779/Live'
+p1411
+sg10
+S'0 : 0'
+p1412
+sa(dp1413
+g4
+S'Getafe'
+p1414
+sg6
+S'Real Betis'
+p1415
+sg8
+S'http://www.whoscored.com/Matches/633775/Live'
+p1416
+sg10
+S'2 : 4'
+p1417
+sa(dp1418
+g4
+S'Real Betis'
+p1419
+sg6
+S'Granada'
+p1420
+sg8
+S'http://www.whoscored.com/Matches/633808/Live'
+p1421
+sg10
+S'1 : 2'
+p1422
+sa(dp1423
+g4
+S'Rayo Vallecano'
+p1424
+sg6
+S'Celta Vigo'
+p1425
+sg8
+S'http://www.whoscored.com/Matches/633816/Live'
+p1426
+sg10
+S'3 : 2'
+p1427
+sa(dp1428
+g4
+S'Espanyol'
+p1429
+sg6
+S'Osasuna'
+p1430
+sg8
+S'http://www.whoscored.com/Matches/633800/Live'
+p1431
+sg10
+S'0 : 3'
+p1432
+sa(dp1433
+g4
+S'Zaragoza'
+p1434
+sg6
+S'Deportivo La Coruna'
+p1435
+sg8
+S'http://www.whoscored.com/Matches/633812/Live'
+p1436
+sg10
+S'5 : 3'
+p1437
+sa(dp1438
+g4
+S'Malaga'
+p1439
+sg6
+S'Real Sociedad'
+p1440
+sg8
+S'http://www.whoscored.com/Matches/633797/Live'
+p1441
+sg10
+S'1 : 2'
+p1442
+sa(dp1443
+g4
+S'Valladolid'
+p1444
+sg6
+S'Valencia'
+p1445
+sg8
+S'http://www.whoscored.com/Matches/633803/Live'
+p1446
+sg10
+S'1 : 1'
+p1447
+sa(dp1448
+g4
+S'Athletic Club'
+p1449
+sg6
+S'Sevilla'
+p1450
+sg8
+S'http://www.whoscored.com/Matches/633810/Live'
+p1451
+sg10
+S'2 : 1'
+p1452
+sa(dp1453
+g4
+S'Mallorca'
+p1454
+sg6
+S'Barcelona'
+p1455
+sg8
+S'http://www.whoscored.com/Matches/633814/Live'
+p1456
+sg10
+S'2 : 4'
+p1457
+sa(dp1458
+g4
+S'Atletico Madrid'
+p1459
+sg6
+S'Getafe'
+p1460
+sg8
+S'http://www.whoscored.com/Matches/633805/Live'
+p1461
+sg10
+S'2 : 0'
+p1462
+sa(dp1463
+g4
+S'Levante'
+p1464
+sg6
+S'Real Madrid'
+p1465
+sg8
+S'http://www.whoscored.com/Matches/633811/Live'
+p1466
+sg10
+S'1 : 2'
+p1467
+sa(dp1468
+g4
+S'Osasuna'
+p1469
+sg6
+S'Malaga'
+p1470
+sg8
+S'http://www.whoscored.com/Matches/633828/Live'
+p1471
+sg10
+S'0 : 0'
+p1472
+sa(dp1473
+g4
+S'Valencia'
+p1474
+sg6
+S'Espanyol'
+p1475
+sg8
+S'http://www.whoscored.com/Matches/633829/Live'
+p1476
+sg10
+S'2 : 1'
+p1477
+sa(dp1478
+g4
+S'Barcelona'
+p1479
+sg6
+S'Zaragoza'
+p1480
+sg8
+S'http://www.whoscored.com/Matches/633841/Live'
+p1481
+sg10
+S'3 : 1'
+p1482
+sa(dp1483
+g4
+S'Real Madrid'
+p1484
+sg6
+S'Athletic Club'
+p1485
+sg8
+S'http://www.whoscored.com/Matches/633837/Live'
+p1486
+sg10
+S'5 : 1'
+p1487
+sa(dp1488
+g4
+S'Deportivo La Coruna'
+p1489
+sg6
+S'Levante'
+p1490
+sg8
+S'http://www.whoscored.com/Matches/633839/Live'
+p1491
+sg10
+S'0 : 2'
+p1492
+sa(dp1493
+g4
+S'Celta Vigo'
+p1494
+sg6
+S'Mallorca'
+p1495
+sg8
+S'http://www.whoscored.com/Matches/633842/Live'
+p1496
+sg10
+S'1 : 1'
+p1497
+sa(dp1498
+g4
+S'Getafe'
+p1499
+sg6
+S'Valladolid'
+p1500
+sg8
+S'http://www.whoscored.com/Matches/633831/Live'
+p1501
+sg10
+S'2 : 1'
+p1502
+sa(dp1503
+g4
+S'Granada'
+p1504
+sg6
+S'Atletico Madrid'
+p1505
+sg8
+S'http://www.whoscored.com/Matches/633834/Live'
+p1506
+sg10
+S'0 : 1'
+p1507
+sa(dp1508
+g4
+S'Sevilla'
+p1509
+sg6
+S'Real Betis'
+p1510
+sg8
+S'http://www.whoscored.com/Matches/633835/Live'
+p1511
+sg10
+S'5 : 1'
+p1512
+sa(dp1513
+g4
+S'Real Sociedad'
+p1514
+sg6
+S'Rayo Vallecano'
+p1515
+sg8
+S'http://www.whoscored.com/Matches/633827/Live'
+p1516
+sg10
+S'4 : 0'
+p1517
+sa(dp1518
+g4
+S'Real Sociedad'
+p1519
+sg6
+S'Osasuna'
+p1520
+sg8
+S'http://www.whoscored.com/Matches/633847/Live'
+p1521
+sg10
+S'0 : 0'
+p1522
+sa(dp1523
+g4
+S'Rayo Vallecano'
+p1524
+sg6
+S'Mallorca'
+p1525
+sg8
+S'http://www.whoscored.com/Matches/633870/Live'
+p1526
+sg10
+S'2 : 0'
+p1527
+sa(dp1528
+g4
+S'Valladolid'
+p1529
+sg6
+S'Granada'
+p1530
+sg8
+S'http://www.whoscored.com/Matches/633853/Live'
+p1531
+sg10
+S'1 : 0'
+p1532
+sa(dp1533
+g4
+S'Malaga'
+p1534
+sg6
+S'Valencia'
+p1535
+sg8
+S'http://www.whoscored.com/Matches/633849/Live'
+p1536
+sg10
+S'4 : 0'
+p1537
+sa(dp1538
+g4
+S'Real Betis'
+p1539
+sg6
+S'Real Madrid'
+p1540
+sg8
+S'http://www.whoscored.com/Matches/633859/Live'
+p1541
+sg10
+S'1 : 0'
+p1542
+sa(dp1543
+g4
+S'Espanyol'
+p1544
+sg6
+S'Getafe'
+p1545
+sg8
+S'http://www.whoscored.com/Matches/633851/Live'
+p1546
+sg10
+S'0 : 2'
+p1547
+sa(dp1548
+g4
+S'Athletic Club'
+p1549
+sg6
+S'Deportivo La Coruna'
+p1550
+sg8
+S'http://www.whoscored.com/Matches/633861/Live'
+p1551
+sg10
+S'1 : 1'
+p1552
+sa(dp1553
+g4
+S'Atletico Madrid'
+p1554
+sg6
+S'Sevilla'
+p1555
+sg8
+S'http://www.whoscored.com/Matches/633856/Live'
+p1556
+sg10
+S'4 : 0'
+p1557
+sa(dp1558
+g4
+S'Levante'
+p1559
+sg6
+S'Barcelona'
+p1560
+sg8
+S'http://www.whoscored.com/Matches/633864/Live'
+p1561
+sg10
+S'0 : 4'
+p1562
+sa(dp1563
+g4
+S'Zaragoza'
+p1564
+sg6
+S'Celta Vigo'
+p1565
+sg8
+S'http://www.whoscored.com/Matches/633868/Live'
+p1566
+sg10
+S'0 : 1'
+p1567
+sa(dp1568
+g4
+S'Osasuna'
+p1569
+sg6
+S'Rayo Vallecano'
+p1570
+sg8
+S'http://www.whoscored.com/Matches/633878/Live'
+p1571
+sg10
+S'1 : 0'
+p1572
+sasS'Dec'
+p1573
+(lp1574
+(dp1575
+g4
+S'Getafe'
+p1576
+sg6
+S'Malaga'
+p1577
+sg8
+S'http://www.whoscored.com/Matches/633888/Live'
+p1578
+sg10
+S'1 : 0'
+p1579
+sa(dp1580
+g4
+S'Valencia'
+p1581
+sg6
+S'Real Sociedad'
+p1582
+sg8
+S'http://www.whoscored.com/Matches/633882/Live'
+p1583
+sg10
+S'2 : 5'
+p1584
+sa(dp1585
+g4
+S'Barcelona'
+p1586
+sg6
+S'Athletic Club'
+p1587
+sg8
+S'http://www.whoscored.com/Matches/633900/Live'
+p1588
+sg10
+S'5 : 1'
+p1589
+sa(dp1590
+g4
+S'Real Madrid'
+p1591
+sg6
+S'Atletico Madrid'
+p1592
+sg8
+S'http://www.whoscored.com/Matches/633897/Live'
+p1593
+sg10
+S'2 : 0'
+p1594
+sa(dp1595
+g4
+S'Granada'
+p1596
+sg6
+S'Espanyol'
+p1597
+sg8
+S'http://www.whoscored.com/Matches/633891/Live'
+p1598
+sg10
+S'0 : 0'
+p1599
+sa(dp1600
+g4
+S'Deportivo La Coruna'
+p1601
+sg6
+S'Real Betis'
+p1602
+sg8
+S'http://www.whoscored.com/Matches/633898/Live'
+p1603
+sg10
+S'2 : 3'
+p1604
+sa(dp1605
+g4
+S'Celta Vigo'
+p1606
+sg6
+S'Levante'
+p1607
+sg8
+S'http://www.whoscored.com/Matches/633904/Live'
+p1608
+sg10
+S'1 : 1'
+p1609
+sa(dp1610
+g4
+S'Mallorca'
+p1611
+sg6
+S'Zaragoza'
+p1612
+sg8
+S'http://www.whoscored.com/Matches/633910/Live'
+p1613
+sg10
+S'1 : 1'
+p1614
+sa(dp1615
+g4
+S'Sevilla'
+p1616
+sg6
+S'Valladolid'
+p1617
+sg8
+S'http://www.whoscored.com/Matches/633894/Live'
+p1618
+sg10
+S'1 : 2'
+p1619
+sa(dp1620
+g4
+S'Espanyol'
+p1621
+sg6
+S'Sevilla'
+p1622
+sg8
+S'http://www.whoscored.com/Matches/633865/Live'
+p1623
+sg10
+S'2 : 2'
+p1624
+sa(dp1625
+g4
+S'Real Sociedad'
+p1626
+sg6
+S'Getafe'
+p1627
+sg8
+S'http://www.whoscored.com/Matches/633854/Live'
+p1628
+sg10
+S'1 : 1'
+p1629
+sa(dp1630
+g4
+S'Malaga'
+p1631
+sg6
+S'Granada'
+p1632
+sg8
+S'http://www.whoscored.com/Matches/633858/Live'
+p1633
+sg10
+S'4 : 0'
+p1634
+sa(dp1635
+g4
+S'Valladolid'
+p1636
+sg6
+S'Real Madrid'
+p1637
+sg8
+S'http://www.whoscored.com/Matches/633869/Live'
+p1638
+sg10
+S'2 : 3'
+p1639
+sa(dp1640
+g4
+S'Osasuna'
+p1641
+sg6
+S'Valencia'
+p1642
+sg8
+S'http://www.whoscored.com/Matches/633791/Live'
+p1643
+sg10
+S'0 : 1'
+p1644
+sa(dp1645
+g4
+S'Levante'
+p1646
+sg6
+S'Mallorca'
+p1647
+sg8
+S'http://www.whoscored.com/Matches/633909/Live'
+p1648
+sg10
+S'4 : 0'
+p1649
+sa(dp1650
+g4
+S'Athletic Club'
+p1651
+sg6
+S'Celta Vigo'
+p1652
+sg8
+S'http://www.whoscored.com/Matches/633899/Live'
+p1653
+sg10
+S'1 : 0'
+p1654
+sa(dp1655
+g4
+S'Atletico Madrid'
+p1656
+sg6
+S'Deportivo La Coruna'
+p1657
+sg8
+S'http://www.whoscored.com/Matches/633876/Live'
+p1658
+sg10
+S'6 : 0'
+p1659
+sa(dp1660
+g4
+S'Real Betis'
+p1661
+sg6
+S'Barcelona'
+p1662
+sg8
+S'http://www.whoscored.com/Matches/633886/Live'
+p1663
+sg10
+S'1 : 2'
+p1664
+sa(dp1665
+g4
+S'Rayo Vallecano'
+p1666
+sg6
+S'Zaragoza'
+p1667
+sg8
+S'http://www.whoscored.com/Matches/633915/Live'
+p1668
+sg10
+S'0 : 2'
+p1669
+sa(dp1670
+g4
+S'Getafe'
+p1671
+sg6
+S'Osasuna'
+p1672
+sg8
+S'http://www.whoscored.com/Matches/633939/Live'
+p1673
+sg10
+S'1 : 1'
+p1674
+sa(dp1675
+g4
+S'Mallorca'
+p1676
+sg6
+S'Athletic Club'
+p1677
+sg8
+S'http://www.whoscored.com/Matches/633926/Live'
+p1678
+sg10
+S'0 : 1'
+p1679
+sa(dp1680
+g4
+S'Granada'
+p1681
+sg6
+S'Real Sociedad'
+p1682
+sg8
+S'http://www.whoscored.com/Matches/633943/Live'
+p1683
+sg10
+S'0 : 0'
+p1684
+sa(dp1685
+g4
+S'Sevilla'
+p1686
+sg6
+S'Malaga'
+p1687
+sg8
+S'http://www.whoscored.com/Matches/633945/Live'
+p1688
+sg10
+S'0 : 2'
+p1689
+sa(dp1690
+g4
+S'Zaragoza'
+p1691
+sg6
+S'Levante'
+p1692
+sg8
+S'http://www.whoscored.com/Matches/633930/Live'
+p1693
+sg10
+S'0 : 1'
+p1694
+sa(dp1695
+g4
+S'Valencia'
+p1696
+sg6
+S'Rayo Vallecano'
+p1697
+sg8
+S'http://www.whoscored.com/Matches/633933/Live'
+p1698
+sg10
+S'0 : 1'
+p1699
+sa(dp1700
+g4
+S'Real Madrid'
+p1701
+sg6
+S'Espanyol'
+p1702
+sg8
+S'http://www.whoscored.com/Matches/633906/Live'
+p1703
+sg10
+S'2 : 2'
+p1704
+sa(dp1705
+g4
+S'Barcelona'
+p1706
+sg6
+S'Atletico Madrid'
+p1707
+sg8
+S'http://www.whoscored.com/Matches/633913/Live'
+p1708
+sg10
+S'4 : 1'
+p1709
+sa(dp1710
+g4
+S'Deportivo La Coruna'
+p1711
+sg6
+S'Valladolid'
+p1712
+sg8
+S'http://www.whoscored.com/Matches/633911/Live'
+p1713
+sg10
+S'0 : 0'
+p1714
+sa(dp1715
+g4
+S'Celta Vigo'
+p1716
+sg6
+S'Real Betis'
+p1717
+sg8
+S'http://www.whoscored.com/Matches/633922/Live'
+p1718
+sg10
+S'0 : 1'
+p1719
+sa(dp1720
+g4
+S'Rayo Vallecano'
+p1721
+sg6
+S'Levante'
+p1722
+sg8
+S'http://www.whoscored.com/Matches/633949/Live'
+p1723
+sg10
+S'3 : 0'
+p1724
+sa(dp1725
+g4
+S'Real Sociedad'
+p1726
+sg6
+S'Sevilla'
+p1727
+sg8
+S'http://www.whoscored.com/Matches/633936/Live'
+p1728
+sg10
+S'2 : 1'
+p1729
+sa(dp1730
+g4
+S'Espanyol'
+p1731
+sg6
+S'Deportivo La Coruna'
+p1732
+sg8
+S'http://www.whoscored.com/Matches/633941/Live'
+p1733
+sg10
+S'2 : 0'
+p1734
+sa(dp1735
+g4
+S'Valencia'
+p1736
+sg6
+S'Getafe'
+p1737
+sg8
+S'http://www.whoscored.com/Matches/633931/Live'
+p1738
+sg10
+S'4 : 2'
+p1739
+sa(dp1740
+g4
+S'Atletico Madrid'
+p1741
+sg6
+S'Celta Vigo'
+p1742
+sg8
+S'http://www.whoscored.com/Matches/633946/Live'
+p1743
+sg10
+S'1 : 0'
+p1744
+sa(dp1745
+g4
+S'Real Betis'
+p1746
+sg6
+S'Mallorca'
+p1747
+sg8
+S'http://www.whoscored.com/Matches/633947/Live'
+p1748
+sg10
+S'1 : 2'
+p1749
+sa(dp1750
+g4
+S'Valladolid'
+p1751
+sg6
+S'Barcelona'
+p1752
+sg8
+S'http://www.whoscored.com/Matches/633944/Live'
+p1753
+sg10
+S'1 : 3'
+p1754
+sa(dp1755
+g4
+S'Osasuna'
+p1756
+sg6
+S'Granada'
+p1757
+sg8
+S'http://www.whoscored.com/Matches/633932/Live'
+p1758
+sg10
+S'1 : 2'
+p1759
+sa(dp1760
+g4
+S'Malaga'
+p1761
+sg6
+S'Real Madrid'
+p1762
+sg8
+S'http://www.whoscored.com/Matches/633938/Live'
+p1763
+sg10
+S'3 : 2'
+p1764
+sa(dp1765
+g4
+S'Athletic Club'
+p1766
+sg6
+S'Zaragoza'
+p1767
+sg8
+S'http://www.whoscored.com/Matches/633948/Live'
+p1768
+sg10
+S'0 : 2'
+p1769
+sasS'Oct'
+p1770
+(lp1771
+(dp1772
+g4
+S'Getafe'
+p1773
+sg6
+S'Mallorca'
+p1774
+sg8
+S'http://www.whoscored.com/Matches/633693/Live'
+p1775
+sg10
+S'1 : 0'
+p1776
+sa(dp1777
+g4
+S'Celta Vigo'
+p1778
+sg6
+S'Sevilla'
+p1779
+sg8
+S'http://www.whoscored.com/Matches/633713/Live'
+p1780
+sg10
+S'2 : 0'
+p1781
+sa(dp1782
+g4
+S'Rayo Vallecano'
+p1783
+sg6
+S'Deportivo La Coruna'
+p1784
+sg8
+S'http://www.whoscored.com/Matches/633717/Live'
+p1785
+sg10
+S'2 : 1'
+p1786
+sa(dp1787
+g4
+S'Zaragoza'
+p1788
+sg6
+S'Getafe'
+p1789
+sg8
+S'http://www.whoscored.com/Matches/633709/Live'
+p1790
+sg10
+S'0 : 1'
+p1791
+sa(dp1792
+g4
+S'Valladolid'
+p1793
+sg6
+S'Espanyol'
+p1794
+sg8
+S'http://www.whoscored.com/Matches/633703/Live'
+p1795
+sg10
+S'1 : 1'
+p1796
+sa(dp1797
+g4
+S'Real Betis'
+p1798
+sg6
+S'Real Sociedad'
+p1799
+sg8
+S'http://www.whoscored.com/Matches/633705/Live'
+p1800
+sg10
+S'2 : 0'
+p1801
+sa(dp1802
+g4
+S'Levante'
+p1803
+sg6
+S'Valencia'
+p1804
+sg8
+S'http://www.whoscored.com/Matches/633708/Live'
+p1805
+sg10
+S'1 : 0'
+p1806
+sa(dp1807
+g4
+S'Mallorca'
+p1808
+sg6
+S'Granada'
+p1809
+sg8
+S'http://www.whoscored.com/Matches/633711/Live'
+p1810
+sg10
+S'1 : 2'
+p1811
+sa(dp1812
+g4
+S'Athletic Club'
+p1813
+sg6
+S'Osasuna'
+p1814
+sg8
+S'http://www.whoscored.com/Matches/633706/Live'
+p1815
+sg10
+S'1 : 0'
+p1816
+sa(dp1817
+g4
+S'Barcelona'
+p1818
+sg6
+S'Real Madrid'
+p1819
+sg8
+S'http://www.whoscored.com/Matches/633714/Live'
+p1820
+sg10
+S'2 : 2'
+p1821
+sa(dp1822
+g4
+S'Atletico Madrid'
+p1823
+sg6
+S'Malaga'
+p1824
+sg8
+S'http://www.whoscored.com/Matches/633704/Live'
+p1825
+sg10
+S'2 : 1'
+p1826
+sa(dp1827
+g4
+S'Malaga'
+p1828
+sg6
+S'Valladolid'
+p1829
+sg8
+S'http://www.whoscored.com/Matches/633724/Live'
+p1830
+sg10
+S'2 : 1'
+p1831
+sa(dp1832
+g4
+S'Real Madrid'
+p1833
+sg6
+S'Celta Vigo'
+p1834
+sg8
+S'http://www.whoscored.com/Matches/633731/Live'
+p1835
+sg10
+S'2 : 0'
+p1836
+sa(dp1837
+g4
+S'Valencia'
+p1838
+sg6
+S'Athletic Club'
+p1839
+sg8
+S'http://www.whoscored.com/Matches/633727/Live'
+p1840
+sg10
+S'3 : 2'
+p1841
+sa(dp1842
+g4
+S'Deportivo La Coruna'
+p1843
+sg6
+S'Barcelona'
+p1844
+sg8
+S'http://www.whoscored.com/Matches/633732/Live'
+p1845
+sg10
+S'4 : 5'
+p1846
+sa(dp1847
+g4
+S'Getafe'
+p1848
+sg6
+S'Levante'
+p1849
+sg8
+S'http://www.whoscored.com/Matches/633728/Live'
+p1850
+sg10
+S'0 : 1'
+p1851
+sa(dp1852
+g4
+S'Espanyol'
+p1853
+sg6
+S'Rayo Vallecano'
+p1854
+sg8
+S'http://www.whoscored.com/Matches/633721/Live'
+p1855
+sg10
+S'3 : 2'
+p1856
+sa(dp1857
+g4
+S'Granada'
+p1858
+sg6
+S'Zaragoza'
+p1859
+sg8
+S'http://www.whoscored.com/Matches/633729/Live'
+p1860
+sg10
+S'1 : 2'
+p1861
+sa(dp1862
+g4
+S'Osasuna'
+p1863
+sg6
+S'Real Betis'
+p1864
+sg8
+S'http://www.whoscored.com/Matches/633726/Live'
+p1865
+sg10
+S'0 : 0'
+p1866
+sa(dp1867
+g4
+S'Real Sociedad'
+p1868
+sg6
+S'Atletico Madrid'
+p1869
+sg8
+S'http://www.whoscored.com/Matches/633725/Live'
+p1870
+sg10
+S'0 : 1'
+p1871
+sa(dp1872
+g4
+S'Sevilla'
+p1873
+sg6
+S'Mallorca'
+p1874
+sg8
+S'http://www.whoscored.com/Matches/633730/Live'
+p1875
+sg10
+S'3 : 2'
+p1876
+sa(dp1877
+g4
+S'Espanyol'
+p1878
+sg6
+S'Malaga'
+p1879
+sg8
+S'http://www.whoscored.com/Matches/633739/Live'
+p1880
+sg10
+S'0 : 0'
+p1881
+sa(dp1882
+g4
+S'Real Betis'
+p1883
+sg6
+S'Valencia'
+p1884
+sg8
+S'http://www.whoscored.com/Matches/633744/Live'
+p1885
+sg10
+S'1 : 0'
+p1886
+sa(dp1887
+g4
+S'Celta Vigo'
+p1888
+sg6
+S'Deportivo La Coruna'
+p1889
+sg8
+S'http://www.whoscored.com/Matches/633757/Live'
+p1890
+sg10
+S'1 : 1'
+p1891
+sa(dp1892
+g4
+S'Rayo Vallecano'
+p1893
+sg6
+S'Barcelona'
+p1894
+sg8
+S'http://www.whoscored.com/Matches/633758/Live'
+p1895
+sg10
+S'0 : 5'
+p1896
+sa(dp1897
+g4
+S'Zaragoza'
+p1898
+sg6
+S'Sevilla'
+p1899
+sg8
+S'http://www.whoscored.com/Matches/633752/Live'
+p1900
+sg10
+S'2 : 1'
+p1901
+sa(dp1902
+g4
+S'Levante'
+p1903
+sg6
+S'Granada'
+p1904
+sg8
+S'http://www.whoscored.com/Matches/633750/Live'
+p1905
+sg10
+S'3 : 1'
+p1906
+sa(dp1907
+g4
+S'Athletic Club'
+p1908
+sg6
+S'Getafe'
+p1909
+sg8
+S'http://www.whoscored.com/Matches/633748/Live'
+p1910
+sg10
+S'1 : 2'
+p1911
+sa(dp1912
+g4
+S'Atletico Madrid'
+p1913
+sg6
+S'Osasuna'
+p1914
+sg8
+S'http://www.whoscored.com/Matches/633742/Live'
+p1915
+sg10
+S'3 : 1'
+p1916
+sa(dp1917
+g4
+S'Mallorca'
+p1918
+sg6
+S'Real Madrid'
+p1919
+sg8
+S'http://www.whoscored.com/Matches/633755/Live'
+p1920
+sg10
+S'0 : 5'
+p1921
+sa(dp1922
+g4
+S'Valladolid'
+p1923
+sg6
+S'Real Sociedad'
+p1924
+sg8
+S'http://www.whoscored.com/Matches/633741/Live'
+p1925
+sg10
+S'2 : 2'
+p1926
+sas.

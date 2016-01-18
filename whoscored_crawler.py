@@ -19,7 +19,7 @@ from multiprocessing import Pool, cpu_count
 
 from old_utils import DBHandler
 from utils.argumet_parsers import CrawlerArgsParser
-from utils.decorators import retry, force
+from utils.decorators import retry
 
 
 args_parser = CrawlerArgsParser()
@@ -70,7 +70,7 @@ class WhoScoredCrawler(object):
         Helper function to create backup folders and files for the data mined.
         '''
         logging.info('Creating backup folders')
-        self._bkup_folder = '-'.join([self.league,str(self.year)])
+        self._bkup_folder = path.join('..','backup','-'.join([self.league,str(self.year)]))
         self._bkup_fixtures_links = path.join(self._bkup_folder,'fixtures.pckl')  
         if not path.exists(self._bkup_folder):
             os.mkdir(self._bkup_folder)
@@ -98,7 +98,7 @@ class WhoScoredCrawler(object):
         logging.info('Finished getting played months')
         return months  
     
-    def crawl(self):
+    def crawl(self,current=False):
         '''
         The main function - crawl the league and mine some data.
         
@@ -109,8 +109,8 @@ class WhoScoredCrawler(object):
         self.team_names = set([unidecode(thr.text) for thr in \
                                self.driver.find_element_by_class_name("stat-table").find_elements_by_class_name("team-link")])
         self.driver.find_element(By.XPATH, '//*[@id="sub-navigation"]').find_element(By.PARTIAL_LINK_TEXT, 'Fixtures').click()
-        self.played_months = self.get_played_months()
-        self.load_previous_data()
+        self.played_months = self.get_played_months()    
+        self.load_previous_data(current)
         prog_bar = ChargingBar('Progress of %s crawling:'%' '.join([self.league,str(self.year)]),max=sum([len(self.fixtures[month]) for month in self.played_months[self.played_months.index(self.start_month)::-1]]))
         for month in self.played_months[self.played_months.index(self.start_month)::-1]:
             for game in self.fixtures[month]:
@@ -233,18 +233,21 @@ class WhoScoredCrawler(object):
                     self.players_dict[dict][player_name][link_table.text] = {h:d for h,d in izip(team_header,player_data_line)}
 
         
-    def load_previous_data(self):
+    def load_previous_data(self,current=False):
         '''
         Loads the data collected in previous run in order to resume crawling from that point.
         '''
         logging.info('Loading data from previous runs')
-        if not path.exists(self._bkup_fixtures_links):
-            self.get_fixtures()
+        if not current:
+            if not path.exists(self._bkup_fixtures_links):
+                self.get_fixtures()
+            else:
+                with open(self._bkup_fixtures_links,'rb') as _bkup_f:
+                    self.fixtures = pickle.load(_bkup_f)
         else:
-            with open(self._bkup_fixtures_links,'rb') as _bkup_f:
-                self.fixtures = pickle.load(_bkup_f)
+            self.get_fixtures(current)
         try:
-            self.start_month = self.find_start_month()
+            self.start_month = self.find_start_month(current)
         except ValueError as e:
             if e.message == 'Finished':
                 with open(path.join(self._bkup_folder,self.last_save_month+'.pckl'),'rb') as _bkup_f:
@@ -264,16 +267,19 @@ class WhoScoredCrawler(object):
             if not(self.all_teams_dict[team_name][key]):
                 return key
     
-    def get_fixtures(self):
+    def get_fixtures(self,current=False):
         '''
         Parse the fixtures page for the games links and save them.
         '''
+        from datetime.datetime import now
         logging.info('Getting fixtures')
+        self.played_months = self.played_months[:self.played_months.index(now.strftime('%b'))] if current else self.played_months 
         self.fixtures = {month:None for month in self.played_months}
         prev_month = self.driver.find_element_by_xpath('//*[@id="date-controller"]/a[1]')
+        xpath_query = '//div[@id="tournament-fixture-wrapper"]/table/tbody/tr[@class!="rowgroupheader"]' if not current else '//div[@id="tournament-fixture-wrapper"]/table/tbody/tr[@class!="rowgroupheader"]//a[@class="result-1 rc"]/../..'
         for month in self.played_months:
             WebDriverWait(self.driver,30).until(EC.text_to_be_present_in_element((By.CLASS_NAME,"rowgroupheader"),month))
-            all_res = self.driver.find_elements_by_xpath('//div[@id="tournament-fixture-wrapper"]/table/tbody/tr[@class!="rowgroupheader"]')
+            all_res = self.driver.find_elements_by_xpath(xpath_query)
             self.fixtures[month] = [self.parse_fixture(res) for res in all_res]
             prev_month.click()
         self.save_fixtures()
@@ -302,7 +308,7 @@ class WhoScoredCrawler(object):
                                   
     
     
-    def find_start_month(self):
+    def find_start_month(self,current=False):
         '''
         Finding the start month for the current run of the crawler.
         '''
@@ -313,12 +319,15 @@ class WhoScoredCrawler(object):
             assert len(pckl_files) <= 2, 'Too many files, should only be fixtures and games for up to the last month'
             if len(pckl_files) == 1: return self.played_months[-1] 
             self.last_save_month = pckl_files[0].split('/')[1].split('.')[0] if pckl_files[0].split('/')[1].split('.')[0] in self.played_months else pckl_files[1].split('/')[1].split('.')[0]
-            if self.last_save_month != self.played_months[0]:
-                logging.info('Finished finding start month')
+            if not current:
+                if self.last_save_month != self.played_months[0]:
+                    logging.info('Finished finding start month')
+                    return self.played_months[self.played_months.index(self.last_save_month)-1]
+                else:
+                    logging.critical('Finished crawling')
+                    raise ValueError('Finished')
+            else:    
                 return self.played_months[self.played_months.index(self.last_save_month)-1]
-            else:
-                logging.critical('Finished crawling')
-                raise ValueError('Finished') 
         logging.info('Finished finding start month')
         return self.played_months[-1]
     

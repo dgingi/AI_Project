@@ -9,7 +9,7 @@ MAX_YEAR = 2015
 
 YEARS = [str(i) for i in range(MIN_YEAR,MAX_YEAR)]
 
-LEAGUES = ['Primer_League','Serie_A','Ligue_1','La_Liga','Bundesliga']
+LEAGUES = ['Primer_League','Serie_A','Ligue1','La_Liga','Bundesliga']
 
 LEAGUES_ABV = ['PL','SA','L1','LL','BL']
 
