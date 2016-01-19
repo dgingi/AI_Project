@@ -13,3 +13,5 @@ LEAGUES = ['Primer_League','Serie_A','Ligue1','La_Liga','Bundesliga']
 
 LEAGUES_ABV = ['PL','SA','L1','LL','BL']
 
+MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+

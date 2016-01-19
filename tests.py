@@ -109,9 +109,43 @@ def find_best_lookback_and_params(league):
     y_data = [d[1] for d in output_array]
     PlotGraph(x_data, y_data, 1, "lookback size", "success rate", "best_lookback_and_params", "k")
 
+def find_best_decision(X1,X2,Y1,Y2):
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(X1,Y1)
+    tags_arr = E.predict(X2)
+    E=EXHandler("Primer_League")
+    result_norm = E.predict(clf, X2, Y2)    
+    
+    array = []
+    for i in range(19):
+        clf = tree.DecisionTreeClassifier()
+        clf = clf.fit(X1,Y1)
+        res = clf.predict(X2)
+        array += [res]
+    
+    final = []
+    for i in range(len(array[0])):
+        temp = []
+        for j in range(len(array)):
+            temp += [array[j][i]]
+        d = {-1:0,0:0,1:0}
+        for k in temp:
+            d[k]+=1
+        max_list = []
+        for key in d:
+            max_list += [(d[key],key)]
+        final += [max(max_list)[1]]
+    
+    s=0
+    for i in range(len(final)):
+        if final[i]==Y2[i]:
+            s+=1
+            
+            
+    result_fix = (s*1.0)/len(final)
+    return final,tags_arr,result_fix,result_norm
+
 if __name__ == '__main__':
     args_parser.parse()
     run_func = args_parser.kwargs['func']
     run_func(args_parser.kwargs['league'])
-
-    
