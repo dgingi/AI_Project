@@ -17,7 +17,7 @@ class DBHandler():
     def __init__(self,league,remote=True):
         _host = '46.101.204.132' if remote else 'localhost'
         self.client = MongoClient(host=_host)
-        self.DB = {temp_league:self.client[league]["all"] for temp_league in LEAGUES}
+        self.DB = {temp_league:self.client[temp_league]["all"] for temp_league in LEAGUES}
         #self.col = self.DB["all"]
         self.league = league
     
@@ -56,7 +56,7 @@ class DBHandler():
         if year:
             self.DB[self.league].remove({'Year':int(year)})
         else:
-            self.client.drop_database(self.league)
+            self.DB[self.league].remove({'Year':{"$in":[int(temp_year) for temp_year in range(MIN_YEAR,MAX_YEAR)]}})
     
     @timed        
     def create_examples(self,year,lookback=15):
