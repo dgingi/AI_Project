@@ -1,26 +1,21 @@
 from old_utils import *
 from FCSHC import *
-from pickle import dump
-from sklearn import tree
+from pickle import dump,load
 from utils.argumet_parsers import TestArgsParser
-import os
 import datetime
+import os
+from exhandler.exhandler import EXHandler
+from data.dbhandler import DBHandler
+from utils.useful import PlotGraph
 
 now = datetime.datetime.now()
 LAST_YEAR = now.year - 1
 
 args_parser = TestArgsParser()
 
-def get_examples_and_tags(league):
-    E = EXHandler(league)
-    X , Y = E.get()
-    X2, Y2 = E.get(LAST_YEAR)
-    idx = -1*len(X2)
-    X1,Y1 = X[:idx], Y[:idx]
-    return X1,Y1,X2,Y2
-
 def find_best_params(league):
-    X1,Y1,X2,Y2 = get_examples_and_tags(league)
+    E = EXHandler(league)
+    X1,Y1,X2,Y2 = E.split_to_train_and_test(E.get())
     s = FirstChoiceLocalSearch(X1,Y1)
     final_state, final_state_score, output_array, random_array = s.search(X2, Y2)
     with open(os.path.join("tests/best_params_test/best_params_test_fs.pckl"),'w') as res:
@@ -34,7 +29,7 @@ def find_best_params(league):
         
 def find_best_partition(league):
     E = EXHandler(league)
-    X1,Y1,X2,Y2 = get_examples_and_tags(league)
+    X1,Y1,X2,Y2 = E.split_to_train_and_test(E.get())
     best_i = 0
     
     s = FirstChoiceLocalSearch(X1,Y1)

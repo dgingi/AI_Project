@@ -13,12 +13,12 @@ from utils.constants import MAX_YEAR, MIN_YEAR, LEAGUES, MONTHS
 from utils.decorators import timed
 
 
+
 class DBHandler():
     def __init__(self,league,remote=True):
         _host = '46.101.204.132' if remote else 'localhost'
         self.client = MongoClient(host=_host)
-        self.DB = {temp_league:self.client[temp_league]["all"] for temp_league in LEAGUES}
-        #self.col = self.DB["all"]
+        self.DB = {temp_league:self.client["leagues_db"][temp_league] for temp_league in LEAGUES}
         self.league = league
     
     def convert(self,data):
@@ -85,7 +85,10 @@ class DBHandler():
             def_rel = [1 for (val1,val2) in zip (combined_list_def_1,combined_list_def_2) if val1 > val2]
             
             return float(len(all_rel))/len(combined_list_all_1), float(len(att_rel))/len(combined_list_att_1), float(len(def_rel))/len(combined_list_def_1)
-                     
+        
+        from exhandler.exhandler import EXHandler
+        from features.features import Features
+                    
         all_teams_names = [g['_id'] for g in self.DB[self.league].aggregate([{"$match":{"Year":year}},{"$group":{"_id":"$GName"}}])]
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(self.DB[self.league],year)

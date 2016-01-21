@@ -17,7 +17,7 @@ from time import sleep
 from unidecode import unidecode
 from multiprocessing import Pool, cpu_count
 
-from old_utils import DBHandler
+from data.dbhandler import DBHandler
 from utils.argumet_parsers import CrawlerArgsParser
 from utils.decorators import retry
 
