@@ -18,9 +18,11 @@ class EXHandler():
     def get_features_names(self):
         from features.features import Features
         team = [g['_id'] for g in self.DBH.DB[self.league].aggregate([{"$match":{"Year":2012}},{"$group":{"_id":"$GName"}}])][0]
-        res_by_fix, res_by_non_avg = Features(self.DBH.DB[self.league],2012).create_features(team)
-        features_names = [k for k in sorted(res_by_fix[15])]
-        features_names += [k for k in sorted(res_by_non_avg[15])]
+        res_by_fix = Features(self.DBH.DB[self.league],2012).create_avg_up_to(team, 30, 15)
+        res_by_non_avg = Features(self.DBH.DB[self.league],2012).create_avg_of_non_avg_f(team, 30, 15)
+        features_names = [k for k in sorted(res_by_fix)]
+        features_names += [k for k in sorted(res_by_non_avg)]
+        features_names += ["relative_all_pos","relative_att_pos","relative_def_pos"]
         return features_names
     
     def split_to_train_and_test(self,ex,ta):

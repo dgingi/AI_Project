@@ -72,7 +72,7 @@ class Features():
              res_by_non_avg[3]["avg_Goals_Scored"] = 2.7
              
         """
-        max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name})])
+        max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name,"Year":self.curr_year})])
         res_by_all = {i:self.create_avg_up_to(t_name, i, lookback) for i in range(1,max_fix+1)}
         res_by_non_avg = {i:self.create_avg_of_non_avg_f(t_name, i, lookback) for i in range(1,max_fix+1)}
         return res_by_all,res_by_non_avg

@@ -89,23 +89,26 @@ class DBHandler():
         from exhandler.exhandler import EXHandler
         from features.features import Features
                     
-        all_teams_names = [g['_id'] for g in self.DB[self.league].aggregate([{"$match":{"Year":year}},{"$group":{"_id":"$GName"}}])]
+        all_teams_names = [g['_id'] for g in self.DB[self.league].aggregate([{"$match":{"Year":int(year)}},{"$group":{"_id":"$GName"}}])]
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(self.DB[self.league],year)
         features_names = EXHandler(self.league).get_features_names()
+        print "before",all_teams_names,all_teams_dict
         for team in all_teams_dict:
+            print "Creating Features for %s-%s"%(team,year)
             res_by_all, res_by_non_avg = features.create_features(team,lookback)
             update_all_teams_dict(res_by_all, all_teams_dict, team, True)
             update_all_teams_dict(res_by_non_avg, all_teams_dict, team, False)
         examples = []
         tags = []
         for team in all_teams_names:
+            print "here"
             for fix in sorted(all_teams_dict[team]):
                 if fix == 1 and all_teams_dict[team][fix]==[]:
                     continue
-                curr_game = self.DB[self.league].find_one({"GName":team,"Fix":fix,"Year":year})
+                curr_game = self.DB[self.league].find_one({"GName":team,"Fix":fix,"Year":int(year)})
                 if curr_game["HA"]=="home":
-                    vs_curr_game = self.DB[self.league].find_one({"GName":curr_game["VS"],"VS":team,"HA":"away","Year":year})
+                    vs_curr_game = self.DB[self.league].find_one({"GName":curr_game["VS"],"VS":team,"HA":"away","Year":int(year)})
                     vs_curr_fix = vs_curr_game["Fix"]
                     if all_teams_dict[curr_game["VS"]][vs_curr_fix] == []:
                         continue
