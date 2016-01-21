@@ -270,6 +270,8 @@ class Features():
             if need_history and vs == "":
                 his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, group_q, add_to_key)
             
+            if num_of_games == 0 and his_num_of_games == 0:
+                his_num_of_games = 1
             res["avg_Goals_by_fix"+add_to_key] /= (num_of_games+his_num_of_games)
             res["avg_received_Goals_by_fix"+add_to_key] /= (num_of_games+his_num_of_games)
             res["avg_Success_rate"+add_to_key] /= (num_of_games+his_num_of_games)
