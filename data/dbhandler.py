@@ -93,7 +93,6 @@ class DBHandler():
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(self.DB[self.league],year)
         features_names = EXHandler(self.league).get_features_names()
-        print "before",all_teams_names,all_teams_dict
         for team in all_teams_dict:
             print "Creating Features for %s-%s"%(team,year)
             res_by_all, res_by_non_avg = features.create_features(team,lookback)
