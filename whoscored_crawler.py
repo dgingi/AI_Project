@@ -125,7 +125,8 @@ class WhoScoredCrawler(object):
                 if current:
                     DBHandler(args_parser.LEAGUE_NAME).update_db(self.all_teams_dict,str(self.year))
         else: #we're done - we can save to the DB now
-            DBHandler(args_parser.LEAGUE_NAME).insert_to_db(self.all_teams_dict,str(self.year))
+            if not current:
+                DBHandler(args_parser.LEAGUE_NAME).insert_to_db(self.all_teams_dict,str(self.year))
         self.driver.quit()
         prog_bar.finish()
         
