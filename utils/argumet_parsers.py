@@ -88,11 +88,12 @@ class CrawlerArgsParser(object):
         self.parser = ArgumentParser(description='Crawl whoscored.com for the specified league and years.')
         self.parser.add_argument('league', metavar='League', type=str,
                            help='A league to parse. The leagues are: '+', '.join(self.leagues),
-                           choices=self.leagues)
+                           choices=self.leagues,nargs='?')
         self.parser.add_argument('year', metavar='Years',type=str, nargs='?',
                             help='A year to parse. Valid years are: '+', '.join([str(i) for i in range(2010,2015)]+[' or any range of them, separated by -.']),
                             default=str(max(range(2010,2015))),\
                             choices=self._default_ranges())
+        self.parser.add_argument('-u','--update',action='store_true',help='Crawel current year on all leagues for update')
      
      
     def _default_ranges(self):
@@ -100,18 +101,28 @@ class CrawlerArgsParser(object):
 
     def parse(self):
         args = self.parser.parse_args()
-        self.LEAGUE_NAME = vars(args)['league']
         self.kwargs={}
-        if '-' in vars(args)['year']:
-            self.multi = True
-            start , end = tuple(vars(args)['year'].split('-'))
-            for year in range(int(start),int(end)+1):
-                self.kwargs['league'] = self.leagues_links[self._hash_league_names_and_years(self.LEAGUE_NAME,year)]
-                self.kwargs['year'] = int(year)
-                self.range_kwargs.append(dict(self.kwargs))
+        if not args.update:
+            self.LEAGUE_NAME = vars(args)['league']
+            self.update = False
+            if '-' in vars(args)['year']:
+                self.multi = True
+                start , end = tuple(vars(args)['year'].split('-'))
+                for year in range(int(start),int(end)+1):
+                    self.kwargs['league'] = self.leagues_links[self._hash_league_names_and_years(self.LEAGUE_NAME,year)]
+                    self.kwargs['year'] = int(year)
+                    self.range_kwargs.append(dict(self.kwargs))
+            else:
+                self.kwargs['year'] = int(vars(args)['year'])
+                self.kwargs['league'] = self.leagues_links[self._hash_league_names_and_years(self.LEAGUE_NAME,self.kwargs['year'])]
         else:
-            self.kwargs['year'] = int(vars(args)['year'])
-            self.kwargs['league'] = self.leagues_links[self._hash_league_names_and_years(self.LEAGUE_NAME,self.kwargs['year'])]
+            self.update = True
+            self.update_kwargs = []
+            for league in self.leagues:
+                self.kwargs['league'] = self.leagues_links[self._hash_league_names_and_years(league,2015)]
+                self.kwargs['year'] = 2015
+                self.kwargs['r_league'] = league
+                self.update_kwargs.append(dict(self.kwargs))
         
     def _hash_league_names_and_years(self,league,year):
         abv_league = ''

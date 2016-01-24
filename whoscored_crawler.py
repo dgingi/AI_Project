@@ -70,7 +70,7 @@ class WhoScoredCrawler(object):
         Helper function to create backup folders and files for the data mined.
         '''
         logging.info('Creating backup folders')
-        self._bkup_folder = path.join('..','backup','-'.join([self.league,str(self.year)]))
+        self._bkup_folder = path.join('backup','-'.join([self.league,str(self.year)]))
         self._bkup_fixtures_links = path.join(self._bkup_folder,'fixtures.pckl')  
         if not path.exists(self._bkup_folder):
             os.mkdir(self._bkup_folder)
@@ -122,6 +122,8 @@ class WhoScoredCrawler(object):
             else:
                 logging.info('Finished month, saving to disk')
                 self.save_month(month)
+                if current:
+                    DBHandler(args_parser.LEAGUE_NAME).update_db(self.all_teams_dict,str(self.year))
         else: #we're done - we can save to the DB now
             DBHandler(args_parser.LEAGUE_NAME).insert_to_db(self.all_teams_dict,str(self.year))
         self.driver.quit()
@@ -271,9 +273,9 @@ class WhoScoredCrawler(object):
         '''
         Parse the fixtures page for the games links and save them.
         '''
-        from datetime.datetime import now
+        from datetime import datetime
         logging.info('Getting fixtures')
-        self.played_months = self.played_months[:self.played_months.index(now.strftime('%b'))] if current else self.played_months 
+        self.played_months = self.played_months[:self.played_months.index(datetime.now().strftime('%b'))-1:-1][::-1] if current else self.played_months 
         self.fixtures = {month:None for month in self.played_months}
         prev_month = self.driver.find_element_by_xpath('//*[@id="date-controller"]/a[1]')
         xpath_query = '//div[@id="tournament-fixture-wrapper"]/table/tbody/tr[@class!="rowgroupheader"]' if not current else '//div[@id="tournament-fixture-wrapper"]/table/tbody/tr[@class!="rowgroupheader"]//a[@class="result-1 rc"]/../..'
@@ -337,15 +339,21 @@ def start_crawl(kwargs):
     '''
     year = kwargs['year']
     league = kwargs['league']
-    WhoScoredCrawler(args_parser.LEAGUE_NAME,year,league).crawl()
-    return
+    if args_parser.update:
+        args_parser.LEAGUE_NAME = kwargs['r_league']
+    WhoScoredCrawler(args_parser.LEAGUE_NAME,year,league).crawl(args_parser.update)
+    
     
 if __name__ == '__main__':
     args_parser.parse()
-    if args_parser.multi:
-        p = Pool(cpu_count())
-        p.map(start_crawl, args_parser.range_kwargs)
-#         for kwargs in args_parser.range_kwargs:
-#             start_crawl(**kwargs)
+    if not args_parser.update:
+        if args_parser.multi:
+            p = Pool(cpu_count())
+            p.map(start_crawl, args_parser.range_kwargs)
+        else:
+            start_crawl(args_parser.kwargs)
     else:
-        start_crawl(args_parser.kwargs)
+#         for kwargs in args_parser.update_kwargs:
+#             start_crawl(kwargs)
+        p = Pool(cpu_count())
+        p.map(start_crawl, args_parser.update_kwargs)

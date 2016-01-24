@@ -52,6 +52,14 @@ class DBHandler():
         self.DB[self.league].remove({'Year':int(year)})
         self.DB[self.league].insert(self.explode(self.convert(data),year))
         
+    def update_db(self,data,year):
+        new_data = self.explode(data, year)
+        old_data = self.DB[self.league].find()
+        def _not_in_db(elem):
+            return elem not in old_data
+        filter(_not_in_db,new_data)
+        self.DB[self.league].insert[filter(_not_in_db,new_data)]
+        
     def drop(self,year=None):
         if year:
             self.DB[self.league].remove({'Year':int(year)})
