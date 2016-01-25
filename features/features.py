@@ -197,13 +197,12 @@ class Features():
                 else:
                     return int(result[1])
             
-    def get_history(self,res,t_name,fix,lookback,HA_list,group_q,add_to_key,pos_list=[],all_feat=False):
-        temp_f = Features(self.col,str(self.prev_year))
+    def get_history(self,res,t_name,diff,year,HA_list,group_q,add_to_key,pos_list=[],all_feat=False):
+        temp_f = Features(self.col,str(year))
         try:
             max_fix = max([g["Fix"] for g in temp_f.col.find({"GName":t_name,"Year":temp_f.curr_year})])
         except Exception,e:
             return 0
-        diff = (fix-lookback)*(-1) + 1
         pipe = [{"$match":{"GName":t_name,"Year":temp_f.curr_year,"Touches":{"$gt":0},"Fix":{"$lte":max_fix,"$gt":max_fix-diff},"HA":{"$in":HA_list}}}]
         if pos_list:
             pipe[0]["$match"]["Position"] = {"$in":pos_list}
@@ -223,7 +222,7 @@ class Features():
                         res["avg_received_Goals_by_fix"+add_to_key] += self.select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
                         res["avg_Success_rate"+add_to_key] += 1 if cursor[key]["Tag"]==1 else 0
                         res["avg_Possession_rate"+add_to_key] += cursor[key]["Possession"]
-        return num_of_games
+        return num_of_games,max_fix-diff
         
     def create_avg_of_non_avg_f(self,t_name,fix,lookback):
         
@@ -272,8 +271,17 @@ class Features():
                             res["avg_Possession_rate"+add_to_key] += cursor[key]["Possession"]
                         
             if need_history and vs == "":
-                his_num_of_games = self.get_history(res, t_name, fix, lookback, HA_list, group_q, add_to_key)
-            
+                diff = (fix-lookback)*(-1) + 1
+                curr_year = self.curr_year
+                his_num_of_games,more_his = self.get_history(res, t_name, diff, curr_year, HA_list, group_q, add_to_key)
+                while more_his < 0:
+                    curr_year -= 1
+                    if curr_year < MIN_YEAR:
+                        break
+                    diff = -1 * more_his
+                    temp_his_num_of_games,more_his = self.get_history(res, t_name, diff, curr_year, HA_list, group_q, add_to_key)
+                    his_num_of_games += temp_his_num_of_games
+                    
             if num_of_games == 0 and his_num_of_games == 0:
                 his_num_of_games = 1
             res["avg_Goals_by_fix"+add_to_key] /= (num_of_games+his_num_of_games)
@@ -350,7 +358,18 @@ class Features():
                         temp_res[key] += cursor[key]
             
             if need_history:
-                his_num_of_games = self.get_history(temp_res, t_name, fix, lookback, HA_list, group_q, "add_to_key", pos_list, True)
+                diff = (fix-lookback)*(-1) + 1
+                curr_year = self.curr_year
+                his_num_of_games,more_his = self.get_history(temp_res, t_name, diff, curr_year, HA_list, group_q, "add_to_key", pos_list, True)
+                while more_his < 0:
+                    curr_year -= 1
+                    if curr_year < MIN_YEAR:
+                        break
+                    diff = -1 * more_his
+                    temp_his_num_of_games,more_his = self.get_history(temp_res, t_name, diff, curr_year, HA_list, group_q, "add_to_key", pos_list, True)
+                    his_num_of_games += temp_his_num_of_games
+                    
+                
             
             if num_of_games == 0 and his_num_of_games == 0:
                 his_num_of_games = 1
