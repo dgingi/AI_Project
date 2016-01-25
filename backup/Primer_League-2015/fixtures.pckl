@@ -1,0 +1,3001 @@
+(dp0
+S'Aug'
+p1
+(lp2
+(dp3
+S'home'
+p4
+S'Manchester United'
+p5
+sS'away'
+p6
+S'Tottenham'
+p7
+sS'link'
+p8
+S'https://www.whoscored.com/Matches/958431/Live'
+p9
+sS'result'
+p10
+S'1 : 0'
+p11
+sa(dp12
+g4
+S'Bournemouth'
+p13
+sg6
+S'Aston Villa'
+p14
+sg8
+S'https://www.whoscored.com/Matches/958427/Live'
+p15
+sg10
+S'0 : 1'
+p16
+sa(dp17
+g4
+S'Everton'
+p18
+sg6
+S'Watford'
+p19
+sg8
+S'https://www.whoscored.com/Matches/958429/Live'
+p20
+sg10
+S'2 : 2'
+p21
+sa(dp22
+g4
+S'Leicester'
+p23
+sg6
+S'Sunderland'
+p24
+sg8
+S'https://www.whoscored.com/Matches/958430/Live'
+p25
+sg10
+S'4 : 2'
+p26
+sa(dp27
+g4
+S'Norwich'
+p28
+sg6
+S'Crystal Palace'
+p29
+sg8
+S'https://www.whoscored.com/Matches/958433/Live'
+p30
+sg10
+S'1 : 3'
+p31
+sa(dp32
+g4
+S'Chelsea'
+p33
+sg6
+S'Swansea'
+p34
+sg8
+S'https://www.whoscored.com/Matches/958428/Live'
+p35
+sg10
+S'2 : 2'
+p36
+sa(dp37
+g4
+S'Arsenal'
+p38
+sg6
+S'West Ham'
+p39
+sg8
+S'https://www.whoscored.com/Matches/958426/Live'
+p40
+sg10
+S'0 : 2'
+p41
+sa(dp42
+g4
+S'Newcastle United'
+p43
+sg6
+S'Southampton'
+p44
+sg8
+S'https://www.whoscored.com/Matches/958432/Live'
+p45
+sg10
+S'2 : 2'
+p46
+sa(dp47
+g4
+S'Stoke'
+p48
+sg6
+S'Liverpool'
+p49
+sg8
+S'https://www.whoscored.com/Matches/958434/Live'
+p50
+sg10
+S'0 : 1'
+p51
+sa(dp52
+g4
+S'West Bromwich Albion'
+p53
+sg6
+S'Manchester City'
+p54
+sg8
+S'https://www.whoscored.com/Matches/958435/Live'
+p55
+sg10
+S'0 : 3'
+p56
+sa(dp57
+g4
+S'Aston Villa'
+p58
+sg6
+S'Manchester United'
+p59
+sg8
+S'https://www.whoscored.com/Matches/958472/Live'
+p60
+sg10
+S'0 : 1'
+p61
+sa(dp62
+g4
+S'Southampton'
+p63
+sg6
+S'Everton'
+p64
+sg8
+S'https://www.whoscored.com/Matches/958476/Live'
+p65
+sg10
+S'0 : 3'
+p66
+sa(dp67
+g4
+S'Sunderland'
+p68
+sg6
+S'Norwich'
+p69
+sg8
+S'https://www.whoscored.com/Matches/958477/Live'
+p70
+sg10
+S'1 : 3'
+p71
+sa(dp72
+g4
+S'Swansea'
+p73
+sg6
+S'Newcastle United'
+p74
+sg8
+S'https://www.whoscored.com/Matches/958478/Live'
+p75
+sg10
+S'2 : 0'
+p76
+sa(dp77
+g4
+S'Tottenham'
+p78
+sg6
+S'Stoke'
+p79
+sg8
+S'https://www.whoscored.com/Matches/958479/Live'
+p80
+sg10
+S'2 : 2'
+p81
+sa(dp82
+g4
+S'Watford'
+p83
+sg6
+S'West Bromwich Albion'
+p84
+sg8
+S'https://www.whoscored.com/Matches/958480/Live'
+p85
+sg10
+S'0 : 0'
+p86
+sa(dp87
+g4
+S'West Ham'
+p88
+sg6
+S'Leicester'
+p89
+sg8
+S'https://www.whoscored.com/Matches/958481/Live'
+p90
+sg10
+S'1 : 2'
+p91
+sa(dp92
+g4
+S'Crystal Palace'
+p93
+sg6
+S'Arsenal'
+p94
+sg8
+S'https://www.whoscored.com/Matches/958473/Live'
+p95
+sg10
+S'1 : 2'
+p96
+sa(dp97
+g4
+S'Manchester City'
+p98
+sg6
+S'Chelsea'
+p99
+sg8
+S'https://www.whoscored.com/Matches/958475/Live'
+p100
+sg10
+S'3 : 0'
+p101
+sa(dp102
+g4
+S'Liverpool'
+p103
+sg6
+S'Bournemouth'
+p104
+sg8
+S'https://www.whoscored.com/Matches/958474/Live'
+p105
+sg10
+S'1 : 0'
+p106
+sa(dp107
+g4
+S'Manchester United'
+p108
+sg6
+S'Newcastle United'
+p109
+sg8
+S'https://www.whoscored.com/Matches/959737/Live'
+p110
+sg10
+S'0 : 0'
+p111
+sa(dp112
+g4
+S'Crystal Palace'
+p113
+sg6
+S'Aston Villa'
+p114
+sg8
+S'https://www.whoscored.com/Matches/959725/Live'
+p115
+sg10
+S'2 : 1'
+p116
+sa(dp117
+g4
+S'Leicester'
+p118
+sg6
+S'Tottenham'
+p119
+sg8
+S'https://www.whoscored.com/Matches/959733/Live'
+p120
+sg10
+S'1 : 1'
+p121
+sa(dp122
+g4
+S'Norwich'
+p123
+sg6
+S'Stoke'
+p124
+sg8
+S'https://www.whoscored.com/Matches/959741/Live'
+p125
+sg10
+S'1 : 1'
+p126
+sa(dp127
+g4
+S'Sunderland'
+p128
+sg6
+S'Swansea'
+p129
+sg8
+S'https://www.whoscored.com/Matches/959745/Live'
+p130
+sg10
+S'1 : 1'
+p131
+sa(dp132
+g4
+S'West Ham'
+p133
+sg6
+S'Bournemouth'
+p134
+sg8
+S'https://www.whoscored.com/Matches/959754/Live'
+p135
+sg10
+S'3 : 4'
+p136
+sa(dp137
+g4
+S'West Bromwich Albion'
+p138
+sg6
+S'Chelsea'
+p139
+sg8
+S'https://www.whoscored.com/Matches/959751/Live'
+p140
+sg10
+S'2 : 3'
+p141
+sa(dp142
+g4
+S'Everton'
+p143
+sg6
+S'Manchester City'
+p144
+sg8
+S'https://www.whoscored.com/Matches/959729/Live'
+p145
+sg10
+S'0 : 2'
+p146
+sa(dp147
+g4
+S'Watford'
+p148
+sg6
+S'Southampton'
+p149
+sg8
+S'https://www.whoscored.com/Matches/959748/Live'
+p150
+sg10
+S'0 : 0'
+p151
+sa(dp152
+g4
+S'Arsenal'
+p153
+sg6
+S'Liverpool'
+p154
+sg8
+S'https://www.whoscored.com/Matches/959721/Live'
+p155
+sg10
+S'0 : 0'
+p156
+sa(dp157
+g4
+S'Newcastle United'
+p158
+sg6
+S'Arsenal'
+p159
+sg8
+S'https://www.whoscored.com/Matches/959768/Live'
+p160
+sg10
+S'0 : 1'
+p161
+sa(dp162
+g4
+S'Aston Villa'
+p163
+sg6
+S'Sunderland'
+p164
+sg8
+S'https://www.whoscored.com/Matches/959757/Live'
+p165
+sg10
+S'2 : 2'
+p166
+sa(dp167
+g4
+S'Bournemouth'
+p168
+sg6
+S'Leicester'
+p169
+sg8
+S'https://www.whoscored.com/Matches/959760/Live'
+p170
+sg10
+S'1 : 1'
+p171
+sa(dp172
+g4
+S'Chelsea'
+p173
+sg6
+S'Crystal Palace'
+p174
+sg8
+S'https://www.whoscored.com/Matches/959762/Live'
+p175
+sg10
+S'1 : 2'
+p176
+sa(dp177
+g4
+S'Liverpool'
+p178
+sg6
+S'West Ham'
+p179
+sg8
+S'https://www.whoscored.com/Matches/959764/Live'
+p180
+sg10
+S'0 : 3'
+p181
+sa(dp182
+g4
+S'Manchester City'
+p183
+sg6
+S'Watford'
+p184
+sg8
+S'https://www.whoscored.com/Matches/959766/Live'
+p185
+sg10
+S'2 : 0'
+p186
+sa(dp187
+g4
+S'Stoke'
+p188
+sg6
+S'West Bromwich Albion'
+p189
+sg8
+S'https://www.whoscored.com/Matches/959771/Live'
+p190
+sg10
+S'0 : 1'
+p191
+sa(dp192
+g4
+S'Tottenham'
+p193
+sg6
+S'Everton'
+p194
+sg8
+S'https://www.whoscored.com/Matches/959773/Live'
+p195
+sg10
+S'0 : 0'
+p196
+sa(dp197
+g4
+S'Southampton'
+p198
+sg6
+S'Norwich'
+p199
+sg8
+S'https://www.whoscored.com/Matches/959770/Live'
+p200
+sg10
+S'3 : 0'
+p201
+sa(dp202
+g4
+S'Swansea'
+p203
+sg6
+S'Manchester United'
+p204
+sg8
+S'https://www.whoscored.com/Matches/959772/Live'
+p205
+sg10
+S'2 : 1'
+p206
+sasS'Sep'
+p207
+(lp208
+(dp209
+g4
+S'Everton'
+p210
+sg6
+S'Chelsea'
+p211
+sg8
+S'https://www.whoscored.com/Matches/959776/Live'
+p212
+sg10
+S'3 : 1'
+p213
+sa(dp214
+g4
+S'Arsenal'
+p215
+sg6
+S'Stoke'
+p216
+sg8
+S'https://www.whoscored.com/Matches/959774/Live'
+p217
+sg10
+S'2 : 0'
+p218
+sa(dp219
+g4
+S'Crystal Palace'
+p220
+sg6
+S'Manchester City'
+p221
+sg8
+S'https://www.whoscored.com/Matches/959775/Live'
+p222
+sg10
+S'0 : 1'
+p223
+sa(dp224
+g4
+S'Norwich'
+p225
+sg6
+S'Bournemouth'
+p226
+sg8
+S'https://www.whoscored.com/Matches/959779/Live'
+p227
+sg10
+S'3 : 1'
+p228
+sa(dp229
+g4
+S'Watford'
+p230
+sg6
+S'Swansea'
+p231
+sg8
+S'https://www.whoscored.com/Matches/959781/Live'
+p232
+sg10
+S'1 : 0'
+p233
+sa(dp234
+g4
+S'West Bromwich Albion'
+p235
+sg6
+S'Southampton'
+p236
+sg8
+S'https://www.whoscored.com/Matches/959782/Live'
+p237
+sg10
+S'0 : 0'
+p238
+sa(dp239
+g4
+S'Manchester United'
+p240
+sg6
+S'Liverpool'
+p241
+sg8
+S'https://www.whoscored.com/Matches/959778/Live'
+p242
+sg10
+S'3 : 1'
+p243
+sa(dp244
+g4
+S'Sunderland'
+p245
+sg6
+S'Tottenham'
+p246
+sg8
+S'https://www.whoscored.com/Matches/959780/Live'
+p247
+sg10
+S'0 : 1'
+p248
+sa(dp249
+g4
+S'Leicester'
+p250
+sg6
+S'Aston Villa'
+p251
+sg8
+S'https://www.whoscored.com/Matches/959777/Live'
+p252
+sg10
+S'3 : 2'
+p253
+sa(dp254
+g4
+S'West Ham'
+p255
+sg6
+S'Newcastle United'
+p256
+sg8
+S'https://www.whoscored.com/Matches/959783/Live'
+p257
+sg10
+S'2 : 0'
+p258
+sa(dp259
+g4
+S'Chelsea'
+p260
+sg6
+S'Arsenal'
+p261
+sg8
+S'https://www.whoscored.com/Matches/959786/Live'
+p262
+sg10
+S'2 : 0'
+p263
+sa(dp264
+g4
+S'Aston Villa'
+p265
+sg6
+S'West Bromwich Albion'
+p266
+sg8
+S'https://www.whoscored.com/Matches/959784/Live'
+p267
+sg10
+S'0 : 1'
+p268
+sa(dp269
+g4
+S'Bournemouth'
+p270
+sg6
+S'Sunderland'
+p271
+sg8
+S'https://www.whoscored.com/Matches/959785/Live'
+p272
+sg10
+S'2 : 0'
+p273
+sa(dp274
+g4
+S'Newcastle United'
+p275
+sg6
+S'Watford'
+p276
+sg8
+S'https://www.whoscored.com/Matches/959789/Live'
+p277
+sg10
+S'1 : 2'
+p278
+sa(dp279
+g4
+S'Stoke'
+p280
+sg6
+S'Leicester'
+p281
+sg8
+S'https://www.whoscored.com/Matches/959791/Live'
+p282
+sg10
+S'2 : 2'
+p283
+sa(dp284
+g4
+S'Swansea'
+p285
+sg6
+S'Everton'
+p286
+sg8
+S'https://www.whoscored.com/Matches/959792/Live'
+p287
+sg10
+S'0 : 0'
+p288
+sa(dp289
+g4
+S'Manchester City'
+p290
+sg6
+S'West Ham'
+p291
+sg8
+S'https://www.whoscored.com/Matches/959788/Live'
+p292
+sg10
+S'1 : 2'
+p293
+sa(dp294
+g4
+S'Tottenham'
+p295
+sg6
+S'Crystal Palace'
+p296
+sg8
+S'https://www.whoscored.com/Matches/959793/Live'
+p297
+sg10
+S'1 : 0'
+p298
+sa(dp299
+g4
+S'Liverpool'
+p300
+sg6
+S'Norwich'
+p301
+sg8
+S'https://www.whoscored.com/Matches/959787/Live'
+p302
+sg10
+S'1 : 1'
+p303
+sa(dp304
+g4
+S'Southampton'
+p305
+sg6
+S'Manchester United'
+p306
+sg8
+S'https://www.whoscored.com/Matches/959790/Live'
+p307
+sg10
+S'2 : 3'
+p308
+sa(dp309
+g4
+S'Tottenham'
+p310
+sg6
+S'Manchester City'
+p311
+sg8
+S'https://www.whoscored.com/Matches/959800/Live'
+p312
+sg10
+S'4 : 1'
+p313
+sa(dp314
+g4
+S'Leicester'
+p315
+sg6
+S'Arsenal'
+p316
+sg8
+S'https://www.whoscored.com/Matches/959794/Live'
+p317
+sg10
+S'2 : 5'
+p318
+sa(dp319
+g4
+S'Liverpool'
+p320
+sg6
+S'Aston Villa'
+p321
+sg8
+S'https://www.whoscored.com/Matches/959795/Live'
+p322
+sg10
+S'3 : 2'
+p323
+sa(dp324
+g4
+S'Manchester United'
+p325
+sg6
+S'Sunderland'
+p326
+sg8
+S'https://www.whoscored.com/Matches/959796/Live'
+p327
+sg10
+S'3 : 0'
+p328
+sa(dp329
+g4
+S'Southampton'
+p330
+sg6
+S'Swansea'
+p331
+sg8
+S'https://www.whoscored.com/Matches/959798/Live'
+p332
+sg10
+S'3 : 1'
+p333
+sa(dp334
+g4
+S'Stoke'
+p335
+sg6
+S'Bournemouth'
+p336
+sg8
+S'https://www.whoscored.com/Matches/959799/Live'
+p337
+sg10
+S'2 : 1'
+p338
+sa(dp339
+g4
+S'West Ham'
+p340
+sg6
+S'Norwich'
+p341
+sg8
+S'https://www.whoscored.com/Matches/959803/Live'
+p342
+sg10
+S'2 : 2'
+p343
+sa(dp344
+g4
+S'Newcastle United'
+p345
+sg6
+S'Chelsea'
+p346
+sg8
+S'https://www.whoscored.com/Matches/959797/Live'
+p347
+sg10
+S'2 : 2'
+p348
+sa(dp349
+g4
+S'Watford'
+p350
+sg6
+S'Crystal Palace'
+p351
+sg8
+S'https://www.whoscored.com/Matches/959801/Live'
+p352
+sg10
+S'0 : 1'
+p353
+sa(dp354
+g4
+S'West Bromwich Albion'
+p355
+sg6
+S'Everton'
+p356
+sg8
+S'https://www.whoscored.com/Matches/959802/Live'
+p357
+sg10
+S'2 : 3'
+p358
+sasS'Jan'
+p359
+(lp360
+(dp361
+g4
+S'West Ham'
+p362
+sg6
+S'Liverpool'
+p363
+sg8
+S'https://www.whoscored.com/Matches/959584/Live'
+p364
+sg10
+S'2 : 0'
+p365
+sa(dp366
+g4
+S'West Bromwich Albion'
+p367
+sg6
+S'Stoke'
+p368
+sg8
+S'https://www.whoscored.com/Matches/959574/Live'
+p369
+sg10
+S'2 : 1'
+p370
+sa(dp371
+g4
+S'Arsenal'
+p372
+sg6
+S'Newcastle United'
+p373
+sg8
+S'https://www.whoscored.com/Matches/959662/Live'
+p374
+sg10
+S'1 : 0'
+p375
+sa(dp376
+g4
+S'Leicester'
+p377
+sg6
+S'Bournemouth'
+p378
+sg8
+S'https://www.whoscored.com/Matches/959689/Live'
+p379
+sg10
+S'0 : 0'
+p380
+sa(dp381
+g4
+S'Manchester United'
+p382
+sg6
+S'Swansea'
+p383
+sg8
+S'https://www.whoscored.com/Matches/959696/Live'
+p384
+sg10
+S'2 : 1'
+p385
+sa(dp386
+g4
+S'Norwich'
+p387
+sg6
+S'Southampton'
+p388
+sg8
+S'https://www.whoscored.com/Matches/959703/Live'
+p389
+sg10
+S'1 : 0'
+p390
+sa(dp391
+g4
+S'Sunderland'
+p392
+sg6
+S'Aston Villa'
+p393
+sg8
+S'https://www.whoscored.com/Matches/959709/Live'
+p394
+sg10
+S'3 : 1'
+p395
+sa(dp396
+g4
+S'Watford'
+p397
+sg6
+S'Manchester City'
+p398
+sg8
+S'https://www.whoscored.com/Matches/959564/Live'
+p399
+sg10
+S'1 : 2'
+p400
+sa(dp401
+g4
+S'Crystal Palace'
+p402
+sg6
+S'Chelsea'
+p403
+sg8
+S'https://www.whoscored.com/Matches/959672/Live'
+p404
+sg10
+S'0 : 3'
+p405
+sa(dp406
+g4
+S'Everton'
+p407
+sg6
+S'Tottenham'
+p408
+sg8
+S'https://www.whoscored.com/Matches/959681/Live'
+p409
+sg10
+S'1 : 1'
+p410
+sa(dp411
+g4
+S'Aston Villa'
+p412
+sg6
+S'Crystal Palace'
+p413
+sg8
+S'https://www.whoscored.com/Matches/959594/Live'
+p414
+sg10
+S'1 : 0'
+p415
+sa(dp416
+g4
+S'Bournemouth'
+p417
+sg6
+S'West Ham'
+p418
+sg8
+S'https://www.whoscored.com/Matches/959604/Live'
+p419
+sg10
+S'1 : 3'
+p420
+sa(dp421
+g4
+S'Newcastle United'
+p422
+sg6
+S'Manchester United'
+p423
+sg8
+S'https://www.whoscored.com/Matches/959654/Live'
+p424
+sg10
+S'3 : 3'
+p425
+sa(dp426
+g4
+S'Swansea'
+p427
+sg6
+S'Sunderland'
+p428
+sg8
+S'https://www.whoscored.com/Matches/959614/Live'
+p429
+sg10
+S'2 : 4'
+p430
+sa(dp431
+g4
+S'Chelsea'
+p432
+sg6
+S'West Bromwich Albion'
+p433
+sg8
+S'https://www.whoscored.com/Matches/959634/Live'
+p434
+sg10
+S'2 : 2'
+p435
+sa(dp436
+g4
+S'Manchester City'
+p437
+sg6
+S'Everton'
+p438
+sg8
+S'https://www.whoscored.com/Matches/959644/Live'
+p439
+sg10
+S'0 : 0'
+p440
+sa(dp441
+g4
+S'Southampton'
+p442
+sg6
+S'Watford'
+p443
+sg8
+S'https://www.whoscored.com/Matches/959664/Live'
+p444
+sg10
+S'2 : 0'
+p445
+sa(dp446
+g4
+S'Stoke'
+p447
+sg6
+S'Norwich'
+p448
+sg8
+S'https://www.whoscored.com/Matches/959673/Live'
+p449
+sg10
+S'3 : 1'
+p450
+sa(dp451
+g4
+S'Liverpool'
+p452
+sg6
+S'Arsenal'
+p453
+sg8
+S'https://www.whoscored.com/Matches/959624/Live'
+p454
+sg10
+S'3 : 3'
+p455
+sa(dp456
+g4
+S'Tottenham'
+p457
+sg6
+S'Leicester'
+p458
+sg8
+S'https://www.whoscored.com/Matches/959682/Live'
+p459
+sg10
+S'0 : 1'
+p460
+sa(dp461
+g4
+S'Tottenham'
+p462
+sg6
+S'Sunderland'
+p463
+sg8
+S'https://www.whoscored.com/Matches/959603/Live'
+p464
+sg10
+S'4 : 1'
+p465
+sa(dp466
+g4
+S'Manchester City'
+p467
+sg6
+S'Crystal Palace'
+p468
+sg8
+S'https://www.whoscored.com/Matches/959559/Live'
+p469
+sg10
+S'4 : 0'
+p470
+sa(dp471
+g4
+S'Newcastle United'
+p472
+sg6
+S'West Ham'
+p473
+sg8
+S'https://www.whoscored.com/Matches/959563/Live'
+p474
+sg10
+S'2 : 1'
+p475
+sa(dp476
+g4
+S'Southampton'
+p477
+sg6
+S'West Bromwich Albion'
+p478
+sg8
+S'https://www.whoscored.com/Matches/959573/Live'
+p479
+sg10
+S'3 : 0'
+p480
+sa(dp481
+g4
+S'Bournemouth'
+p482
+sg6
+S'Norwich'
+p483
+sg8
+S'https://www.whoscored.com/Matches/959697/Live'
+p484
+sg10
+S'3 : 0'
+p485
+sa(dp486
+g4
+S'Chelsea'
+p487
+sg6
+S'Everton'
+p488
+sg8
+S'https://www.whoscored.com/Matches/959704/Live'
+p489
+sg10
+S'3 : 3'
+p490
+sa(dp491
+g4
+S'Aston Villa'
+p492
+sg6
+S'Leicester'
+p493
+sg8
+S'https://www.whoscored.com/Matches/959690/Live'
+p494
+sg10
+S'1 : 1'
+p495
+sa(dp496
+g4
+S'Liverpool'
+p497
+sg6
+S'Manchester United'
+p498
+sg8
+S'https://www.whoscored.com/Matches/959710/Live'
+p499
+sg10
+S'0 : 1'
+p500
+sa(dp501
+g4
+S'Stoke'
+p502
+sg6
+S'Arsenal'
+p503
+sg8
+S'https://www.whoscored.com/Matches/959583/Live'
+p504
+sg10
+S'0 : 0'
+p505
+sa(dp506
+g4
+S'Swansea'
+p507
+sg6
+S'Watford'
+p508
+sg8
+S'https://www.whoscored.com/Matches/959593/Live'
+p509
+sg10
+S'1 : 0'
+p510
+sa(dp511
+g4
+S'Norwich'
+p512
+sg6
+S'Liverpool'
+p513
+sg8
+S'https://www.whoscored.com/Matches/959663/Live'
+p514
+sg10
+S'4 : 5'
+p515
+sa(dp516
+g4
+S'Sunderland'
+p517
+sg6
+S'Bournemouth'
+p518
+sg8
+S'https://www.whoscored.com/Matches/959561/Live'
+p519
+sg10
+S'1 : 1'
+p520
+sa(dp521
+g4
+S'Watford'
+p522
+sg6
+S'Newcastle United'
+p523
+sg8
+S'https://www.whoscored.com/Matches/959567/Live'
+p524
+sg10
+S'2 : 1'
+p525
+sa(dp526
+g4
+S'West Bromwich Albion'
+p527
+sg6
+S'Aston Villa'
+p528
+sg8
+S'https://www.whoscored.com/Matches/959577/Live'
+p529
+sg10
+S'0 : 0'
+p530
+sa(dp531
+g4
+S'Crystal Palace'
+p532
+sg6
+S'Tottenham'
+p533
+sg8
+S'https://www.whoscored.com/Matches/959623/Live'
+p534
+sg10
+S'1 : 3'
+p535
+sa(dp536
+g4
+S'Leicester'
+p537
+sg6
+S'Stoke'
+p538
+sg8
+S'https://www.whoscored.com/Matches/959643/Live'
+p539
+sg10
+S'3 : 0'
+p540
+sa(dp541
+g4
+S'Manchester United'
+p542
+sg6
+S'Southampton'
+p543
+sg8
+S'https://www.whoscored.com/Matches/959653/Live'
+p544
+sg10
+S'0 : 1'
+p545
+sa(dp546
+g4
+S'West Ham'
+p547
+sg6
+S'Manchester City'
+p548
+sg8
+S'https://www.whoscored.com/Matches/959587/Live'
+p549
+sg10
+S'2 : 2'
+p550
+sa(dp551
+g4
+S'Everton'
+p552
+sg6
+S'Swansea'
+p553
+sg8
+S'https://www.whoscored.com/Matches/959633/Live'
+p554
+sg10
+S'1 : 2'
+p555
+sasS'Nov'
+p556
+(lp557
+(dp558
+g4
+S'Everton'
+p559
+sg6
+S'Sunderland'
+p560
+sg8
+S'https://www.whoscored.com/Matches/959836/Live'
+p561
+sg10
+S'6 : 2'
+p562
+sa(dp563
+g4
+S'Southampton'
+p564
+sg6
+S'Bournemouth'
+p565
+sg8
+S'https://www.whoscored.com/Matches/959579/Live'
+p566
+sg10
+S'2 : 0'
+p567
+sa(dp568
+g4
+S'Tottenham'
+p569
+sg6
+S'Aston Villa'
+p570
+sg8
+S'https://www.whoscored.com/Matches/959599/Live'
+p571
+sg10
+S'3 : 1'
+p572
+sa(dp573
+g4
+S'Bournemouth'
+p574
+sg6
+S'Newcastle United'
+p575
+sg8
+S'https://www.whoscored.com/Matches/959649/Live'
+p576
+sg10
+S'0 : 1'
+p577
+sa(dp578
+g4
+S'Sunderland'
+p579
+sg6
+S'Southampton'
+p580
+sg8
+S'https://www.whoscored.com/Matches/959580/Live'
+p581
+sg10
+S'0 : 1'
+p582
+sa(dp583
+g4
+S'West Ham'
+p584
+sg6
+S'Everton'
+p585
+sg8
+S'https://www.whoscored.com/Matches/959590/Live'
+p586
+sg10
+S'1 : 1'
+p587
+sa(dp588
+g4
+S'Leicester'
+p589
+sg6
+S'Watford'
+p590
+sg8
+S'https://www.whoscored.com/Matches/959659/Live'
+p591
+sg10
+S'2 : 1'
+p592
+sa(dp593
+g4
+S'Manchester United'
+p594
+sg6
+S'West Bromwich Albion'
+p595
+sg8
+S'https://www.whoscored.com/Matches/959678/Live'
+p596
+sg10
+S'2 : 0'
+p597
+sa(dp598
+g4
+S'Norwich'
+p599
+sg6
+S'Swansea'
+p600
+sg8
+S'https://www.whoscored.com/Matches/959686/Live'
+p601
+sg10
+S'1 : 0'
+p602
+sa(dp603
+g4
+S'Stoke'
+p604
+sg6
+S'Chelsea'
+p605
+sg8
+S'https://www.whoscored.com/Matches/959570/Live'
+p606
+sg10
+S'1 : 0'
+p607
+sa(dp608
+g4
+S'Aston Villa'
+p609
+sg6
+S'Manchester City'
+p610
+sg8
+S'https://www.whoscored.com/Matches/959639/Live'
+p611
+sg10
+S'0 : 0'
+p612
+sa(dp613
+g4
+S'Arsenal'
+p614
+sg6
+S'Tottenham'
+p615
+sg8
+S'https://www.whoscored.com/Matches/959629/Live'
+p616
+sg10
+S'1 : 1'
+p617
+sa(dp618
+g4
+S'Liverpool'
+p619
+sg6
+S'Crystal Palace'
+p620
+sg8
+S'https://www.whoscored.com/Matches/959669/Live'
+p621
+sg10
+S'1 : 2'
+p622
+sa(dp623
+g4
+S'Watford'
+p624
+sg6
+S'Manchester United'
+p625
+sg8
+S'https://www.whoscored.com/Matches/959679/Live'
+p626
+sg10
+S'1 : 2'
+p627
+sa(dp628
+g4
+S'Chelsea'
+p629
+sg6
+S'Norwich'
+p630
+sg8
+S'https://www.whoscored.com/Matches/959600/Live'
+p631
+sg10
+S'1 : 0'
+p632
+sa(dp633
+g4
+S'Everton'
+p634
+sg6
+S'Aston Villa'
+p635
+sg8
+S'https://www.whoscored.com/Matches/959620/Live'
+p636
+sg10
+S'4 : 0'
+p637
+sa(dp638
+g4
+S'Newcastle United'
+p639
+sg6
+S'Leicester'
+p640
+sg8
+S'https://www.whoscored.com/Matches/959640/Live'
+p641
+sg10
+S'0 : 3'
+p642
+sa(dp643
+g4
+S'Southampton'
+p644
+sg6
+S'Stoke'
+p645
+sg8
+S'https://www.whoscored.com/Matches/959650/Live'
+p646
+sg10
+S'0 : 1'
+p647
+sa(dp648
+g4
+S'Swansea'
+p649
+sg6
+S'Bournemouth'
+p650
+sg8
+S'https://www.whoscored.com/Matches/959660/Live'
+p651
+sg10
+S'2 : 2'
+p652
+sa(dp653
+g4
+S'West Bromwich Albion'
+p654
+sg6
+S'Arsenal'
+p655
+sg8
+S'https://www.whoscored.com/Matches/959687/Live'
+p656
+sg10
+S'2 : 1'
+p657
+sa(dp658
+g4
+S'Manchester City'
+p659
+sg6
+S'Liverpool'
+p660
+sg8
+S'https://www.whoscored.com/Matches/959630/Live'
+p661
+sg10
+S'1 : 4'
+p662
+sa(dp663
+g4
+S'Tottenham'
+p664
+sg6
+S'West Ham'
+p665
+sg8
+S'https://www.whoscored.com/Matches/959670/Live'
+p666
+sg10
+S'4 : 1'
+p667
+sa(dp668
+g4
+S'Crystal Palace'
+p669
+sg6
+S'Sunderland'
+p670
+sg8
+S'https://www.whoscored.com/Matches/959610/Live'
+p671
+sg10
+S'0 : 1'
+p672
+sa(dp673
+g4
+S'Sunderland'
+p674
+sg6
+S'Stoke'
+p675
+sg8
+S'https://www.whoscored.com/Matches/959578/Live'
+p676
+sg10
+S'2 : 0'
+p677
+sa(dp678
+g4
+S'Aston Villa'
+p679
+sg6
+S'Watford'
+p680
+sg8
+S'https://www.whoscored.com/Matches/959694/Live'
+p681
+sg10
+S'2 : 3'
+p682
+sa(dp683
+g4
+S'Bournemouth'
+p684
+sg6
+S'Everton'
+p685
+sg8
+S'https://www.whoscored.com/Matches/959701/Live'
+p686
+sg10
+S'3 : 3'
+p687
+sa(dp688
+g4
+S'Crystal Palace'
+p689
+sg6
+S'Newcastle United'
+p690
+sg8
+S'https://www.whoscored.com/Matches/959707/Live'
+p691
+sg10
+S'5 : 1'
+p692
+sa(dp693
+g4
+S'Manchester City'
+p694
+sg6
+S'Southampton'
+p695
+sg8
+S'https://www.whoscored.com/Matches/959715/Live'
+p696
+sg10
+S'3 : 1'
+p697
+sa(dp698
+g4
+S'Leicester'
+p699
+sg6
+S'Manchester United'
+p700
+sg8
+S'https://www.whoscored.com/Matches/959712/Live'
+p701
+sg10
+S'1 : 1'
+p702
+sa(dp703
+g4
+S'Tottenham'
+p704
+sg6
+S'Chelsea'
+p705
+sg8
+S'https://www.whoscored.com/Matches/959588/Live'
+p706
+sg10
+S'0 : 0'
+p707
+sa(dp708
+g4
+S'West Ham'
+p709
+sg6
+S'West Bromwich Albion'
+p710
+sg8
+S'https://www.whoscored.com/Matches/959598/Live'
+p711
+sg10
+S'1 : 1'
+p712
+sa(dp713
+g4
+S'Norwich'
+p714
+sg6
+S'Arsenal'
+p715
+sg8
+S'https://www.whoscored.com/Matches/959568/Live'
+p716
+sg10
+S'1 : 1'
+p717
+sa(dp718
+g4
+S'Liverpool'
+p719
+sg6
+S'Swansea'
+p720
+sg8
+S'https://www.whoscored.com/Matches/959714/Live'
+p721
+sg10
+S'1 : 0'
+p722
+sasS'Dec'
+p723
+(lp724
+(dp725
+g4
+S'Stoke'
+p726
+sg6
+S'Manchester City'
+p727
+sg8
+S'https://www.whoscored.com/Matches/959668/Live'
+p728
+sg10
+S'2 : 0'
+p729
+sa(dp730
+g4
+S'Watford'
+p731
+sg6
+S'Norwich'
+p732
+sg8
+S'https://www.whoscored.com/Matches/959571/Live'
+p733
+sg10
+S'2 : 0'
+p734
+sa(dp735
+g4
+S'West Bromwich Albion'
+p736
+sg6
+S'Tottenham'
+p737
+sg8
+S'https://www.whoscored.com/Matches/959581/Live'
+p738
+sg10
+S'1 : 1'
+p739
+sa(dp740
+g4
+S'Arsenal'
+p741
+sg6
+S'Sunderland'
+p742
+sg8
+S'https://www.whoscored.com/Matches/959608/Live'
+p743
+sg10
+S'3 : 1'
+p744
+sa(dp745
+g4
+S'Manchester United'
+p746
+sg6
+S'West Ham'
+p747
+sg8
+S'https://www.whoscored.com/Matches/959638/Live'
+p748
+sg10
+S'0 : 0'
+p749
+sa(dp750
+g4
+S'Southampton'
+p751
+sg6
+S'Aston Villa'
+p752
+sg8
+S'https://www.whoscored.com/Matches/959658/Live'
+p753
+sg10
+S'1 : 1'
+p754
+sa(dp755
+g4
+S'Swansea'
+p756
+sg6
+S'Leicester'
+p757
+sg8
+S'https://www.whoscored.com/Matches/959677/Live'
+p758
+sg10
+S'0 : 3'
+p759
+sa(dp760
+g4
+S'Chelsea'
+p761
+sg6
+S'Bournemouth'
+p762
+sg8
+S'https://www.whoscored.com/Matches/959618/Live'
+p763
+sg10
+S'0 : 1'
+p764
+sa(dp765
+g4
+S'Newcastle United'
+p766
+sg6
+S'Liverpool'
+p767
+sg8
+S'https://www.whoscored.com/Matches/959648/Live'
+p768
+sg10
+S'2 : 0'
+p769
+sa(dp770
+g4
+S'Everton'
+p771
+sg6
+S'Crystal Palace'
+p772
+sg8
+S'https://www.whoscored.com/Matches/959628/Live'
+p773
+sg10
+S'1 : 1'
+p774
+sa(dp775
+g4
+S'Norwich'
+p776
+sg6
+S'Everton'
+p777
+sg8
+S'https://www.whoscored.com/Matches/959651/Live'
+p778
+sg10
+S'1 : 1'
+p779
+sa(dp780
+g4
+S'Crystal Palace'
+p781
+sg6
+S'Southampton'
+p782
+sg8
+S'https://www.whoscored.com/Matches/959611/Live'
+p783
+sg10
+S'1 : 0'
+p784
+sa(dp785
+g4
+S'Manchester City'
+p786
+sg6
+S'Swansea'
+p787
+sg8
+S'https://www.whoscored.com/Matches/959641/Live'
+p788
+sg10
+S'2 : 1'
+p789
+sa(dp790
+g4
+S'Sunderland'
+p791
+sg6
+S'Watford'
+p792
+sg8
+S'https://www.whoscored.com/Matches/959661/Live'
+p793
+sg10
+S'0 : 1'
+p794
+sa(dp795
+g4
+S'West Ham'
+p796
+sg6
+S'Stoke'
+p797
+sg8
+S'https://www.whoscored.com/Matches/959680/Live'
+p798
+sg10
+S'0 : 0'
+p799
+sa(dp800
+g4
+S'Bournemouth'
+p801
+sg6
+S'Manchester United'
+p802
+sg8
+S'https://www.whoscored.com/Matches/959601/Live'
+p803
+sg10
+S'2 : 1'
+p804
+sa(dp805
+g4
+S'Aston Villa'
+p806
+sg6
+S'Arsenal'
+p807
+sg8
+S'https://www.whoscored.com/Matches/959591/Live'
+p808
+sg10
+S'0 : 2'
+p809
+sa(dp810
+g4
+S'Liverpool'
+p811
+sg6
+S'West Bromwich Albion'
+p812
+sg8
+S'https://www.whoscored.com/Matches/959631/Live'
+p813
+sg10
+S'2 : 2'
+p814
+sa(dp815
+g4
+S'Tottenham'
+p816
+sg6
+S'Newcastle United'
+p817
+sg8
+S'https://www.whoscored.com/Matches/959671/Live'
+p818
+sg10
+S'1 : 2'
+p819
+sa(dp820
+g4
+S'Leicester'
+p821
+sg6
+S'Chelsea'
+p822
+sg8
+S'https://www.whoscored.com/Matches/959621/Live'
+p823
+sg10
+S'2 : 1'
+p824
+sa(dp825
+g4
+S'Southampton'
+p826
+sg6
+S'Tottenham'
+p827
+sg8
+S'https://www.whoscored.com/Matches/959565/Live'
+p828
+sg10
+S'0 : 2'
+p829
+sa(dp830
+g4
+S'Stoke'
+p831
+sg6
+S'Crystal Palace'
+p832
+sg8
+S'https://www.whoscored.com/Matches/959575/Live'
+p833
+sg10
+S'1 : 2'
+p834
+sa(dp835
+g4
+S'West Bromwich Albion'
+p836
+sg6
+S'Bournemouth'
+p837
+sg8
+S'https://www.whoscored.com/Matches/959605/Live'
+p838
+sg10
+S'1 : 2'
+p839
+sa(dp840
+g4
+S'Chelsea'
+p841
+sg6
+S'Sunderland'
+p842
+sg8
+S'https://www.whoscored.com/Matches/959695/Live'
+p843
+sg10
+S'3 : 1'
+p844
+sa(dp845
+g4
+S'Everton'
+p846
+sg6
+S'Leicester'
+p847
+sg8
+S'https://www.whoscored.com/Matches/959702/Live'
+p848
+sg10
+S'2 : 3'
+p849
+sa(dp850
+g4
+S'Manchester United'
+p851
+sg6
+S'Norwich'
+p852
+sg8
+S'https://www.whoscored.com/Matches/959708/Live'
+p853
+sg10
+S'1 : 2'
+p854
+sa(dp855
+g4
+S'Newcastle United'
+p856
+sg6
+S'Aston Villa'
+p857
+sg8
+S'https://www.whoscored.com/Matches/959560/Live'
+p858
+sg10
+S'1 : 1'
+p859
+sa(dp860
+g4
+S'Watford'
+p861
+sg6
+S'Liverpool'
+p862
+sg8
+S'https://www.whoscored.com/Matches/959595/Live'
+p863
+sg10
+S'3 : 0'
+p864
+sa(dp865
+g4
+S'Swansea'
+p866
+sg6
+S'West Ham'
+p867
+sg8
+S'https://www.whoscored.com/Matches/959585/Live'
+p868
+sg10
+S'0 : 0'
+p869
+sa(dp870
+g4
+S'Arsenal'
+p871
+sg6
+S'Manchester City'
+p872
+sg8
+S'https://www.whoscored.com/Matches/959688/Live'
+p873
+sg10
+S'2 : 1'
+p874
+sa(dp875
+g4
+S'Stoke'
+p876
+sg6
+S'Manchester United'
+p877
+sg8
+S'https://www.whoscored.com/Matches/959683/Live'
+p878
+sg10
+S'2 : 0'
+p879
+sa(dp880
+g4
+S'Aston Villa'
+p881
+sg6
+S'West Ham'
+p882
+sg8
+S'https://www.whoscored.com/Matches/959615/Live'
+p883
+sg10
+S'1 : 1'
+p884
+sa(dp885
+g4
+S'Bournemouth'
+p886
+sg6
+S'Crystal Palace'
+p887
+sg8
+S'https://www.whoscored.com/Matches/959625/Live'
+p888
+sg10
+S'0 : 0'
+p889
+sa(dp890
+g4
+S'Chelsea'
+p891
+sg6
+S'Watford'
+p892
+sg8
+S'https://www.whoscored.com/Matches/959635/Live'
+p893
+sg10
+S'2 : 2'
+p894
+sa(dp895
+g4
+S'Liverpool'
+p896
+sg6
+S'Leicester'
+p897
+sg8
+S'https://www.whoscored.com/Matches/959645/Live'
+p898
+sg10
+S'1 : 0'
+p899
+sa(dp900
+g4
+S'Manchester City'
+p901
+sg6
+S'Sunderland'
+p902
+sg8
+S'https://www.whoscored.com/Matches/959655/Live'
+p903
+sg10
+S'4 : 1'
+p904
+sa(dp905
+g4
+S'Swansea'
+p906
+sg6
+S'West Bromwich Albion'
+p907
+sg8
+S'https://www.whoscored.com/Matches/959691/Live'
+p908
+sg10
+S'1 : 0'
+p909
+sa(dp910
+g4
+S'Tottenham'
+p911
+sg6
+S'Norwich'
+p912
+sg8
+S'https://www.whoscored.com/Matches/959698/Live'
+p913
+sg10
+S'3 : 0'
+p914
+sa(dp915
+g4
+S'Newcastle United'
+p916
+sg6
+S'Everton'
+p917
+sg8
+S'https://www.whoscored.com/Matches/959665/Live'
+p918
+sg10
+S'0 : 1'
+p919
+sa(dp920
+g4
+S'Southampton'
+p921
+sg6
+S'Arsenal'
+p922
+sg8
+S'https://www.whoscored.com/Matches/959674/Live'
+p923
+sg10
+S'4 : 0'
+p924
+sa(dp925
+g4
+S'Crystal Palace'
+p926
+sg6
+S'Swansea'
+p927
+sg8
+S'https://www.whoscored.com/Matches/959572/Live'
+p928
+sg10
+S'0 : 0'
+p929
+sa(dp930
+g4
+S'Everton'
+p931
+sg6
+S'Stoke'
+p932
+sg8
+S'https://www.whoscored.com/Matches/959582/Live'
+p933
+sg10
+S'3 : 4'
+p934
+sa(dp935
+g4
+S'Norwich'
+p936
+sg6
+S'Aston Villa'
+p937
+sg8
+S'https://www.whoscored.com/Matches/959612/Live'
+p938
+sg10
+S'2 : 0'
+p939
+sa(dp940
+g4
+S'Watford'
+p941
+sg6
+S'Tottenham'
+p942
+sg8
+S'https://www.whoscored.com/Matches/959632/Live'
+p943
+sg10
+S'1 : 2'
+p944
+sa(dp945
+g4
+S'West Bromwich Albion'
+p946
+sg6
+S'Newcastle United'
+p947
+sg8
+S'https://www.whoscored.com/Matches/959642/Live'
+p948
+sg10
+S'1 : 0'
+p949
+sa(dp950
+g4
+S'Arsenal'
+p951
+sg6
+S'Bournemouth'
+p952
+sg8
+S'https://www.whoscored.com/Matches/959562/Live'
+p953
+sg10
+S'2 : 0'
+p954
+sa(dp955
+g4
+S'Manchester United'
+p956
+sg6
+S'Chelsea'
+p957
+sg8
+S'https://www.whoscored.com/Matches/959602/Live'
+p958
+sg10
+S'0 : 0'
+p959
+sa(dp960
+g4
+S'West Ham'
+p961
+sg6
+S'Southampton'
+p962
+sg8
+S'https://www.whoscored.com/Matches/959652/Live'
+p963
+sg10
+S'2 : 1'
+p964
+sa(dp965
+g4
+S'Leicester'
+p966
+sg6
+S'Manchester City'
+p967
+sg8
+S'https://www.whoscored.com/Matches/959592/Live'
+p968
+sg10
+S'0 : 0'
+p969
+sa(dp970
+g4
+S'Sunderland'
+p971
+sg6
+S'Liverpool'
+p972
+sg8
+S'https://www.whoscored.com/Matches/959622/Live'
+p973
+sg10
+S'0 : 1'
+p974
+sasS'Oct'
+p975
+(lp976
+(dp977
+g4
+S'Crystal Palace'
+p978
+sg6
+S'West Bromwich Albion'
+p979
+sg8
+S'https://www.whoscored.com/Matches/959808/Live'
+p980
+sg10
+S'2 : 0'
+p981
+sa(dp982
+g4
+S'Aston Villa'
+p983
+sg6
+S'Stoke'
+p984
+sg8
+S'https://www.whoscored.com/Matches/959805/Live'
+p985
+sg10
+S'0 : 1'
+p986
+sa(dp987
+g4
+S'Bournemouth'
+p988
+sg6
+S'Watford'
+p989
+sg8
+S'https://www.whoscored.com/Matches/959806/Live'
+p990
+sg10
+S'1 : 1'
+p991
+sa(dp992
+g4
+S'Manchester City'
+p993
+sg6
+S'Newcastle United'
+p994
+sg8
+S'https://www.whoscored.com/Matches/959810/Live'
+p995
+sg10
+S'6 : 1'
+p996
+sa(dp997
+g4
+S'Norwich'
+p998
+sg6
+S'Leicester'
+p999
+sg8
+S'https://www.whoscored.com/Matches/959811/Live'
+p1000
+sg10
+S'1 : 2'
+p1001
+sa(dp1002
+g4
+S'Sunderland'
+p1003
+sg6
+S'West Ham'
+p1004
+sg8
+S'https://www.whoscored.com/Matches/959812/Live'
+p1005
+sg10
+S'2 : 2'
+p1006
+sa(dp1007
+g4
+S'Chelsea'
+p1008
+sg6
+S'Southampton'
+p1009
+sg8
+S'https://www.whoscored.com/Matches/959807/Live'
+p1010
+sg10
+S'1 : 3'
+p1011
+sa(dp1012
+g4
+S'Everton'
+p1013
+sg6
+S'Liverpool'
+p1014
+sg8
+S'https://www.whoscored.com/Matches/959809/Live'
+p1015
+sg10
+S'1 : 1'
+p1016
+sa(dp1017
+g4
+S'Arsenal'
+p1018
+sg6
+S'Manchester United'
+p1019
+sg8
+S'https://www.whoscored.com/Matches/959804/Live'
+p1020
+sg10
+S'3 : 0'
+p1021
+sa(dp1022
+g4
+S'Swansea'
+p1023
+sg6
+S'Tottenham'
+p1024
+sg8
+S'https://www.whoscored.com/Matches/959813/Live'
+p1025
+sg10
+S'2 : 2'
+p1026
+sa(dp1027
+g4
+S'Tottenham'
+p1028
+sg6
+S'Liverpool'
+p1029
+sg8
+S'https://www.whoscored.com/Matches/959821/Live'
+p1030
+sg10
+S'0 : 0'
+p1031
+sa(dp1032
+g4
+S'Chelsea'
+p1033
+sg6
+S'Aston Villa'
+p1034
+sg8
+S'https://www.whoscored.com/Matches/959814/Live'
+p1035
+sg10
+S'2 : 0'
+p1036
+sa(dp1037
+g4
+S'Crystal Palace'
+p1038
+sg6
+S'West Ham'
+p1039
+sg8
+S'https://www.whoscored.com/Matches/959815/Live'
+p1040
+sg10
+S'1 : 3'
+p1041
+sa(dp1042
+g4
+S'Everton'
+p1043
+sg6
+S'Manchester United'
+p1044
+sg8
+S'https://www.whoscored.com/Matches/959816/Live'
+p1045
+sg10
+S'0 : 3'
+p1046
+sa(dp1047
+g4
+S'Manchester City'
+p1048
+sg6
+S'Bournemouth'
+p1049
+sg8
+S'https://www.whoscored.com/Matches/959817/Live'
+p1050
+sg10
+S'5 : 1'
+p1051
+sa(dp1052
+g4
+S'Southampton'
+p1053
+sg6
+S'Leicester'
+p1054
+sg8
+S'https://www.whoscored.com/Matches/959819/Live'
+p1055
+sg10
+S'2 : 2'
+p1056
+sa(dp1057
+g4
+S'West Bromwich Albion'
+p1058
+sg6
+S'Sunderland'
+p1059
+sg8
+S'https://www.whoscored.com/Matches/959823/Live'
+p1060
+sg10
+S'1 : 0'
+p1061
+sa(dp1062
+g4
+S'Watford'
+p1063
+sg6
+S'Arsenal'
+p1064
+sg8
+S'https://www.whoscored.com/Matches/959822/Live'
+p1065
+sg10
+S'0 : 3'
+p1066
+sa(dp1067
+g4
+S'Newcastle United'
+p1068
+sg6
+S'Norwich'
+p1069
+sg8
+S'https://www.whoscored.com/Matches/959818/Live'
+p1070
+sg10
+S'6 : 2'
+p1071
+sa(dp1072
+g4
+S'Swansea'
+p1073
+sg6
+S'Stoke'
+p1074
+sg8
+S'https://www.whoscored.com/Matches/959820/Live'
+p1075
+sg10
+S'0 : 1'
+p1076
+sa(dp1077
+g4
+S'Aston Villa'
+p1078
+sg6
+S'Swansea'
+p1079
+sg8
+S'https://www.whoscored.com/Matches/959825/Live'
+p1080
+sg10
+S'1 : 2'
+p1081
+sa(dp1082
+g4
+S'Leicester'
+p1083
+sg6
+S'Crystal Palace'
+p1084
+sg8
+S'https://www.whoscored.com/Matches/959827/Live'
+p1085
+sg10
+S'1 : 0'
+p1086
+sa(dp1087
+g4
+S'Norwich'
+p1088
+sg6
+S'West Bromwich Albion'
+p1089
+sg8
+S'https://www.whoscored.com/Matches/959830/Live'
+p1090
+sg10
+S'0 : 1'
+p1091
+sa(dp1092
+g4
+S'Stoke'
+p1093
+sg6
+S'Watford'
+p1094
+sg8
+S'https://www.whoscored.com/Matches/959831/Live'
+p1095
+sg10
+S'0 : 2'
+p1096
+sa(dp1097
+g4
+S'West Ham'
+p1098
+sg6
+S'Chelsea'
+p1099
+sg8
+S'https://www.whoscored.com/Matches/959833/Live'
+p1100
+sg10
+S'2 : 1'
+p1101
+sa(dp1102
+g4
+S'Arsenal'
+p1103
+sg6
+S'Everton'
+p1104
+sg8
+S'https://www.whoscored.com/Matches/959824/Live'
+p1105
+sg10
+S'2 : 1'
+p1106
+sa(dp1107
+g4
+S'Sunderland'
+p1108
+sg6
+S'Newcastle United'
+p1109
+sg8
+S'https://www.whoscored.com/Matches/959832/Live'
+p1110
+sg10
+S'3 : 0'
+p1111
+sa(dp1112
+g4
+S'Bournemouth'
+p1113
+sg6
+S'Tottenham'
+p1114
+sg8
+S'https://www.whoscored.com/Matches/959826/Live'
+p1115
+sg10
+S'1 : 5'
+p1116
+sa(dp1117
+g4
+S'Manchester United'
+p1118
+sg6
+S'Manchester City'
+p1119
+sg8
+S'https://www.whoscored.com/Matches/959829/Live'
+p1120
+sg10
+S'0 : 0'
+p1121
+sa(dp1122
+g4
+S'Liverpool'
+p1123
+sg6
+S'Southampton'
+p1124
+sg8
+S'https://www.whoscored.com/Matches/959828/Live'
+p1125
+sg10
+S'1 : 1'
+p1126
+sa(dp1127
+g4
+S'Chelsea'
+p1128
+sg6
+S'Liverpool'
+p1129
+sg8
+S'https://www.whoscored.com/Matches/959834/Live'
+p1130
+sg10
+S'1 : 3'
+p1131
+sa(dp1132
+g4
+S'Newcastle United'
+p1133
+sg6
+S'Stoke'
+p1134
+sg8
+S'https://www.whoscored.com/Matches/959569/Live'
+p1135
+sg10
+S'0 : 0'
+p1136
+sa(dp1137
+g4
+S'Swansea'
+p1138
+sg6
+S'Arsenal'
+p1139
+sg8
+S'https://www.whoscored.com/Matches/959589/Live'
+p1140
+sg10
+S'0 : 3'
+p1141
+sa(dp1142
+g4
+S'Watford'
+p1143
+sg6
+S'West Ham'
+p1144
+sg8
+S'https://www.whoscored.com/Matches/959609/Live'
+p1145
+sg10
+S'2 : 0'
+p1146
+sa(dp1147
+g4
+S'West Bromwich Albion'
+p1148
+sg6
+S'Leicester'
+p1149
+sg8
+S'https://www.whoscored.com/Matches/959619/Live'
+p1150
+sg10
+S'2 : 3'
+p1151
+sa(dp1152
+g4
+S'Crystal Palace'
+p1153
+sg6
+S'Manchester United'
+p1154
+sg8
+S'https://www.whoscored.com/Matches/959835/Live'
+p1155
+sg10
+S'0 : 0'
+p1156
+sa(dp1157
+g4
+S'Manchester City'
+p1158
+sg6
+S'Norwich'
+p1159
+sg8
+S'https://www.whoscored.com/Matches/959837/Live'
+p1160
+sg10
+S'2 : 1'
+p1161
+sas.

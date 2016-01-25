@@ -3,10 +3,10 @@ A module to handle the backend of the project.
 
 @author: Dror Porat & Ory Jonay
 '''
-import sys
+import sys, os
 sys.path.append('..')
 import pickle
-from pymongo import MongoClient
+import pymongo
 
 import numpy as np
 from utils.constants import MAX_YEAR, MIN_YEAR, LEAGUES, MONTHS
@@ -17,8 +17,11 @@ from utils.decorators import timed
 class DBHandler():
     def __init__(self,league,remote=True):
         _host = '46.101.204.132' if remote else 'localhost'
-        self.client = MongoClient(host=_host)
+        self.client = pymongo.MongoClient(host=_host)
         self.DB = {temp_league:self.client["leagues_db"][temp_league] for temp_league in LEAGUES}
+        for col in self.DB:
+            self.DB[col].create_index([('Year',pymongo.DESCENDING),('GName',pymongo.ASCENDING),('PName',pymongo.ASCENDING),('Fix',pymongo.DESCENDING)],\
+                             unique = True)
         self.league = league
     
     def convert(self,data):
@@ -49,17 +52,16 @@ class DBHandler():
         return res
     
     def insert_to_db(self,data,year):
-        self.DB[self.league].remove({'Year':int(year)})
-        self.DB[self.league].insert(self.explode(self.convert(data),year))
+        try:
+            self.DB[self.league].remove({'Year':int(year)})
+        except Exception as e:
+            pass
+        try:
+            self.DB[self.league].insert(self.explode(self.convert(data),year),continue_on_error=True)
+        except Exception as e:
+            print str(e)
         
-    def update_db(self,data,year):
-        new_data = self.explode(data, year)
-        old_data = self.DB[self.league].find()
-        def _not_in_db(elem):
-            return elem not in old_data
-        filter(_not_in_db,new_data)
-        self.DB[self.league].insert[filter(_not_in_db,new_data)]
-        
+
     def drop(self,year=None):
         if year:
             self.DB[self.league].remove({'Year':int(year)})
@@ -128,7 +130,7 @@ class DBHandler():
 
 if __name__ == '__main__':
     for league in LEAGUES:
-        for year in [str(i) for i in range(MIN_YEAR,MAX_YEAR)]:
+        for year in [str(i) for i in range(MIN_YEAR,MAX_YEAR+1)]:
             for month in MONTHS:
                 try:
                     with open('../backup/%s-%s/%s.pckl'%(league,year,month),'r') as games:

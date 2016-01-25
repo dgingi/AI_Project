@@ -123,10 +123,11 @@ class WhoScoredCrawler(object):
                 logging.info('Finished month, saving to disk')
                 self.save_month(month)
                 if current:
-                    DBHandler(args_parser.LEAGUE_NAME).update_db(self.all_teams_dict,str(self.year))
+                    pass
+#                     DBHandler(args_parser.LEAGUE_NAME).update_db(self.all_teams_dict,str(self.year))
         else: #we're done - we can save to the DB now
-            if not current:
-                DBHandler(args_parser.LEAGUE_NAME).insert_to_db(self.all_teams_dict,str(self.year))
+#             if not current:
+            DBHandler(args_parser.LEAGUE_NAME).insert_to_db(self.all_teams_dict,str(self.year))
         self.driver.quit()
         prog_bar.finish()
         
@@ -321,7 +322,7 @@ class WhoScoredCrawler(object):
             pckl_files = glob.glob('%s/*.pckl'%self._bkup_folder)
             assert len(pckl_files) <= 2, 'Too many files, should only be fixtures and games for up to the last month'
             if len(pckl_files) == 1: return self.played_months[-1] 
-            self.last_save_month = pckl_files[0].split('/')[1].split('.')[0] if pckl_files[0].split('/')[1].split('.')[0] in self.played_months else pckl_files[1].split('/')[1].split('.')[0]
+            self.last_save_month = pckl_files[0].split('/')[2].split('.')[0] if pckl_files[0].split('/')[2].split('.')[0] in self.played_months else pckl_files[1].split('/')[2].split('.')[0]
             if not current:
                 if self.last_save_month != self.played_months[0]:
                     logging.info('Finished finding start month')
