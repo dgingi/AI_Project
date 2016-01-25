@@ -32,10 +32,8 @@ class Features():
         self.att_keys = ["Shots","ShotsOT","KeyPasses","Dribbles","Fouled","Offsides","Disp","UnsTouches"]
         self.def_keys = ["TotalTackles","Interceptions","Clearances","BlockedShots","Fouls"]
         
-        self.d_pos = ["DR","DL","DC","DMC","DML","DMR","MR","MC","ML"]
-        self.a_pos = ["FW","AR","AL","AC","AMC","AML","AMR","MR","MC","ML"]
-        
-        self.o_pos = ["Sub"]
+        self.d_pos = ["DR","DL","DC","DMC","DML","DMR","MR","MC","ML","Sub"]
+        self.a_pos = ["FW","AR","AL","AC","AMC","AML","AMR","MR","MC","ML","Sub"]
         
         self.curr_year = int(year)
         self.prev_year = self.curr_year - 1
@@ -187,11 +185,17 @@ class Features():
             need_history = True
         return True,need_history
     
-    def select_recieved_goals(self,HA,result):
+    def select_recieved_goals(self,HA,result,bool_for_recieved):
             if HA=="home":
-                return int(result[1])
+                if bool_for_recieved:
+                    return int(result[1])
+                else:
+                    return int(result[0])
             else:
-                return int(result[0])
+                if bool_for_recieved:
+                    return int(result[0])
+                else:
+                    return int(result[1])
             
     def get_history(self,res,t_name,fix,lookback,HA_list,group_q,add_to_key,pos_list=[],all_feat=False):
         temp_f = Features(self.col,str(self.prev_year))
@@ -236,7 +240,7 @@ class Features():
             pipe = [{"$match":{"GName":t_name,"Year":self.curr_year,"Touches":{"$gt":0},"Fix":{"$lt":fix,"$gte":fix-lookback},"HA":{"$in":HA_list}}}]
             if vs!= "":
                 pipe[0]["$match"]["VS"] = vs           
-            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result","Tag":"$Tag","Possession":"$Possession"},"avg_Goals_by_fix"+by_loc:{"$sum":"$Goals"}}}
+            group_q = {"$group":{"_id":{"GName":"$GName","Fix":"$Fix","HA":"$HA","Result":"$Result","Tag":"$Tag","Possession":"$Possession"}}}
             prev_pipe += [group_q]
             pipe += [group_q]
 
@@ -261,9 +265,9 @@ class Features():
                 for cursor in agg:
                     for key in cursor:
                         if key!="_id":
-                            res["avg_Goals_by_fix"+add_to_key] += cursor[key]
+                            res["avg_Goals_by_fix"+add_to_key] += self.select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"],False)
                         else:
-                            res["avg_received_Goals_by_fix"+add_to_key] += self.select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
+                            res["avg_received_Goals_by_fix"+add_to_key] += self.select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"],True)
                             res["avg_Success_rate"+add_to_key] += 1 if cursor[key]["Tag"]==1 else 0
                             res["avg_Possession_rate"+add_to_key] += cursor[key]["Possession"]
                         
@@ -348,6 +352,8 @@ class Features():
             if need_history:
                 his_num_of_games = self.get_history(temp_res, t_name, fix, lookback, HA_list, group_q, "add_to_key", pos_list, True)
             
+            if num_of_games == 0 and his_num_of_games == 0:
+                his_num_of_games = 1
             for key in temp_res:
                 temp_res[key] /= (num_of_games+his_num_of_games)
             res.update(temp_res)
