@@ -16,6 +16,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from time import sleep
 from unidecode import unidecode
 from multiprocessing import Pool, cpu_count
+from datetime import datetime
 
 from data.dbhandler import DBHandler
 from utils.argumet_parsers import CrawlerArgsParser
@@ -275,7 +276,6 @@ class WhoScoredCrawler(object):
         '''
         Parse the fixtures page for the games links and save them.
         '''
-        from datetime import datetime
         logging.info('Getting fixtures')
         self.played_months = self.played_months[:self.played_months.index(datetime.now().strftime('%b'))-1:-1][::-1] if current else self.played_months 
         self.fixtures = {month:None for month in self.played_months}
@@ -330,8 +330,11 @@ class WhoScoredCrawler(object):
                 else:
                     logging.critical('Finished crawling')
                     raise ValueError('Finished')
-            else:    
-                return self.played_months[self.played_months.index(self.last_save_month)]
+            else:
+                if self.last_save_month == datetime.now().strftime('%b'):    
+                    return self.played_months[self.played_months.index(self.last_save_month)]
+                else:
+                    return self.played_months[self.played_months.index(self.last_save_month)-1]
         logging.info('Finished finding start month')
         return self.played_months[-1]
     
@@ -355,7 +358,7 @@ if __name__ == '__main__':
         else:
             start_crawl(args_parser.kwargs)
     else:
-#         for kwargs in args_parser.update_kwargs:
-#             start_crawl(kwargs)
-        p = Pool(cpu_count())
-        p.map(start_crawl, args_parser.update_kwargs)
+        for kwargs in args_parser.update_kwargs:
+            start_crawl(kwargs)
+#         p = Pool(cpu_count())
+#         p.map(start_crawl, args_parser.update_kwargs)
