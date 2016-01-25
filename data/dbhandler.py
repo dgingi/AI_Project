@@ -98,10 +98,17 @@ class DBHandler():
         
         from exhandler.exhandler import EXHandler
         from features.features import Features
-                    
-        all_teams_names = [g['_id'] for g in self.DB[self.league].aggregate([{"$match":{"Year":int(year)}},{"$group":{"_id":"$GName"}}])]
+        from bson.son import SON
+        
+        temp_client = MongoClient('localhost')
+        temp_DB = temp_client["leagues_db"]
+        temp_col = temp_DB[self.league]
+        temp_col.drop()
+        temp_DB.command(SON([("cloneCollection","leagues_db."+self.league),("from",'46.101.204.132')]))
+        
+        all_teams_names = [g['_id'] for g in temp_DB[self.league].aggregate([{"$match":{"Year":int(year)}},{"$group":{"_id":"$GName"}}])]
         all_teams_dict = {name:{} for name in all_teams_names}
-        features = Features(self.DB[self.league],year)
+        features = Features(temp_DB[self.league],year)
         features_names = EXHandler(self.league).get_features_names()
         for team in all_teams_dict:
             print "Creating Features for %s-%s"%(team,year)
@@ -111,19 +118,18 @@ class DBHandler():
         examples = []
         tags = []
         for team in all_teams_names:
-            print "here"
             for fix in sorted(all_teams_dict[team]):
                 if fix == 1 and all_teams_dict[team][fix]==[]:
                     continue
-                curr_game = self.DB[self.league].find_one({"GName":team,"Fix":fix,"Year":int(year)})
+                curr_game = temp_DB[self.league].find_one({"GName":team,"Fix":fix,"Year":int(year)})
                 if curr_game["HA"]=="home":
-                    vs_curr_game = self.DB[self.league].find_one({"GName":curr_game["VS"],"VS":team,"HA":"away","Year":int(year)})
+                    vs_curr_game = temp_DB[self.league].find_one({"GName":curr_game["VS"],"VS":team,"HA":"away","Year":int(year)})
                     vs_curr_fix = vs_curr_game["Fix"]
                     if all_teams_dict[curr_game["VS"]][vs_curr_fix] == []:
                         continue
                     rel_all, rel_att, rel_def = relative_features(all_teams_dict[team][fix], all_teams_dict[curr_game["VS"]][vs_curr_fix], features_names)
                     examples += [np.array(all_teams_dict[team][fix])-np.array(all_teams_dict[curr_game["VS"]][vs_curr_fix])]
-                    examples[-1] += [rel_all, rel_att, rel_def]
+                    examples[-1] = np.concatenate((examples[-1],[rel_all, rel_att, rel_def]))
                     tags += [curr_game["Tag"]]
         return examples,tags
         
