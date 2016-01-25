@@ -331,7 +331,7 @@ class WhoScoredCrawler(object):
                     logging.critical('Finished crawling')
                     raise ValueError('Finished')
             else:    
-                return self.played_months[self.played_months.index(self.last_save_month)-1]
+                return self.played_months[self.played_months.index(self.last_save_month)]
         logging.info('Finished finding start month')
         return self.played_months[-1]
     

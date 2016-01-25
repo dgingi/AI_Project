@@ -11,6 +11,7 @@ import pymongo
 import numpy as np
 from utils.constants import MAX_YEAR, MIN_YEAR, LEAGUES, MONTHS
 from utils.decorators import timed
+import logging
 
 
 
@@ -59,7 +60,7 @@ class DBHandler():
         try:
             self.DB[self.league].insert(self.explode(self.convert(data),year),continue_on_error=True)
         except Exception as e:
-            print str(e)
+            logging.critical(str(e))
         
 
     def drop(self,year=None):
