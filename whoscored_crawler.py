@@ -358,7 +358,7 @@ if __name__ == '__main__':
         else:
             start_crawl(args_parser.kwargs)
     else:
-        for kwargs in args_parser.update_kwargs:
-            start_crawl(kwargs)
-#         p = Pool(cpu_count())
-#         p.map(start_crawl, args_parser.update_kwargs)
+#         for kwargs in args_parser.update_kwargs:
+#             start_crawl(kwargs)
+        p = Pool(cpu_count())
+        p.map(start_crawl, args_parser.update_kwargs)
