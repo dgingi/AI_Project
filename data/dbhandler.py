@@ -66,7 +66,7 @@ class DBHandler():
         if year:
             self.DB[self.league].remove({'Year':int(year)})
         else:
-            self.DB[self.league].remove({'Year':{"$in":[int(temp_year) for temp_year in range(MIN_YEAR,MAX_YEAR)]}})
+            self.DB[self.league].drop()
     
     @timed        
     def create_examples(self,year,lookback=15):
@@ -100,7 +100,7 @@ class DBHandler():
         from features.features import Features
         from bson.son import SON
         
-        temp_client = MongoClient('localhost')
+        temp_client = pymongo.MongoClient('localhost')
         temp_DB = temp_client["leagues_db"]
         temp_col = temp_DB[self.league]
         temp_col.drop()
