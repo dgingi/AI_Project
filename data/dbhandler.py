@@ -116,7 +116,6 @@ class DBHandler():
         examples = []
         tags = []
         for team in all_teams_names:
-            print "here"
             for fix in sorted(all_teams_dict[team]):
                 if fix == 1 and all_teams_dict[team][fix]==[]:
                     continue
@@ -128,7 +127,7 @@ class DBHandler():
                         continue
                     rel_all, rel_att, rel_def = relative_features(all_teams_dict[team][fix], all_teams_dict[curr_game["VS"]][vs_curr_fix], features_names)
                     examples += [np.array(all_teams_dict[team][fix])-np.array(all_teams_dict[curr_game["VS"]][vs_curr_fix])]
-                    examples[-1] += [rel_all, rel_att, rel_def]
+                    examples[-1] = np.concatenate((examples[-1],[rel_all, rel_att, rel_def]))
                     tags += [curr_game["Tag"]]
         return examples,tags
         
