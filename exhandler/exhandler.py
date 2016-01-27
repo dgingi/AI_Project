@@ -18,8 +18,8 @@ class EXHandler():
     def get_features_names(self):
         from features.features import Features
         team = [g['_id'] for g in self.DBH.DB[self.league].aggregate([{"$match":{"Year":2012}},{"$group":{"_id":"$GName"}}])][0]
-        res_by_fix = Features(self.DBH.DB[self.league],2012).create_avg_up_to(team, 30, 15)
-        res_by_non_avg = Features(self.DBH.DB[self.league],2012).create_avg_of_non_avg_f(team, 30, 15)
+        res_by_fix = Features(self.DBH.DB[self.league],2012,self.league).create_avg_up_to(team, 30, 15)
+        res_by_non_avg = Features(self.DBH.DB[self.league],2012,self.league).create_avg_of_non_avg_f(team, 30, 15)
         features_names = [k for k in sorted(res_by_fix)]
         features_names += [k for k in sorted(res_by_non_avg)]
         features_names += ["relative_all_pos","relative_att_pos","relative_def_pos"]
@@ -28,7 +28,7 @@ class EXHandler():
     def split_to_train_and_test(self,ex,ta):
         from features.features import Features
         agg = self.DBH.DB[self.league].aggregate([{"$match":{"Year":MAX_YEAR-1}},{"$group":{"_id":{"GName":"$GName","VS":"$VS","Fix":"$Fix"}}}])
-        idx = Features(self.DBH.DB,str(MAX_YEAR-1)).get_agg_size(agg)
+        idx = Features(self.DBH.DB,str(MAX_YEAR-1),self.league).get_agg_size(agg)
         idx /= 2
         X1,Y1 = ex[:-idx], ta[:-idx]
         X2,Y2 = ex[-idx:], ta[-idx:]

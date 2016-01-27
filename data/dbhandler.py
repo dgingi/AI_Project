@@ -109,7 +109,7 @@ class DBHandler():
         
         all_teams_names = [g['_id'] for g in temp_DB[self.league].aggregate([{"$match":{"Year":int(year)}},{"$group":{"_id":"$GName"}}])]
         all_teams_dict = {name:{} for name in all_teams_names}
-        features = Features(temp_DB[self.league],year)
+        features = Features(temp_DB[self.league],year,self.league)
         features_names = EXHandler(self.league).get_features_names()
         for team in all_teams_dict:
             print "Creating Features for %s-%s"%(team,year)
