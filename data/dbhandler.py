@@ -16,10 +16,11 @@ import logging
 
 
 class DBHandler():
-    def __init__(self,league,remote=True):
+    def __init__(self,league,remote=True,test=False):
         _host = '46.101.204.132' if remote else 'localhost'
         self.client = pymongo.MongoClient(host=_host)
-        self.DB = {temp_league:self.client["leagues_db"][temp_league] for temp_league in LEAGUES}
+        self._db = 'test' if test else 'leagues_db'
+        self.DB = {temp_league:self.client[self._db][temp_league] for temp_league in LEAGUES}
         for col in self.DB:
             self.DB[col].create_index([('Year',pymongo.DESCENDING),('GName',pymongo.ASCENDING),('PName',pymongo.ASCENDING),('Fix',pymongo.DESCENDING)],\
                              unique = True)
