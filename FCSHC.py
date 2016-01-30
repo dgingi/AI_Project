@@ -1,6 +1,5 @@
 from abstract_search import *
 from random import shuffle,randint,random
-import numpy as np
 from sklearn import tree
 import copy
 

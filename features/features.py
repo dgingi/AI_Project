@@ -6,12 +6,14 @@ Created on Jan 19, 2016
 
 from utils.decorators import timed
 from utils.constants import MIN_YEAR
+import logging
+from os import path
 
 class Features():
     """This class handles the creation of the features for the classifier. 
 
     """
-    def __init__(self,data,year):
+    def __init__(self,data,year,league):
         """Init method - used to create new instance of Features.
 
         Args:
@@ -37,6 +39,10 @@ class Features():
         
         self.curr_year = int(year)
         self.prev_year = self.curr_year - 1
+        
+        self.league = league
+        
+        logging.basicConfig(filename=path.join('logs','features-%s-%s.log'%(league,year)),format='%(levelname)s: %(asctime)s %(message)s', datefmt='%d/%m/%Y %H:%M %p',level=logging.INFO)
     
     @timed
     def create_features(self,t_name,lookback=15):
@@ -198,7 +204,7 @@ class Features():
                     return int(result[1])
             
     def get_history(self,res,t_name,diff,year,HA_list,group_q,add_to_key,pos_list=[],all_feat=False):
-        temp_f = Features(self.col,str(year))
+        temp_f = Features(self.col,str(year),self.league)
         try:
             max_fix = max([g["Fix"] for g in temp_f.col.find({"GName":t_name,"Year":temp_f.curr_year})])
         except Exception,e:
@@ -214,12 +220,12 @@ class Features():
             for key in cursor:
                 if key!="_id":
                     if not all_feat:
-                        res["avg_Goals_by_fix"+add_to_key] += cursor[key]
+                        res["avg_Goals_by_fix"+add_to_key] += self.select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"],False)
                     else:
                         res[key] += cursor[key]
                 else:
                     if not all_feat:
-                        res["avg_received_Goals_by_fix"+add_to_key] += self.select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"])
+                        res["avg_received_Goals_by_fix"+add_to_key] += self.select_recieved_goals(cursor[key]["HA"], cursor[key]["Result"],True)
                         res["avg_Success_rate"+add_to_key] += 1 if cursor[key]["Tag"]==1 else 0
                         res["avg_Possession_rate"+add_to_key] += cursor[key]["Possession"]
         return num_of_games,max_fix-diff
@@ -283,6 +289,7 @@ class Features():
                     his_num_of_games += temp_his_num_of_games
                     
             if num_of_games == 0 and his_num_of_games == 0:
+                logging.info("Got 0 in num_of_games and his_... with fix:%s, lookback:%s, team:%s, vs:%s"%(str(fix),str(lookback),t_name,vs))
                 his_num_of_games = 1
             res["avg_Goals_by_fix"+add_to_key] /= (num_of_games+his_num_of_games)
             res["avg_received_Goals_by_fix"+add_to_key] /= (num_of_games+his_num_of_games)
@@ -373,6 +380,7 @@ class Features():
                 
             
             if num_of_games == 0 and his_num_of_games == 0:
+                logging.info("Got 0 in num_of_games and his_... with fix:%s, lookback:%s, team:%s"%(str(fix),str(lookback),t_name))
                 his_num_of_games = 1
             for key in temp_res:
                 temp_res[key] /= (num_of_games+his_num_of_games)
