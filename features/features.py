@@ -300,6 +300,7 @@ class Features():
         create_avg(res,t_name, fix, "_by_all_HA", ["home","away"], lookback, curr_VS)
         create_avg(res,t_name, fix, "_by_"+curr_HA, [curr_HA], lookback, curr_VS)
         
+        self._navg_feat_names = [k for k in sorted(res)]
         return res
         
     def create_avg_up_to(self,t_name,fix,lookback):
@@ -385,8 +386,11 @@ class Features():
             curr_pos_list,curr_key_list = make_curr_lists(pos)
             update_res(res,t_name,fix,lookback,pos, "by_all_HA",["home","away"],curr_pos_list,curr_key_list)
             update_res(res,t_name,fix,lookback,pos, "by_"+curr_HA, [curr_HA],curr_pos_list,curr_key_list)
-             
+        
+        self._avg_feat_names = [k for k in sorted(res)]     
         return res   
     
-    
+    @property
+    def features(self):
+        return self._avg_feat_names + self._navg_feat_names + ["relative_all_pos","relative_att_pos","relative_def_pos"]
                  
