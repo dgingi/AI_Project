@@ -1,4 +1,3 @@
-from old_utils import *
 from FCSHC import *
 from pickle import dump,load
 from utils.argumet_parsers import TestArgsParser
@@ -33,7 +32,7 @@ def find_best_partition(league):
     best_i = 0
     
     s = FirstChoiceLocalSearch(X1,Y1)
-    data, final_state_score, output_array = s.search(X2, Y2)
+    data, final_state_score, output_array, random_array = s.search(X2, Y2)
 
     clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
     clf = clf.fit(X1,Y1)
@@ -45,7 +44,7 @@ def find_best_partition(league):
         new_X1 = E.convert(X1, i)
         new_X2 = E.convert(X2, i)
         s = FirstChoiceLocalSearch(new_X1,Y1)
-        data, final_state_score, output_array = s.search(new_X2, Y2)
+        data, final_state_score, output_array, random_array = s.search(new_X2, Y2)
         clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
         clf = clf.fit(new_X1,Y1)
         res = E.predict(clf, new_X2, Y2)
@@ -107,7 +106,7 @@ def find_best_lookback_and_params(league):
 def find_best_decision(X1,X2,Y1,Y2):
     clf = tree.DecisionTreeClassifier()
     clf = clf.fit(X1,Y1)
-    tags_arr = E.predict(X2)
+    tags_arr = clf.predict(X2)
     E=EXHandler("Primer_League")
     result_norm = E.predict(clf, X2, Y2)    
     
