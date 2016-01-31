@@ -25,6 +25,24 @@ class DBHandler():
             self.DB[col].create_index([('Year',pymongo.DESCENDING),('GName',pymongo.ASCENDING),('PName',pymongo.ASCENDING),('Fix',pymongo.DESCENDING)],\
                              unique = True)
         self.league = league
+        self._test = test
+        self._temp_db = self.clone_db(test=self._test)
+    
+    @timed    
+    def clone_db(self,test):
+        from bson.son import SON
+          
+        temp_client = pymongo.MongoClient('localhost')
+        _db = 'leagues_db' if not self._test else 'test'
+        if not test: 
+            temp_client.drop_database(_db)
+        temp_DB = temp_client[_db]
+        for league in LEAGUES:
+            temp_col = temp_DB[self.league]
+            if not test:
+                temp_DB.command(SON([("cloneCollection","%s."%_db+league),("from",'46.101.204.132')]))
+        return temp_DB
+        
     
     def convert(self,data):
         return {name:{str(i):data[name][i] for i in range(1,2*len(data.keys())-1)} for name in data.keys()}
@@ -98,23 +116,25 @@ class DBHandler():
             
             return float(len(all_rel))/len(combined_list_all_1), float(len(att_rel))/len(combined_list_att_1), float(len(def_rel))/len(combined_list_def_1)
         
-        from exhandler.exhandler import EXHandler
         from features.features import Features
-        from bson.son import SON
-        
-        temp_client = pymongo.MongoClient('localhost')
-        temp_DB = temp_client["leagues_db"]
-        temp_col = temp_DB[self.league]
-        temp_col.drop()
-        temp_DB.command(SON([("cloneCollection","leagues_db."+self.league),("from",'46.101.204.132')]))
-        
+#         from bson.son import SON
+#           
+#         temp_client = pymongo.MongoClient('localhost')
+#         _db = 'leagues_db' if not self._test else 'test'
+#         temp_client.drop_database(_db)
+#         temp_DB = temp_client[_db]
+#         temp_col = temp_DB[self.league]
+#         temp_col.drop()
+#         temp_DB.command(SON([("cloneCollection","%s."%_db+self.league),("from",'46.101.204.132')]))
+        temp_DB = self._temp_db
         all_teams_names = [g['_id'] for g in temp_DB[self.league].aggregate([{"$match":{"Year":int(year)}},{"$group":{"_id":"$GName"}}])]
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(temp_DB[self.league],year,self.league)
-        features_names = EXHandler(self.league).get_features_names()
+        features_names = []
         for team in all_teams_dict:
             print "Creating Features for %s-%s"%(team,year)
             res_by_all, res_by_non_avg = features.create_features(team,lookback)
+            if not features_names: features_names = features.features_names
             update_all_teams_dict(res_by_all, all_teams_dict, team, True)
             update_all_teams_dict(res_by_non_avg, all_teams_dict, team, False)
         examples = []
@@ -124,9 +144,15 @@ class DBHandler():
                 if fix == 1 and all_teams_dict[team][fix]==[]:
                     continue
                 curr_game = temp_DB[self.league].find_one({"GName":team,"Fix":fix,"Year":int(year)})
+                if curr_game is None:
+                    continue
                 if curr_game["HA"]=="home":
                     vs_curr_game = temp_DB[self.league].find_one({"GName":curr_game["VS"],"VS":team,"HA":"away","Year":int(year)})
-                    vs_curr_fix = vs_curr_game["Fix"]
+                    try:
+                        vs_curr_fix = vs_curr_game["Fix"]
+                    except TypeError as e:
+                        vs_curr_fix = fix+1
+                        all_teams_dict[curr_game["VS"]][vs_curr_fix] = []
                     if all_teams_dict[curr_game["VS"]][vs_curr_fix] == []:
                         continue
                     rel_all, rel_att, rel_def = relative_features(all_teams_dict[team][fix], all_teams_dict[curr_game["VS"]][vs_curr_fix], features_names)

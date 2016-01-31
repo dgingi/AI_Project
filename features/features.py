@@ -41,10 +41,10 @@ class Features():
         self.prev_year = self.curr_year - 1
         
         self.league = league
-        
-        logging.basicConfig(filename=path.join('logs','features-%s-%s.log'%(league,year)),format='%(levelname)s: %(asctime)s %(message)s', datefmt='%d/%m/%Y %H:%M %p',level=logging.INFO)
+        prev = '..' if not path.exists('logs') else '.'
+        logging.basicConfig(filename=path.join(prev,'logs','features-%s-%s.log'%(league,year)),format='%(levelname)s: %(asctime)s %(message)s', datefmt='%d/%m/%Y %H:%M %p',level=logging.INFO)
     
-    @timed
+    
     def create_features(self,t_name,lookback=15):
         """A method to create features for a team, according to the lookback.
 
@@ -399,6 +399,6 @@ class Features():
         return res   
     
     @property
-    def features(self):
+    def features_names(self):
         return self._avg_feat_names + self._navg_feat_names + ["relative_all_pos","relative_att_pos","relative_def_pos"]
                  
