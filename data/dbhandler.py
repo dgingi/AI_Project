@@ -26,21 +26,16 @@ class DBHandler():
                              unique = True)
         self.league = league
         self._test = test
-        self._temp_db = self.clone_db(test=self._test)
     
     @timed    
-    def clone_db(self,test):
+    def clone_db(self):
         from bson.son import SON
-          
         temp_client = pymongo.MongoClient('localhost')
         _db = 'leagues_db' if not self._test else 'test'
-        if not test: 
-            temp_client.drop_database(_db)
         temp_DB = temp_client[_db]
-        for league in LEAGUES:
-            temp_col = temp_DB[self.league]
-            if not test:
-                temp_DB.command(SON([("cloneCollection","%s."%_db+league),("from",'46.101.204.132')]))
+        temp_col = temp_DB[self.league]
+        temp_col.drop()
+        temp_DB.command(SON([("cloneCollection","%s."%_db+self.league),("from",'46.101.204.132')]))
         return temp_DB
         
     
@@ -117,16 +112,7 @@ class DBHandler():
             return float(len(all_rel))/len(combined_list_all_1), float(len(att_rel))/len(combined_list_att_1), float(len(def_rel))/len(combined_list_def_1)
         
         from features.features import Features
-#         from bson.son import SON
-#           
-#         temp_client = pymongo.MongoClient('localhost')
-#         _db = 'leagues_db' if not self._test else 'test'
-#         temp_client.drop_database(_db)
-#         temp_DB = temp_client[_db]
-#         temp_col = temp_DB[self.league]
-#         temp_col.drop()
-#         temp_DB.command(SON([("cloneCollection","%s."%_db+self.league),("from",'46.101.204.132')]))
-        temp_DB = self._temp_db
+        temp_DB = self.clone_db()
         all_teams_names = [g['_id'] for g in temp_DB[self.league].aggregate([{"$match":{"Year":int(year)}},{"$group":{"_id":"$GName"}}])]
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(temp_DB[self.league],year,self.league)

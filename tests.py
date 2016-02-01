@@ -38,7 +38,7 @@ def find_best_lookback():
         tot_res = 0.0
         for league in LEAGUES:
             E=EXHandler(league)
-            X1,Y1,X2,Y2 = E.split_to_train_and_test(E.get(),i)
+            X1,Y1,X2,Y2 = E.split_to_train_and_test(E.get())
             clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
             clf = clf.fit(X1,Y1)
             tot_res += E.predict(clf, X2, Y2)
