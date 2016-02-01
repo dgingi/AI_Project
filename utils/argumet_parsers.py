@@ -13,31 +13,24 @@ class TestArgsParser(object):
     
     tests = ['bprm','bprt','blk','blkpr']
     leagues = ['Primer_League','Serie_A','La_Liga','Ligue1','Bundesliga']
-    tests_hash = ['bprm for best_params','bprt for best_partition','blk for best_lookback','blkpr for best_lookback_and_params']
+    tests_hash = ['bprm for best_params','blk for best_lookback','blkpr for best_lookback_and_params']
     
     def __init__(self):
         self.parser = ArgumentParser(description='Testing the project')
         self.parser.add_argument('test', metavar='Test', type=str,
                            help='A test to parse. the tests are: '+', '.join(self.tests_hash),
                            choices=self.tests)
-        self.parser.add_argument('league', metavar='League', type=str,
-                           help='A league to parse. The leagues are: '+', '.join(self.leagues),
-                           choices=self.leagues)
         
     def parse(self):
         args = self.parser.parse_args()
         self.TEST_NAME = vars(args)['test']
-        self.LEAGUE_NAME = vars(args)['league']
         self.kwargs = {}
         self.kwargs['func'] = self._hash_test_name(self.TEST_NAME)
-        self.kwargs['league'] = self.LEAGUE_NAME
  
     def _hash_test_name(self,test):
-        from tests import find_best_params,find_best_lookback,find_best_partition,find_best_lookback_and_params
+        from tests import find_best_params,find_best_lookback,find_best_lookback_and_params
         if test == 'bprm':
             return find_best_params
-        elif test == 'bprt':
-            return find_best_partition
         elif test == 'blk':
             return find_best_lookback
         else:

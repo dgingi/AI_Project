@@ -1,4 +1,5 @@
-from FCSHC import *
+from FCSHC import FirstChoiceLocalSearch
+from sklearn import tree
 from pickle import dump,load
 from utils.argumet_parsers import TestArgsParser
 import datetime
@@ -6,72 +7,42 @@ import os
 from exhandler.exhandler import EXHandler
 from data.dbhandler import DBHandler
 from utils.useful import PlotGraph
+from utils.constants import LEAGUES
 
 now = datetime.datetime.now()
 LAST_YEAR = now.year - 1
 
 args_parser = TestArgsParser()
 
-def find_best_params(league):
-    E = EXHandler(league)
-    X1,Y1,X2,Y2 = E.split_to_train_and_test(E.get())
-    s = FirstChoiceLocalSearch(X1,Y1)
-    final_state, final_state_score, output_array, random_array = s.search(X2, Y2)
-    with open(os.path.join("tests/best_params_test/best_params_test_fs.pckl"),'w') as res:
+def find_best_params():
+    s = FirstChoiceLocalSearch()
+    final_state, final_state_score, output_array = s.search()
+    if not os.path.exists(os.path.join("tests/best_params_test")):
+        os.makedirs("tests/best_params_test")
+    with open(os.path.join("tests/best_params_test/best_params_test_fs1.pckl"),'w') as res:
         dump(final_state.data, res)
-    with open(os.path.join("tests/best_params_test/best_params_test_fss.pckl"),'w') as res:
+    with open(os.path.join("tests/best_params_test/best_params_test_fss1.pckl"),'w') as res:
         dump(final_state_score, res)
-    with open(os.path.join("tests/best_params_test/best_params_test_oa.pckl"),'w') as res:
+    with open(os.path.join("tests/best_params_test/best_params_test_oa1.pckl"),'w') as res:
         dump(output_array, res)
+
     y_data = [d[1] for d in output_array]
     PlotGraph([i for i in range(len(output_array))], y_data, 1, "iter number", "success rate", "best_params_test","k")
         
-def find_best_partition(league):
-    E = EXHandler(league)
-    X1,Y1,X2,Y2 = E.split_to_train_and_test(E.get())
-    best_i = 0
-    
-    s = FirstChoiceLocalSearch(X1,Y1)
-    data, final_state_score, output_array, random_array = s.search(X2, Y2)
-
-    clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
-    clf = clf.fit(X1,Y1)
-    output_array = []
-    best_res = E.predict(clf, X2, Y2)
-    output_array += [(best_i,best_res)]
-    
-    for i in range(2,10):
-        new_X1 = E.convert(X1, i)
-        new_X2 = E.convert(X2, i)
-        s = FirstChoiceLocalSearch(new_X1,Y1)
-        data, final_state_score, output_array, random_array = s.search(new_X2, Y2)
-        clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
-        clf = clf.fit(new_X1,Y1)
-        res = E.predict(clf, new_X2, Y2)
-        output_array += [(i,res)]
-    with open("tests/best_partition_test/best_partition.pckl",'w') as res:
-        dump(output_array, res)
-    x_data = [d[0] for d in output_array]
-    y_data = [d[1] for d in output_array]
-    PlotGraph(x_data, y_data, 1, "partition size", "success rate", "best_partition", "k")
-    
-def find_best_lookback(league):
-    D = DBHandler(league)
-    E = EXHandler(league)
+        
+def find_best_lookback():
     with open("tests/best_params_test/best_params_test_fs.pckl",'r') as res:
         data = load(res)
     output_array = []
-    for i in range(3,16):
-        ex_10 , ta_10 = D.create_examples("2010", i)
-        ex_11 , ta_11 = D.create_examples("2011", i)
-        ex_12 , ta_12 = D.create_examples("2012", i)
-        ex_13 , ta_13 = D.create_examples("2013", i)
-        ex_14 , ta_14 = D.create_examples("2014", i)
-        X1 = ex_10 + ex_11 + ex_12 + ex_13
-        Y1 = ta_10 + ta_11 + ta_12 + ta_13
-        clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
-        clf = clf.fit(X1,Y1)
-        res = E.predict(clf, ex_14, ta_14)
+    for i in range(5,55,5):
+        tot_res = 0.0
+        for league in LEAGUES:
+            E=EXHandler(league)
+            X1,Y1,X2,Y2 = E.split_to_train_and_test(E.get(),i)
+            clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
+            clf = clf.fit(X1,Y1)
+            tot_res += E.predict(clf, X2, Y2)
+        res = tot_res/len(LEAGUES)
         output_array += [(i,res)]
     with open("tests/best_lookback_test/best_lookback.pckl",'w') as res:
         dump(output_array, res)
@@ -142,4 +113,4 @@ def find_best_decision(X1,X2,Y1,Y2):
 if __name__ == '__main__':
     args_parser.parse()
     run_func = args_parser.kwargs['func']
-    run_func(args_parser.kwargs['league'])
+    run_func()

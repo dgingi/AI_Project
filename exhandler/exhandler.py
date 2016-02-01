@@ -9,10 +9,10 @@ import copy
 from utils.constants import MIN_YEAR,MAX_YEAR
             
 class EXHandler():
-    def __init__(self,league):
+    def __init__(self,league,remote=True):
         from data.dbhandler import DBHandler
         self.league = league
-        self.DBH = DBHandler(self.league)
+        self.DBH = DBHandler(self.league,remote)
         
 
     def get_features_names(self):
@@ -34,13 +34,13 @@ class EXHandler():
         X2,Y2 = ex[-idx:], ta[-idx:]
         return X1,Y1,X2,Y2
     
-    def get(self,year=None):
+    def get(self,year=None,lookback=15):
         if not year:
             examples = []
             tags = []
             for curr_year in range(MIN_YEAR,MAX_YEAR):
                 if self.DBH.DB[self.league].find_one({"Year":MIN_YEAR}):
-                    temp_e,temp_t = self.DBH.create_examples(str(curr_year))
+                    temp_e,temp_t = self.DBH.create_examples(str(curr_year),lookback)
                     examples += temp_e
                     tags += temp_t
         else:
