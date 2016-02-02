@@ -169,10 +169,10 @@ if __name__ == "__main__":
     
     # set of parameters to test
     param_grid = {"criterion": ["gini", "entropy"],
-                  "min_samples_split": [i+1 for i in range(len(500))],
-                  "max_depth": [None]+[i+1 for i in range(len(59))],
-                  "min_samples_leaf": [i+1 for i in range(len(200))],
-                  "max_leaf_nodes": [None]+[i+1 for i in range(1,len(400))],
+                  "min_samples_split": [i+1 for i in range(500)],
+                  "max_depth": [None]+[i+1 for i in range(59)],
+                  "min_samples_leaf": [i+1 for i in range(200)],
+                  "max_leaf_nodes": [None]+[i+1 for i in range(1,400)],
                   }
     
     dt = DecisionTreeClassifier()

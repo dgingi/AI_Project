@@ -81,7 +81,7 @@ def find_best_decision():
     cv = CrossValidation(test=False)
     cv.load_data(15)
     result_fix = 0.0
-    for train , test in cv.leagues_cross_validation():
+    for train , test in cv._leagues_cross_validation():
         clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
         clf = clf.fit(train[0],train[1])
         tags_arr = clf.predict(test[0])
