@@ -3,7 +3,8 @@ from abstract_search import *
 from random import shuffle,randint,random
 from sklearn import tree
 import copy
-from utils.constants import LEAGUES
+from utils.constants import LEAGUES,YEARS
+from data.cross_validation import CrossValidation
 
 def check_borders(state,key,lbord,ubord):
     if state.data[key] < lbord:
@@ -51,7 +52,7 @@ def funcMinSSAux(i):
 def funcMinSS(state,i):
     new_state = copy.deepcopy(state)
     new_state.data["min_samples_split"] += i
-    check_borders(new_state, "min_samples_split", 2, len(new_state.examples["Primer_League"]))
+    check_borders(new_state, "min_samples_split", 2, 100)
     return new_state
     
 def funcMinSLAux(i):
@@ -60,7 +61,7 @@ def funcMinSLAux(i):
 def funcMinSL(state,i):
     new_state = copy.deepcopy(state)
     new_state.data["min_samples_leaf"] += i
-    check_borders(new_state, "min_samples_leaf", 1, len(new_state.examples["Primer_League"]))
+    check_borders(new_state, "min_samples_leaf", 1, 50)
     return new_state
 
     
@@ -123,30 +124,31 @@ class LearningState(SearchState):
 
 class FirstChoiceLocalSearch(LocalSearch):
     def __init__(self):
-        ex_dict = {}
-        ta_dict = {}
-        from exhandler.exhandler import EXHandler
+        ex_dict = {league:[] for league in LEAGUES}
+        ta_dict = {league:[] for league in LEAGUES}
+        cv = CrossValidation(test=False)
+        cv.load_data(15)
         for league in LEAGUES:
-            ex_dict[league], ta_dict[league] = EXHandler(league).get()
+            for year in YEARS:
+                ex_dict[league].extend(cv.data[league][year][0]) 
+                ta_dict[league].extend(cv.data[league][year][1])
         
         data = {"criterion":"gini","splitter":"random","max_features":len(ex_dict["Primer_League"][0]),"min_samples_split":2,"min_samples_leaf":1,"max_depth":len(ex_dict["Primer_League"][0])}
         starting_state = LearningState(data,ex_dict,ta_dict)
         LocalSearch.__init__(self,starting_state)
         self.sideSteps = 30
-        print "Finish Init"
     
     def make_random_state(self,state,array):
         new_data = {}
         prev_state = True
         while prev_state:
-            print "looking for new random start"
             found_prev = False
             new_data["criterion"] = "gini" if random() <= 0.5 else "entropy"
             new_data["splitter"] = "random" if random() <= 0.5 else "best"
             new_data["max_features"] = randint(1,len(state.examples["Primer_League"][0]))
-            new_data["max_depth"] =  len(state.examples["Primer_League"][0]) if random() <= 0.5 else randint(1,len(state.examples["Primer_League"][0]))
-            new_data["min_samples_split"] = randint(2,len(state.examples["Primer_League"]))
-            new_data["min_samples_leaf"] = randint(1,len(state.examples["Primer_League"]))
+            new_data["max_depth"] =  randint(1,len(state.examples["Primer_League"][0]))
+            new_data["min_samples_split"] = randint(2,100)
+            new_data["min_samples_leaf"] = randint(1,50)
             for i in range(len(array)):
                 if array[i][1] == new_data:
                     found_prev = True
@@ -158,7 +160,6 @@ class FirstChoiceLocalSearch(LocalSearch):
         
     
     def search(self):
-        print "Start Search"
         current = self._current_state
         output_array = []
         random_array = []
@@ -167,7 +168,6 @@ class FirstChoiceLocalSearch(LocalSearch):
         first_state = True
         
         while True:
-            print "start of loop"
             improved = False
             next_states = current.get_next_states()
             shuffle(next_states)
@@ -178,17 +178,14 @@ class FirstChoiceLocalSearch(LocalSearch):
             
             while not improved and self.sideSteps >= 0:
                 try:
-                    print "Looking for next step"
                     new_state = next_states.pop(0)[0]
                 except Exception,e:
                     break
                 nRes = new_state.evaluate2()
                 if nRes >= cRes :
                     if nRes == cRes:
-                        print "Found Equal"
                         self.sideSteps -= 1
                     if nRes > cRes:
-                        print "Found Better",cRes,nRes
                         self.sideSteps = 30
                     
                     current = new_state
@@ -196,18 +193,14 @@ class FirstChoiceLocalSearch(LocalSearch):
                     first_state = False
                     improved = True
             
-            print "Improved=",improved
             if not improved:
-                print "finish looking all near stages no better"
                 if random_start <= 10:
-                    print "random"
                     random_array += [(cRes,current)]
                     current = self.make_random_state(current,output_array)
                     random_start += 1
                     first_state = True
                     self.sideSteps = 30
                 else:
-                    print "Finish-",random_array
                     return max(random_array)[1],max(random_array)[0],output_array
 
 

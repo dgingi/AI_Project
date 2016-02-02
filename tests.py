@@ -8,6 +8,7 @@ from exhandler.exhandler import EXHandler
 from data.dbhandler import DBHandler
 from utils.useful import PlotGraph
 from utils.constants import LEAGUES
+from data.cross_validation import CrossValidation
 
 now = datetime.datetime.now()
 LAST_YEAR = now.year - 1
@@ -17,13 +18,13 @@ args_parser = TestArgsParser()
 def find_best_params():
     s = FirstChoiceLocalSearch()
     final_state, final_state_score, output_array = s.search()
-    if not os.path.exists(os.path.join("tests/best_params_test")):
-        os.makedirs("tests/best_params_test")
-    with open(os.path.join("tests/best_params_test/best_params_test_fs1.pckl"),'w') as res:
+    if not os.path.exists(os.path.join("tests/bprm")):
+        os.makedirs("tests/bprm")
+    with open(os.path.join("tests/bprm/bprm_fs1.pckl"),'w') as res:
         dump(final_state.data, res)
-    with open(os.path.join("tests/best_params_test/best_params_test_fss1.pckl"),'w') as res:
+    with open(os.path.join("tests/bprm/bprm_fss1.pckl"),'w') as res:
         dump(final_state_score, res)
-    with open(os.path.join("tests/best_params_test/best_params_test_oa1.pckl"),'w') as res:
+    with open(os.path.join("tests/bprm/bprm_oa1.pckl"),'w') as res:
         dump(output_array, res)
 
     y_data = [d[1] for d in output_array]
@@ -74,41 +75,47 @@ def find_best_lookback_and_params(league):
     y_data = [d[1] for d in output_array]
     PlotGraph(x_data, y_data, 1, "lookback size", "success rate", "best_lookback_and_params", "k")
 
-def find_best_decision(X1,X2,Y1,Y2):
-    clf = tree.DecisionTreeClassifier()
-    clf = clf.fit(X1,Y1)
-    tags_arr = clf.predict(X2)
-    E=EXHandler("Primer_League")
-    result_norm = E.predict(clf, X2, Y2)    
-    
-    array = []
-    for i in range(19):
-        clf = tree.DecisionTreeClassifier()
-        clf = clf.fit(X1,Y1)
-        res = clf.predict(X2)
-        array += [res]
-    
-    final = []
-    for i in range(len(array[0])):
-        temp = []
-        for j in range(len(array)):
-            temp += [array[j][i]]
-        d = {-1:0,0:0,1:0}
-        for k in temp:
-            d[k]+=1
-        max_list = []
-        for key in d:
-            max_list += [(d[key],key)]
-        final += [max(max_list)[1]]
-    
-    s=0
-    for i in range(len(final)):
-        if final[i]==Y2[i]:
-            s+=1
-            
-            
-    result_fix = (s*1.0)/len(final)
-    return final,tags_arr,result_fix,result_norm
+def find_best_decision():
+    with open("tests/bprm/bprm_fs1.pckl",'r') as res:
+        data = load(res)
+    cv = CrossValidation(test=False)
+    cv.load_data(15)
+    result_fix = 0.0
+    for train , test in cv.leagues_cross_validation():
+        clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
+        clf = clf.fit(train[0],train[1])
+        tags_arr = clf.predict(test[0])
+        E=EXHandler("Primer_League",False)
+        result_norm = E.predict(clf, test[0], test[1])    
+        
+        array = []
+        for i in range(11):
+            clf = tree.DecisionTreeClassifier(criterion=data["criterion"],splitter=data["splitter"],max_features=data["max_features"],max_depth=data["max_depth"],min_samples_leaf=data["min_samples_leaf"],min_samples_split=data["min_samples_split"])
+            clf = clf.fit(train[0],train[1])
+            res = clf.predict(test[0])
+            array += [res]
+        
+        final = []
+        for i in range(len(array[0])):
+            temp = []
+            for j in range(len(array)):
+                temp += [array[j][i]]
+            d = {-1:0,0:0,1:0}
+            for k in temp:
+                d[k]+=1
+            max_list = []
+            for key in d:
+                max_list += [(d[key],key)]
+            final += [max(max_list)[1]]
+        
+        s=0
+        for i in range(len(final)):
+            if final[i]==test[1][i]:
+                s+=1
+                
+                
+        result_fix += (s*1.0)/len(final)
+    print final,tags_arr,result_fix,result_norm
 
 if __name__ == '__main__':
     args_parser.parse()

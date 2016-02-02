@@ -8,10 +8,9 @@ Implementations of different command line arguments parsers.
 import argparse
 from argparse import ArgumentParser
 
-
 class TestArgsParser(object):
     
-    tests = ['bprm','bprt','blk','blkpr']
+    tests = ['bprm','blk','blkpr','bda']
     leagues = ['Primer_League','Serie_A','La_Liga','Ligue1','Bundesliga']
     tests_hash = ['bprm for best_params','blk for best_lookback','blkpr for best_lookback_and_params']
     
@@ -28,11 +27,13 @@ class TestArgsParser(object):
         self.kwargs['func'] = self._hash_test_name(self.TEST_NAME)
  
     def _hash_test_name(self,test):
-        from tests import find_best_params,find_best_lookback,find_best_lookback_and_params
+        from tests import find_best_params,find_best_lookback,find_best_lookback_and_params,find_best_decision
         if test == 'bprm':
             return find_best_params
         elif test == 'blk':
             return find_best_lookback
+        elif test == 'bda':
+            return find_best_decision
         else:
             return find_best_lookback_and_params
         

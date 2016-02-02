@@ -124,7 +124,7 @@ class DBHandler():
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(temp_DB[self.league],year,self.league)
         features_names = []
-        prog_bar = ChargingBar('Creating examples for %s'%self.league,max=len(all_teams_dict))
+        prog_bar = ChargingBar('Creating examples for %s-%'%(self.league,year),max=len(all_teams_dict))
         for team in all_teams_dict:
 #             print "Creating Features for %s-%s"%(team,year)
             res_by_all, res_by_non_avg = features.create_features(team,lookback)
