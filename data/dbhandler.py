@@ -3,15 +3,19 @@ A module to handle the backend of the project.
 
 @author: Dror Porat & Ory Jonay
 '''
-import sys, os
-sys.path.append('..')
+import logging
 import pickle
+from progress.bar import ChargingBar
 import pymongo
+import sys, os
 
 import numpy as np
 from utils.constants import MAX_YEAR, MIN_YEAR, LEAGUES, MONTHS
 from utils.decorators import timed
-import logging
+
+
+sys.path.append('..')
+
 
 
 
@@ -36,8 +40,9 @@ class DBHandler():
         temp_DB = temp_client[_db]
         for league in LEAGUES:
             temp_col = temp_DB[league]
-            temp_col.drop()
-            temp_DB.command(SON([("cloneCollection","%s."%_db+league),("from",'46.101.204.132')]))
+            if not self._test or temp_DB[league].find().count() == 0:
+                temp_col.drop()
+                temp_DB.command(SON([("cloneCollection","%s."%_db+league),("from",'46.101.204.132')]))
         return temp_DB
         
     
@@ -119,14 +124,17 @@ class DBHandler():
         all_teams_dict = {name:{} for name in all_teams_names}
         features = Features(temp_DB[self.league],year,self.league)
         features_names = []
+        prog_bar = ChargingBar('Creating examples for %s'%self.league,max=len(all_teams_dict))
         for team in all_teams_dict:
-            print "Creating Features for %s-%s"%(team,year)
+#             print "Creating Features for %s-%s"%(team,year)
             res_by_all, res_by_non_avg = features.create_features(team,lookback)
             if not features_names: features_names = features.features_names
             update_all_teams_dict(res_by_all, all_teams_dict, team, True)
             update_all_teams_dict(res_by_non_avg, all_teams_dict, team, False)
+            prog_bar.next()
         examples = []
         tags = []
+        prog_bar.finish()
         for team in all_teams_names:
             for fix in sorted(all_teams_dict[team]):
                 if fix == 1 and all_teams_dict[team][fix]==[]:

@@ -373,5 +373,5 @@ if __name__ == '__main__':
     else:
 #         for kwargs in args_parser.update_kwargs:
 #             start_crawl(kwargs)
-        p = Pool(cpu_count())
+        p = Pool(cpu_count()/2)
         p.map(start_crawl, args_parser.update_kwargs)
