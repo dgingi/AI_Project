@@ -338,7 +338,7 @@ class WhoScoredCrawler(object):
             if len(pckl_files) == 1: return self.played_months[-1] 
             #TODO fix to match 3 files
             def _get_last_save_month():
-                for i in range(3):
+                for i in range(len(pckl_files)):
                     if pckl_files[i].split('/')[2].split('.')[0] in self.played_months:
                         return pckl_files[i].split('/')[2].split('.')[0]
             self.last_save_month = _get_last_save_month()
