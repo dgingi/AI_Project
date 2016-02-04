@@ -260,14 +260,14 @@ class WhoScoredCrawler(object):
             with open(path.join(self._bkup_folder,self.last_save_month+'.pckl'),'rb') as _bkup_f:
                 self.all_teams_dict = pickle.load(_bkup_f)
             if not current:
-                with open(path.join(self._bkup_folder,self.last_save_month+'-nxtFix'),'rb') as _bkup_f:
+                with open(path.join(self._bkup_folder,self.last_save_month+'-nxtFix.pckl'),'rb') as _bkup_f:
                     self.all_teams_curr_fix = pickle.load(_bkup_f)
             else:
                 if self.last_save_month != datetime.now().strftime('%b'):
-                    with open(path.join(self._bkup_folder,self.last_save_month+'-nxtFix'),'rb') as _bkup_f:
+                    with open(path.join(self._bkup_folder,self.last_save_month+'-nxtFix.pckl'),'rb') as _bkup_f:
                         self.all_teams_curr_fix = pickle.load(_bkup_f)
                 else:
-                    with open(path.join(self._bkup_folder,self.played_months[self.played_months.index(self.last_save_month)+1]+'-nxtFix'),'rb') as _bkup_f:
+                    with open(path.join(self._bkup_folder,self.played_months[self.played_months.index(self.last_save_month)+1]+'-nxtFix.pckl'),'rb') as _bkup_f:
                         self.all_teams_curr_fix = pickle.load(_bkup_f)
         else:
             self.all_teams_dict = {name:{i:{} for i in range(1,2*len(self.team_names)-1)} for name in self.team_names}
@@ -304,12 +304,16 @@ class WhoScoredCrawler(object):
         with open(path.join(self._bkup_folder,month+'.pckl'),'wb') as month_bkup:
             pickle.dump(self.all_teams_dict,month_bkup)
         nxt_fix_dict = {name:self._get_curr_fix(name) for name in self.team_names}
-        with open(path.join(self._bkup_folder,month+'-nxtFix'),'wb') as month_nf_bkup:
+        with open(path.join(self._bkup_folder,month+'-nxtFix.pckl'),'wb') as month_nf_bkup:
             pickle.dump(nxt_fix_dict,month_nf_bkup)
         if month != self.played_months[-1]:
             os.remove(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+1]+'.pckl'))
-            if os.path.exists(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+2]+'-nxtFix')):
-                os.remove(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+2]+'-nxtFix'))
+            if os.path.exists(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+2]+'-nxtFix.pckl')):
+                try:
+                    os.remove(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+2]+'-nxtFix.pckl'))
+                except Exception as e:
+                    logging.info(str(e))
+                    pass
             
     @retry()       
     def parse_fixture(self,fixture):
@@ -330,10 +334,14 @@ class WhoScoredCrawler(object):
         logging.info('Finding the start month')
         if path.exists(self._bkup_fixtures_links):
             pckl_files = glob.glob('%s/*.pckl'%self._bkup_folder)
-            assert len(pckl_files) <= 2, 'Too many files, should only be fixtures and games for up to the last month'
+            assert len(pckl_files) <= 3, 'Too many files, should only be fixtures and games for up to the last month'
             if len(pckl_files) == 1: return self.played_months[-1] 
             #TODO fix to match 3 files
-            self.last_save_month = pckl_files[0].split('/')[2].split('.')[0] if pckl_files[0].split('/')[2].split('.')[0] in self.played_months else pckl_files[1].split('/')[2].split('.')[0]
+            def _get_last_save_month():
+                for i in range(3):
+                    if pckl_files[i].split('/')[2].split('.')[0] in self.played_months:
+                        return pckl_files[i].split('/')[2].split('.')[0]
+            self.last_save_month = _get_last_save_month()
             if not current:
                 if self.last_save_month != self.played_months[0]:
                     logging.info('Finished finding start month')
