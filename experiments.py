@@ -79,7 +79,7 @@ if __name__ == '__main__':
     params_ranges = {"min_samples_split": (1,300),
                   "max_depth": (1,60),
                   "min_samples_leaf": (15,100),
-                  "max_leaf_nodes": (1,100),
+                  "max_leaf_nodes": (2,100),
                   }
     expr = best_params("bprm_grid",DTC,GridSearchCV,parameters,criterion,params_ranges)
     expr.run()
