@@ -55,7 +55,7 @@ class best_params(run_experiment):
         self.get_data()
         algo_old = self.algo()
         self.make_param_grid()
-        algo_search = self.expr(algo_old, self.param_grid, cv=self.cv.leagues_cross_validation)
+        algo_search = self.expr(algo_old, self.param_grid, cv=5)
         algo_search.fit(self.X, self.y)
         tg_pg = self.report(self.param_grid.grid_scores_, 3)
         new_algo = self.algo(**tg_pg)
