@@ -50,14 +50,14 @@ class best_params(run_experiment):
         for param in self.params:
             if param != "criterion":
                 self.param_grid[param] = [i for i in range(self.params_ranges[param][0],self.params_ranges[param][1])]
-    
+        
     def run(self):
         self.get_data()
         algo_old = self.algo()
-        pg = self.make_param_grid()
-        algo_search = self.expr(algo_old, pg, cv=self.cv.leagues_cross_validation)
+        self.make_param_grid()
+        algo_search = self.expr(algo_old, self.param_grid, cv=self.cv.leagues_cross_validation)
         algo_search.fit(self.X, self.y)
-        tg_pg = self.report(pg.grid_scores_, 3)
+        tg_pg = self.report(self.param_grid.grid_scores_, 3)
         new_algo = self.algo(**tg_pg)
         scores = cross_val_score(new_algo, self.X, self.y, cv=self.cv.leagues_cross_validation)
         print "mean: {:.3f} (std: {:.3f})".format(scores.mean(), scores.std())+"\n\n" 
