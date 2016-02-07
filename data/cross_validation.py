@@ -45,12 +45,14 @@ class CrossValidation(object):
         
     @property
     def leagues_cross_validation(self):
+        res = []
         for league in LEAGUES:
             train_leagues = list(set(LEAGUES) - set([league]))
             train_leagues.sort(key=LEAGUES.index)
             test_league = [league]
             train_data , test_data = self.create_indeces_leagues(train_leagues,test_league)
-            yield numpy.array(train_data) , numpy.array(test_data)
+            res.append((numpy.array(train_data) , numpy.array(test_data)))
+        return res
     
     def _leagues_cross_validation(self):
         for league in LEAGUES:

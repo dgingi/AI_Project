@@ -93,7 +93,7 @@ class DBHandler():
         else:
             self.DB[self.league].drop()
     
-    @timed        
+            
     def create_examples(self,year,lookback=15):
         
         def update_all_teams_dict(res,all_teams_dict,team,first):
