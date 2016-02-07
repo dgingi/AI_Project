@@ -1,3 +1,5 @@
+import sys
+sys.path.append('..')
 import unittest
 from data.cross_validation import CrossValidation
 from sklearn.tree import DecisionTreeClassifier as DTC
