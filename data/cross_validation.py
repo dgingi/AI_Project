@@ -28,6 +28,14 @@ class CrossValidation(object):
             for _y in YEARS:
                 self.complete_examples.extend(self.data[_l][_y][0])
                 self.complete_tags.extend(self.data[_l][_y][1])
+        res = []
+        for league in LEAGUES:
+            train_leagues = list(set(LEAGUES) - set([league]))
+            train_leagues.sort(key=LEAGUES.index)
+            test_league = [league]
+            train_data , test_data = self.create_indeces_leagues(train_leagues,test_league)
+            res.append((numpy.array(train_data) , numpy.array(test_data)))
+        self.cv_list = res
         
     def create_indeces_leagues(self,train,test):
         _train , _test = [] , []
@@ -45,14 +53,8 @@ class CrossValidation(object):
         
     @property
     def leagues_cross_validation(self):
-        res = []
-        for league in LEAGUES:
-            train_leagues = list(set(LEAGUES) - set([league]))
-            train_leagues.sort(key=LEAGUES.index)
-            test_league = [league]
-            train_data , test_data = self.create_indeces_leagues(train_leagues,test_league)
-            res.append((numpy.array(train_data) , numpy.array(test_data)))
-        return res
+        return self.cv_list
+        
     
     def _leagues_cross_validation(self):
         for league in LEAGUES:

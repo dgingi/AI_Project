@@ -39,8 +39,16 @@ class xTestCrossValidation(unittest.TestCase):
 
         
 class TestExperiments(unittest.TestCase):
+    def tearDown(self):
+        unittest.TestCase.tearDown(self)
+        from shutil import rmtree
+        try:
+            rmtree('Results/ut_results')
+        except:
+            pass
+    
     def test(self):
-        BestParamsExperiment('dt',True).run()
+        BestParamsExperiment('ut_results',True).run()
     
         
 if __name__ == "__main__":
