@@ -56,7 +56,8 @@ class Experiment():
         Loads the all of the examples and tags, and also creates a cross validation for using in the estimators \ searches.
         '''
         self.cv = CrossValidation(test=self._test)
-        self.cv.load_data()
+        lookback = 2 if self._test else 15
+        self.cv.load_data(lookback)
         self.X = self.cv.complete_examples
         self.y = self.cv.complete_tags
         
