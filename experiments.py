@@ -23,8 +23,9 @@ class Experiment():
         '''
         Creates a new Experiment instance.
         
-        Requires a dir_name (to save results) and a flag to indicate whether it's test enviorment or not.
+        Requires a dir_name (to save results) and a flag to indicate whether it's test environment or not.
         '''
+        self._dir_name = dir_name
         self.results_dir = join_path('Results',dir_name)
         self._test = test
         
@@ -150,9 +151,48 @@ class BestParamsExperiment(Experiment):
         grid_tree.fit(self.cv.complete_examples,self.cv.complete_tags)
         grid_forest = GridSearchCV(RFC(), _grids['RFC'], n_jobs=-1, cv=self.cv.leagues_cross_validation)
         grid_forest.fit(self.cv.complete_examples,self.cv.complete_tags)
-        self.save({'Tree':grid_tree,'Forest':grid_forest})
+        self._loaded_data = {'Tree':grid_tree,'Forest':grid_forest} 
+        self.save(self._loaded_data)
+        
+
+class AdaBoostExperimet(Experiment):
+    '''
+    A class the experiments the AdaBoost algorithm.
+    '''
+    def __init__(self, dir_name, test=False):
+        Experiment.__init__(self, dir_name, test=test)
+        self.name = 'AdaBoost'
+        
+    def load_params(self,estimators=[]):
+        if not self._test:
+            return {'base_estimator':estimators,\
+                'n_estimators':range(50,500,50),\
+                }
+        else:
+            return {'base_estimator':estimators,\
+                    'n_estimators':range(50,151,50)}
+            
+    def run(self):
+        Experiment.run(self)
+        best_param_exp = BestParamsExperiment(self._dir_name, self._test)
+        try:
+            best_param_exp.load()
+        except Exception as e:
+            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
+            ans = raw_input('>>>')
+            if ans == 'Yes I am sure':
+                best_param_exp.run()
+            else:
+                return
+        estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
+        _grid = self.load_params(estimators)
+        ada_boost = GridSearchCV(AdaC(), _grid, n_jobs=-1, cv=self.cv.leagues_cross_validation)
+        ada_boost.fit(self.cv.complete_examples,self.cv.complete_tags)
+        self._loaded_data = {'AdaBoost':ada_boost}
+        self.save(self._loaded_data)
         
         
+            
         
 if __name__ == '__main__':
     BestParamsExperiment('Best_Params').run()
