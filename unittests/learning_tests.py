@@ -8,7 +8,7 @@ from sklearn.ensemble import AdaBoostClassifier as ABC
 from sklearn.grid_search import GridSearchCV
 from sklearn.cross_validation import cross_val_score
 from utils.constants import LEAGUES
-from experiments import BestParamsExperiment, AdaBoostExperimet
+from experiments import BestParamsExperiment, AdaBoostExperimet, BestLookbackExperimet
 
 
 class xTestCrossValidation(unittest.TestCase):
@@ -54,6 +54,8 @@ class TestExperiments(unittest.TestCase):
         BestParamsExperiment('ut_results',True).run()
         AdaBoostExperimet('ut_results',True).run()
     
+    def xtestLookback(self):
+        BestLookbackExperimet('ut_results',True).run()
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

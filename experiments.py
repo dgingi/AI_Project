@@ -1,4 +1,3 @@
-
 from data.cross_validation import CrossValidation
 from os.path import exists, join as join_path
 from os import  makedirs
@@ -191,8 +190,48 @@ class AdaBoostExperimet(Experiment):
         self._loaded_data = {'AdaBoost':ada_boost}
         self.save(self._loaded_data)
         
+class BestLookbackExperimet(Experiment):
+    '''
+    A class that experiments the best lookback for making examples.
+    '''
+    def __init__(self, dir_name, test=False):
+        Experiment.__init__(self, dir_name, test=test)
+        self.name = 'Best_Lookback'
+             
+    
+    def load_params(self,estimators=[]):
+        best_param_exp = BestParamsExperiment(self._dir_name, self._test)
+        try:
+            best_param_exp.load()
+        except Exception as e:
+            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
+            ans = raw_input('>>>')
+            if ans == 'Yes I am sure':
+                best_param_exp.run()
+            else:
+                return
+        self.estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
         
-            
+    def get_data(self,lookback):
+        self.cv = CrossValidation(test=self._test)
+        self.cv.load_data(lookback)
+        self.X = self.cv.complete_examples
+        self.y = self.cv.complete_tags
+        
+    def run(self):
+        if not self._test:
+            self.ranges = [15,30]
+        else:
+            self.ranges = range(1,101,10)
+        self.load_params()
+        results = {str(i):0 for i in self.ranges}
+        for lookback in self.ranges:
+            self.get_data(lookback)
+            dtc_score = cross_val_score(self.estimators[0], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+            rtc_score = cross_val_score(self.estimators[1], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+            results[str(lookback)] = (dtc_score.mean(),rtc_score.mean())
+        self.save(results)
+        
         
 if __name__ == '__main__':
     BestParamsExperiment('Best_Params').run()
