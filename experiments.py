@@ -146,9 +146,9 @@ class BestParamsExperiment(Experiment):
         '''
         Experiment.run(self)
         _grids = self.load_params()
-        grid_tree = RandomizedSearchCV(DTC(), _grids['DTC'], n_jobs=-1, cv=self.cv.leagues_cross_validation,n_iters=1000)
+        grid_tree = RandomizedSearchCV(DTC(), _grids['DTC'], n_jobs=-1, cv=self.cv.leagues_cross_validation,n_iter=1000)
         grid_tree.fit(self.cv.complete_examples,self.cv.complete_tags)
-        grid_forest = RandomizedSearchCV(RFC(), _grids['RFC'], n_jobs=-1, cv=self.cv.leagues_cross_validation,n_iters=1000)
+        grid_forest = RandomizedSearchCV(RFC(), _grids['RFC'], n_jobs=-1, cv=self.cv.leagues_cross_validation,n_iter=1000)
         grid_forest.fit(self.cv.complete_examples,self.cv.complete_tags)
         self._loaded_data = {'Tree':grid_tree,'Forest':grid_forest} 
         self.save(self._loaded_data)
