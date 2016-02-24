@@ -8,7 +8,7 @@ from sklearn.cross_validation import  cross_val_score
 from sklearn.tree import DecisionTreeClassifier as DTC
 from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.ensemble import AdaBoostClassifier as AdaC
-from sklearn.grid_search import GridSearchCV
+from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
 
 class Experiment():
     '''
@@ -146,9 +146,9 @@ class BestParamsExperiment(Experiment):
         '''
         Experiment.run(self)
         _grids = self.load_params()
-        grid_tree = GridSearchCV(DTC(), _grids['DTC'], n_jobs=-1, cv=self.cv.leagues_cross_validation)
+        grid_tree = RandomizedSearchCV(DTC(), _grids['DTC'], n_jobs=-1, cv=self.cv.leagues_cross_validation,n_iters=1000)
         grid_tree.fit(self.cv.complete_examples,self.cv.complete_tags)
-        grid_forest = GridSearchCV(RFC(), _grids['RFC'], n_jobs=-1, cv=self.cv.leagues_cross_validation)
+        grid_forest = RandomizedSearchCV(RFC(), _grids['RFC'], n_jobs=-1, cv=self.cv.leagues_cross_validation,n_iters=1000)
         grid_forest.fit(self.cv.complete_examples,self.cv.complete_tags)
         self._loaded_data = {'Tree':grid_tree,'Forest':grid_forest} 
         self.save(self._loaded_data)
@@ -165,7 +165,7 @@ class AdaBoostExperimet(Experiment):
     def load_params(self,estimators=[]):
         if not self._test:
             return {'base_estimator':estimators,\
-                'n_estimators':range(50,500,50),\
+                'n_estimators':range(100,501,50),\
                 }
         else:
             return {'base_estimator':estimators,\
