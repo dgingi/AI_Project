@@ -33,9 +33,7 @@ class Experiment():
         
     def save(self,data):
         '''
-        Saves data into the results dir under the special suffix .results.
-        
-        Each Experiment should only have ONE .results file in his results_dir, since it's the data the will be loaded.
+        Saves data into the results dir under the special format {experiment_name}.results
         '''
         if not exists(self.results_dir):
             makedirs(self.results_dir)
@@ -46,7 +44,7 @@ class Experiment():
         '''
         Loads results from previous runs into _loaded_data attribute.
         '''
-        _path = glob(join_path(self.results_dir,'*.results')).pop()
+        _path = glob(join_path(self.results_dir,'%s.results'%self.name)).pop()
         with open(_path,'r') as _f:
             self._loaded_data = load(_f)
     
@@ -179,7 +177,7 @@ class BestParamsExperiment(Experiment):
     
     def run(self):
         '''
-        Runs a GridSearch on both DecisionTree and RandomForest classifiers.
+        Runs a RandomizedSearch on both DecisionTree and RandomForest classifiers.
         '''
         Experiment.run(self)
         _grids = self.load_params()
