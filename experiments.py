@@ -3,6 +3,7 @@ from os.path import exists, join as join_path
 from os import  makedirs
 from pickle import dump , load
 import numpy as np
+from scipy.stats import ttest_rel
 from glob import glob
 from sklearn.cross_validation import  cross_val_score
 from sklearn.tree import DecisionTreeClassifier as DTC
@@ -76,7 +77,43 @@ class Experiment():
         You should override this in derived classes to configure the experiment parameters
         '''
         raise NotImplementedError
+    
+    '''
+    @todo:    t_test for 2 algs
+              validate & report
+    '''
+      
+    def t_test(self,original_measurements, measurements_after_alteration):
+        '''
+        This is the paired T-test (for repeated measurements):
+        Given two sets of measurements on the SAME data points (folds) before and after some change,
+        Checks whether or not they come from the same distribution. 
         
+        This T-test assumes the measurements come from normal distributions.
+        
+        Returns: 
+            The probability the measurements come the same distributions
+            A flag that indicates whether the result is statically significant
+            A flag that indicates whether the new measurements are better than the old measurements
+        '''
+        SIGNIFICANCE_THRESHOLD= 0.05
+        
+        test_value, probability= ttest_rel(original_measurements, measurements_after_alteration)
+        is_significant= probability/2 < SIGNIFICANCE_THRESHOLD
+        is_better= sum(original_measurements) < sum(measurements_after_alteration) #should actually compare averages, but there's no need since it's the same number of measurments.
+        return probability/2 if is_better else 1-probability/2, is_significant, is_better
+    
+    def _load_prev_experiment(self,exp):
+        try:
+            exp.load()
+        except Exception as e:
+            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'%exp.name
+            ans = raw_input('>>>')
+            if ans == 'Yes I am sure':
+                exp.run()
+            else:
+                return
+  
 #     def report(self,grid_scores, n_top=3):
 #         top_scores = sorted(grid_scores, key=itemgetter(1),reverse=True)[:n_top]
 #         for i, score in enumerate(top_scores):
@@ -174,15 +211,7 @@ class AdaBoostExperimet(Experiment):
     def run(self):
         Experiment.run(self)
         best_param_exp = BestParamsExperiment(self._dir_name, self._test)
-        try:
-            best_param_exp.load()
-        except Exception as e:
-            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
-            ans = raw_input('>>>')
-            if ans == 'Yes I am sure':
-                best_param_exp.run()
-            else:
-                return
+        self._load_prev_experiment(best_param_exp)
         estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
         _grid = self.load_params(estimators)
         ada_boost = GridSearchCV(AdaC(), _grid, n_jobs=-1, cv=self.cv.leagues_cross_validation)
@@ -201,16 +230,12 @@ class BestLookbackExperimet(Experiment):
     
     def load_params(self,estimators=[]):
         best_param_exp = BestParamsExperiment(self._dir_name, self._test)
-        try:
-            best_param_exp.load()
-        except Exception as e:
-            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
-            ans = raw_input('>>>')
-            if ans == 'Yes I am sure':
-                best_param_exp.run()
-            else:
-                return
-        self.estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
+        self._load_prev_experiment(best_param_exp)
+        ada_exp = AdaBoostExperimet(self._dir_name, self._test)
+        self._load_prev_experiment(ada_exp)
+        self.estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),\
+                           RFC(**best_param_exp._loaded_data['Forest'].best_params_),\
+                           AdaC(**ada_exp._loaded_data['AdaBoost'].best_params_)]
         
     def get_data(self,lookback):
         self.cv = CrossValidation(test=self._test)
@@ -228,13 +253,15 @@ class BestLookbackExperimet(Experiment):
         for lookback in self.ranges:
             self.get_data(lookback)
             dtc_score = cross_val_score(self.estimators[0], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
-            rtc_score = cross_val_score(self.estimators[1], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
-            results[str(lookback)] = (dtc_score.mean(),rtc_score.mean())
-        self.save(results)
+            rfc_score = cross_val_score(self.estimators[1], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+            ada_score = cross_val_score(self.estimators[2], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+            results[str(lookback)] = (dtc_score,rfc_score,ada_score)
+        self._loaded_data = results
+        self.save(self._loaded_data)
         
         
 if __name__ == '__main__':
-    BestParamsExperiment('Best_Params').run()
+    AdaBoostExperimet('Best_Params').run()
 #     #args_parser.parse()
 #     #run_func = args_parser.kwargs['func']
 #     #run_func()
