@@ -1,15 +1,18 @@
-from data.cross_validation import CrossValidation
-from os.path import exists, join as join_path
-from os import  makedirs
-from pickle import dump , load
-import numpy as np
-from scipy.stats import ttest_rel
 from glob import glob
+from os import  makedirs
+from os.path import exists, join as join_path
+from pickle import dump , load
+from scipy.stats import ttest_rel
 from sklearn.cross_validation import  cross_val_score
-from sklearn.tree import DecisionTreeClassifier as DTC
-from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.ensemble import AdaBoostClassifier as AdaC
+from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
+from sklearn.tree import DecisionTreeClassifier as DTC
+
+from data.cross_validation import CrossValidation
+import numpy as np
+from utils.argumet_parsers import ExperimentArgsParser
+
 
 class Experiment():
     '''
@@ -112,7 +115,8 @@ class Experiment():
             else:
                 return
   
-#     def report(self,grid_scores, n_top=3):
+    def report(self,*args,**kwargs):
+        raise NotImplementedError("I'm not done with this yet... Could use some help!")
 #         top_scores = sorted(grid_scores, key=itemgetter(1),reverse=True)[:n_top]
 #         for i, score in enumerate(top_scores):
 #             print("Model with rank: {0}".format(i + 1))
@@ -160,18 +164,8 @@ class BestParamsExperiment(Experiment):
                            'n_jobs':[-1]}}
         else:
             return {'DTC':{'criterion':['gini'],\
-#                            'max_depth':range(5,61,30),\
-#                            'max_leaf_nodes':[None]+range(10,51,30),\
-#                            'min_samples_leaf':range(15,100,60),\
-#                            'min_samples_split':range(2,51,30),\
-#                            'splitter':['random','best'],\
                            'max_features':[None,'auto','log2']+range(10,61,25)},\
                     'RFC':[{'criterion':['gini'],\
-#                            'max_depth':range(5,61,30),\
-#                            'max_leaf_nodes':[None]+range(10,51,30),\
-#                            'min_samples_leaf':range(15,100,60),\
-#                            'min_samples_split':range(2,51,30),\
-#                            'n_estimators':range(50,400,150),\
                            'max_features':[None,'auto','log2']+range(10,61,25),\
                            'n_jobs':[-1]}]}
     
@@ -236,7 +230,7 @@ class BestLookbackExperimet(Experiment):
                            AdaC(**ada_exp._loaded_data['AdaBoost'].best_params_)]
         
     def get_data(self,lookback):
-        self.cv = CrossValidation(test=self._test)
+        self.cv = CrossValidation(test=self._test,remote=self._remote)
         self.cv.load_data(lookback)
         self.X = self.cv.complete_examples
         self.y = self.cv.complete_tags
@@ -248,8 +242,10 @@ class BestLookbackExperimet(Experiment):
             self.ranges = range(1,101,10)
         self.load_params()
         results = {str(i):0 for i in self.ranges}
+        self._remote = True
         for lookback in self.ranges:
             self.get_data(lookback)
+            self._remote = False
             dtc_score = cross_val_score(self.estimators[0], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
             rfc_score = cross_val_score(self.estimators[1], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
             ada_score = cross_val_score(self.estimators[2], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
@@ -259,7 +255,13 @@ class BestLookbackExperimet(Experiment):
         
         
 if __name__ == '__main__':
-    AdaBoostExperimet('Best_Params').run()
+    args = ExperimentArgsParser().parse()
+    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet}
+    if args.action == 'run':
+        _experiments[args.exp](dir_name=args.out_dir).run()
+    else:
+        _experiments[args.exp](dir_name=args.out_dir).report(verbosity=args.verbosity,outfile=args.outfile)
+
 #     #args_parser.parse()
 #     #run_func = args_parser.kwargs['func']
 #     #run_func()

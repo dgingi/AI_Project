@@ -5,37 +5,35 @@ Implementations of different command line arguments parsers.
 
 @author: root
 '''
-import argparse
 from argparse import ArgumentParser
 
-class TestArgsParser(object):
+class ExperimentArgsParser(object):
     
-    tests = ['bprm','blk','blkpr','bda']
-    leagues = ['Primer_League','Serie_A','La_Liga','Ligue1','Bundesliga']
-    tests_hash = ['bprm for best_params','blk for best_lookback','blkpr for best_lookback_and_params']
+    experiments = ['Best_Params','AdaBoost','Best_Lookback']
+    actions = ['run','report']
+    
+#     leagues = ['Primer_League','Serie_A','La_Liga','Ligue1','Bundesliga']
+#     tests_hash = ['bprm for best_params','blk for best_lookback','blkpr for best_lookback_and_params']
     
     def __init__(self):
-        self.parser = ArgumentParser(description='Testing the project')
-        self.parser.add_argument('test', metavar='Test', type=str,
-                           help='A test to parse. the tests are: '+', '.join(self.tests_hash),
-                           choices=self.tests)
+        usage = '''experiments.py Output_Directory Experiment Run\Report  [-v {0,1,2}] [-o OUTFILE] [-h] 
+example: 
+$ experiments.py exp1 Best_Params report -v 1
+                      '''
+        self.parser = ArgumentParser(description='The different experiments for the project.',usage=usage)
+        self.parser.add_argument('out_dir', metavar='Output_Directory', type=str,
+                           help='The directory to store experiments or a directory that holds previous experiments.')
+        self.parser.add_argument('exp', metavar='Experiment', type=str,
+                           help='The experiment to run \ report. Choices are: '+' '.join(self.experiments),choices=self.experiments)
+        self.parser.add_argument('action', metavar='Run\Report', type=str,choices=self.actions,help='Choices are: '+' / '.join(self.actions))
+        self.parser.add_argument("-v", "--verbosity", type=int, choices=[0, 1, 2],default=0,
+                    help="Increase the output verbosity for reporting an experiment")
+        self.parser.add_argument("-o", "--outfile", type=str,default='', 
+                    help="Outputs the report into the file specified. Defaults to standard output.")
         
     def parse(self):
-        args = self.parser.parse_args()
-        self.TEST_NAME = vars(args)['test']
-        self.kwargs = {}
-        self.kwargs['func'] = self._hash_test_name(self.TEST_NAME)
- 
-    def _hash_test_name(self,test):
-        from tests import find_best_params,find_best_lookback,find_best_lookback_and_params,find_best_decision
-        if test == 'bprm':
-            return find_best_params
-        elif test == 'blk':
-            return find_best_lookback
-        elif test == 'bda':
-            return find_best_decision
-        else:
-            return find_best_lookback_and_params
+        return self.parser.parse_args()
+
         
 class CrawlerArgsParser(object):
     '''
