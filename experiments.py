@@ -10,7 +10,6 @@ from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
 from sklearn.tree import DecisionTreeClassifier as DTC
 
 from data.cross_validation import CrossValidation
-import numpy as np
 from utils.argumet_parsers import ExperimentArgsParser
 
 
@@ -105,6 +104,9 @@ class Experiment():
         return probability/2 if is_better else 1-probability/2, is_significant, is_better
     
     def _load_prev_experiment(self,exp):
+        '''
+        A function to load a previous experiment.
+        '''
         try:
             exp.load()
         except Exception as e:
@@ -115,7 +117,10 @@ class Experiment():
             else:
                 return
   
-    def report(self,*args,**kwargs):
+    def report(self,verbosity,outfile):
+        '''
+        A method to report the experiment's results.
+        '''
         raise NotImplementedError("I'm not done with this yet... Could use some help!")
 #         top_scores = sorted(grid_scores, key=itemgetter(1),reverse=True)[:n_top]
 #         for i, score in enumerate(top_scores):
