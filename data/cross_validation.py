@@ -7,9 +7,9 @@ from utils.constants import LEAGUES, YEARS
 
 class CrossValidation(object):
     
-    def __init__(self,test=False):
+    def __init__(self,test=False,remote=True):
         self._test = test
-        self.dbh = DBHandler(league=LEAGUES[0],test=self._test)
+        self.dbh = DBHandler(league=LEAGUES[0],test=self._test,remote=remote)
         self.data = {_l:{_y:(None,None) for _y in YEARS} for _l in LEAGUES}
         self._indces = {_l:0 for _l in LEAGUES}
     

@@ -1,15 +1,17 @@
-from data.cross_validation import CrossValidation
-from os.path import exists, join as join_path
-from os import  makedirs
-from pickle import dump , load
-import numpy as np
-from scipy.stats import ttest_rel
 from glob import glob
+from os import  makedirs
+from os.path import exists, join as join_path
+from pickle import dump , load
+from scipy.stats import ttest_rel
 from sklearn.cross_validation import  cross_val_score
-from sklearn.tree import DecisionTreeClassifier as DTC
-from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.ensemble import AdaBoostClassifier as AdaC
+from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
+from sklearn.tree import DecisionTreeClassifier as DTC
+
+from data.cross_validation import CrossValidation
+from utils.argumet_parsers import ExperimentArgsParser
+
 
 class Experiment():
     '''
@@ -33,9 +35,7 @@ class Experiment():
         
     def save(self,data):
         '''
-        Saves data into the results dir under the special suffix .results.
-        
-        Each Experiment should only have ONE .results file in his results_dir, since it's the data the will be loaded.
+        Saves data into the results dir under the special format {experiment_name}.results
         '''
         if not exists(self.results_dir):
             makedirs(self.results_dir)
@@ -46,7 +46,7 @@ class Experiment():
         '''
         Loads results from previous runs into _loaded_data attribute.
         '''
-        _path = glob(join_path(self.results_dir,'*.results')).pop()
+        _path = glob(join_path(self.results_dir,'%s.results'%self.name)).pop()
         with open(_path,'r') as _f:
             self._loaded_data = load(_f)
     
@@ -104,6 +104,9 @@ class Experiment():
         return probability/2 if is_better else 1-probability/2, is_significant, is_better
     
     def _load_prev_experiment(self,exp):
+        '''
+        A function to load a previous experiment.
+        '''
         try:
             exp.load()
         except Exception as e:
@@ -114,7 +117,11 @@ class Experiment():
             else:
                 return
   
-#     def report(self,grid_scores, n_top=3):
+    def report(self,verbosity,outfile):
+        '''
+        A method to report the experiment's results.
+        '''
+        raise NotImplementedError("I'm not done with this yet... Could use some help!")
 #         top_scores = sorted(grid_scores, key=itemgetter(1),reverse=True)[:n_top]
 #         for i, score in enumerate(top_scores):
 #             print("Model with rank: {0}".format(i + 1))
@@ -162,24 +169,14 @@ class BestParamsExperiment(Experiment):
                            'n_jobs':[-1]}}
         else:
             return {'DTC':{'criterion':['gini'],\
-#                            'max_depth':range(5,61,30),\
-#                            'max_leaf_nodes':[None]+range(10,51,30),\
-#                            'min_samples_leaf':range(15,100,60),\
-#                            'min_samples_split':range(2,51,30),\
-#                            'splitter':['random','best'],\
                            'max_features':[None,'auto','log2']+range(10,61,25)},\
                     'RFC':[{'criterion':['gini'],\
-#                            'max_depth':range(5,61,30),\
-#                            'max_leaf_nodes':[None]+range(10,51,30),\
-#                            'min_samples_leaf':range(15,100,60),\
-#                            'min_samples_split':range(2,51,30),\
-#                            'n_estimators':range(50,400,150),\
                            'max_features':[None,'auto','log2']+range(10,61,25),\
                            'n_jobs':[-1]}]}
     
     def run(self):
         '''
-        Runs a GridSearch on both DecisionTree and RandomForest classifiers.
+        Runs a RandomizedSearch on both DecisionTree and RandomForest classifiers.
         '''
         Experiment.run(self)
         _grids = self.load_params()
@@ -238,7 +235,7 @@ class BestLookbackExperimet(Experiment):
                            AdaC(**ada_exp._loaded_data['AdaBoost'].best_params_)]
         
     def get_data(self,lookback):
-        self.cv = CrossValidation(test=self._test)
+        self.cv = CrossValidation(test=self._test,remote=self._remote)
         self.cv.load_data(lookback)
         self.X = self.cv.complete_examples
         self.y = self.cv.complete_tags
@@ -250,8 +247,10 @@ class BestLookbackExperimet(Experiment):
             self.ranges = range(1,101,10)
         self.load_params()
         results = {str(i):0 for i in self.ranges}
+        self._remote = True
         for lookback in self.ranges:
             self.get_data(lookback)
+            self._remote = False
             dtc_score = cross_val_score(self.estimators[0], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
             rfc_score = cross_val_score(self.estimators[1], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
             ada_score = cross_val_score(self.estimators[2], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
@@ -261,7 +260,13 @@ class BestLookbackExperimet(Experiment):
         
         
 if __name__ == '__main__':
-    AdaBoostExperimet('Best_Params').run()
+    args = ExperimentArgsParser().parse()
+    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet}
+    if args.action == 'run':
+        _experiments[args.exp](dir_name=args.out_dir).run()
+    else:
+        _experiments[args.exp](dir_name=args.out_dir).report(verbosity=args.verbosity,outfile=args.outfile)
+
 #     #args_parser.parse()
 #     #run_func = args_parser.kwargs['func']
 #     #run_func()
