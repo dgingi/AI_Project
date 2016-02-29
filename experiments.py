@@ -241,7 +241,7 @@ class BestLookbackExperimet(Experiment):
         self.y = self.cv.complete_tags
         
     def run(self):
-        if not self._test:
+        if self._test:
             self.ranges = [15,30]
         else:
             self.ranges = range(1,101,10)
