@@ -8,6 +8,7 @@ from sklearn.ensemble import AdaBoostClassifier as AdaC
 from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
 from sklearn.tree import DecisionTreeClassifier as DTC
+from tabulate import tabulate
 
 from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
@@ -115,13 +116,27 @@ class Experiment():
             if ans == 'Yes I am sure':
                 exp.run()
             else:
-                return
+                return False
   
     def report(self,verbosity,outfile):
         '''
         A method to report the experiment's results.
         '''
-        raise NotImplementedError("I'm not done with this yet... Could use some help!")
+        if self._loaded_data is None:
+            try:
+                self.load()
+            except:
+                if not self._load_prev_experiment(self):
+                    print 'Can not report, must run experiment before!'
+                    return
+        print self._begining_report
+        if verbosity == 0:
+            print self._no_detail
+        elif verbosity == 1:
+            print self._detail
+        elif verbosity == 2:
+            print self._more_detail
+        print self._ending_report
 #         top_scores = sorted(grid_scores, key=itemgetter(1),reverse=True)[:n_top]
 #         for i, score in enumerate(top_scores):
 #             print("Model with rank: {0}".format(i + 1))
@@ -174,6 +189,22 @@ class BestParamsExperiment(Experiment):
                            'max_features':[None,'auto','log2']+range(10,61,25),\
                            'n_jobs':[-1]}]}
     
+    
+    _begining_report = '''This experiment performed a Randomized Search for 1000 iterations upon the hyper parameters grid for both the \
+Decision Tree classifier and the Random Forest classifier.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        return '\n'.join(['Decision Tree after search accuracy score: {0:.4f}'.format(self._loaded_data['Tree'].best_score_),\
+                          str(self._loaded_data['Tree'].best_params_),
+        'Random Forest after search accuracy score: {0:.4f}'.format(self._loaded_data['Forest'].best_score_),\
+        str(self._loaded_data['Forest'].best_params_)])
+        
     def run(self):
         '''
         Runs a RandomizedSearch on both DecisionTree and RandomForest classifiers.
@@ -209,12 +240,25 @@ class AdaBoostExperimet(Experiment):
         Experiment.run(self)
         best_param_exp = BestParamsExperiment(self._dir_name, self._test)
         self._load_prev_experiment(best_param_exp)
-        estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
+        estimators = [DTC(),RFC(),DTC(**best_param_exp._loaded_data['Tree'].best_params_),RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
         _grid = self.load_params(estimators)
         ada_boost = GridSearchCV(AdaC(), _grid, n_jobs=-1, cv=self.cv.leagues_cross_validation)
         ada_boost.fit(self.cv.complete_examples,self.cv.complete_tags)
         self._loaded_data = {'AdaBoost':ada_boost}
         self.save(self._loaded_data)
+        
+    _begining_report = '''This experiment performed a Grid Search upon the hyper parameters grid for the \
+AdaBoost classifier.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        return '\n'.join(['AdaBoost after search accuracy score: {0:.4f}'.format(self._loaded_data['AdaBoost'].best_score_),\
+                          str(self._loaded_data['AdaBoost'].best_params_)])
         
 class BestLookbackExperimet(Experiment):
     '''
