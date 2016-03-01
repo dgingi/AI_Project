@@ -111,7 +111,7 @@ class Experiment():
         try:
             exp.load()
         except Exception as e:
-            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'%exp.name
+            print 'Failed to load previous {ex} experiment\n. If you would like to run the {ex} experiment, Please type:\n Yes I am sure'.format(ex=exp.name)
             ans = raw_input('>>>')
             if ans == 'Yes I am sure':
                 exp.run()
