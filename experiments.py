@@ -272,11 +272,11 @@ class BestLookbackExperimet(Experiment):
     def load_params(self,estimators=[]):
         best_param_exp = BestParamsExperiment(self._dir_name, self._test)
         self._load_prev_experiment(best_param_exp)
-        ada_exp = AdaBoostExperimet(self._dir_name, self._test)
-        self._load_prev_experiment(ada_exp)
+#         ada_exp = AdaBoostExperimet(self._dir_name, self._test)
+#         self._load_prev_experiment(ada_exp)
         self.estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),\
-                           RFC(**best_param_exp._loaded_data['Forest'].best_params_),\
-                           AdaC(**ada_exp._loaded_data['AdaBoost'].best_params_)]
+                           RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
+#                            AdaC(**ada_exp._loaded_data['AdaBoost'].best_params_)]
         
     def get_data(self,lookback):
         self.cv = CrossValidation(test=self._test,remote=self._remote)
@@ -297,8 +297,8 @@ class BestLookbackExperimet(Experiment):
             self._remote = False
             dtc_score = cross_val_score(self.estimators[0], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
             rfc_score = cross_val_score(self.estimators[1], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
-            ada_score = cross_val_score(self.estimators[2], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
-            results[str(lookback)] = (dtc_score,rfc_score,ada_score)
+#             ada_score = cross_val_score(self.estimators[2], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+            results[str(lookback)] = (dtc_score,rfc_score)
         self._loaded_data = results
         self.save(self._loaded_data)
         
