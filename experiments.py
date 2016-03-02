@@ -288,7 +288,7 @@ class BestLookbackExperimet(Experiment):
         if self._test:
             self.ranges = [15,30]
         else:
-            self.ranges = range(1,101,10)
+            self.ranges = range(1,70,5)
         self.load_params()
         results = {str(i):0 for i in self.ranges}
         self._remote = True
@@ -301,6 +301,22 @@ class BestLookbackExperimet(Experiment):
             results[str(lookback)] = (dtc_score,rfc_score)
         self._loaded_data = results
         self.save(self._loaded_data)
+        
+    _begining_report = '''This experiment checks both classifier's accuracy correlation with the lookback parameter \
+for the creation on the examples.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        _dtc_scores = {int(_lk):self._loaded_data[_lk][0].mean() for _lk in self._loaded_data}
+        _rfc_scores = {int(_lk):self._loaded_data[_lk][1].mean() for _lk in self._loaded_data}
+        _table = tabulate([['Decision Tree']+_dtc_scores.values(),['Random Forest']+_rfc_scores.values()],\
+                          headers=['Classifier / Lookback']+_dtc_scores.keys(),tablefmt="fancy_grid",floatfmt=".4f")
+        return 'Cross validation scores for each classifier by lookback:\n{table}\n'.format(table=_table)
         
         
 if __name__ == '__main__':
