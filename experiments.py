@@ -302,6 +302,74 @@ class BestLookbackExperimet(Experiment):
         self._loaded_data = results
         self.save(self._loaded_data)
         
+class FindBestDecisionExperiment(Experiment):
+    '''
+    A class that experiments the best amount of tree for making the decision.
+    '''
+    def __init__(self, dir_name, test=False):
+        Experiment.__init__(self, dir_name, test=test)
+        self.name = 'Best_Decision'
+    
+    def load_params(self):
+        best_param_exp = BestParamsExperiment(self._dir_name, self._test)
+        try:
+            best_param_exp.load()
+        except Exception as e:
+            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
+            ans = raw_input('>>>')
+            if ans == 'Yes I am sure':
+                best_param_exp.run()
+            else:
+                return
+        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
+    
+    def run(self):
+        Experiment.run(self)
+        self.load_params()
+        if self.test:
+            self.ranges = [1,3]
+        else:
+            self.ranges = [1,3,5,7,9,11,13,15]
+        self.data = {k:0 for k in self.ranges}
+        
+        for _range in self.ranges:
+            cross_size = 0
+            decision_result = 0.0
+            
+            for train , test in self.cv._leagues_cross_validation():  
+                cross_size += 1
+                
+                tags_array = []
+                for i in range(_range):
+                    clf = DTC(**self.estimators_params['DTC'])
+                    clf = clf.fit(train[0],train[1])
+                    res_tags = clf.predict(test[0])
+                    tags_array += [res_tags]
+                
+                final_decsion = []
+                for i in range(len(tags_array[0])):
+                    temp = []
+                    for j in range(_range):
+                        temp += [tags_array[j][i]]
+                    decision_dict = {-1:0,0:0,1:0}
+                    for res in temp:
+                        decision_dict[res]+=1
+                    
+                    max_list = []
+                    for key in decision_dict:
+                        max_list += [(decision_dict[key],key)]
+                    final_decsion += [max(max_list)[1]]
+                
+                score = 0
+                for i in range(len(final_decsion)):
+                    if final_decsion[i] == test[1][i]:
+                        score+=1
+                        
+                decision_result += (score*1.0)/len(final_decsion)
+            decision_result /= cross_size
+            self.data[_range] = decision_result
+        self.save(self.data)
+        
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
