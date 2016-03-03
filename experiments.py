@@ -315,9 +315,10 @@ for the creation on the examples.'''
         '''
         _dtc_scores = {int(_lk):self._loaded_data[_lk][0].mean() for _lk in self._loaded_data}
         _rfc_scores = {int(_lk):self._loaded_data[_lk][1].mean() for _lk in self._loaded_data}
-        _table = tabulate([['Decision Tree']+_dtc_scores.values(),['Random Forest']+_rfc_scores.values()],\
-                          headers=['Classifier / Lookback']+_dtc_scores.keys(),tablefmt="fancy_grid",floatfmt=".4f")
-        return 'Cross validation scores for each classifier by lookback:\n{table}\n'.format(table=_table)
+        _table = tabulate([['Decision Tree']+[value for (key, value) in sorted(_dtc_scores.items())],\
+                           ['Random Forest']+[value for (key, value) in sorted(_rfc_scores.items())]],\
+                          headers=['Classifier / Lookback']+sorted(_dtc_scores),tablefmt="fancy_grid",floatfmt=".4f")
+        return 'Cross validation scores for each classifier by lookback:\n%s\n'%_table
 
 class FindBestDecisionExperiment(Experiment):
     '''
