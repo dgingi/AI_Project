@@ -12,6 +12,9 @@ from tabulate import tabulate
 
 from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
+from sklearn.naive_bayes import GaussianNB
+from utils.decorators import timed
+from sklearn.learning_curve import learning_curve
 
 
 class Experiment():
@@ -62,7 +65,7 @@ class Experiment():
         self.cv.load_data(lookback)
         self.X = self.cv.complete_examples
         self.y = self.cv.complete_tags
-        
+    @timed    
     def run(self):
         '''
         Runs the experiment.
@@ -204,7 +207,7 @@ Decision Tree classifier and the Random Forest classifier.'''
                           str(self._loaded_data['Tree'].best_params_),
         'Random Forest after search accuracy score: {0:.4f}'.format(self._loaded_data['Forest'].best_score_),\
         str(self._loaded_data['Forest'].best_params_)])
-        
+    @timed    
     def run(self):
         '''
         Runs a RandomizedSearch on both DecisionTree and RandomForest classifiers.
@@ -218,7 +221,59 @@ Decision Tree classifier and the Random Forest classifier.'''
         self._loaded_data = {'Tree':grid_tree,'Forest':grid_forest} 
         self.save(self._loaded_data)
         
-
+class BayesExperiment(Experiment):
+    def __init__(self,dir_name,test=False):
+        Experiment.__init__(self,dir_name,test)
+        self.name = 'Bayes'
+        
+    def run(self):
+        Experiment.run(self)
+        bayes_score = cross_val_score(GaussianNB(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        self._loaded_data = {'Bayes':bayes_score}
+        self.save(self._loaded_data)
+        
+    _begining_report = '''This experiment tried a Naive Bayes classifer.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        return '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['Bayes'].mean())])
+        
+    
+class LearningCurveExperiment(Experiment):
+    def __init__(self,dir_name,test=False):
+        Experiment.__init__(self,dir_name,test)
+        self.name = 'Learning_Curve'
+        
+    def run(self):
+        Experiment.run(self)
+        best_param_exp = BestParamsExperiment(self._dir_name, self._test)
+        self._load_prev_experiment(best_param_exp)
+        tree_curve = learning_curve(DTC(**best_param_exp._loaded_data['Tree'].best_params_), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        forest_curve = learning_curve(RFC(**best_param_exp._loaded_data['Forest'].best_params_), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        bayes_curve = learning_curve(GaussianNB(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        self._loaded_data = {'Tree_Curve':tree_curve,'Forest_Curve':forest_curve,'Bayes_Curve':bayes_curve}
+        self.save(self._loaded_data)
+        
+    _begining_report = '''This experiment checks the learning curve for all the classifiers.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        pass
+        # should be a table - test score vs training score
+        
+        
+    
+        
 class AdaBoostExperimet(Experiment):
     '''
     A class the experiments the AdaBoost algorithm.
@@ -408,7 +463,8 @@ determined by max result from all trees.'''
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
-    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,'Best_Forest_Size':BestForestSizeExperiment}
+    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,\
+                    'Best_Forest_Size':BestForestSizeExperiment,'Bayes':BayesExperiment,'Learning_Curve':LearningCurveExperiment}
     if args.action == 'run':
         _experiments[args.exp](dir_name=args.out_dir).run()
     else:

@@ -34,8 +34,7 @@ class DBHandler():
             self.temp_DB = self.clone_db()
         else:
             self.temp_DB = self.DB 
-    
-    @timed    
+        
     def clone_db(self):
         from bson.son import SON
         temp_client = pymongo.MongoClient('localhost')
