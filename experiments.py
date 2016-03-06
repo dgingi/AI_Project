@@ -320,9 +320,11 @@ for the creation on the examples.'''
                           headers=['Classifier / Lookback']+sorted(_dtc_scores),tablefmt="fancy_grid",floatfmt=".4f")
         return 'Cross validation scores for each classifier by lookback:\n%s\n'%_table
 
-class FindBestDecisionExperiment(Experiment):
+class FindBestForestSizeExperiment(Experiment):
     '''
-    A class that experiments the best amount of tree for making the decision.
+    A class that experiments the best size of a non-random forest.
+    All trees are the same tree but decision tree gives different result each time you do fit so this experoment checks
+    the best size of a forest.
     '''
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
@@ -388,6 +390,21 @@ class FindBestDecisionExperiment(Experiment):
             self.data[_range] = decision_result
         self.save(self.data)
         
+    _begining_report = '''This experiment checks the best size of a non-random forest. \
+Due to decision-tree behavior we build a forest from the same tree and the result of an example will be \
+determined by max result from all trees.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        _tree_size_scores = {int(_k):self.data[_k] for _k in self.data.keys()}
+        _table = tabulate([['Forest Size']+[value for (key, value) in sorted(_tree_size_scores.items())]],\
+                          headers=['Experiment / Lookback']+sorted(_tree_size_scores),tablefmt="fancy_grid",floatfmt=".4f")
+        return 'Cross validation scores for each non-random forest size :\n%s\n'%_table
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
