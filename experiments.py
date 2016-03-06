@@ -320,7 +320,7 @@ for the creation on the examples.'''
                           headers=['Classifier / Lookback']+sorted(_dtc_scores),tablefmt="fancy_grid",floatfmt=".4f")
         return 'Cross validation scores for each classifier by lookback:\n%s\n'%_table
 
-class FindBestForestSizeExperiment(Experiment):
+class BestForestSizeExperiment(Experiment):
     '''
     A class that experiments the best size of a non-random forest.
     All trees are the same tree but decision tree gives different result each time you do fit so this experoment checks
@@ -408,7 +408,7 @@ determined by max result from all trees.'''
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
-    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet}
+    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,'Best_Forest_Size':BestForestSizeExperiment}
     if args.action == 'run':
         _experiments[args.exp](dir_name=args.out_dir).run()
     else:

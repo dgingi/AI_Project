@@ -9,11 +9,8 @@ from argparse import ArgumentParser
 
 class ExperimentArgsParser(object):
     
-    experiments = ['Best_Params','AdaBoost','Best_Lookback']
+    experiments = ['Best_Params','AdaBoost','Best_Lookback','Best_Forest_Size']
     actions = ['run','report']
-    
-#     leagues = ['Primer_League','Serie_A','La_Liga','Ligue1','Bundesliga']
-#     tests_hash = ['bprm for best_params','blk for best_lookback','blkpr for best_lookback_and_params']
     
     def __init__(self):
         usage = '''experiments.py Output_Directory Experiment Run\Report  [-v {0,1,2}] [-o OUTFILE] [-h] 
