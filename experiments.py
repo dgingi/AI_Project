@@ -7,14 +7,15 @@ from sklearn.cross_validation import  cross_val_score
 from sklearn.ensemble import AdaBoostClassifier as AdaC
 from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
+from sklearn.learning_curve import learning_curve
+from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier as DTC
 from tabulate import tabulate
+import warnings
 
 from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
-from sklearn.naive_bayes import GaussianNB
 from utils.decorators import timed
-from sklearn.learning_curve import learning_curve
 
 
 class Experiment():
@@ -269,43 +270,46 @@ Will plot the learning curves on screen.'''
         '''
         Reporting on low verbosity
         '''
-        import numpy as np
-        import matplotlib.pyplot as plt
-
-
-        def plot_learning_curve(title, ylim=None,_type='Tree'):
-      
-            plt.figure()
-            plt.title(title)
-            if ylim is not None:
-                plt.ylim(*ylim)
-            plt.xlabel("Training examples")
-            plt.ylabel("Score")
-            train_sizes, train_scores, test_scores = self._loaded_data[_type]
-            train_scores_mean = np.mean(train_scores, axis=1)
-            train_scores_std = np.std(train_scores, axis=1)
-            test_scores_mean = np.mean(test_scores, axis=1)
-            test_scores_std = np.std(test_scores, axis=1)
-            plt.grid()
-        
-            plt.fill_between(train_sizes, train_scores_mean - train_scores_std,
-                             train_scores_mean + train_scores_std, alpha=0.1,
-                             color="r")
-            plt.fill_between(train_sizes, test_scores_mean - test_scores_std,
-                             test_scores_mean + test_scores_std, alpha=0.1, color="g")
-            plt.plot(train_sizes, train_scores_mean, 'o-', color="r",
-                     label="Training score")
-            plt.plot(train_sizes, test_scores_mean, 'o-', color="g",
-                     label="Cross-validation score")
-        
-            plt.legend(loc="best")
-            return plt
-                
-        plot_learning_curve("Learning Curves (Decision Tree)",_type='Tree_Curve')
-        plot_learning_curve("Learning Curves (Random Forest)",_type='Forest_Curve')
-        
-        plt.show()
-        return ''
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import numpy as np
+            import matplotlib.pyplot as plt
+    
+    
+            def plot_learning_curve(title, ylim=None,_type='Tree'):
+          
+                plt.figure()
+                plt.title(title)
+                if ylim is not None:
+                    plt.ylim(*ylim)
+                plt.xlabel("Training examples")
+                plt.ylabel("Score")
+                train_sizes, train_scores, test_scores = self._loaded_data[_type]
+                train_scores_mean = np.mean(train_scores, axis=1)
+                train_scores_std = np.std(train_scores, axis=1)
+                test_scores_mean = np.mean(test_scores, axis=1)
+                test_scores_std = np.std(test_scores, axis=1)
+                plt.grid()
+            
+                plt.fill_between(train_sizes, train_scores_mean - train_scores_std,
+                                 train_scores_mean + train_scores_std, alpha=0.1,
+                                 color="r")
+                plt.fill_between(train_sizes, test_scores_mean - test_scores_std,
+                                 test_scores_mean + test_scores_std, alpha=0.1, color="g")
+                plt.plot(train_sizes, train_scores_mean, 'o-', color="r",
+                         label="Training score")
+                plt.plot(train_sizes, test_scores_mean, 'o-', color="g",
+                         label="Cross-validation score")
+            
+                plt.legend(loc="best")
+                return plt
+                    
+            plot_learning_curve("Learning Curves (Decision Tree)",_type='Tree_Curve')
+            plot_learning_curve("Learning Curves (Random Forest)",_type='Forest_Curve')
+            plot_learning_curve("Learning Curves (Naive Bayes)",_type='Bayes_Curve')
+            
+            plt.show()
+            return ''
         
         
         
