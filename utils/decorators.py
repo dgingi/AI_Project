@@ -3,8 +3,7 @@ Decorators and various generic utilities for the project.
 
 @author: Ory Jonay
 '''
-
-from time import clock,sleep
+from datetime import datetime,timedelta
 import logging
 
 def timed(f):
@@ -14,9 +13,9 @@ def timed(f):
     def some_funcion(args...):'''
     
     def wrap(*x, **d):
-        start = clock()
+        start = datetime.now()
         res = f(*x, **d)
-        print(f.__name__, ':', clock() - start)
+        print 'Function "{0}" ran for {1} (Hours:Minutes:Seconds)'.format(f.__name__,str(timedelta(seconds=(datetime.now() - start).total_seconds()))) 
         return res
     return wrap
 

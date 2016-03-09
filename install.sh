@@ -19,3 +19,4 @@ sudo -H pip install pymongo
 sudo -H pip install selenium
 sudo -H pip install sklearn
 sudo -H pip install progress==1.2
+sudo -H pip install tabulate
