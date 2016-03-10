@@ -569,7 +569,7 @@ we start making the decisions.'''
                           headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
   
-def FinalSeasonExperimentAllL(Experiment):
+class FinalSeasonExperimentAllL(Experiment):
     '''
     A class that experiments the results of the classifier for last season (2015-2016).
     '''
@@ -600,7 +600,7 @@ def FinalSeasonExperimentAllL(Experiment):
         curr_tags = []
         for _league in LEAGUES:    
             self.cv.dbh.league = _league
-            temp_examples, temp_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,True)
+            temp_examples, temp_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,current=True)
             raw_curr_examples += temp_examples
             curr_tags += temp_tags
         curr_examples = [_ex[0] for _ex in raw_curr_examples]
