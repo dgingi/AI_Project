@@ -5,11 +5,13 @@ Implementations of different command line arguments parsers.
 
 @author: root
 '''
+
+from utils.constants import MIN_YEAR,MAX_YEAR
 from argparse import ArgumentParser
 
 class ExperimentArgsParser(object):
     
-    experiments = ['Best_Params','AdaBoost','Best_Lookback','Best_Forest_Size','Bayes','Learning_Curve']
+    experiments = ['Best_Params','AdaBoost','Best_Lookback','Best_Forest_Size','Bayes','Learning_Curve','Best_Proba','Final_Year']
     actions = ['run','report']
     
     def __init__(self):
@@ -79,14 +81,14 @@ class CrawlerArgsParser(object):
                            help='A league to parse. The leagues are: '+', '.join(self.leagues),
                            choices=self.leagues,nargs='?')
         self.parser.add_argument('year', metavar='Years',type=str, nargs='?',
-                            help='A year to parse. Valid years are: '+', '.join([str(i) for i in range(2010,2015)]+[' or any range of them, separated by -.']),
+                            help='A year to parse. Valid years are: '+', '.join([str(i) for i in range(MIN_YEAR,MAX_YEAR)]+[' or any range of them, separated by -.']),
                             default=str(max(range(2010,2015))),\
                             choices=self._default_ranges())
         self.parser.add_argument('-u','--update',action='store_true',help='Crawel current year on all leagues for update')
      
      
     def _default_ranges(self):
-        return [str(i) for i in range(2010,2015)]+['-'.join([str(i),str(j)]) for i in range(2010,2015) for j in range(2010,2015) if i<j]
+        return [str(i) for i in range(MIN_YEAR,MAX_YEAR)]+['-'.join([str(i),str(j)]) for i in range(MIN_YEAR,MAX_YEAR) for j in range(MIN_YEAR,MAX_YEAR) if i<j]
 
     def parse(self):
         args = self.parser.parse_args()
@@ -108,8 +110,8 @@ class CrawlerArgsParser(object):
             self.update = True
             self.update_kwargs = []
             for league in self.leagues:
-                self.kwargs['league'] = self.leagues_links[self._hash_league_names_and_years(league,2015)]
-                self.kwargs['year'] = 2015
+                self.kwargs['league'] = self.leagues_links[self._hash_league_names_and_years(league,MAX_YEAR)]
+                self.kwargs['year'] = MAX_YEAR
                 self.kwargs['r_league'] = league
                 self.update_kwargs.append(dict(self.kwargs))
         

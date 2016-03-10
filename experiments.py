@@ -16,7 +16,7 @@ import warnings
 from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
 from utils.decorators import timed
-
+from utils.constants import LEAGUES, MAX_YEAR
 
 class Experiment():
     '''
@@ -424,10 +424,10 @@ class BestForestSizeExperiment(Experiment):
     '''
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
-        self.name = 'Best_Decision'
+        self.name = 'Best_Forest_Size'
     
     def load_params(self):
-        best_param_exp = BestParamsExperiment(self._dir_name, self._test)
+        best_param_exp = BestParamsExperiment("Best_Params", self._test)
         try:
             best_param_exp.load()
         except Exception as e:
@@ -442,11 +442,11 @@ class BestForestSizeExperiment(Experiment):
     def run(self):
         Experiment.run(self)
         self.load_params()
-        if self.test:
+        if self._test:
             self.ranges = [1,3]
         else:
             self.ranges = [1,3,5,7,9,11,13,15]
-        self.data = {k:0 for k in self.ranges}
+        self._loaded_data = {k:0 for k in self.ranges}
         
         for _range in self.ranges:
             cross_size = 0
@@ -483,8 +483,8 @@ class BestForestSizeExperiment(Experiment):
                         
                 decision_result += (score*1.0)/len(final_decsion)
             decision_result /= cross_size
-            self.data[_range] = decision_result
-        self.save(self.data)
+            self._loaded_data[_range] = decision_result
+        self.save(self._loaded_data)
         
     _begining_report = '''This experiment checks the best size of a non-random forest. \
 Due to decision-tree behavior we build a forest from the same tree and the result of an example will be \
@@ -497,35 +497,154 @@ determined by max result from all trees.'''
         '''
         Reporting on low verbosity
         '''
-        _tree_size_scores = {int(_k):self.data[_k] for _k in self.data.keys()}
+        _tree_size_scores = {int(_k):self._loaded_data[_k] for _k in self._loaded_data.keys()}
         _table = tabulate([['Forest Size']+[value for (key, value) in sorted(_tree_size_scores.items())]],\
-                          headers=['Experiment / Lookback']+sorted(_tree_size_scores),tablefmt="fancy_grid",floatfmt=".4f")
+                          headers=['Experiment / Size']+sorted(_tree_size_scores),tablefmt="fancy_grid",floatfmt=".4f")
         return 'Cross validation scores for each non-random forest size :\n%s\n'%_table
+  
+class BestProbaForDecision(Experiment):
+    '''
+    A class that experiments the best proba from which we want to make the decision.
+    '''
+    def __init__(self, dir_name, test=False):
+        Experiment.__init__(self, dir_name, test=test)
+        self.name = 'Best_Proba'
+    
+    def load_params(self):
+        best_param_exp = BestParamsExperiment("Best_Params", self._test)
+        try:
+            best_param_exp.load()
+        except Exception as e:
+            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
+            ans = raw_input('>>>')
+            if ans == 'Yes I am sure':
+                best_param_exp.run()
+            else:
+                return
+        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
+    
+    def run(self):
+        Experiment.run(self)
+        self.load_params()
+        if self._test:
+            self.ranges = [0.34,0.35]
+        else:
+            self.ranges = [(float(_i)/100) for _i in range(34,60)]
+        self._loaded_data = {k:(0,0) for k in self.ranges}
+        
+        for _range in self.ranges:
+            decision_result = 0.0
+            score = 0
+            curr_decisions = 0
+            
+            for train , test in self.cv._leagues_cross_validation():  
+                clf = DTC(**self.estimators_params['DTC'])
+                clf = clf.fit(train[0],train[1])
+                res_tags = clf.predict(test[0])
+                res_proba = clf.predict_proba(test[0])
+                    
+                for i in range(len(res_tags)):
+                    if max(res_proba[i]) >= _range:
+                        curr_decisions += 1
+                        if res_tags[i] == test[1][i]:
+                            score += 1
+                        
+            decision_result = (score*1.0)/curr_decisions
+            self._loaded_data[_range] = (curr_decisions,decision_result)
+        self.save(self._loaded_data)
+        
+    _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
+we start making the decisions.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        _proba_scores = {float(_k):self._loaded_data[_k] for _k in self._loaded_data.keys()}
+        _inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_proba_scores.items())]
+        _table = tabulate([_inner_table],\
+                          headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
+        return 'Results :\n%s\n'%_table
+  
+def FinalSeasonExperimentAllL(Experiment):
+    '''
+    A class that experiments the results of the classifier for last season (2015-2016).
+    '''
+    def __init__(self, dir_name, test=False):
+        Experiment.__init__(self, dir_name, test=test)
+        self.name = 'Final_Season'
+    
+    def load_params(self):
+        best_param_exp = BestParamsExperiment("Best_Params", self._test)
+        try:
+            best_param_exp.load()
+        except Exception as e:
+            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
+            ans = raw_input('>>>')
+            if ans == 'Yes I am sure':
+                best_param_exp.run()
+            else:
+                return
+        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
+    
+        
+    def run(self):
+        Experiment.run(self)
+        self.load_params()
+        clf = DTC(**self.estimators_params['DTC'])
+        clf = clf.fit(self.X,self.y)
+        raw_curr_examples = []
+        curr_tags = []
+        for _league in LEAGUES:    
+            self.cv.dbh.league = _league
+            temp_examples, temp_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,True)
+            raw_curr_examples += temp_examples
+            curr_tags += temp_tags
+        curr_examples = [_ex[0] for _ex in raw_curr_examples]
+        result_tags = clf.predict(curr_examples)
+        self._loaded_data = (clf.score(curr_examples, curr_tags),[],{i:0 for i in range(61)})
+        amount_games_per_fix = {i:0 for i in range(61)}
+        for i in range(len(raw_curr_examples)):
+            _ex = raw_curr_examples[i]
+            curr_fix = _ex[1]
+            curr_result = _ex[2]
+            self._loaded_data[1] += [(curr_result,result_tags[i])]
+            amount_games_per_fix[curr_fix] += 1
+            if result_tags[i] == curr_tags[i]:
+                self._loaded_data[3][curr_fix] += 1
+        
+        for _k in self._loaded_data[3].keys():
+            score = float(self._loaded_data[3][_k])
+            self._loaded_data[3][_k] = score / amount_games_per_fix[_k]
+        self.save(self._loaded_data)
+        
+    _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
+we start making the decisions.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        _proba_scores = {float(_k):self._loaded_data[_k] for _k in self._loaded_data.keys()}
+        _inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_proba_scores.items())]
+        _table = tabulate([_inner_table],\
+                          headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
+        return 'Results :\n%s\n'%_table
+    
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
-    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,\
-                    'Best_Forest_Size':BestForestSizeExperiment,'Bayes':BayesExperiment,'Learning_Curve':LearningCurveExperiment}
+    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,'Best_Forest_Size':BestForestSizeExperiment,'Best_Proba':BestProbaForDecision,'Final_Year':FinalSeasonExperimentAllL,'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment}
+
     if args.action == 'run':
         _experiments[args.exp](dir_name=args.out_dir).run()
     else:
         _experiments[args.exp](dir_name=args.out_dir).report(verbosity=args.verbosity,outfile=args.outfile)
-
-#     #args_parser.parse()
-#     #run_func = args_parser.kwargs['func']
-#     #run_func()
-#     '''
-#     Example how to run best params with grid search
-#     '''
-#     from sklearn.grid_search import GridSearchCV
-#     from sklearn.tree import DecisionTreeClassifier as DTC
-#     parameters = ["criterion","min_samples_split","max_depth","min_samples_leaf","max_leaf_nodes"]
-#     criterion = ["gini","entropy"]
-#     params_ranges = {"min_samples_split": (1,300),
-#                   "max_depth": (1,60),
-#                   "min_samples_leaf": (15,100),
-#                   "max_leaf_nodes": (2,100),
-#                   }
-#     expr = best_params("bprm_grid",DTC,GridSearchCV,parameters,criterion,params_ranges)
-#     expr.run()
-    
+        
+        

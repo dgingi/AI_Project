@@ -34,7 +34,7 @@ class DBHandler():
             self.temp_DB = self.clone_db()
         else:
             self.temp_DB = self.DB 
-        
+    
     def clone_db(self):
         from bson.son import SON
         temp_client = pymongo.MongoClient('localhost')
@@ -92,8 +92,8 @@ class DBHandler():
         else:
             self.DB[self.league].drop()
     
-            
-    def create_examples(self,year,lookback=15):
+       
+    def create_examples(self,year,lookback=15,current=False):
         
         def update_all_teams_dict(res,all_teams_dict,team,first):
             for fix in sorted(res):
@@ -128,7 +128,6 @@ class DBHandler():
         features_names = []
         prog_bar = ChargingBar('Creating examples for %s-%s'%(self.league,year),max=len(all_teams_dict))
         for team in all_teams_dict:
-#             print "Creating Features for %s-%s"%(team,year)
             res_by_all, res_by_non_avg = features.create_features(team,lookback)
             if not features_names: features_names = features.features_names
             update_all_teams_dict(res_by_all, all_teams_dict, team, True)
@@ -136,6 +135,7 @@ class DBHandler():
             prog_bar.next()
         examples = []
         tags = []
+        curr_examples = []
         prog_bar.finish()
         for team in all_teams_names:
             for fix in sorted(all_teams_dict[team]):
@@ -156,8 +156,9 @@ class DBHandler():
                     rel_all, rel_att, rel_def = relative_features(all_teams_dict[team][fix], all_teams_dict[curr_game["VS"]][vs_curr_fix], features_names)
                     examples += [np.array(all_teams_dict[team][fix])-np.array(all_teams_dict[curr_game["VS"]][vs_curr_fix])]
                     examples[-1] = np.concatenate((examples[-1],[rel_all, rel_att, rel_def]))
+                    curr_examples += [(examples[-1],curr_game["Fix"],curr_game["Result"])]
                     tags += [curr_game["Tag"]]
-        return examples,tags
+        return examples,tags if not current else curr_examples,tags
         
 
 if __name__ == '__main__':
