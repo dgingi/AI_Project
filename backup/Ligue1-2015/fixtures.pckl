@@ -1,2884 +1,3826 @@
 (dp0
-S'Aug'
+S'Mar'
 p1
 (lp2
 (dp3
 S'home'
 p4
-S'Lille'
+S'Caen'
 p5
 sS'away'
 p6
-S'Paris Saint Germain'
+S'Monaco'
 p7
 sS'link'
 p8
-S'https://www.whoscored.com/Matches/960591/Live'
+S'https://www.whoscored.com/Matches/960835/Live'
 p9
 sS'result'
 p10
-S'0 : 1'
+S'2 : 2'
 p11
 sa(dp12
 g4
-S'SC Bastia'
+S'Paris Saint Germain'
 p13
 sg6
-S'Rennes'
+S'Montpellier'
 p14
 sg8
-S'https://www.whoscored.com/Matches/960588/Live'
+S'https://www.whoscored.com/Matches/960831/Live'
 p15
 sg10
-S'2 : 1'
+S'0 : 0'
 p16
 sa(dp17
 g4
-S'Marseille'
+S'SC Bastia'
 p18
 sg6
-S'Caen'
+S'Lorient'
 p19
 sg8
-S'https://www.whoscored.com/Matches/960593/Live'
+S'https://www.whoscored.com/Matches/960833/Live'
 p20
 sg10
-S'0 : 1'
+S'0 : 0'
 p21
 sa(dp22
 g4
-S'Montpellier'
+S'Angers'
 p23
 sg6
-S'Angers'
+S'Saint-Etienne'
 p24
 sg8
-S'https://www.whoscored.com/Matches/960594/Live'
+S'https://www.whoscored.com/Matches/960817/Live'
 p25
 sg10
-S'0 : 2'
+S'0 : 0'
 p26
 sa(dp27
 g4
-S'Nantes'
+S'Bordeaux'
 p28
 sg6
-S'Guingamp'
+S'GFC Ajaccio'
 p29
 sg8
-S'https://www.whoscored.com/Matches/960595/Live'
+S'https://www.whoscored.com/Matches/960818/Live'
 p30
 sg10
-S'1 : 0'
+S'1 : 1'
 p31
 sa(dp32
 g4
-S'Nice'
+S'Lille'
 p33
 sg6
-S'Monaco'
+S'Reims'
 p34
 sg8
-S'https://www.whoscored.com/Matches/960596/Live'
+S'https://www.whoscored.com/Matches/960820/Live'
 p35
 sg10
-S'1 : 2'
+S'2 : 0'
 p36
 sa(dp37
 g4
-S'Troyes'
+S'Nice'
 p38
 sg6
-S'GFC Ajaccio'
+S'Troyes'
 p39
 sg8
-S'https://www.whoscored.com/Matches/960940/Live'
+S'https://www.whoscored.com/Matches/960821/Live'
 p40
 sg10
-S'0 : 0'
+S'2 : 1'
 p41
 sa(dp42
 g4
-S'Bordeaux'
+S'Marseille'
 p43
 sg6
-S'Reims'
+S'Toulouse'
 p44
 sg8
-S'https://www.whoscored.com/Matches/960589/Live'
+S'https://www.whoscored.com/Matches/960822/Live'
 p45
 sg10
-S'1 : 2'
+S'1 : 1'
 p46
 sa(dp47
 g4
-S'Toulouse'
+S'Rennes'
 p48
 sg6
-S'Saint-Etienne'
+S'Nantes'
 p49
 sg8
-S'https://www.whoscored.com/Matches/960597/Live'
+S'https://www.whoscored.com/Matches/960837/Live'
 p50
 sg10
-S'2 : 1'
+S'4 : 1'
 p51
 sa(dp52
 g4
 S'Lyon'
 p53
 sg6
-S'Lorient'
+S'Guingamp'
 p54
 sg8
-S'https://www.whoscored.com/Matches/960592/Live'
+S'https://www.whoscored.com/Matches/960823/Live'
 p55
 sg10
-S'0 : 0'
+S'5 : 1'
 p56
 sa(dp57
 g4
-S'Monaco'
+S'SC Bastia'
 p58
 sg6
-S'Lille'
+S'Nantes'
 p59
 sg8
-S'https://www.whoscored.com/Matches/960602/Live'
+S'https://www.whoscored.com/Matches/960955/Live'
 p60
 sg10
 S'0 : 0'
 p61
 sa(dp62
 g4
-S'Saint-Etienne'
+S'GFC Ajaccio'
 p63
 sg6
-S'Bordeaux'
+S'Marseille'
 p64
 sg8
-S'https://www.whoscored.com/Matches/960606/Live'
+S'https://www.whoscored.com/Matches/960962/Live'
 p65
 sg10
 S'1 : 1'
 p66
 sa(dp67
 g4
-S'Angers'
+S'Monaco'
 p68
 sg6
-S'Nantes'
+S'Reims'
 p69
 sg8
-S'https://www.whoscored.com/Matches/960598/Live'
+S'https://www.whoscored.com/Matches/960839/Live'
 p70
 sg10
-S'0 : 0'
+S'2 : 2'
 p71
 sa(dp72
 g4
-S'Caen'
+S'Lorient'
 p73
 sg6
-S'Toulouse'
+S'Marseille'
 p74
 sg8
-S'https://www.whoscored.com/Matches/960599/Live'
+S'https://www.whoscored.com/Matches/960845/Live'
 p75
 sg10
-S'1 : 0'
+S'1 : 1'
 p76
-sa(dp77
+sasS'Feb'
+p77
+(lp78
+(dp79
 g4
-S'Guingamp'
-p78
-sg6
-S'Lyon'
-p79
-sg8
-S'https://www.whoscored.com/Matches/960600/Live'
+S'Monaco'
 p80
-sg10
-S'0 : 1'
-p81
-sa(dp82
-g4
-S'Rennes'
-p83
-sg6
-S'Montpellier'
-p84
-sg8
-S'https://www.whoscored.com/Matches/960605/Live'
-p85
-sg10
-S'1 : 0'
-p86
-sa(dp87
-g4
-S'Troyes'
-p88
-sg6
-S'Nice'
-p89
-sg8
-S'https://www.whoscored.com/Matches/960607/Live'
-p90
-sg10
-S'3 : 3'
-p91
-sa(dp92
-g4
-S'Reims'
-p93
-sg6
-S'Marseille'
-p94
-sg8
-S'https://www.whoscored.com/Matches/960604/Live'
-p95
-sg10
-S'1 : 0'
-p96
-sa(dp97
-g4
-S'Lorient'
-p98
 sg6
 S'SC Bastia'
-p99
+p81
 sg8
-S'https://www.whoscored.com/Matches/960601/Live'
-p100
-sg10
-S'1 : 1'
-p101
-sa(dp102
-g4
-S'Paris Saint Germain'
-p103
-sg6
-S'GFC Ajaccio'
-p104
-sg8
-S'https://www.whoscored.com/Matches/960603/Live'
-p105
+S'https://www.whoscored.com/Matches/960918/Live'
+p82
 sg10
 S'2 : 0'
-p106
-sa(dp107
+p83
+sa(dp84
 g4
 S'Montpellier'
-p108
+p85
 sg6
-S'Paris Saint Germain'
-p109
+S'Marseille'
+p86
 sg8
-S'https://www.whoscored.com/Matches/960614/Live'
-p110
+S'https://www.whoscored.com/Matches/960922/Live'
+p87
 sg10
 S'0 : 1'
-p111
-sa(dp112
+p88
+sa(dp89
+g4
+S'Nice'
+p90
+sg6
+S'Toulouse'
+p91
+sg8
+S'https://www.whoscored.com/Matches/960923/Live'
+p92
+sg10
+S'1 : 0'
+p93
+sa(dp94
 g4
 S'Lyon'
-p113
+p95
 sg6
-S'Rennes'
-p114
+S'Bordeaux'
+p96
 sg8
-S'https://www.whoscored.com/Matches/960612/Live'
-p115
-sg10
-S'1 : 2'
-p116
-sa(dp117
-g4
-S'SC Bastia'
-p118
-sg6
-S'Guingamp'
-p119
-sg8
-S'https://www.whoscored.com/Matches/960608/Live'
-p120
+S'https://www.whoscored.com/Matches/960924/Live'
+p97
 sg10
 S'3 : 0'
-p121
-sa(dp122
-g4
-S'GFC Ajaccio'
-p123
-sg6
-S'Angers'
-p124
-sg8
-S'https://www.whoscored.com/Matches/960609/Live'
-p125
-sg10
-S'0 : 2'
-p126
-sa(dp127
-g4
-S'Nantes'
-p128
-sg6
-S'Reims'
-p129
-sg8
-S'https://www.whoscored.com/Matches/960615/Live'
-p130
-sg10
-S'1 : 0'
-p131
-sa(dp132
-g4
-S'Nice'
-p133
-sg6
-S'Caen'
-p134
-sg8
-S'https://www.whoscored.com/Matches/960616/Live'
-p135
-sg10
-S'2 : 1'
-p136
-sa(dp137
-g4
-S'Toulouse'
-p138
-sg6
-S'Monaco'
-p139
-sg8
-S'https://www.whoscored.com/Matches/960617/Live'
-p140
-sg10
-S'1 : 1'
-p141
-sa(dp142
-g4
-S'Lille'
-p143
-sg6
-S'Bordeaux'
-p144
-sg8
-S'https://www.whoscored.com/Matches/960610/Live'
-p145
-sg10
-S'0 : 0'
-p146
-sa(dp147
-g4
-S'Lorient'
-p148
-sg6
-S'Saint-Etienne'
-p149
-sg8
-S'https://www.whoscored.com/Matches/960611/Live'
-p150
-sg10
-S'0 : 1'
-p151
-sa(dp152
-g4
-S'Marseille'
-p153
-sg6
-S'Troyes'
-p154
-sg8
-S'https://www.whoscored.com/Matches/960613/Live'
-p155
-sg10
-S'6 : 0'
-p156
-sa(dp157
+p98
+sa(dp99
 g4
 S'Guingamp'
-p158
+p100
 sg6
-S'Marseille'
-p159
-sg8
-S'https://www.whoscored.com/Matches/960646/Live'
-p160
-sg10
-S'2 : 0'
-p161
-sa(dp162
-g4
-S'Caen'
-p163
-sg6
-S'Lyon'
-p164
-sg8
-S'https://www.whoscored.com/Matches/960643/Live'
-p165
-sg10
-S'0 : 4'
-p166
-sa(dp167
-g4
-S'Reims'
-p168
-sg6
-S'Lorient'
-p169
-sg8
-S'https://www.whoscored.com/Matches/960621/Live'
-p170
-sg10
-S'4 : 1'
-p171
-sa(dp172
-g4
-S'Rennes'
-p173
-sg6
-S'Toulouse'
-p174
-sg8
-S'https://www.whoscored.com/Matches/960623/Live'
-p175
-sg10
-S'3 : 1'
-p176
-sa(dp177
-g4
 S'Troyes'
-p178
-sg6
-S'Montpellier'
-p179
+p101
 sg8
-S'https://www.whoscored.com/Matches/960627/Live'
-p180
+S'https://www.whoscored.com/Matches/960919/Live'
+p102
 sg10
-S'0 : 0'
-p181
-sa(dp182
+S'4 : 0'
+p103
+sa(dp104
 g4
-S'Angers'
-p183
-sg6
-S'Nice'
-p184
-sg8
-S'https://www.whoscored.com/Matches/960637/Live'
-p185
-sg10
-S'1 : 1'
-p186
-sa(dp187
-g4
-S'Lille'
-p188
+S'Nantes'
+p105
 sg6
 S'GFC Ajaccio'
-p189
+p106
 sg8
-S'https://www.whoscored.com/Matches/960648/Live'
-p190
+S'https://www.whoscored.com/Matches/960920/Live'
+p107
+sg10
+S'3 : 1'
+p108
+sa(dp109
+g4
+S'Lille'
+p110
+sg6
+S'Caen'
+p111
+sg8
+S'https://www.whoscored.com/Matches/960921/Live'
+p112
 sg10
 S'1 : 0'
-p191
-sa(dp192
+p113
+sa(dp114
 g4
-S'Saint-Etienne'
-p193
+S'Reims'
+p115
 sg6
-S'SC Bastia'
-p194
+S'Angers'
+p116
 sg8
-S'https://www.whoscored.com/Matches/960625/Live'
-p195
+S'https://www.whoscored.com/Matches/960926/Live'
+p117
 sg10
 S'2 : 1'
-p196
-sa(dp197
+p118
+sa(dp119
 g4
-S'Bordeaux'
-p198
+S'Paris Saint Germain'
+p120
 sg6
-S'Nantes'
-p199
+S'Lorient'
+p121
 sg8
-S'https://www.whoscored.com/Matches/960640/Live'
-p200
+S'https://www.whoscored.com/Matches/960925/Live'
+p122
 sg10
-S'2 : 0'
-p201
-sa(dp202
+S'3 : 1'
+p123
+sa(dp124
+g4
+S'Rennes'
+p125
+sg6
+S'Saint-Etienne'
+p126
+sg8
+S'https://www.whoscored.com/Matches/960927/Live'
+p127
+sg10
+S'0 : 1'
+p128
+sa(dp129
 g4
 S'Monaco'
-p203
+p130
 sg6
-S'Paris Saint Germain'
-p204
+S'Nice'
+p131
 sg8
-S'https://www.whoscored.com/Matches/960619/Live'
-p205
+S'https://www.whoscored.com/Matches/960929/Live'
+p132
+sg10
+S'1 : 0'
+p133
+sa(dp134
+g4
+S'Angers'
+p135
+sg6
+S'Lyon'
+p136
+sg8
+S'https://www.whoscored.com/Matches/960928/Live'
+p137
 sg10
 S'0 : 3'
-p206
-sasS'Sep'
-p207
-(lp208
-(dp209
+p138
+sa(dp139
+g4
+S'Lorient'
+p140
+sg6
+S'Montpellier'
+p141
+sg8
+S'https://www.whoscored.com/Matches/960931/Live'
+p142
+sg10
+S'1 : 1'
+p143
+sa(dp144
+g4
+S'GFC Ajaccio'
+p145
+sg6
+S'Guingamp'
+p146
+sg8
+S'https://www.whoscored.com/Matches/960932/Live'
+p147
+sg10
+S'0 : 0'
+p148
+sa(dp149
+g4
+S'SC Bastia'
+p150
+sg6
+S'Troyes'
+p151
+sg8
+S'https://www.whoscored.com/Matches/960935/Live'
+p152
+sg10
+S'2 : 0'
+p153
+sa(dp154
+g4
+S'Caen'
+p155
+sg6
+S'Reims'
+p156
+sg8
+S'https://www.whoscored.com/Matches/960936/Live'
+p157
+sg10
+S'0 : 2'
+p158
+sa(dp159
+g4
+S'Toulouse'
+p160
+sg6
+S'Nantes'
+p161
+sg8
+S'https://www.whoscored.com/Matches/960937/Live'
+p162
+sg10
+S'0 : 0'
+p163
+sa(dp164
+g4
+S'Lille'
+p165
+sg6
+S'Rennes'
+p166
+sg8
+S'https://www.whoscored.com/Matches/960933/Live'
+p167
+sg10
+S'1 : 1'
+p168
+sa(dp169
+g4
+S'Bordeaux'
+p170
+sg6
+S'Saint-Etienne'
+p171
+sg8
+S'https://www.whoscored.com/Matches/960930/Live'
+p172
+sg10
+S'1 : 4'
+p173
+sa(dp174
+g4
+S'Marseille'
+p175
+sg6
+S'Paris Saint Germain'
+p176
+sg8
+S'https://www.whoscored.com/Matches/960934/Live'
+p177
+sg10
+S'1 : 2'
+p178
+sa(dp179
+g4
+S'Rennes'
+p180
+sg6
+S'Angers'
+p181
+sg8
+S'https://www.whoscored.com/Matches/960947/Live'
+p182
+sg10
+S'1 : 0'
+p183
+sa(dp184
 g4
 S'Paris Saint Germain'
-p210
+p185
+sg6
+S'Lille'
+p186
+sg8
+S'https://www.whoscored.com/Matches/960945/Live'
+p187
+sg10
+S'0 : 0'
+p188
+sa(dp189
+g4
+S'Reims'
+p190
+sg6
+S'SC Bastia'
+p191
+sg8
+S'https://www.whoscored.com/Matches/960946/Live'
+p192
+sg10
+S'0 : 1'
+p193
+sa(dp194
+g4
+S'Guingamp'
+p195
 sg6
 S'Bordeaux'
+p196
+sg8
+S'https://www.whoscored.com/Matches/960939/Live'
+p197
+sg10
+S'2 : 4'
+p198
+sa(dp199
+g4
+S'Nantes'
+p200
+sg6
+S'Lorient'
+p201
+sg8
+S'https://www.whoscored.com/Matches/960941/Live'
+p202
+sg10
+S'2 : 1'
+p203
+sa(dp204
+g4
+S'Montpellier'
+p205
+sg6
+S'Toulouse'
+p206
+sg8
+S'https://www.whoscored.com/Matches/960942/Live'
+p207
+sg10
+S'2 : 0'
+p208
+sa(dp209
+g4
+S'GFC Ajaccio'
+p210
+sg6
+S'Troyes'
 p211
 sg8
-S'https://www.whoscored.com/Matches/960660/Live'
+S'https://www.whoscored.com/Matches/960590/Live'
 p212
 sg10
-S'2 : 2'
+S'2 : 3'
 p213
 sa(dp214
 g4
 S'Lyon'
 p215
 sg6
-S'Lille'
+S'Caen'
 p216
 sg8
-S'https://www.whoscored.com/Matches/960633/Live'
+S'https://www.whoscored.com/Matches/960944/Live'
 p217
 sg10
-S'0 : 0'
+S'4 : 1'
 p218
 sa(dp219
 g4
-S'Lorient'
+S'Saint-Etienne'
 p220
 sg6
-S'Angers'
+S'Monaco'
 p221
 sg8
-S'https://www.whoscored.com/Matches/960631/Live'
+S'https://www.whoscored.com/Matches/960938/Live'
 p222
 sg10
-S'3 : 1'
+S'1 : 1'
 p223
 sa(dp224
 g4
-S'Montpellier'
+S'Nice'
 p225
 sg6
-S'Saint-Etienne'
+S'Marseille'
 p226
 sg8
-S'https://www.whoscored.com/Matches/960638/Live'
+S'https://www.whoscored.com/Matches/960943/Live'
 p227
 sg10
-S'1 : 2'
+S'1 : 1'
 p228
 sa(dp229
 g4
-S'Nice'
+S'Bordeaux'
 p230
 sg6
-S'Guingamp'
+S'Nice'
 p231
 sg8
-S'https://www.whoscored.com/Matches/960644/Live'
+S'https://www.whoscored.com/Matches/960950/Live'
 p232
 sg10
-S'0 : 1'
+S'0 : 0'
 p233
 sa(dp234
 g4
-S'Toulouse'
+S'Paris Saint Germain'
 p235
 sg6
 S'Reims'
 p236
 sg8
-S'https://www.whoscored.com/Matches/960663/Live'
+S'https://www.whoscored.com/Matches/960954/Live'
 p237
 sg10
-S'2 : 2'
+S'4 : 1'
 p238
 sa(dp239
 g4
-S'Troyes'
+S'Lorient'
 p240
 sg6
-S'Caen'
+S'Guingamp'
 p241
 sg8
-S'https://www.whoscored.com/Matches/960666/Live'
+S'https://www.whoscored.com/Matches/960951/Live'
 p242
 sg10
-S'1 : 3'
+S'4 : 3'
 p243
 sa(dp244
 g4
-S'GFC Ajaccio'
+S'Toulouse'
 p245
 sg6
-S'Monaco'
+S'GFC Ajaccio'
 p246
 sg8
-S'https://www.whoscored.com/Matches/960629/Live'
+S'https://www.whoscored.com/Matches/960957/Live'
 p247
 sg10
-S'0 : 1'
+S'1 : 1'
 p248
 sa(dp249
 g4
-S'Nantes'
+S'Angers'
 p250
 sg6
-S'Rennes'
+S'Montpellier'
 p251
 sg8
-S'https://www.whoscored.com/Matches/960641/Live'
+S'https://www.whoscored.com/Matches/960948/Live'
 p252
 sg10
-S'0 : 2'
+S'2 : 3'
 p253
 sa(dp254
 g4
-S'Marseille'
+S'Monaco'
 p255
 sg6
-S'SC Bastia'
+S'Troyes'
 p256
 sg8
-S'https://www.whoscored.com/Matches/960635/Live'
+S'https://www.whoscored.com/Matches/960949/Live'
 p257
 sg10
-S'4 : 1'
+S'3 : 1'
 p258
 sa(dp259
 g4
-S'Rennes'
+S'Marseille'
 p260
 sg6
-S'Lille'
+S'Saint-Etienne'
 p261
 sg8
-S'https://www.whoscored.com/Matches/960634/Live'
+S'https://www.whoscored.com/Matches/960953/Live'
 p262
 sg10
 S'1 : 1'
 p263
 sa(dp264
 g4
-S'Reims'
+S'Caen'
 p265
 sg6
-S'Paris Saint Germain'
+S'Rennes'
 p266
 sg8
-S'https://www.whoscored.com/Matches/960632/Live'
+S'https://www.whoscored.com/Matches/960956/Live'
 p267
 sg10
-S'1 : 1'
+S'1 : 0'
 p268
 sa(dp269
 g4
-S'Angers'
+S'Lille'
 p270
 sg6
-S'Troyes'
+S'Lyon'
 p271
 sg8
-S'https://www.whoscored.com/Matches/960618/Live'
+S'https://www.whoscored.com/Matches/960952/Live'
 p272
 sg10
 S'1 : 0'
 p273
 sa(dp274
 g4
-S'SC Bastia'
+S'Nice'
 p275
 sg6
-S'Nice'
+S'SC Bastia'
 p276
 sg8
-S'https://www.whoscored.com/Matches/960620/Live'
+S'https://www.whoscored.com/Matches/960964/Live'
 p277
 sg10
-S'1 : 3'
+S'0 : 2'
 p278
 sa(dp279
 g4
-S'Caen'
+S'Montpellier'
 p280
 sg6
-S'Montpellier'
+S'Lille'
 p281
 sg8
-S'https://www.whoscored.com/Matches/960624/Live'
+S'https://www.whoscored.com/Matches/960963/Live'
 p282
 sg10
-S'2 : 1'
+S'3 : 0'
 p283
 sa(dp284
 g4
-S'Guingamp'
+S'Reims'
 p285
 sg6
-S'GFC Ajaccio'
+S'Bordeaux'
 p286
 sg8
-S'https://www.whoscored.com/Matches/960626/Live'
+S'https://www.whoscored.com/Matches/960966/Live'
 p287
 sg10
-S'2 : 1'
+S'4 : 1'
 p288
 sa(dp289
 g4
-S'Bordeaux'
+S'Toulouse'
 p290
 sg6
-S'Toulouse'
+S'Rennes'
 p291
 sg8
-S'https://www.whoscored.com/Matches/960622/Live'
+S'https://www.whoscored.com/Matches/960967/Live'
 p292
 sg10
-S'1 : 1'
+S'1 : 2'
 p293
 sa(dp294
 g4
-S'Monaco'
+S'Guingamp'
 p295
 sg6
-S'Lorient'
+S'Angers'
 p296
 sg8
-S'https://www.whoscored.com/Matches/960630/Live'
+S'https://www.whoscored.com/Matches/960959/Live'
 p297
 sg10
-S'2 : 3'
+S'2 : 2'
 p298
 sa(dp299
 g4
-S'Saint-Etienne'
+S'Troyes'
 p300
 sg6
-S'Nantes'
+S'Lorient'
 p301
 sg8
-S'https://www.whoscored.com/Matches/960636/Live'
+S'https://www.whoscored.com/Matches/960960/Live'
 p302
 sg10
-S'2 : 0'
+S'0 : 1'
 p303
 sa(dp304
 g4
-S'Marseille'
+S'Nantes'
 p305
 sg6
-S'Lyon'
+S'Monaco'
 p306
 sg8
-S'https://www.whoscored.com/Matches/960628/Live'
+S'https://www.whoscored.com/Matches/960961/Live'
 p307
 sg10
-S'1 : 1'
+S'0 : 0'
 p308
 sa(dp309
 g4
-S'Angers'
+S'Saint-Etienne'
 p310
 sg6
-S'Reims'
+S'Caen'
 p311
 sg8
-S'https://www.whoscored.com/Matches/960639/Live'
+S'https://www.whoscored.com/Matches/960958/Live'
 p312
 sg10
-S'0 : 0'
+S'1 : 2'
 p313
 sa(dp314
 g4
-S'Paris Saint Germain'
+S'Lyon'
 p315
 sg6
-S'Guingamp'
+S'Paris Saint Germain'
 p316
 sg8
-S'https://www.whoscored.com/Matches/960661/Live'
+S'https://www.whoscored.com/Matches/960965/Live'
 p317
 sg10
-S'3 : 0'
+S'2 : 1'
 p318
-sa(dp319
+sasS'Aug'
+p319
+(lp320
+(dp321
 g4
-S'GFC Ajaccio'
-p320
-sg6
-S'Rennes'
-p321
-sg8
-S'https://www.whoscored.com/Matches/960642/Live'
-p322
-sg10
-S'1 : 1'
-p323
-sa(dp324
-g4
-S'Lorient'
-p325
-sg6
-S'Caen'
-p326
-sg8
-S'https://www.whoscored.com/Matches/960647/Live'
-p327
-sg10
-S'2 : 0'
-p328
-sa(dp329
-g4
-S'Lyon'
-p330
-sg6
-S'SC Bastia'
-p331
-sg8
-S'https://www.whoscored.com/Matches/960649/Live'
-p332
-sg10
-S'2 : 0'
-p333
-sa(dp334
-g4
-S'Nice'
-p335
-sg6
-S'Bordeaux'
-p336
-sg8
-S'https://www.whoscored.com/Matches/960658/Live'
-p337
-sg10
-S'6 : 1'
-p338
-sa(dp339
-g4
-S'Troyes'
-p340
-sg6
-S'Saint-Etienne'
-p341
-sg8
-S'https://www.whoscored.com/Matches/960667/Live'
-p342
-sg10
-S'0 : 1'
-p343
-sa(dp344
-g4
-S'Toulouse'
-p345
-sg6
-S'Marseille'
-p346
-sg8
-S'https://www.whoscored.com/Matches/960664/Live'
-p347
-sg10
-S'1 : 1'
-p348
-sa(dp349
-g4
-S'Montpellier'
-p350
-sg6
-S'Monaco'
-p351
-sg8
-S'https://www.whoscored.com/Matches/960656/Live'
-p352
-sg10
-S'2 : 3'
-p353
-sa(dp354
-g4
-S'Reims'
-p355
-sg6
 S'Lille'
-p356
-sg8
-S'https://www.whoscored.com/Matches/960777/Live'
-p357
-sg10
-S'1 : 0'
-p358
-sa(dp359
-g4
-S'Nantes'
-p360
+p322
 sg6
 S'Paris Saint Germain'
-p361
+p323
 sg8
-S'https://www.whoscored.com/Matches/960776/Live'
-p362
+S'https://www.whoscored.com/Matches/960591/Live'
+p324
 sg10
-S'1 : 4'
-p363
-sa(dp364
-g4
-S'Rennes'
-p365
-sg6
-S'Troyes'
-p366
-sg8
-S'https://www.whoscored.com/Matches/960650/Live'
-p367
-sg10
-S'1 : 1'
-p368
-sa(dp369
+S'0 : 1'
+p325
+sa(dp326
 g4
 S'SC Bastia'
-p370
+p327
 sg6
-S'Toulouse'
-p371
+S'Rennes'
+p328
 sg8
-S'https://www.whoscored.com/Matches/960669/Live'
-p372
-sg10
-S'3 : 0'
-p373
-sa(dp374
-g4
-S'Bordeaux'
-p375
-sg6
-S'Lyon'
-p376
-sg8
-S'https://www.whoscored.com/Matches/960671/Live'
-p377
-sg10
-S'3 : 1'
-p378
-sa(dp379
-g4
-S'Caen'
-p380
-sg6
-S'GFC Ajaccio'
-p381
-sg8
-S'https://www.whoscored.com/Matches/960673/Live'
-p382
-sg10
-S'2 : 0'
-p383
-sa(dp384
-g4
-S'Marseille'
-p385
-sg6
-S'Angers'
-p386
-sg8
-S'https://www.whoscored.com/Matches/960722/Live'
-p387
-sg10
-S'1 : 2'
-p388
-sa(dp389
-g4
-S'Guingamp'
-p390
-sg6
-S'Monaco'
-p391
-sg8
-S'https://www.whoscored.com/Matches/960717/Live'
-p392
-sg10
-S'3 : 3'
-p393
-sa(dp394
-g4
-S'Montpellier'
-p395
-sg6
-S'Lorient'
-p396
-sg8
-S'https://www.whoscored.com/Matches/960775/Live'
-p397
+S'https://www.whoscored.com/Matches/960588/Live'
+p329
 sg10
 S'2 : 1'
-p398
-sa(dp399
+p330
+sa(dp331
 g4
-S'Saint-Etienne'
-p400
+S'Marseille'
+p332
 sg6
-S'Nice'
-p401
+S'Caen'
+p333
 sg8
-S'https://www.whoscored.com/Matches/960651/Live'
-p402
-sg10
-S'1 : 4'
-p403
-sa(dp404
-g4
-S'Lille'
-p405
-sg6
-S'Nantes'
-p406
-sg8
-S'https://www.whoscored.com/Matches/960645/Live'
-p407
+S'https://www.whoscored.com/Matches/960593/Live'
+p334
 sg10
 S'0 : 1'
-p408
-sasS'Jan'
-p409
-(lp410
-(dp411
+p335
+sa(dp336
 g4
-S'Paris Saint Germain'
+S'Montpellier'
+p337
+sg6
+S'Angers'
+p338
+sg8
+S'https://www.whoscored.com/Matches/960594/Live'
+p339
+sg10
+S'0 : 2'
+p340
+sa(dp341
+g4
+S'Nantes'
+p342
+sg6
+S'Guingamp'
+p343
+sg8
+S'https://www.whoscored.com/Matches/960595/Live'
+p344
+sg10
+S'1 : 0'
+p345
+sa(dp346
+g4
+S'Nice'
+p347
+sg6
+S'Monaco'
+p348
+sg8
+S'https://www.whoscored.com/Matches/960596/Live'
+p349
+sg10
+S'1 : 2'
+p350
+sa(dp351
+g4
+S'Troyes'
+p352
+sg6
+S'GFC Ajaccio'
+p353
+sg8
+S'https://www.whoscored.com/Matches/960940/Live'
+p354
+sg10
+S'0 : 0'
+p355
+sa(dp356
+g4
+S'Toulouse'
+p357
+sg6
+S'Saint-Etienne'
+p358
+sg8
+S'https://www.whoscored.com/Matches/960597/Live'
+p359
+sg10
+S'2 : 1'
+p360
+sa(dp361
+g4
+S'Bordeaux'
+p362
+sg6
+S'Reims'
+p363
+sg8
+S'https://www.whoscored.com/Matches/960589/Live'
+p364
+sg10
+S'1 : 2'
+p365
+sa(dp366
+g4
+S'Lyon'
+p367
+sg6
+S'Lorient'
+p368
+sg8
+S'https://www.whoscored.com/Matches/960592/Live'
+p369
+sg10
+S'0 : 0'
+p370
+sa(dp371
+g4
+S'Monaco'
+p372
+sg6
+S'Lille'
+p373
+sg8
+S'https://www.whoscored.com/Matches/960602/Live'
+p374
+sg10
+S'0 : 0'
+p375
+sa(dp376
+g4
+S'Saint-Etienne'
+p377
+sg6
+S'Bordeaux'
+p378
+sg8
+S'https://www.whoscored.com/Matches/960606/Live'
+p379
+sg10
+S'1 : 1'
+p380
+sa(dp381
+g4
+S'Troyes'
+p382
+sg6
+S'Nice'
+p383
+sg8
+S'https://www.whoscored.com/Matches/960607/Live'
+p384
+sg10
+S'3 : 3'
+p385
+sa(dp386
+g4
+S'Rennes'
+p387
+sg6
+S'Montpellier'
+p388
+sg8
+S'https://www.whoscored.com/Matches/960605/Live'
+p389
+sg10
+S'1 : 0'
+p390
+sa(dp391
+g4
+S'Angers'
+p392
+sg6
+S'Nantes'
+p393
+sg8
+S'https://www.whoscored.com/Matches/960598/Live'
+p394
+sg10
+S'0 : 0'
+p395
+sa(dp396
+g4
+S'Caen'
+p397
+sg6
+S'Toulouse'
+p398
+sg8
+S'https://www.whoscored.com/Matches/960599/Live'
+p399
+sg10
+S'1 : 0'
+p400
+sa(dp401
+g4
+S'Guingamp'
+p402
+sg6
+S'Lyon'
+p403
+sg8
+S'https://www.whoscored.com/Matches/960600/Live'
+p404
+sg10
+S'0 : 1'
+p405
+sa(dp406
+g4
+S'Reims'
+p407
+sg6
+S'Marseille'
+p408
+sg8
+S'https://www.whoscored.com/Matches/960604/Live'
+p409
+sg10
+S'1 : 0'
+p410
+sa(dp411
+g4
+S'Lorient'
 p412
 sg6
 S'SC Bastia'
 p413
 sg8
-S'https://www.whoscored.com/Matches/960785/Live'
+S'https://www.whoscored.com/Matches/960601/Live'
 p414
 sg10
-S'2 : 0'
+S'1 : 1'
 p415
 sa(dp416
 g4
-S'Lyon'
+S'Paris Saint Germain'
 p417
 sg6
-S'Troyes'
+S'GFC Ajaccio'
 p418
 sg8
-S'https://www.whoscored.com/Matches/960784/Live'
+S'https://www.whoscored.com/Matches/960603/Live'
 p419
 sg10
-S'4 : 1'
+S'2 : 0'
 p420
 sa(dp421
 g4
-S'Angers'
+S'Montpellier'
 p422
 sg6
-S'Caen'
+S'Paris Saint Germain'
 p423
 sg8
-S'https://www.whoscored.com/Matches/960778/Live'
+S'https://www.whoscored.com/Matches/960614/Live'
 p424
 sg10
-S'2 : 0'
+S'0 : 1'
 p425
 sa(dp426
 g4
-S'Monaco'
+S'Lyon'
 p427
 sg6
-S'GFC Ajaccio'
+S'Rennes'
 p428
 sg8
-S'https://www.whoscored.com/Matches/960779/Live'
+S'https://www.whoscored.com/Matches/960612/Live'
 p429
 sg10
-S'2 : 2'
+S'1 : 2'
 p430
 sa(dp431
 g4
-S'Montpellier'
+S'Nantes'
 p432
 sg6
-S'Bordeaux'
+S'Reims'
 p433
 sg8
-S'https://www.whoscored.com/Matches/960782/Live'
+S'https://www.whoscored.com/Matches/960615/Live'
 p434
 sg10
-S'0 : 1'
+S'1 : 0'
 p435
 sa(dp436
 g4
-S'Reims'
+S'Nice'
 p437
 sg6
-S'Toulouse'
+S'Caen'
 p438
 sg8
-S'https://www.whoscored.com/Matches/960786/Live'
+S'https://www.whoscored.com/Matches/960616/Live'
 p439
 sg10
-S'1 : 3'
+S'2 : 1'
 p440
 sa(dp441
 g4
-S'Rennes'
+S'Toulouse'
 p442
 sg6
-S'Lorient'
+S'Monaco'
 p443
 sg8
-S'https://www.whoscored.com/Matches/960787/Live'
+S'https://www.whoscored.com/Matches/960617/Live'
 p444
 sg10
-S'2 : 2'
+S'1 : 1'
 p445
 sa(dp446
 g4
-S'Nantes'
+S'SC Bastia'
 p447
 sg6
-S'Saint-Etienne'
+S'Guingamp'
 p448
 sg8
-S'https://www.whoscored.com/Matches/960780/Live'
+S'https://www.whoscored.com/Matches/960608/Live'
 p449
 sg10
-S'2 : 1'
+S'3 : 0'
 p450
 sa(dp451
 g4
-S'Lille'
+S'GFC Ajaccio'
 p452
 sg6
-S'Nice'
+S'Angers'
 p453
 sg8
-S'https://www.whoscored.com/Matches/960781/Live'
+S'https://www.whoscored.com/Matches/960609/Live'
 p454
 sg10
-S'1 : 1'
+S'0 : 2'
 p455
 sa(dp456
 g4
-S'Marseille'
+S'Lille'
 p457
 sg6
-S'Guingamp'
+S'Bordeaux'
 p458
 sg8
-S'https://www.whoscored.com/Matches/960783/Live'
+S'https://www.whoscored.com/Matches/960610/Live'
 p459
 sg10
 S'0 : 0'
 p460
 sa(dp461
 g4
-S'Nice'
+S'Lorient'
 p462
 sg6
-S'Angers'
+S'Saint-Etienne'
 p463
 sg8
-S'https://www.whoscored.com/Matches/960794/Live'
+S'https://www.whoscored.com/Matches/960611/Live'
 p464
 sg10
-S'2 : 1'
+S'0 : 1'
 p465
 sa(dp466
 g4
-S'Toulouse'
+S'Marseille'
 p467
 sg6
-S'Paris Saint Germain'
+S'Troyes'
 p468
 sg8
-S'https://www.whoscored.com/Matches/960797/Live'
+S'https://www.whoscored.com/Matches/960613/Live'
 p469
 sg10
-S'0 : 1'
+S'6 : 0'
 p470
 sa(dp471
 g4
 S'Guingamp'
 p472
 sg6
-S'Nantes'
+S'Marseille'
 p473
 sg8
-S'https://www.whoscored.com/Matches/960789/Live'
+S'https://www.whoscored.com/Matches/960646/Live'
 p474
 sg10
-S'2 : 2'
+S'2 : 0'
 p475
 sa(dp476
 g4
-S'Troyes'
+S'Caen'
 p477
 sg6
-S'Rennes'
+S'Lyon'
 p478
 sg8
-S'https://www.whoscored.com/Matches/960790/Live'
+S'https://www.whoscored.com/Matches/960643/Live'
 p479
 sg10
-S'2 : 4'
+S'0 : 4'
 p480
 sa(dp481
 g4
-S'Bordeaux'
+S'Lille'
 p482
 sg6
-S'Lille'
+S'GFC Ajaccio'
 p483
 sg8
-S'https://www.whoscored.com/Matches/960791/Live'
+S'https://www.whoscored.com/Matches/960648/Live'
 p484
 sg10
 S'1 : 0'
 p485
 sa(dp486
 g4
-S'GFC Ajaccio'
+S'Troyes'
 p487
 sg6
-S'Reims'
+S'Montpellier'
 p488
 sg8
-S'https://www.whoscored.com/Matches/960793/Live'
+S'https://www.whoscored.com/Matches/960627/Live'
 p489
 sg10
-S'2 : 2'
+S'0 : 0'
 p490
 sa(dp491
 g4
-S'SC Bastia'
+S'Angers'
 p492
 sg6
-S'Montpellier'
+S'Nice'
 p493
 sg8
-S'https://www.whoscored.com/Matches/960795/Live'
+S'https://www.whoscored.com/Matches/960637/Live'
 p494
 sg10
-S'1 : 0'
+S'1 : 1'
 p495
 sa(dp496
 g4
-S'Lorient'
+S'Reims'
 p497
 sg6
-S'Monaco'
+S'Lorient'
 p498
 sg8
-S'https://www.whoscored.com/Matches/960792/Live'
+S'https://www.whoscored.com/Matches/960621/Live'
 p499
 sg10
-S'0 : 2'
+S'4 : 1'
 p500
 sa(dp501
 g4
-S'Caen'
+S'Rennes'
 p502
 sg6
-S'Marseille'
+S'Toulouse'
 p503
 sg8
-S'https://www.whoscored.com/Matches/960796/Live'
+S'https://www.whoscored.com/Matches/960623/Live'
 p504
 sg10
-S'1 : 3'
+S'3 : 1'
 p505
 sa(dp506
 g4
 S'Saint-Etienne'
 p507
 sg6
-S'Lyon'
+S'SC Bastia'
 p508
 sg8
-S'https://www.whoscored.com/Matches/960788/Live'
+S'https://www.whoscored.com/Matches/960625/Live'
 p509
 sg10
-S'1 : 0'
+S'2 : 1'
 p510
 sa(dp511
 g4
-S'Rennes'
+S'Bordeaux'
 p512
 sg6
-S'GFC Ajaccio'
+S'Nantes'
 p513
 sg8
-S'https://www.whoscored.com/Matches/960819/Live'
+S'https://www.whoscored.com/Matches/960640/Live'
 p514
 sg10
-S'1 : 0'
+S'2 : 0'
 p515
 sa(dp516
 g4
-S'Paris Saint Germain'
+S'Monaco'
 p517
 sg6
-S'Angers'
+S'Paris Saint Germain'
 p518
 sg8
-S'https://www.whoscored.com/Matches/960805/Live'
+S'https://www.whoscored.com/Matches/960619/Live'
 p519
 sg10
-S'5 : 1'
+S'0 : 3'
 p520
-sa(dp521
+sasS'Sep'
+p521
+(lp522
+(dp523
 g4
-S'Guingamp'
-p522
-sg6
-S'SC Bastia'
-p523
-sg8
-S'https://www.whoscored.com/Matches/960799/Live'
+S'Paris Saint Germain'
 p524
-sg10
-S'1 : 0'
-p525
-sa(dp526
-g4
-S'Nantes'
-p527
 sg6
 S'Bordeaux'
-p528
+p525
 sg8
-S'https://www.whoscored.com/Matches/960800/Live'
-p529
+S'https://www.whoscored.com/Matches/960660/Live'
+p526
 sg10
 S'2 : 2'
-p530
-sa(dp531
-g4
-S'Lille'
-p532
-sg6
-S'Troyes'
-p533
-sg8
-S'https://www.whoscored.com/Matches/960801/Live'
-p534
-sg10
-S'1 : 3'
-p535
-sa(dp536
-g4
-S'Montpellier'
-p537
-sg6
-S'Caen'
-p538
-sg8
-S'https://www.whoscored.com/Matches/960802/Live'
-p539
-sg10
-S'1 : 2'
-p540
-sa(dp541
-g4
-S'Nice'
-p542
-sg6
-S'Lorient'
-p543
-sg8
-S'https://www.whoscored.com/Matches/960803/Live'
-p544
-sg10
-S'2 : 1'
-p545
-sa(dp546
-g4
-S'Monaco'
-p547
-sg6
-S'Toulouse'
-p548
-sg8
-S'https://www.whoscored.com/Matches/960798/Live'
-p549
-sg10
-S'4 : 0'
-p550
-sa(dp551
-g4
-S'Reims'
-p552
-sg6
-S'Saint-Etienne'
-p553
-sg8
-S'https://www.whoscored.com/Matches/960806/Live'
-p554
-sg10
-S'1 : 1'
-p555
-sa(dp556
+p527
+sa(dp528
 g4
 S'Lyon'
-p557
-sg6
-S'Marseille'
-p558
-sg8
-S'https://www.whoscored.com/Matches/960804/Live'
-p559
-sg10
-S'1 : 1'
-p560
-sasS'Nov'
-p561
-(lp562
-(dp563
-g4
-S'Nice'
-p564
+p529
 sg6
 S'Lille'
-p565
+p530
 sg8
-S'https://www.whoscored.com/Matches/960729/Live'
-p566
+S'https://www.whoscored.com/Matches/960633/Live'
+p531
 sg10
 S'0 : 0'
+p532
+sa(dp533
+g4
+S'Montpellier'
+p534
+sg6
+S'Saint-Etienne'
+p535
+sg8
+S'https://www.whoscored.com/Matches/960638/Live'
+p536
+sg10
+S'1 : 2'
+p537
+sa(dp538
+g4
+S'Lorient'
+p539
+sg6
+S'Angers'
+p540
+sg8
+S'https://www.whoscored.com/Matches/960631/Live'
+p541
+sg10
+S'3 : 1'
+p542
+sa(dp543
+g4
+S'Toulouse'
+p544
+sg6
+S'Reims'
+p545
+sg8
+S'https://www.whoscored.com/Matches/960663/Live'
+p546
+sg10
+S'2 : 2'
+p547
+sa(dp548
+g4
+S'Troyes'
+p549
+sg6
+S'Caen'
+p550
+sg8
+S'https://www.whoscored.com/Matches/960666/Live'
+p551
+sg10
+S'1 : 3'
+p552
+sa(dp553
+g4
+S'Nice'
+p554
+sg6
+S'Guingamp'
+p555
+sg8
+S'https://www.whoscored.com/Matches/960644/Live'
+p556
+sg10
+S'0 : 1'
+p557
+sa(dp558
+g4
+S'GFC Ajaccio'
+p559
+sg6
+S'Monaco'
+p560
+sg8
+S'https://www.whoscored.com/Matches/960629/Live'
+p561
+sg10
+S'0 : 1'
+p562
+sa(dp563
+g4
+S'Nantes'
+p564
+sg6
+S'Rennes'
+p565
+sg8
+S'https://www.whoscored.com/Matches/960641/Live'
+p566
+sg10
+S'0 : 2'
 p567
 sa(dp568
 g4
-S'Monaco'
+S'Marseille'
 p569
 sg6
-S'Angers'
+S'SC Bastia'
 p570
 sg8
-S'https://www.whoscored.com/Matches/960720/Live'
+S'https://www.whoscored.com/Matches/960635/Live'
 p571
 sg10
-S'1 : 0'
+S'4 : 1'
 p572
 sa(dp573
 g4
-S'Nantes'
+S'Rennes'
 p574
 sg6
-S'Marseille'
+S'Lille'
 p575
 sg8
-S'https://www.whoscored.com/Matches/960725/Live'
+S'https://www.whoscored.com/Matches/960634/Live'
 p576
 sg10
-S'0 : 1'
+S'1 : 1'
 p577
 sa(dp578
 g4
-S'Nice'
+S'Reims'
 p579
 sg6
-S'Nantes'
+S'Paris Saint Germain'
 p580
 sg8
-S'https://www.whoscored.com/Matches/1029051/Live'
+S'https://www.whoscored.com/Matches/960632/Live'
 p581
 sg10
-S'1 : 2'
+S'1 : 1'
 p582
 sa(dp583
 g4
 S'Angers'
 p584
 sg6
-S'Rennes'
+S'Troyes'
 p585
 sg8
-S'https://www.whoscored.com/Matches/960693/Live'
+S'https://www.whoscored.com/Matches/960618/Live'
 p586
 sg10
-S'0 : 2'
+S'1 : 0'
 p587
 sa(dp588
 g4
-S'Paris Saint Germain'
+S'SC Bastia'
 p589
 sg6
-S'Toulouse'
+S'Nice'
 p590
 sg8
-S'https://www.whoscored.com/Matches/960724/Live'
+S'https://www.whoscored.com/Matches/960620/Live'
 p591
 sg10
-S'5 : 0'
+S'1 : 3'
 p592
 sa(dp593
 g4
 S'Caen'
 p594
 sg6
-S'Guingamp'
+S'Montpellier'
 p595
 sg8
-S'https://www.whoscored.com/Matches/960699/Live'
+S'https://www.whoscored.com/Matches/960624/Live'
 p596
 sg10
 S'2 : 1'
 p597
 sa(dp598
 g4
-S'Lille'
+S'Guingamp'
 p599
 sg6
-S'SC Bastia'
+S'GFC Ajaccio'
 p600
 sg8
-S'https://www.whoscored.com/Matches/960702/Live'
+S'https://www.whoscored.com/Matches/960626/Live'
 p601
 sg10
-S'1 : 1'
+S'2 : 1'
 p602
 sa(dp603
 g4
-S'Lorient'
+S'Bordeaux'
 p604
 sg6
-S'Troyes'
+S'Toulouse'
 p605
 sg8
-S'https://www.whoscored.com/Matches/960706/Live'
+S'https://www.whoscored.com/Matches/960622/Live'
 p606
 sg10
-S'4 : 1'
+S'1 : 1'
 p607
 sa(dp608
 g4
-S'Montpellier'
+S'Monaco'
 p609
 sg6
-S'Nantes'
+S'Lorient'
 p610
 sg8
-S'https://www.whoscored.com/Matches/960719/Live'
+S'https://www.whoscored.com/Matches/960630/Live'
 p611
 sg10
-S'2 : 1'
+S'2 : 3'
 p612
 sa(dp613
 g4
-S'Reims'
+S'Saint-Etienne'
 p614
 sg6
-S'GFC Ajaccio'
+S'Nantes'
 p615
 sg8
-S'https://www.whoscored.com/Matches/960728/Live'
+S'https://www.whoscored.com/Matches/960636/Live'
 p616
 sg10
-S'1 : 2'
+S'2 : 0'
 p617
 sa(dp618
 g4
 S'Marseille'
 p619
 sg6
-S'Nice'
+S'Lyon'
 p620
 sg8
-S'https://www.whoscored.com/Matches/960714/Live'
+S'https://www.whoscored.com/Matches/960628/Live'
 p621
 sg10
-S'0 : 1'
+S'1 : 1'
 p622
 sa(dp623
 g4
-S'Bordeaux'
+S'Angers'
 p624
 sg6
-S'Monaco'
+S'Reims'
 p625
 sg8
-S'https://www.whoscored.com/Matches/960696/Live'
+S'https://www.whoscored.com/Matches/960639/Live'
 p626
 sg10
-S'3 : 1'
+S'0 : 0'
 p627
 sa(dp628
 g4
-S'Lyon'
+S'Paris Saint Germain'
 p629
 sg6
-S'Saint-Etienne'
+S'Guingamp'
 p630
 sg8
-S'https://www.whoscored.com/Matches/960710/Live'
+S'https://www.whoscored.com/Matches/960661/Live'
 p631
 sg10
 S'3 : 0'
 p632
 sa(dp633
 g4
-S'Nice'
+S'Troyes'
 p634
 sg6
-S'Lyon'
+S'Saint-Etienne'
 p635
 sg8
-S'https://www.whoscored.com/Matches/960695/Live'
+S'https://www.whoscored.com/Matches/960667/Live'
 p636
 sg10
-S'3 : 0'
+S'0 : 1'
 p637
 sa(dp638
 g4
-S'Lorient'
+S'Nice'
 p639
 sg6
-S'Paris Saint Germain'
+S'Bordeaux'
 p640
 sg8
-S'https://www.whoscored.com/Matches/960742/Live'
+S'https://www.whoscored.com/Matches/960658/Live'
 p641
 sg10
-S'1 : 2'
+S'6 : 1'
 p642
 sa(dp643
 g4
-S'Monaco'
+S'Lorient'
 p644
 sg6
-S'Nantes'
+S'Caen'
 p645
 sg8
-S'https://www.whoscored.com/Matches/960689/Live'
+S'https://www.whoscored.com/Matches/960647/Live'
 p646
 sg10
-S'1 : 0'
+S'2 : 0'
 p647
 sa(dp648
 g4
-S'Montpellier'
+S'Lyon'
 p649
 sg6
-S'Reims'
+S'SC Bastia'
 p650
 sg8
-S'https://www.whoscored.com/Matches/960692/Live'
+S'https://www.whoscored.com/Matches/960649/Live'
 p651
 sg10
-S'3 : 1'
+S'2 : 0'
 p652
 sa(dp653
 g4
-S'Troyes'
+S'GFC Ajaccio'
 p654
 sg6
-S'Lille'
+S'Rennes'
 p655
 sg8
-S'https://www.whoscored.com/Matches/960704/Live'
+S'https://www.whoscored.com/Matches/960642/Live'
 p656
 sg10
 S'1 : 1'
 p657
 sa(dp658
 g4
-S'Guingamp'
+S'Toulouse'
 p659
 sg6
-S'Toulouse'
+S'Marseille'
 p660
 sg8
-S'https://www.whoscored.com/Matches/960739/Live'
+S'https://www.whoscored.com/Matches/960664/Live'
 p661
 sg10
-S'2 : 0'
+S'1 : 1'
 p662
 sa(dp663
 g4
-S'SC Bastia'
+S'Montpellier'
 p664
 sg6
-S'GFC Ajaccio'
+S'Monaco'
 p665
 sg8
-S'https://www.whoscored.com/Matches/960732/Live'
+S'https://www.whoscored.com/Matches/960656/Live'
 p666
 sg10
-S'1 : 2'
+S'2 : 3'
 p667
 sa(dp668
 g4
-S'Caen'
+S'Reims'
 p669
 sg6
-S'Angers'
+S'Lille'
 p670
 sg8
-S'https://www.whoscored.com/Matches/960736/Live'
+S'https://www.whoscored.com/Matches/960777/Live'
 p671
 sg10
-S'0 : 0'
+S'1 : 0'
 p672
 sa(dp673
 g4
-S'Rennes'
+S'Nantes'
 p674
 sg6
-S'Bordeaux'
+S'Paris Saint Germain'
 p675
 sg8
-S'https://www.whoscored.com/Matches/960698/Live'
+S'https://www.whoscored.com/Matches/960776/Live'
 p676
 sg10
-S'2 : 2'
+S'1 : 4'
 p677
 sa(dp678
 g4
-S'Saint-Etienne'
+S'Rennes'
 p679
 sg6
-S'Marseille'
+S'Troyes'
 p680
 sg8
-S'https://www.whoscored.com/Matches/960701/Live'
+S'https://www.whoscored.com/Matches/960650/Live'
 p681
 sg10
-S'0 : 2'
+S'1 : 1'
 p682
 sa(dp683
 g4
-S'Lyon'
+S'SC Bastia'
 p684
 sg6
-S'Montpellier'
+S'Toulouse'
 p685
 sg8
-S'https://www.whoscored.com/Matches/960721/Live'
+S'https://www.whoscored.com/Matches/960669/Live'
 p686
 sg10
-S'2 : 4'
+S'3 : 0'
 p687
 sa(dp688
 g4
-S'Paris Saint Germain'
+S'Bordeaux'
 p689
 sg6
-S'Troyes'
+S'Lyon'
 p690
 sg8
-S'https://www.whoscored.com/Matches/960734/Live'
+S'https://www.whoscored.com/Matches/960671/Live'
 p691
 sg10
-S'4 : 1'
+S'3 : 1'
 p692
 sa(dp693
 g4
-S'Reims'
+S'Caen'
 p694
 sg6
-S'Rennes'
+S'GFC Ajaccio'
 p695
 sg8
-S'https://www.whoscored.com/Matches/960705/Live'
+S'https://www.whoscored.com/Matches/960673/Live'
 p696
 sg10
-S'2 : 2'
+S'2 : 0'
 p697
 sa(dp698
 g4
-S'Angers'
+S'Marseille'
 p699
 sg6
-S'Lille'
+S'Angers'
 p700
 sg8
-S'https://www.whoscored.com/Matches/960708/Live'
+S'https://www.whoscored.com/Matches/960722/Live'
 p701
 sg10
-S'2 : 0'
+S'1 : 2'
 p702
 sa(dp703
 g4
-S'Toulouse'
+S'Montpellier'
 p704
 sg6
-S'Nice'
+S'Lorient'
 p705
 sg8
-S'https://www.whoscored.com/Matches/960713/Live'
+S'https://www.whoscored.com/Matches/960775/Live'
 p706
 sg10
-S'2 : 0'
+S'2 : 1'
 p707
 sa(dp708
 g4
-S'GFC Ajaccio'
+S'Guingamp'
 p709
 sg6
-S'Lorient'
+S'Monaco'
 p710
 sg8
-S'https://www.whoscored.com/Matches/960716/Live'
+S'https://www.whoscored.com/Matches/960717/Live'
 p711
 sg10
-S'1 : 1'
+S'3 : 3'
 p712
 sa(dp713
 g4
-S'Nantes'
+S'Saint-Etienne'
 p714
 sg6
-S'SC Bastia'
+S'Nice'
 p715
 sg8
-S'https://www.whoscored.com/Matches/960730/Live'
+S'https://www.whoscored.com/Matches/960651/Live'
 p716
 sg10
-S'0 : 0'
+S'1 : 4'
 p717
 sa(dp718
 g4
-S'Saint-Etienne'
+S'Lille'
 p719
 sg6
-S'Guingamp'
+S'Nantes'
 p720
 sg8
-S'https://www.whoscored.com/Matches/960709/Live'
+S'https://www.whoscored.com/Matches/960645/Live'
 p721
 sg10
-S'3 : 0'
+S'0 : 1'
 p722
-sa(dp723
+sasS'Jan'
+p723
+(lp724
+(dp725
 g4
-S'Bordeaux'
-p724
-sg6
-S'Caen'
-p725
-sg8
-S'https://www.whoscored.com/Matches/960712/Live'
+S'Paris Saint Germain'
 p726
-sg10
-S'1 : 4'
-p727
-sa(dp728
-g4
-S'Marseille'
-p729
 sg6
-S'Monaco'
-p730
+S'SC Bastia'
+p727
 sg8
-S'https://www.whoscored.com/Matches/960726/Live'
-p731
+S'https://www.whoscored.com/Matches/960785/Live'
+p728
 sg10
-S'3 : 3'
-p732
-sasS'Dec'
-p733
-(lp734
-(dp735
+S'2 : 0'
+p729
+sa(dp730
 g4
-S'Angers'
+S'Lyon'
+p731
+sg6
+S'Troyes'
+p732
+sg8
+S'https://www.whoscored.com/Matches/960784/Live'
+p733
+sg10
+S'4 : 1'
+p734
+sa(dp735
+g4
+S'Montpellier'
 p736
 sg6
-S'Paris Saint Germain'
+S'Bordeaux'
 p737
 sg8
-S'https://www.whoscored.com/Matches/960718/Live'
+S'https://www.whoscored.com/Matches/960782/Live'
 p738
 sg10
-S'0 : 0'
+S'0 : 1'
 p739
 sa(dp740
 g4
-S'Lorient'
+S'Reims'
 p741
 sg6
-S'Nice'
+S'Toulouse'
 p742
 sg8
-S'https://www.whoscored.com/Matches/960735/Live'
+S'https://www.whoscored.com/Matches/960786/Live'
 p743
 sg10
-S'0 : 0'
+S'1 : 3'
 p744
 sa(dp745
 g4
-S'Nantes'
+S'Rennes'
 p746
 sg6
-S'Lyon'
+S'Lorient'
 p747
 sg8
-S'https://www.whoscored.com/Matches/960744/Live'
+S'https://www.whoscored.com/Matches/960787/Live'
 p748
 sg10
-S'0 : 0'
+S'2 : 2'
 p749
 sa(dp750
 g4
-S'SC Bastia'
+S'Angers'
 p751
 sg6
-S'Bordeaux'
+S'Caen'
 p752
 sg8
-S'https://www.whoscored.com/Matches/960723/Live'
+S'https://www.whoscored.com/Matches/960778/Live'
 p753
 sg10
-S'1 : 0'
+S'2 : 0'
 p754
 sa(dp755
 g4
-S'Guingamp'
+S'Monaco'
 p756
 sg6
-S'Reims'
+S'GFC Ajaccio'
 p757
 sg8
-S'https://www.whoscored.com/Matches/960727/Live'
+S'https://www.whoscored.com/Matches/960779/Live'
 p758
 sg10
-S'1 : 2'
+S'2 : 2'
 p759
 sa(dp760
 g4
-S'Monaco'
+S'Nantes'
 p761
 sg6
-S'Caen'
+S'Saint-Etienne'
 p762
 sg8
-S'https://www.whoscored.com/Matches/960738/Live'
+S'https://www.whoscored.com/Matches/960780/Live'
 p763
 sg10
-S'1 : 1'
+S'2 : 1'
 p764
 sa(dp765
 g4
-S'Montpellier'
+S'Lille'
 p766
 sg6
-S'GFC Ajaccio'
+S'Nice'
 p767
 sg8
-S'https://www.whoscored.com/Matches/960741/Live'
+S'https://www.whoscored.com/Matches/960781/Live'
 p768
 sg10
-S'0 : 2'
+S'1 : 1'
 p769
 sa(dp770
 g4
-S'Troyes'
+S'Marseille'
 p771
 sg6
-S'Toulouse'
+S'Guingamp'
 p772
 sg8
-S'https://www.whoscored.com/Matches/960748/Live'
+S'https://www.whoscored.com/Matches/960783/Live'
 p773
 sg10
-S'0 : 3'
+S'0 : 0'
 p774
 sa(dp775
 g4
-S'Lille'
+S'Nice'
 p776
 sg6
-S'Saint-Etienne'
+S'Angers'
 p777
 sg8
-S'https://www.whoscored.com/Matches/960731/Live'
+S'https://www.whoscored.com/Matches/960794/Live'
 p778
 sg10
-S'1 : 0'
+S'2 : 1'
 p779
 sa(dp780
 g4
-S'Rennes'
+S'Toulouse'
 p781
 sg6
-S'Marseille'
+S'Paris Saint Germain'
 p782
 sg8
-S'https://www.whoscored.com/Matches/960746/Live'
+S'https://www.whoscored.com/Matches/960797/Live'
 p783
 sg10
 S'0 : 1'
 p784
 sa(dp785
 g4
-S'Nice'
+S'SC Bastia'
 p786
 sg6
-S'Paris Saint Germain'
+S'Montpellier'
 p787
 sg8
-S'https://www.whoscored.com/Matches/960771/Live'
+S'https://www.whoscored.com/Matches/960795/Live'
 p788
 sg10
-S'0 : 3'
+S'1 : 0'
 p789
 sa(dp790
 g4
-S'Lyon'
+S'GFC Ajaccio'
 p791
 sg6
-S'Angers'
+S'Reims'
 p792
 sg8
-S'https://www.whoscored.com/Matches/960769/Live'
+S'https://www.whoscored.com/Matches/960793/Live'
 p793
 sg10
-S'0 : 2'
+S'2 : 2'
 p794
 sa(dp795
 g4
-S'SC Bastia'
+S'Guingamp'
 p796
 sg6
-S'Monaco'
+S'Nantes'
 p797
 sg8
-S'https://www.whoscored.com/Matches/960750/Live'
+S'https://www.whoscored.com/Matches/960789/Live'
 p798
 sg10
-S'1 : 2'
+S'2 : 2'
 p799
 sa(dp800
 g4
-S'Caen'
+S'Troyes'
 p801
 sg6
-S'Lille'
+S'Rennes'
 p802
 sg8
-S'https://www.whoscored.com/Matches/960754/Live'
+S'https://www.whoscored.com/Matches/960790/Live'
 p803
 sg10
-S'1 : 2'
+S'2 : 4'
 p804
 sa(dp805
 g4
-S'GFC Ajaccio'
+S'Bordeaux'
 p806
 sg6
-S'Nantes'
+S'Lille'
 p807
 sg8
-S'https://www.whoscored.com/Matches/960756/Live'
+S'https://www.whoscored.com/Matches/960791/Live'
 p808
 sg10
-S'1 : 1'
+S'1 : 0'
 p809
 sa(dp810
 g4
-S'Reims'
+S'Lorient'
 p811
 sg6
-S'Troyes'
+S'Monaco'
 p812
 sg8
-S'https://www.whoscored.com/Matches/960772/Live'
+S'https://www.whoscored.com/Matches/960792/Live'
 p813
 sg10
-S'1 : 1'
+S'0 : 2'
 p814
 sa(dp815
 g4
-S'Toulouse'
+S'Caen'
 p816
 sg6
-S'Lorient'
+S'Marseille'
 p817
 sg8
-S'https://www.whoscored.com/Matches/960774/Live'
+S'https://www.whoscored.com/Matches/960796/Live'
 p818
 sg10
-S'2 : 3'
+S'1 : 3'
 p819
 sa(dp820
 g4
-S'Marseille'
+S'Saint-Etienne'
 p821
 sg6
-S'Montpellier'
+S'Lyon'
 p822
 sg8
-S'https://www.whoscored.com/Matches/960770/Live'
+S'https://www.whoscored.com/Matches/960788/Live'
 p823
 sg10
-S'2 : 2'
+S'1 : 0'
 p824
 sa(dp825
 g4
-S'Bordeaux'
+S'Rennes'
 p826
 sg6
-S'Guingamp'
+S'GFC Ajaccio'
 p827
 sg8
-S'https://www.whoscored.com/Matches/960752/Live'
+S'https://www.whoscored.com/Matches/960819/Live'
 p828
 sg10
 S'1 : 0'
 p829
 sa(dp830
 g4
-S'Saint-Etienne'
+S'Paris Saint Germain'
 p831
 sg6
-S'Rennes'
+S'Angers'
 p832
 sg8
-S'https://www.whoscored.com/Matches/960773/Live'
+S'https://www.whoscored.com/Matches/960805/Live'
 p833
 sg10
-S'1 : 1'
+S'5 : 1'
 p834
 sa(dp835
 g4
-S'Rennes'
+S'Guingamp'
 p836
 sg6
-S'Caen'
+S'SC Bastia'
 p837
 sg8
-S'https://www.whoscored.com/Matches/960753/Live'
+S'https://www.whoscored.com/Matches/960799/Live'
 p838
 sg10
-S'1 : 1'
+S'1 : 0'
 p839
 sa(dp840
 g4
-S'Reims'
+S'Nantes'
 p841
 sg6
-S'Nice'
+S'Bordeaux'
 p842
 sg8
-S'https://www.whoscored.com/Matches/960751/Live'
+S'https://www.whoscored.com/Matches/960800/Live'
 p843
 sg10
-S'1 : 1'
+S'2 : 2'
 p844
 sa(dp845
 g4
-S'Montpellier'
+S'Lille'
 p846
 sg6
-S'Guingamp'
+S'Troyes'
 p847
 sg8
-S'https://www.whoscored.com/Matches/960745/Live'
+S'https://www.whoscored.com/Matches/960801/Live'
 p848
 sg10
-S'2 : 1'
+S'1 : 3'
 p849
 sa(dp850
 g4
-S'Nantes'
+S'Montpellier'
 p851
 sg6
-S'Toulouse'
+S'Caen'
 p852
 sg8
-S'https://www.whoscored.com/Matches/960747/Live'
+S'https://www.whoscored.com/Matches/960802/Live'
 p853
 sg10
-S'1 : 1'
+S'1 : 2'
 p854
 sa(dp855
 g4
-S'Troyes'
+S'Nice'
 p856
 sg6
-S'SC Bastia'
+S'Lorient'
 p857
 sg8
-S'https://www.whoscored.com/Matches/960755/Live'
+S'https://www.whoscored.com/Matches/960803/Live'
 p858
 sg10
-S'1 : 1'
+S'2 : 1'
 p859
 sa(dp860
 g4
-S'Lille'
+S'Monaco'
 p861
 sg6
-S'Lorient'
+S'Toulouse'
 p862
 sg8
-S'https://www.whoscored.com/Matches/960768/Live'
+S'https://www.whoscored.com/Matches/960798/Live'
 p863
 sg10
-S'3 : 0'
+S'4 : 0'
 p864
 sa(dp865
 g4
-S'Monaco'
+S'Reims'
 p866
 sg6
 S'Saint-Etienne'
 p867
 sg8
-S'https://www.whoscored.com/Matches/960743/Live'
+S'https://www.whoscored.com/Matches/960806/Live'
 p868
 sg10
-S'1 : 0'
+S'1 : 1'
 p869
 sa(dp870
 g4
-S'Marseille'
+S'Lyon'
 p871
 sg6
-S'GFC Ajaccio'
+S'Marseille'
 p872
 sg8
-S'https://www.whoscored.com/Matches/960740/Live'
+S'https://www.whoscored.com/Matches/960804/Live'
 p873
 sg10
 S'1 : 1'
 p874
 sa(dp875
 g4
-S'Angers'
+S'Marseille'
 p876
 sg6
-S'Bordeaux'
+S'Lille'
 p877
 sg8
-S'https://www.whoscored.com/Matches/960767/Live'
+S'https://www.whoscored.com/Matches/960813/Live'
 p878
 sg10
 S'1 : 1'
 p879
 sa(dp880
 g4
-S'Paris Saint Germain'
+S'Angers'
 p881
 sg6
-S'Lyon'
+S'Monaco'
 p882
 sg8
-S'https://www.whoscored.com/Matches/960749/Live'
+S'https://www.whoscored.com/Matches/960807/Live'
 p883
 sg10
-S'5 : 1'
+S'3 : 0'
 p884
 sa(dp885
 g4
-S'Nice'
+S'Troyes'
 p886
 sg6
-S'Montpellier'
+S'Nantes'
 p887
 sg8
-S'https://www.whoscored.com/Matches/960763/Live'
+S'https://www.whoscored.com/Matches/960809/Live'
 p888
 sg10
-S'1 : 0'
+S'0 : 1'
 p889
 sa(dp890
 g4
-S'Caen'
+S'Lorient'
 p891
 sg6
-S'Paris Saint Germain'
+S'Reims'
 p892
 sg8
-S'https://www.whoscored.com/Matches/960759/Live'
+S'https://www.whoscored.com/Matches/960811/Live'
 p893
 sg10
-S'0 : 3'
+S'2 : 0'
 p894
 sa(dp895
 g4
-S'SC Bastia'
+S'GFC Ajaccio'
 p896
 sg6
-S'Reims'
+S'Montpellier'
 p897
 sg8
-S'https://www.whoscored.com/Matches/960757/Live'
+S'https://www.whoscored.com/Matches/960812/Live'
 p898
 sg10
-S'2 : 0'
+S'0 : 4'
 p899
 sa(dp900
 g4
-S'Guingamp'
+S'SC Bastia'
 p901
 sg6
-S'Rennes'
+S'Lyon'
 p902
 sg8
-S'https://www.whoscored.com/Matches/960761/Live'
+S'https://www.whoscored.com/Matches/960814/Live'
 p903
 sg10
-S'0 : 2'
+S'1 : 0'
 p904
 sa(dp905
 g4
-S'Lorient'
+S'Toulouse'
 p906
 sg6
-S'Nantes'
+S'Guingamp'
 p907
 sg8
-S'https://www.whoscored.com/Matches/960762/Live'
+S'https://www.whoscored.com/Matches/960816/Live'
 p908
 sg10
-S'0 : 0'
+S'1 : 2'
 p909
 sa(dp910
 g4
-S'Toulouse'
+S'Caen'
 p911
 sg6
-S'Lille'
+S'Nice'
 p912
 sg8
-S'https://www.whoscored.com/Matches/960765/Live'
+S'https://www.whoscored.com/Matches/960815/Live'
 p913
 sg10
-S'1 : 1'
+S'2 : 0'
 p914
 sa(dp915
 g4
-S'Troyes'
+S'Bordeaux'
 p916
 sg6
-S'Monaco'
+S'Rennes'
 p917
 sg8
-S'https://www.whoscored.com/Matches/960766/Live'
+S'https://www.whoscored.com/Matches/960810/Live'
 p918
 sg10
-S'0 : 0'
+S'4 : 0'
 p919
 sa(dp920
 g4
 S'Saint-Etienne'
 p921
 sg6
-S'Angers'
+S'Paris Saint Germain'
 p922
 sg8
-S'https://www.whoscored.com/Matches/960764/Live'
+S'https://www.whoscored.com/Matches/960808/Live'
 p923
 sg10
-S'1 : 0'
+S'0 : 2'
 p924
-sa(dp925
+sasS'Nov'
+p925
+(lp926
+(dp927
 g4
-S'GFC Ajaccio'
-p926
-sg6
-S'Lyon'
-p927
-sg8
-S'https://www.whoscored.com/Matches/960760/Live'
+S'Nice'
 p928
-sg10
-S'2 : 1'
-p929
-sa(dp930
-g4
-S'Bordeaux'
-p931
 sg6
-S'Marseille'
-p932
-sg8
-S'https://www.whoscored.com/Matches/960758/Live'
-p933
-sg10
-S'1 : 1'
-p934
-sasS'Oct'
-p935
-(lp936
-(dp937
-g4
 S'Lille'
+p929
+sg8
+S'https://www.whoscored.com/Matches/960729/Live'
+p930
+sg10
+S'0 : 0'
+p931
+sa(dp932
+g4
+S'Monaco'
+p933
+sg6
+S'Angers'
+p934
+sg8
+S'https://www.whoscored.com/Matches/960720/Live'
+p935
+sg10
+S'1 : 0'
+p936
+sa(dp937
+g4
+S'Nantes'
 p938
 sg6
-S'Montpellier'
+S'Marseille'
 p939
 sg8
-S'https://www.whoscored.com/Matches/960655/Live'
+S'https://www.whoscored.com/Matches/960725/Live'
 p940
 sg10
-S'2 : 0'
+S'0 : 1'
 p941
 sa(dp942
 g4
-S'Lyon'
+S'Nice'
 p943
 sg6
-S'Reims'
+S'Nantes'
 p944
 sg8
-S'https://www.whoscored.com/Matches/960659/Live'
+S'https://www.whoscored.com/Matches/1029051/Live'
 p945
 sg10
-S'1 : 0'
+S'1 : 2'
 p946
 sa(dp947
 g4
 S'Angers'
 p948
 sg6
-S'SC Bastia'
+S'Rennes'
 p949
 sg8
-S'https://www.whoscored.com/Matches/960652/Live'
+S'https://www.whoscored.com/Matches/960693/Live'
 p950
 sg10
-S'1 : 0'
+S'0 : 2'
 p951
 sa(dp952
 g4
-S'GFC Ajaccio'
+S'Paris Saint Germain'
 p953
 sg6
 S'Toulouse'
 p954
 sg8
-S'https://www.whoscored.com/Matches/960654/Live'
+S'https://www.whoscored.com/Matches/960724/Live'
 p955
 sg10
-S'2 : 2'
+S'5 : 0'
 p956
 sa(dp957
 g4
-S'Troyes'
+S'Montpellier'
 p958
 sg6
-S'Guingamp'
+S'Nantes'
 p959
 sg8
-S'https://www.whoscored.com/Matches/960670/Live'
+S'https://www.whoscored.com/Matches/960719/Live'
 p960
 sg10
-S'0 : 1'
+S'2 : 1'
 p961
 sa(dp962
 g4
-S'Monaco'
+S'Lorient'
 p963
 sg6
-S'Rennes'
+S'Troyes'
 p964
 sg8
-S'https://www.whoscored.com/Matches/960662/Live'
+S'https://www.whoscored.com/Matches/960706/Live'
 p965
 sg10
-S'1 : 1'
+S'4 : 1'
 p966
 sa(dp967
 g4
 S'Caen'
 p968
 sg6
-S'Saint-Etienne'
+S'Guingamp'
 p969
 sg8
-S'https://www.whoscored.com/Matches/960653/Live'
+S'https://www.whoscored.com/Matches/960699/Live'
 p970
 sg10
-S'1 : 0'
+S'2 : 1'
 p971
 sa(dp972
 g4
-S'Lorient'
+S'Lille'
 p973
 sg6
-S'Bordeaux'
+S'SC Bastia'
 p974
 sg8
-S'https://www.whoscored.com/Matches/960657/Live'
+S'https://www.whoscored.com/Matches/960702/Live'
 p975
 sg10
-S'3 : 2'
+S'1 : 1'
 p976
 sa(dp977
 g4
-S'Paris Saint Germain'
+S'Reims'
 p978
 sg6
-S'Marseille'
+S'GFC Ajaccio'
 p979
 sg8
-S'https://www.whoscored.com/Matches/960668/Live'
+S'https://www.whoscored.com/Matches/960728/Live'
 p980
 sg10
-S'2 : 1'
+S'1 : 2'
 p981
 sa(dp982
 g4
-S'Monaco'
+S'Marseille'
 p983
 sg6
-S'Lyon'
+S'Nice'
 p984
 sg8
-S'https://www.whoscored.com/Matches/960677/Live'
+S'https://www.whoscored.com/Matches/960714/Live'
 p985
 sg10
-S'1 : 1'
+S'0 : 1'
 p986
 sa(dp987
 g4
-S'SC Bastia'
+S'Lyon'
 p988
 sg6
-S'Paris Saint Germain'
+S'Saint-Etienne'
 p989
 sg8
-S'https://www.whoscored.com/Matches/960672/Live'
+S'https://www.whoscored.com/Matches/960710/Live'
 p990
 sg10
-S'0 : 2'
+S'3 : 0'
 p991
 sa(dp992
 g4
-S'Guingamp'
+S'Bordeaux'
 p993
 sg6
-S'Lille'
+S'Monaco'
 p994
 sg8
-S'https://www.whoscored.com/Matches/960675/Live'
+S'https://www.whoscored.com/Matches/960696/Live'
 p995
 sg10
-S'1 : 1'
+S'3 : 1'
 p996
 sa(dp997
 g4
-S'Nantes'
+S'Nice'
 p998
 sg6
-S'Troyes'
+S'Lyon'
 p999
 sg8
-S'https://www.whoscored.com/Matches/960678/Live'
+S'https://www.whoscored.com/Matches/960695/Live'
 p1000
 sg10
 S'3 : 0'
 p1001
 sa(dp1002
 g4
-S'Reims'
+S'Lorient'
 p1003
 sg6
-S'Caen'
+S'Paris Saint Germain'
 p1004
 sg8
-S'https://www.whoscored.com/Matches/960679/Live'
+S'https://www.whoscored.com/Matches/960742/Live'
 p1005
 sg10
-S'0 : 1'
+S'1 : 2'
 p1006
 sa(dp1007
 g4
-S'Saint-Etienne'
+S'Guingamp'
 p1008
 sg6
-S'GFC Ajaccio'
+S'Toulouse'
 p1009
 sg8
-S'https://www.whoscored.com/Matches/960681/Live'
+S'https://www.whoscored.com/Matches/960739/Live'
 p1010
 sg10
 S'2 : 0'
 p1011
 sa(dp1012
 g4
-S'Toulouse'
+S'Montpellier'
 p1013
 sg6
-S'Angers'
+S'Reims'
 p1014
 sg8
-S'https://www.whoscored.com/Matches/960682/Live'
+S'https://www.whoscored.com/Matches/960692/Live'
 p1015
 sg10
-S'1 : 2'
+S'3 : 1'
 p1016
 sa(dp1017
 g4
-S'Marseille'
+S'Monaco'
 p1018
 sg6
-S'Lorient'
+S'Nantes'
 p1019
 sg8
-S'https://www.whoscored.com/Matches/960676/Live'
+S'https://www.whoscored.com/Matches/960689/Live'
 p1020
 sg10
-S'1 : 1'
+S'1 : 0'
 p1021
 sa(dp1022
 g4
-S'Bordeaux'
+S'Troyes'
 p1023
 sg6
-S'Montpellier'
+S'Lille'
 p1024
 sg8
-S'https://www.whoscored.com/Matches/960674/Live'
+S'https://www.whoscored.com/Matches/960704/Live'
 p1025
 sg10
-S'0 : 0'
+S'1 : 1'
 p1026
 sa(dp1027
 g4
-S'Rennes'
+S'SC Bastia'
 p1028
 sg6
-S'Nice'
+S'GFC Ajaccio'
 p1029
 sg8
-S'https://www.whoscored.com/Matches/960680/Live'
+S'https://www.whoscored.com/Matches/960732/Live'
 p1030
 sg10
-S'1 : 4'
+S'1 : 2'
 p1031
 sa(dp1032
 g4
 S'Caen'
 p1033
 sg6
-S'Nantes'
+S'Angers'
 p1034
 sg8
-S'https://www.whoscored.com/Matches/960685/Live'
+S'https://www.whoscored.com/Matches/960736/Live'
 p1035
 sg10
-S'0 : 2'
+S'0 : 0'
 p1036
 sa(dp1037
 g4
-S'Lyon'
+S'Rennes'
 p1038
 sg6
-S'Toulouse'
+S'Bordeaux'
 p1039
 sg8
-S'https://www.whoscored.com/Matches/960694/Live'
+S'https://www.whoscored.com/Matches/960698/Live'
 p1040
 sg10
-S'3 : 0'
+S'2 : 2'
 p1041
 sa(dp1042
 g4
-S'Lorient'
+S'Saint-Etienne'
 p1043
 sg6
-S'Rennes'
+S'Marseille'
 p1044
 sg8
-S'https://www.whoscored.com/Matches/960691/Live'
+S'https://www.whoscored.com/Matches/960701/Live'
 p1045
 sg10
-S'1 : 1'
+S'0 : 2'
 p1046
 sa(dp1047
 g4
-S'Angers'
+S'Lyon'
 p1048
 sg6
-S'Guingamp'
+S'Montpellier'
 p1049
 sg8
-S'https://www.whoscored.com/Matches/960683/Live'
+S'https://www.whoscored.com/Matches/960721/Live'
 p1050
 sg10
-S'0 : 0'
+S'2 : 4'
 p1051
 sa(dp1052
 g4
-S'GFC Ajaccio'
+S'Paris Saint Germain'
 p1053
 sg6
-S'Nice'
+S'Troyes'
 p1054
 sg8
-S'https://www.whoscored.com/Matches/960686/Live'
+S'https://www.whoscored.com/Matches/960734/Live'
 p1055
 sg10
-S'3 : 1'
+S'4 : 1'
 p1056
 sa(dp1057
 g4
-S'Montpellier'
+S'Nantes'
 p1058
 sg6
 S'SC Bastia'
 p1059
 sg8
-S'https://www.whoscored.com/Matches/960697/Live'
+S'https://www.whoscored.com/Matches/960730/Live'
 p1060
 sg10
-S'2 : 0'
+S'0 : 0'
 p1061
 sa(dp1062
 g4
-S'Reims'
+S'GFC Ajaccio'
 p1063
 sg6
-S'Monaco'
+S'Lorient'
 p1064
 sg8
-S'https://www.whoscored.com/Matches/960703/Live'
+S'https://www.whoscored.com/Matches/960716/Live'
 p1065
 sg10
-S'0 : 1'
+S'1 : 1'
 p1066
 sa(dp1067
 g4
-S'Bordeaux'
+S'Toulouse'
 p1068
 sg6
-S'Troyes'
+S'Nice'
 p1069
 sg8
-S'https://www.whoscored.com/Matches/960684/Live'
+S'https://www.whoscored.com/Matches/960713/Live'
 p1070
 sg10
-S'1 : 0'
+S'2 : 0'
 p1071
 sa(dp1072
 g4
-S'Lille'
+S'Reims'
 p1073
 sg6
-S'Marseille'
+S'Rennes'
 p1074
 sg8
-S'https://www.whoscored.com/Matches/960688/Live'
+S'https://www.whoscored.com/Matches/960705/Live'
 p1075
 sg10
-S'1 : 2'
+S'2 : 2'
 p1076
 sa(dp1077
 g4
-S'Paris Saint Germain'
+S'Angers'
 p1078
 sg6
-S'Saint-Etienne'
+S'Lille'
 p1079
 sg8
-S'https://www.whoscored.com/Matches/960700/Live'
+S'https://www.whoscored.com/Matches/960708/Live'
 p1080
 sg10
-S'4 : 1'
+S'2 : 0'
 p1081
 sa(dp1082
 g4
-S'Rennes'
+S'Saint-Etienne'
 p1083
 sg6
-S'Paris Saint Germain'
+S'Guingamp'
 p1084
 sg8
-S'https://www.whoscored.com/Matches/960733/Live'
+S'https://www.whoscored.com/Matches/960709/Live'
 p1085
 sg10
-S'0 : 1'
+S'3 : 0'
 p1086
 sa(dp1087
 g4
-S'Saint-Etienne'
+S'Bordeaux'
 p1088
 sg6
-S'Reims'
+S'Caen'
 p1089
 sg8
-S'https://www.whoscored.com/Matches/960737/Live'
+S'https://www.whoscored.com/Matches/960712/Live'
 p1090
 sg10
-S'3 : 0'
+S'1 : 4'
 p1091
 sa(dp1092
 g4
-S'Toulouse'
+S'Marseille'
 p1093
 sg6
-S'Montpellier'
+S'Monaco'
 p1094
 sg8
-S'https://www.whoscored.com/Matches/960687/Live'
+S'https://www.whoscored.com/Matches/960726/Live'
 p1095
 sg10
-S'1 : 1'
+S'3 : 3'
 p1096
-sa(dp1097
+sasS'Dec'
+p1097
+(lp1098
+(dp1099
 g4
-S'Troyes'
-p1098
+S'Angers'
+p1100
+sg6
+S'Paris Saint Germain'
+p1101
+sg8
+S'https://www.whoscored.com/Matches/960718/Live'
+p1102
+sg10
+S'0 : 0'
+p1103
+sa(dp1104
+g4
+S'Lorient'
+p1105
+sg6
+S'Nice'
+p1106
+sg8
+S'https://www.whoscored.com/Matches/960735/Live'
+p1107
+sg10
+S'0 : 0'
+p1108
+sa(dp1109
+g4
+S'Nantes'
+p1110
 sg6
 S'Lyon'
-p1099
+p1111
 sg8
-S'https://www.whoscored.com/Matches/960690/Live'
-p1100
+S'https://www.whoscored.com/Matches/960744/Live'
+p1112
 sg10
-S'0 : 1'
-p1101
-sa(dp1102
+S'0 : 0'
+p1113
+sa(dp1114
 g4
-S'SC Bastia'
-p1103
+S'Troyes'
+p1115
+sg6
+S'Toulouse'
+p1116
+sg8
+S'https://www.whoscored.com/Matches/960748/Live'
+p1117
+sg10
+S'0 : 3'
+p1118
+sa(dp1119
+g4
+S'Monaco'
+p1120
 sg6
 S'Caen'
-p1104
+p1121
 sg8
-S'https://www.whoscored.com/Matches/960707/Live'
-p1105
+S'https://www.whoscored.com/Matches/960738/Live'
+p1122
 sg10
-S'1 : 0'
-p1106
-sa(dp1107
+S'1 : 1'
+p1123
+sa(dp1124
 g4
+S'Montpellier'
+p1125
+sg6
 S'GFC Ajaccio'
-p1108
+p1126
+sg8
+S'https://www.whoscored.com/Matches/960741/Live'
+p1127
+sg10
+S'0 : 2'
+p1128
+sa(dp1129
+g4
+S'SC Bastia'
+p1130
 sg6
 S'Bordeaux'
-p1109
+p1131
 sg8
-S'https://www.whoscored.com/Matches/960711/Live'
-p1110
+S'https://www.whoscored.com/Matches/960723/Live'
+p1132
 sg10
-S'2 : 0'
-p1111
-sa(dp1112
+S'1 : 0'
+p1133
+sa(dp1134
 g4
 S'Guingamp'
-p1113
+p1135
+sg6
+S'Reims'
+p1136
+sg8
+S'https://www.whoscored.com/Matches/960727/Live'
+p1137
+sg10
+S'1 : 2'
+p1138
+sa(dp1139
+g4
+S'Lille'
+p1140
+sg6
+S'Saint-Etienne'
+p1141
+sg8
+S'https://www.whoscored.com/Matches/960731/Live'
+p1142
+sg10
+S'1 : 0'
+p1143
+sa(dp1144
+g4
+S'Rennes'
+p1145
+sg6
+S'Marseille'
+p1146
+sg8
+S'https://www.whoscored.com/Matches/960746/Live'
+p1147
+sg10
+S'0 : 1'
+p1148
+sa(dp1149
+g4
+S'Nice'
+p1150
+sg6
+S'Paris Saint Germain'
+p1151
+sg8
+S'https://www.whoscored.com/Matches/960771/Live'
+p1152
+sg10
+S'0 : 3'
+p1153
+sa(dp1154
+g4
+S'Lyon'
+p1155
+sg6
+S'Angers'
+p1156
+sg8
+S'https://www.whoscored.com/Matches/960769/Live'
+p1157
+sg10
+S'0 : 2'
+p1158
+sa(dp1159
+g4
+S'Reims'
+p1160
+sg6
+S'Troyes'
+p1161
+sg8
+S'https://www.whoscored.com/Matches/960772/Live'
+p1162
+sg10
+S'1 : 1'
+p1163
+sa(dp1164
+g4
+S'Toulouse'
+p1165
 sg6
 S'Lorient'
-p1114
+p1166
 sg8
-S'https://www.whoscored.com/Matches/960715/Live'
-p1115
+S'https://www.whoscored.com/Matches/960774/Live'
+p1167
+sg10
+S'2 : 3'
+p1168
+sa(dp1169
+g4
+S'SC Bastia'
+p1170
+sg6
+S'Monaco'
+p1171
+sg8
+S'https://www.whoscored.com/Matches/960750/Live'
+p1172
+sg10
+S'1 : 2'
+p1173
+sa(dp1174
+g4
+S'Caen'
+p1175
+sg6
+S'Lille'
+p1176
+sg8
+S'https://www.whoscored.com/Matches/960754/Live'
+p1177
+sg10
+S'1 : 2'
+p1178
+sa(dp1179
+g4
+S'GFC Ajaccio'
+p1180
+sg6
+S'Nantes'
+p1181
+sg8
+S'https://www.whoscored.com/Matches/960756/Live'
+p1182
+sg10
+S'1 : 1'
+p1183
+sa(dp1184
+g4
+S'Marseille'
+p1185
+sg6
+S'Montpellier'
+p1186
+sg8
+S'https://www.whoscored.com/Matches/960770/Live'
+p1187
 sg10
 S'2 : 2'
-p1116
+p1188
+sa(dp1189
+g4
+S'Bordeaux'
+p1190
+sg6
+S'Guingamp'
+p1191
+sg8
+S'https://www.whoscored.com/Matches/960752/Live'
+p1192
+sg10
+S'1 : 0'
+p1193
+sa(dp1194
+g4
+S'Saint-Etienne'
+p1195
+sg6
+S'Rennes'
+p1196
+sg8
+S'https://www.whoscored.com/Matches/960773/Live'
+p1197
+sg10
+S'1 : 1'
+p1198
+sa(dp1199
+g4
+S'Rennes'
+p1200
+sg6
+S'Caen'
+p1201
+sg8
+S'https://www.whoscored.com/Matches/960753/Live'
+p1202
+sg10
+S'1 : 1'
+p1203
+sa(dp1204
+g4
+S'Reims'
+p1205
+sg6
+S'Nice'
+p1206
+sg8
+S'https://www.whoscored.com/Matches/960751/Live'
+p1207
+sg10
+S'1 : 1'
+p1208
+sa(dp1209
+g4
+S'Nantes'
+p1210
+sg6
+S'Toulouse'
+p1211
+sg8
+S'https://www.whoscored.com/Matches/960747/Live'
+p1212
+sg10
+S'1 : 1'
+p1213
+sa(dp1214
+g4
+S'Montpellier'
+p1215
+sg6
+S'Guingamp'
+p1216
+sg8
+S'https://www.whoscored.com/Matches/960745/Live'
+p1217
+sg10
+S'2 : 1'
+p1218
+sa(dp1219
+g4
+S'Troyes'
+p1220
+sg6
+S'SC Bastia'
+p1221
+sg8
+S'https://www.whoscored.com/Matches/960755/Live'
+p1222
+sg10
+S'1 : 1'
+p1223
+sa(dp1224
+g4
+S'Lille'
+p1225
+sg6
+S'Lorient'
+p1226
+sg8
+S'https://www.whoscored.com/Matches/960768/Live'
+p1227
+sg10
+S'3 : 0'
+p1228
+sa(dp1229
+g4
+S'Monaco'
+p1230
+sg6
+S'Saint-Etienne'
+p1231
+sg8
+S'https://www.whoscored.com/Matches/960743/Live'
+p1232
+sg10
+S'1 : 0'
+p1233
+sa(dp1234
+g4
+S'Marseille'
+p1235
+sg6
+S'GFC Ajaccio'
+p1236
+sg8
+S'https://www.whoscored.com/Matches/960740/Live'
+p1237
+sg10
+S'1 : 1'
+p1238
+sa(dp1239
+g4
+S'Angers'
+p1240
+sg6
+S'Bordeaux'
+p1241
+sg8
+S'https://www.whoscored.com/Matches/960767/Live'
+p1242
+sg10
+S'1 : 1'
+p1243
+sa(dp1244
+g4
+S'Paris Saint Germain'
+p1245
+sg6
+S'Lyon'
+p1246
+sg8
+S'https://www.whoscored.com/Matches/960749/Live'
+p1247
+sg10
+S'5 : 1'
+p1248
+sa(dp1249
+g4
+S'Nice'
+p1250
+sg6
+S'Montpellier'
+p1251
+sg8
+S'https://www.whoscored.com/Matches/960763/Live'
+p1252
+sg10
+S'1 : 0'
+p1253
+sa(dp1254
+g4
+S'Caen'
+p1255
+sg6
+S'Paris Saint Germain'
+p1256
+sg8
+S'https://www.whoscored.com/Matches/960759/Live'
+p1257
+sg10
+S'0 : 3'
+p1258
+sa(dp1259
+g4
+S'SC Bastia'
+p1260
+sg6
+S'Reims'
+p1261
+sg8
+S'https://www.whoscored.com/Matches/960757/Live'
+p1262
+sg10
+S'2 : 0'
+p1263
+sa(dp1264
+g4
+S'Guingamp'
+p1265
+sg6
+S'Rennes'
+p1266
+sg8
+S'https://www.whoscored.com/Matches/960761/Live'
+p1267
+sg10
+S'0 : 2'
+p1268
+sa(dp1269
+g4
+S'Lorient'
+p1270
+sg6
+S'Nantes'
+p1271
+sg8
+S'https://www.whoscored.com/Matches/960762/Live'
+p1272
+sg10
+S'0 : 0'
+p1273
+sa(dp1274
+g4
+S'Toulouse'
+p1275
+sg6
+S'Lille'
+p1276
+sg8
+S'https://www.whoscored.com/Matches/960765/Live'
+p1277
+sg10
+S'1 : 1'
+p1278
+sa(dp1279
+g4
+S'Troyes'
+p1280
+sg6
+S'Monaco'
+p1281
+sg8
+S'https://www.whoscored.com/Matches/960766/Live'
+p1282
+sg10
+S'0 : 0'
+p1283
+sa(dp1284
+g4
+S'Saint-Etienne'
+p1285
+sg6
+S'Angers'
+p1286
+sg8
+S'https://www.whoscored.com/Matches/960764/Live'
+p1287
+sg10
+S'1 : 0'
+p1288
+sa(dp1289
+g4
+S'GFC Ajaccio'
+p1290
+sg6
+S'Lyon'
+p1291
+sg8
+S'https://www.whoscored.com/Matches/960760/Live'
+p1292
+sg10
+S'2 : 1'
+p1293
+sa(dp1294
+g4
+S'Bordeaux'
+p1295
+sg6
+S'Marseille'
+p1296
+sg8
+S'https://www.whoscored.com/Matches/960758/Live'
+p1297
+sg10
+S'1 : 1'
+p1298
+sasS'Oct'
+p1299
+(lp1300
+(dp1301
+g4
+S'Lille'
+p1302
+sg6
+S'Montpellier'
+p1303
+sg8
+S'https://www.whoscored.com/Matches/960655/Live'
+p1304
+sg10
+S'2 : 0'
+p1305
+sa(dp1306
+g4
+S'Lyon'
+p1307
+sg6
+S'Reims'
+p1308
+sg8
+S'https://www.whoscored.com/Matches/960659/Live'
+p1309
+sg10
+S'1 : 0'
+p1310
+sa(dp1311
+g4
+S'Troyes'
+p1312
+sg6
+S'Guingamp'
+p1313
+sg8
+S'https://www.whoscored.com/Matches/960670/Live'
+p1314
+sg10
+S'0 : 1'
+p1315
+sa(dp1316
+g4
+S'Angers'
+p1317
+sg6
+S'SC Bastia'
+p1318
+sg8
+S'https://www.whoscored.com/Matches/960652/Live'
+p1319
+sg10
+S'1 : 0'
+p1320
+sa(dp1321
+g4
+S'GFC Ajaccio'
+p1322
+sg6
+S'Toulouse'
+p1323
+sg8
+S'https://www.whoscored.com/Matches/960654/Live'
+p1324
+sg10
+S'2 : 2'
+p1325
+sa(dp1326
+g4
+S'Monaco'
+p1327
+sg6
+S'Rennes'
+p1328
+sg8
+S'https://www.whoscored.com/Matches/960662/Live'
+p1329
+sg10
+S'1 : 1'
+p1330
+sa(dp1331
+g4
+S'Caen'
+p1332
+sg6
+S'Saint-Etienne'
+p1333
+sg8
+S'https://www.whoscored.com/Matches/960653/Live'
+p1334
+sg10
+S'1 : 0'
+p1335
+sa(dp1336
+g4
+S'Lorient'
+p1337
+sg6
+S'Bordeaux'
+p1338
+sg8
+S'https://www.whoscored.com/Matches/960657/Live'
+p1339
+sg10
+S'3 : 2'
+p1340
+sa(dp1341
+g4
+S'Paris Saint Germain'
+p1342
+sg6
+S'Marseille'
+p1343
+sg8
+S'https://www.whoscored.com/Matches/960668/Live'
+p1344
+sg10
+S'2 : 1'
+p1345
+sa(dp1346
+g4
+S'Monaco'
+p1347
+sg6
+S'Lyon'
+p1348
+sg8
+S'https://www.whoscored.com/Matches/960677/Live'
+p1349
+sg10
+S'1 : 1'
+p1350
+sa(dp1351
+g4
+S'SC Bastia'
+p1352
+sg6
+S'Paris Saint Germain'
+p1353
+sg8
+S'https://www.whoscored.com/Matches/960672/Live'
+p1354
+sg10
+S'0 : 2'
+p1355
+sa(dp1356
+g4
+S'Nantes'
+p1357
+sg6
+S'Troyes'
+p1358
+sg8
+S'https://www.whoscored.com/Matches/960678/Live'
+p1359
+sg10
+S'3 : 0'
+p1360
+sa(dp1361
+g4
+S'Reims'
+p1362
+sg6
+S'Caen'
+p1363
+sg8
+S'https://www.whoscored.com/Matches/960679/Live'
+p1364
+sg10
+S'0 : 1'
+p1365
+sa(dp1366
+g4
+S'Saint-Etienne'
+p1367
+sg6
+S'GFC Ajaccio'
+p1368
+sg8
+S'https://www.whoscored.com/Matches/960681/Live'
+p1369
+sg10
+S'2 : 0'
+p1370
+sa(dp1371
+g4
+S'Toulouse'
+p1372
+sg6
+S'Angers'
+p1373
+sg8
+S'https://www.whoscored.com/Matches/960682/Live'
+p1374
+sg10
+S'1 : 2'
+p1375
+sa(dp1376
+g4
+S'Guingamp'
+p1377
+sg6
+S'Lille'
+p1378
+sg8
+S'https://www.whoscored.com/Matches/960675/Live'
+p1379
+sg10
+S'1 : 1'
+p1380
+sa(dp1381
+g4
+S'Marseille'
+p1382
+sg6
+S'Lorient'
+p1383
+sg8
+S'https://www.whoscored.com/Matches/960676/Live'
+p1384
+sg10
+S'1 : 1'
+p1385
+sa(dp1386
+g4
+S'Bordeaux'
+p1387
+sg6
+S'Montpellier'
+p1388
+sg8
+S'https://www.whoscored.com/Matches/960674/Live'
+p1389
+sg10
+S'0 : 0'
+p1390
+sa(dp1391
+g4
+S'Rennes'
+p1392
+sg6
+S'Nice'
+p1393
+sg8
+S'https://www.whoscored.com/Matches/960680/Live'
+p1394
+sg10
+S'1 : 4'
+p1395
+sa(dp1396
+g4
+S'Caen'
+p1397
+sg6
+S'Nantes'
+p1398
+sg8
+S'https://www.whoscored.com/Matches/960685/Live'
+p1399
+sg10
+S'0 : 2'
+p1400
+sa(dp1401
+g4
+S'Lyon'
+p1402
+sg6
+S'Toulouse'
+p1403
+sg8
+S'https://www.whoscored.com/Matches/960694/Live'
+p1404
+sg10
+S'3 : 0'
+p1405
+sa(dp1406
+g4
+S'Lorient'
+p1407
+sg6
+S'Rennes'
+p1408
+sg8
+S'https://www.whoscored.com/Matches/960691/Live'
+p1409
+sg10
+S'1 : 1'
+p1410
+sa(dp1411
+g4
+S'GFC Ajaccio'
+p1412
+sg6
+S'Nice'
+p1413
+sg8
+S'https://www.whoscored.com/Matches/960686/Live'
+p1414
+sg10
+S'3 : 1'
+p1415
+sa(dp1416
+g4
+S'Montpellier'
+p1417
+sg6
+S'SC Bastia'
+p1418
+sg8
+S'https://www.whoscored.com/Matches/960697/Live'
+p1419
+sg10
+S'2 : 0'
+p1420
+sa(dp1421
+g4
+S'Angers'
+p1422
+sg6
+S'Guingamp'
+p1423
+sg8
+S'https://www.whoscored.com/Matches/960683/Live'
+p1424
+sg10
+S'0 : 0'
+p1425
+sa(dp1426
+g4
+S'Reims'
+p1427
+sg6
+S'Monaco'
+p1428
+sg8
+S'https://www.whoscored.com/Matches/960703/Live'
+p1429
+sg10
+S'0 : 1'
+p1430
+sa(dp1431
+g4
+S'Lille'
+p1432
+sg6
+S'Marseille'
+p1433
+sg8
+S'https://www.whoscored.com/Matches/960688/Live'
+p1434
+sg10
+S'1 : 2'
+p1435
+sa(dp1436
+g4
+S'Bordeaux'
+p1437
+sg6
+S'Troyes'
+p1438
+sg8
+S'https://www.whoscored.com/Matches/960684/Live'
+p1439
+sg10
+S'1 : 0'
+p1440
+sa(dp1441
+g4
+S'Paris Saint Germain'
+p1442
+sg6
+S'Saint-Etienne'
+p1443
+sg8
+S'https://www.whoscored.com/Matches/960700/Live'
+p1444
+sg10
+S'4 : 1'
+p1445
+sa(dp1446
+g4
+S'Rennes'
+p1447
+sg6
+S'Paris Saint Germain'
+p1448
+sg8
+S'https://www.whoscored.com/Matches/960733/Live'
+p1449
+sg10
+S'0 : 1'
+p1450
+sa(dp1451
+g4
+S'Saint-Etienne'
+p1452
+sg6
+S'Reims'
+p1453
+sg8
+S'https://www.whoscored.com/Matches/960737/Live'
+p1454
+sg10
+S'3 : 0'
+p1455
+sa(dp1456
+g4
+S'SC Bastia'
+p1457
+sg6
+S'Caen'
+p1458
+sg8
+S'https://www.whoscored.com/Matches/960707/Live'
+p1459
+sg10
+S'1 : 0'
+p1460
+sa(dp1461
+g4
+S'GFC Ajaccio'
+p1462
+sg6
+S'Bordeaux'
+p1463
+sg8
+S'https://www.whoscored.com/Matches/960711/Live'
+p1464
+sg10
+S'2 : 0'
+p1465
+sa(dp1466
+g4
+S'Guingamp'
+p1467
+sg6
+S'Lorient'
+p1468
+sg8
+S'https://www.whoscored.com/Matches/960715/Live'
+p1469
+sg10
+S'2 : 2'
+p1470
+sa(dp1471
+g4
+S'Troyes'
+p1472
+sg6
+S'Lyon'
+p1473
+sg8
+S'https://www.whoscored.com/Matches/960690/Live'
+p1474
+sg10
+S'0 : 1'
+p1475
+sa(dp1476
+g4
+S'Toulouse'
+p1477
+sg6
+S'Montpellier'
+p1478
+sg8
+S'https://www.whoscored.com/Matches/960687/Live'
+p1479
+sg10
+S'1 : 1'
+p1480
 sas.

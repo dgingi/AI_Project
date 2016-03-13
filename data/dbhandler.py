@@ -158,7 +158,10 @@ class DBHandler():
                     examples[-1] = np.concatenate((examples[-1],[rel_all, rel_att, rel_def]))
                     curr_examples += [(examples[-1],curr_game["Fix"],curr_game["Result"])]
                     tags += [curr_game["Tag"]]
-        return examples,tags if not current else curr_examples,tags
+        if not current:
+            return examples,tags
+        else:
+            return curr_examples,tags
         
 
 if __name__ == '__main__':

@@ -565,7 +565,7 @@ we start making the decisions.'''
         '''
         _proba_scores = {float(_k):self._loaded_data[_k] for _k in self._loaded_data.keys()}
         _inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_proba_scores.items())]
-        _table = tabulate([_inner_table],\
+        _table = tabulate([data for data in _inner_table],\
                           headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
   
@@ -592,33 +592,39 @@ class FinalSeasonExperimentAllL(Experiment):
     
         
     def run(self):
+        print "start"
         Experiment.run(self)
+        print "get data finish"
         self.load_params()
         clf = DTC(**self.estimators_params['DTC'])
         clf = clf.fit(self.X,self.y)
         raw_curr_examples = []
         curr_tags = []
-        for _league in LEAGUES:    
+        for _league in LEAGUES:
+            print "league"    
             self.cv.dbh.league = _league
             temp_examples, temp_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,current=True)
             raw_curr_examples += temp_examples
             curr_tags += temp_tags
         curr_examples = [_ex[0] for _ex in raw_curr_examples]
         result_tags = clf.predict(curr_examples)
-        self._loaded_data = (clf.score(curr_examples, curr_tags),[],{i:0 for i in range(61)})
+        self._loaded_data = {"score":clf.score(curr_examples, curr_tags),"array":[],"dict":{i:0 for i in range(61)}}
         amount_games_per_fix = {i:0 for i in range(61)}
         for i in range(len(raw_curr_examples)):
             _ex = raw_curr_examples[i]
             curr_fix = _ex[1]
             curr_result = _ex[2]
-            self._loaded_data[1] += [(curr_result,result_tags[i])]
+            self._loaded_data["array"] += [(curr_result,result_tags[i])]
             amount_games_per_fix[curr_fix] += 1
             if result_tags[i] == curr_tags[i]:
-                self._loaded_data[3][curr_fix] += 1
+                self._loaded_data["dict"][curr_fix] += 1
         
-        for _k in self._loaded_data[3].keys():
-            score = float(self._loaded_data[3][_k])
-            self._loaded_data[3][_k] = score / amount_games_per_fix[_k]
+        for _k in self._loaded_data["dict"].keys():
+            score = float(self._loaded_data["dict"][_k])
+            if amount_games_per_fix[_k] == 0:
+                self._loaded_data["dict"][_k] = score
+            else:
+                self._loaded_data["dict"][_k] = score / amount_games_per_fix[_k]
         self.save(self._loaded_data)
         
     _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
@@ -631,10 +637,11 @@ we start making the decisions.'''
         '''
         Reporting on low verbosity
         '''
-        _proba_scores = {float(_k):self._loaded_data[_k] for _k in self._loaded_data.keys()}
-        _inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_proba_scores.items())]
-        _table = tabulate([_inner_table],\
-                          headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
+        _scores = {int(_lk):self._loaded_data["dict"][_lk] for _lk in self._loaded_data["dict"]}
+        _scores[0] = self._loaded_data["score"]
+        _inner_table = [[key,_scores[key]] for key in sorted(_scores.keys())]
+        _table = tabulate([data for data in _inner_table],\
+                          headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
     
         

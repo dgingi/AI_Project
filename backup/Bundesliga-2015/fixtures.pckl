@@ -1,2130 +1,2955 @@
 (dp0
-S'Aug'
+S'Mar'
 p1
 (lp2
 (dp3
 S'home'
 p4
-S'Bayern Munich'
+S'Hannover 96'
 p5
 sS'away'
 p6
-S'Hamburger SV'
+S'Wolfsburg'
 p7
 sS'link'
 p8
-S'https://www.whoscored.com/Matches/969088/Live'
+S'https://www.whoscored.com/Matches/969779/Live'
 p9
 sS'result'
 p10
-S'5 : 0'
+S'0 : 4'
 p11
 sa(dp12
 g4
-S'Bayer Leverkusen'
+S'Ingolstadt'
 p13
 sg6
-S'Hoffenheim'
+S'FC Cologne'
 p14
 sg8
-S'https://www.whoscored.com/Matches/969096/Live'
+S'https://www.whoscored.com/Matches/969782/Live'
 p15
 sg10
-S'2 : 1'
+S'1 : 1'
 p16
 sa(dp17
 g4
-S'Augsburg'
+S'Darmstadt'
 p18
 sg6
-S'Hertha Berlin'
+S'Borussia Dortmund'
 p19
 sg8
-S'https://www.whoscored.com/Matches/969107/Live'
+S'https://www.whoscored.com/Matches/969783/Live'
 p20
 sg10
-S'0 : 1'
+S'0 : 2'
 p21
 sa(dp22
 g4
-S'Werder Bremen'
+S'Hertha Berlin'
 p23
 sg6
-S'Schalke 04'
+S'Eintracht Frankfurt'
 p24
 sg8
-S'https://www.whoscored.com/Matches/969110/Live'
+S'https://www.whoscored.com/Matches/969780/Live'
 p25
 sg10
-S'0 : 3'
+S'2 : 0'
 p26
 sa(dp27
 g4
-S'Mainz 05'
+S'Hoffenheim'
 p28
 sg6
-S'Ingolstadt'
+S'Augsburg'
 p29
 sg8
-S'https://www.whoscored.com/Matches/969114/Live'
+S'https://www.whoscored.com/Matches/969781/Live'
 p30
 sg10
-S'0 : 1'
+S'2 : 1'
 p31
 sa(dp32
 g4
-S'Darmstadt'
+S'Bayern Munich'
 p33
 sg6
-S'Hannover 96'
+S'Mainz 05'
 p34
 sg8
-S'https://www.whoscored.com/Matches/969117/Live'
+S'https://www.whoscored.com/Matches/969775/Live'
 p35
 sg10
-S'2 : 2'
+S'1 : 2'
 p36
 sa(dp37
 g4
-S'Borussia Dortmund'
+S'Schalke 04'
 p38
 sg6
-S'Borussia M.Gladbach'
+S'Hamburger SV'
 p39
 sg8
-S'https://www.whoscored.com/Matches/969092/Live'
+S'https://www.whoscored.com/Matches/969776/Live'
 p40
 sg10
-S'4 : 0'
+S'3 : 2'
 p41
 sa(dp42
 g4
-S'Wolfsburg'
+S'Bayer Leverkusen'
 p43
 sg6
-S'Eintracht Frankfurt'
+S'Werder Bremen'
 p44
 sg8
-S'https://www.whoscored.com/Matches/969100/Live'
+S'https://www.whoscored.com/Matches/969777/Live'
 p45
 sg10
-S'2 : 1'
+S'1 : 4'
 p46
 sa(dp47
 g4
-S'VfB Stuttgart'
+S'Borussia M.Gladbach'
 p48
 sg6
-S'FC Cologne'
+S'VfB Stuttgart'
 p49
 sg8
-S'https://www.whoscored.com/Matches/969103/Live'
+S'https://www.whoscored.com/Matches/969778/Live'
 p50
 sg10
-S'1 : 3'
+S'4 : 0'
 p51
 sa(dp52
 g4
-S'Hertha Berlin'
+S'VfB Stuttgart'
 p53
 sg6
-S'Werder Bremen'
+S'Hoffenheim'
 p54
 sg8
-S'https://www.whoscored.com/Matches/969577/Live'
+S'https://www.whoscored.com/Matches/969787/Live'
 p55
 sg10
-S'1 : 1'
+S'5 : 1'
 p56
 sa(dp57
 g4
-S'Schalke 04'
+S'Augsburg'
 p58
 sg6
-S'Darmstadt'
+S'Bayer Leverkusen'
 p59
 sg8
-S'https://www.whoscored.com/Matches/969571/Live'
+S'https://www.whoscored.com/Matches/969788/Live'
 p60
 sg10
-S'1 : 1'
+S'3 : 3'
 p61
 sa(dp62
 g4
-S'Eintracht Frankfurt'
+S'Werder Bremen'
 p63
 sg6
-S'Augsburg'
+S'Hannover 96'
 p64
 sg8
-S'https://www.whoscored.com/Matches/969574/Live'
+S'https://www.whoscored.com/Matches/969789/Live'
 p65
 sg10
-S'1 : 1'
+S'4 : 1'
 p66
 sa(dp67
 g4
-S'FC Cologne'
+S'Eintracht Frankfurt'
 p68
 sg6
-S'Wolfsburg'
+S'Ingolstadt'
 p69
 sg8
-S'https://www.whoscored.com/Matches/969575/Live'
+S'https://www.whoscored.com/Matches/969790/Live'
 p70
 sg10
 S'1 : 1'
 p71
 sa(dp72
 g4
-S'Hannover 96'
+S'FC Cologne'
 p73
 sg6
-S'Bayer Leverkusen'
+S'Schalke 04'
 p74
 sg8
-S'https://www.whoscored.com/Matches/969576/Live'
+S'https://www.whoscored.com/Matches/969791/Live'
 p75
 sg10
-S'0 : 1'
+S'1 : 3'
 p76
 sa(dp77
 g4
-S'Hoffenheim'
+S'Wolfsburg'
 p78
 sg6
-S'Bayern Munich'
+S'Borussia M.Gladbach'
 p79
 sg8
-S'https://www.whoscored.com/Matches/969578/Live'
+S'https://www.whoscored.com/Matches/969785/Live'
 p80
 sg10
-S'1 : 2'
+S'2 : 1'
 p81
 sa(dp82
 g4
-S'Hamburger SV'
+S'Borussia Dortmund'
 p83
 sg6
-S'VfB Stuttgart'
+S'Bayern Munich'
 p84
 sg8
-S'https://www.whoscored.com/Matches/969573/Live'
+S'https://www.whoscored.com/Matches/969784/Live'
 p85
 sg10
-S'3 : 2'
+S'0 : 0'
 p86
 sa(dp87
 g4
-S'Ingolstadt'
+S'Mainz 05'
 p88
 sg6
-S'Borussia Dortmund'
+S'Darmstadt'
 p89
 sg8
-S'https://www.whoscored.com/Matches/969579/Live'
+S'https://www.whoscored.com/Matches/969792/Live'
 p90
 sg10
-S'0 : 4'
+S'0 : 0'
 p91
 sa(dp92
 g4
-S'Borussia M.Gladbach'
+S'Hamburger SV'
 p93
 sg6
-S'Mainz 05'
+S'Hertha Berlin'
 p94
 sg8
-S'https://www.whoscored.com/Matches/969572/Live'
+S'https://www.whoscored.com/Matches/969786/Live'
 p95
 sg10
-S'1 : 2'
+S'2 : 0'
 p96
-sa(dp97
+sasS'Feb'
+p97
+(lp98
+(dp99
 g4
-S'Wolfsburg'
-p98
-sg6
-S'Schalke 04'
-p99
-sg8
-S'https://www.whoscored.com/Matches/969582/Live'
+S'Borussia M.Gladbach'
 p100
+sg6
+S'Werder Bremen'
+p101
+sg8
+S'https://www.whoscored.com/Matches/969741/Live'
+p102
+sg10
+S'5 : 1'
+p103
+sa(dp104
+g4
+S'Schalke 04'
+p105
+sg6
+S'Wolfsburg'
+p106
+sg8
+S'https://www.whoscored.com/Matches/969739/Live'
+p107
 sg10
 S'3 : 0'
-p101
-sa(dp102
-g4
-S'VfB Stuttgart'
-p103
-sg6
-S'Eintracht Frankfurt'
-p104
-sg8
-S'https://www.whoscored.com/Matches/969583/Live'
-p105
-sg10
-S'1 : 4'
-p106
-sa(dp107
-g4
-S'Augsburg'
 p108
-sg6
-S'Ingolstadt'
-p109
-sg8
-S'https://www.whoscored.com/Matches/969584/Live'
+sa(dp109
+g4
+S'Eintracht Frankfurt'
 p110
+sg6
+S'VfB Stuttgart'
+p111
+sg8
+S'https://www.whoscored.com/Matches/969743/Live'
+p112
+sg10
+S'2 : 4'
+p113
+sa(dp114
+g4
+S'Hannover 96'
+p115
+sg6
+S'Mainz 05'
+p116
+sg8
+S'https://www.whoscored.com/Matches/969744/Live'
+p117
 sg10
 S'0 : 1'
-p111
-sa(dp112
-g4
-S'FC Cologne'
-p113
-sg6
-S'Hamburger SV'
-p114
-sg8
-S'https://www.whoscored.com/Matches/969586/Live'
-p115
-sg10
-S'2 : 1'
-p116
-sa(dp117
-g4
-S'Mainz 05'
 p118
-sg6
-S'Hannover 96'
-p119
-sg8
-S'https://www.whoscored.com/Matches/969587/Live'
-p120
-sg10
-S'3 : 0'
-p121
-sa(dp122
+sa(dp119
 g4
-S'Darmstadt'
-p123
+S'Hertha Berlin'
+p120
 sg6
-S'Hoffenheim'
-p124
+S'Borussia Dortmund'
+p121
 sg8
-S'https://www.whoscored.com/Matches/969588/Live'
-p125
+S'https://www.whoscored.com/Matches/969745/Live'
+p122
 sg10
 S'0 : 0'
+p123
+sa(dp124
+g4
+S'Ingolstadt'
+p125
+sg6
+S'Augsburg'
 p126
-sa(dp127
-g4
-S'Bayern Munich'
-p128
-sg6
-S'Bayer Leverkusen'
-p129
 sg8
-S'https://www.whoscored.com/Matches/969580/Live'
-p130
-sg10
-S'3 : 0'
-p131
-sa(dp132
-g4
-S'Borussia Dortmund'
-p133
-sg6
-S'Hertha Berlin'
-p134
-sg8
-S'https://www.whoscored.com/Matches/969581/Live'
-p135
-sg10
-S'3 : 1'
-p136
-sa(dp137
-g4
-S'Werder Bremen'
-p138
-sg6
-S'Borussia M.Gladbach'
-p139
-sg8
-S'https://www.whoscored.com/Matches/969585/Live'
-p140
+S'https://www.whoscored.com/Matches/969747/Live'
+p127
 sg10
 S'2 : 1'
-p141
-sasS'Sep'
-p142
-(lp143
-(dp144
+p128
+sa(dp129
 g4
-S'Borussia M.Gladbach'
+S'Bayer Leverkusen'
+p130
+sg6
+S'Bayern Munich'
+p131
+sg8
+S'https://www.whoscored.com/Matches/969740/Live'
+p132
+sg10
+S'0 : 0'
+p133
+sa(dp134
+g4
+S'Hamburger SV'
+p135
+sg6
+S'FC Cologne'
+p136
+sg8
+S'https://www.whoscored.com/Matches/969742/Live'
+p137
+sg10
+S'1 : 1'
+p138
+sa(dp139
+g4
+S'Hoffenheim'
+p140
+sg6
+S'Darmstadt'
+p141
+sg8
+S'https://www.whoscored.com/Matches/969746/Live'
+p142
+sg10
+S'0 : 2'
+p143
+sa(dp144
+g4
+S'Mainz 05'
 p145
 sg6
-S'Hamburger SV'
+S'Schalke 04'
 p146
 sg8
-S'https://www.whoscored.com/Matches/969593/Live'
+S'https://www.whoscored.com/Matches/969755/Live'
 p147
 sg10
-S'0 : 3'
+S'2 : 1'
 p148
 sa(dp149
 g4
-S'Bayern Munich'
+S'Darmstadt'
 p150
 sg6
-S'Augsburg'
+S'Bayer Leverkusen'
 p151
 sg8
-S'https://www.whoscored.com/Matches/969590/Live'
+S'https://www.whoscored.com/Matches/969756/Live'
 p152
 sg10
-S'2 : 1'
+S'1 : 2'
 p153
 sa(dp154
 g4
-S'Bayer Leverkusen'
+S'Borussia Dortmund'
 p155
 sg6
-S'Darmstadt'
+S'Hannover 96'
 p156
 sg8
-S'https://www.whoscored.com/Matches/969592/Live'
+S'https://www.whoscored.com/Matches/969748/Live'
 p157
 sg10
-S'0 : 1'
+S'1 : 0'
 p158
 sa(dp159
 g4
-S'Hannover 96'
+S'Wolfsburg'
 p160
 sg6
-S'Borussia Dortmund'
+S'Ingolstadt'
 p161
 sg8
-S'https://www.whoscored.com/Matches/969595/Live'
+S'https://www.whoscored.com/Matches/969749/Live'
 p162
 sg10
-S'2 : 4'
+S'2 : 0'
 p163
 sa(dp164
 g4
-S'Hertha Berlin'
+S'VfB Stuttgart'
 p165
 sg6
-S'VfB Stuttgart'
+S'Hertha Berlin'
 p166
 sg8
-S'https://www.whoscored.com/Matches/969596/Live'
+S'https://www.whoscored.com/Matches/969751/Live'
 p167
 sg10
-S'2 : 1'
+S'2 : 0'
 p168
 sa(dp169
 g4
-S'Ingolstadt'
+S'Werder Bremen'
 p170
 sg6
-S'Wolfsburg'
+S'Hoffenheim'
 p171
 sg8
-S'https://www.whoscored.com/Matches/969598/Live'
+S'https://www.whoscored.com/Matches/969753/Live'
 p172
 sg10
-S'0 : 0'
+S'1 : 1'
 p173
 sa(dp174
 g4
-S'Eintracht Frankfurt'
+S'FC Cologne'
 p175
 sg6
-S'FC Cologne'
+S'Eintracht Frankfurt'
 p176
 sg8
-S'https://www.whoscored.com/Matches/969594/Live'
+S'https://www.whoscored.com/Matches/969754/Live'
 p177
 sg10
-S'6 : 2'
+S'3 : 1'
 p178
 sa(dp179
 g4
-S'Hoffenheim'
+S'Hamburger SV'
 p180
 sg6
-S'Werder Bremen'
+S'Borussia M.Gladbach'
 p181
 sg8
-S'https://www.whoscored.com/Matches/969597/Live'
+S'https://www.whoscored.com/Matches/969750/Live'
 p182
 sg10
-S'1 : 3'
+S'3 : 2'
 p183
 sa(dp184
 g4
-S'Schalke 04'
+S'Augsburg'
 p185
 sg6
-S'Mainz 05'
+S'Bayern Munich'
 p186
 sg8
-S'https://www.whoscored.com/Matches/969591/Live'
+S'https://www.whoscored.com/Matches/969752/Live'
 p187
 sg10
-S'2 : 1'
+S'1 : 3'
 p188
 sa(dp189
 g4
-S'Mainz 05'
+S'Eintracht Frankfurt'
 p190
 sg6
-S'Hoffenheim'
+S'Hamburger SV'
 p191
 sg8
-S'https://www.whoscored.com/Matches/969606/Live'
+S'https://www.whoscored.com/Matches/969761/Live'
 p192
 sg10
-S'3 : 1'
+S'0 : 0'
 p193
 sa(dp194
 g4
-S'Wolfsburg'
+S'Bayern Munich'
 p195
 sg6
-S'Hertha Berlin'
+S'Darmstadt'
 p196
 sg8
-S'https://www.whoscored.com/Matches/969600/Live'
+S'https://www.whoscored.com/Matches/969757/Live'
 p197
 sg10
-S'2 : 0'
+S'3 : 1'
 p198
 sa(dp199
 g4
-S'Hamburger SV'
+S'Hertha Berlin'
 p200
 sg6
-S'Eintracht Frankfurt'
+S'Wolfsburg'
 p201
 sg8
-S'https://www.whoscored.com/Matches/969601/Live'
+S'https://www.whoscored.com/Matches/969763/Live'
 p202
 sg10
-S'0 : 0'
+S'1 : 1'
 p203
 sa(dp204
 g4
-S'Werder Bremen'
+S'Hoffenheim'
 p205
 sg6
-S'Ingolstadt'
+S'Mainz 05'
 p206
 sg8
-S'https://www.whoscored.com/Matches/969604/Live'
+S'https://www.whoscored.com/Matches/969764/Live'
 p207
 sg10
-S'0 : 1'
+S'3 : 2'
 p208
 sa(dp209
 g4
-S'FC Cologne'
+S'Ingolstadt'
 p210
 sg6
-S'Borussia M.Gladbach'
+S'Werder Bremen'
 p211
 sg8
-S'https://www.whoscored.com/Matches/969605/Live'
+S'https://www.whoscored.com/Matches/969765/Live'
 p212
 sg10
-S'1 : 0'
+S'2 : 0'
 p213
 sa(dp214
 g4
-S'Darmstadt'
+S'Borussia M.Gladbach'
 p215
 sg6
-S'Bayern Munich'
+S'FC Cologne'
 p216
 sg8
-S'https://www.whoscored.com/Matches/969607/Live'
+S'https://www.whoscored.com/Matches/969760/Live'
 p217
 sg10
-S'0 : 3'
+S'1 : 0'
 p218
 sa(dp219
 g4
-S'VfB Stuttgart'
+S'Bayer Leverkusen'
 p220
 sg6
-S'Schalke 04'
+S'Borussia Dortmund'
 p221
 sg8
-S'https://www.whoscored.com/Matches/969602/Live'
+S'https://www.whoscored.com/Matches/969759/Live'
 p222
 sg10
 S'0 : 1'
 p223
 sa(dp224
 g4
-S'Borussia Dortmund'
+S'Hannover 96'
 p225
 sg6
-S'Bayer Leverkusen'
+S'Augsburg'
 p226
 sg8
-S'https://www.whoscored.com/Matches/969599/Live'
+S'https://www.whoscored.com/Matches/969762/Live'
 p227
 sg10
-S'3 : 0'
+S'0 : 1'
 p228
 sa(dp229
 g4
-S'Augsburg'
+S'Schalke 04'
 p230
 sg6
-S'Hannover 96'
+S'VfB Stuttgart'
 p231
 sg8
-S'https://www.whoscored.com/Matches/969603/Live'
+S'https://www.whoscored.com/Matches/969758/Live'
 p232
 sg10
-S'2 : 0'
+S'1 : 1'
 p233
 sa(dp234
 g4
-S'Bayern Munich'
+S'FC Cologne'
 p235
 sg6
-S'Wolfsburg'
+S'Hertha Berlin'
 p236
 sg8
-S'https://www.whoscored.com/Matches/969611/Live'
+S'https://www.whoscored.com/Matches/969773/Live'
 p237
 sg10
-S'5 : 1'
+S'0 : 1'
 p238
 sa(dp239
 g4
-S'Hertha Berlin'
+S'Werder Bremen'
 p240
 sg6
-S'FC Cologne'
+S'Darmstadt'
 p241
 sg8
-S'https://www.whoscored.com/Matches/969616/Live'
+S'https://www.whoscored.com/Matches/969771/Live'
 p242
 sg10
-S'2 : 0'
+S'2 : 2'
 p243
 sa(dp244
 g4
-S'Ingolstadt'
+S'Wolfsburg'
 p245
 sg6
-S'Hamburger SV'
+S'Bayern Munich'
 p246
 sg8
-S'https://www.whoscored.com/Matches/969618/Live'
+S'https://www.whoscored.com/Matches/969767/Live'
 p247
 sg10
-S'0 : 1'
+S'0 : 2'
 p248
 sa(dp249
 g4
-S'Darmstadt'
+S'Hamburger SV'
 p250
 sg6
-S'Werder Bremen'
+S'Ingolstadt'
 p251
 sg8
-S'https://www.whoscored.com/Matches/969619/Live'
+S'https://www.whoscored.com/Matches/969768/Live'
 p252
 sg10
-S'2 : 1'
+S'1 : 1'
 p253
 sa(dp254
 g4
-S'Schalke 04'
+S'VfB Stuttgart'
 p255
 sg6
-S'Eintracht Frankfurt'
+S'Hannover 96'
 p256
 sg8
-S'https://www.whoscored.com/Matches/969612/Live'
+S'https://www.whoscored.com/Matches/969769/Live'
 p257
 sg10
-S'2 : 0'
+S'1 : 2'
 p258
 sa(dp259
 g4
-S'Bayer Leverkusen'
+S'Augsburg'
 p260
 sg6
-S'Mainz 05'
+S'Borussia M.Gladbach'
 p261
 sg8
-S'https://www.whoscored.com/Matches/969613/Live'
+S'https://www.whoscored.com/Matches/969770/Live'
 p262
 sg10
-S'1 : 0'
+S'2 : 2'
 p263
 sa(dp264
 g4
-S'Borussia M.Gladbach'
+S'Borussia Dortmund'
 p265
 sg6
-S'Augsburg'
+S'Hoffenheim'
 p266
 sg8
-S'https://www.whoscored.com/Matches/969614/Live'
+S'https://www.whoscored.com/Matches/969766/Live'
 p267
 sg10
-S'4 : 2'
+S'3 : 1'
 p268
 sa(dp269
 g4
-S'Hannover 96'
+S'Mainz 05'
 p270
 sg6
-S'VfB Stuttgart'
+S'Bayer Leverkusen'
 p271
 sg8
-S'https://www.whoscored.com/Matches/969615/Live'
+S'https://www.whoscored.com/Matches/969774/Live'
 p272
 sg10
-S'1 : 3'
+S'3 : 1'
 p273
 sa(dp274
 g4
-S'Hoffenheim'
+S'Eintracht Frankfurt'
 p275
 sg6
-S'Borussia Dortmund'
+S'Schalke 04'
 p276
 sg8
-S'https://www.whoscored.com/Matches/969617/Live'
+S'https://www.whoscored.com/Matches/969772/Live'
 p277
 sg10
-S'1 : 1'
+S'0 : 0'
 p278
-sa(dp279
+sasS'Aug'
+p279
+(lp280
+(dp281
 g4
-S'FC Cologne'
-p280
-sg6
-S'Ingolstadt'
-p281
-sg8
-S'https://www.whoscored.com/Matches/969627/Live'
+S'Bayern Munich'
 p282
-sg10
-S'1 : 1'
+sg6
+S'Hamburger SV'
 p283
-sa(dp284
-g4
-S'Wolfsburg'
+sg8
+S'https://www.whoscored.com/Matches/969088/Live'
+p284
+sg10
+S'5 : 0'
 p285
-sg6
-S'Hannover 96'
-p286
-sg8
-S'https://www.whoscored.com/Matches/969621/Live'
+sa(dp286
+g4
+S'Bayer Leverkusen'
 p287
-sg10
-S'1 : 1'
-p288
-sa(dp289
-g4
-S'VfB Stuttgart'
-p290
-sg6
-S'Borussia M.Gladbach'
-p291
-sg8
-S'https://www.whoscored.com/Matches/969623/Live'
-p292
-sg10
-S'1 : 3'
-p293
-sa(dp294
-g4
-S'Augsburg'
-p295
 sg6
 S'Hoffenheim'
-p296
+p288
 sg8
-S'https://www.whoscored.com/Matches/969624/Live'
-p297
+S'https://www.whoscored.com/Matches/969096/Live'
+p289
 sg10
-S'1 : 3'
-p298
-sa(dp299
+S'2 : 1'
+p290
+sa(dp291
 g4
-S'Werder Bremen'
-p300
-sg6
-S'Bayer Leverkusen'
-p301
-sg8
-S'https://www.whoscored.com/Matches/969625/Live'
-p302
-sg10
-S'0 : 3'
-p303
-sa(dp304
-g4
-S'Mainz 05'
-p305
-sg6
-S'Bayern Munich'
-p306
-sg8
-S'https://www.whoscored.com/Matches/969628/Live'
-p307
-sg10
-S'0 : 3'
-p308
-sa(dp309
-g4
-S'Hamburger SV'
-p310
-sg6
-S'Schalke 04'
-p311
-sg8
-S'https://www.whoscored.com/Matches/969622/Live'
-p312
-sg10
-S'0 : 1'
-p313
-sa(dp314
-g4
-S'Eintracht Frankfurt'
-p315
+S'Augsburg'
+p292
 sg6
 S'Hertha Berlin'
-p316
+p293
 sg8
-S'https://www.whoscored.com/Matches/969626/Live'
-p317
+S'https://www.whoscored.com/Matches/969107/Live'
+p294
 sg10
-S'1 : 1'
-p318
-sa(dp319
+S'0 : 1'
+p295
+sa(dp296
 g4
-S'Borussia Dortmund'
-p320
+S'Werder Bremen'
+p297
 sg6
-S'Darmstadt'
-p321
+S'Schalke 04'
+p298
 sg8
-S'https://www.whoscored.com/Matches/969620/Live'
-p322
+S'https://www.whoscored.com/Matches/969110/Live'
+p299
+sg10
+S'0 : 3'
+p300
+sa(dp301
+g4
+S'Mainz 05'
+p302
+sg6
+S'Ingolstadt'
+p303
+sg8
+S'https://www.whoscored.com/Matches/969114/Live'
+p304
+sg10
+S'0 : 1'
+p305
+sa(dp306
+g4
+S'Darmstadt'
+p307
+sg6
+S'Hannover 96'
+p308
+sg8
+S'https://www.whoscored.com/Matches/969117/Live'
+p309
 sg10
 S'2 : 2'
-p323
-sasS'Jan'
-p324
-(lp325
-(dp326
+p310
+sa(dp311
 g4
-S'Hamburger SV'
+S'Borussia Dortmund'
+p312
+sg6
+S'Borussia M.Gladbach'
+p313
+sg8
+S'https://www.whoscored.com/Matches/969092/Live'
+p314
+sg10
+S'4 : 0'
+p315
+sa(dp316
+g4
+S'Wolfsburg'
+p317
+sg6
+S'Eintracht Frankfurt'
+p318
+sg8
+S'https://www.whoscored.com/Matches/969100/Live'
+p319
+sg10
+S'2 : 1'
+p320
+sa(dp321
+g4
+S'VfB Stuttgart'
+p322
+sg6
+S'FC Cologne'
+p323
+sg8
+S'https://www.whoscored.com/Matches/969103/Live'
+p324
+sg10
+S'1 : 3'
+p325
+sa(dp326
+g4
+S'Hertha Berlin'
 p327
 sg6
-S'Bayern Munich'
+S'Werder Bremen'
 p328
 sg8
-S'https://www.whoscored.com/Matches/969723/Live'
+S'https://www.whoscored.com/Matches/969577/Live'
 p329
 sg10
-S'1 : 2'
+S'1 : 1'
 p330
 sa(dp331
 g4
-S'FC Cologne'
+S'Hoffenheim'
 p332
 sg6
-S'VfB Stuttgart'
+S'Bayern Munich'
 p333
 sg8
-S'https://www.whoscored.com/Matches/969725/Live'
+S'https://www.whoscored.com/Matches/969578/Live'
 p334
 sg10
-S'1 : 3'
+S'1 : 2'
 p335
 sa(dp336
 g4
-S'Hannover 96'
+S'Schalke 04'
 p337
 sg6
 S'Darmstadt'
 p338
 sg8
-S'https://www.whoscored.com/Matches/969726/Live'
+S'https://www.whoscored.com/Matches/969571/Live'
 p339
 sg10
-S'1 : 2'
+S'1 : 1'
 p340
 sa(dp341
 g4
-S'Hertha Berlin'
+S'Eintracht Frankfurt'
 p342
 sg6
 S'Augsburg'
 p343
 sg8
-S'https://www.whoscored.com/Matches/969727/Live'
+S'https://www.whoscored.com/Matches/969574/Live'
 p344
 sg10
-S'0 : 0'
+S'1 : 1'
 p345
 sa(dp346
 g4
-S'Hoffenheim'
+S'FC Cologne'
 p347
 sg6
-S'Bayer Leverkusen'
+S'Wolfsburg'
 p348
 sg8
-S'https://www.whoscored.com/Matches/969728/Live'
+S'https://www.whoscored.com/Matches/969575/Live'
 p349
 sg10
 S'1 : 1'
 p350
 sa(dp351
 g4
-S'Ingolstadt'
+S'Hannover 96'
 p352
 sg6
-S'Mainz 05'
+S'Bayer Leverkusen'
 p353
 sg8
-S'https://www.whoscored.com/Matches/969729/Live'
+S'https://www.whoscored.com/Matches/969576/Live'
 p354
 sg10
-S'1 : 0'
+S'0 : 1'
 p355
 sa(dp356
 g4
-S'Borussia M.Gladbach'
+S'Hamburger SV'
 p357
 sg6
-S'Borussia Dortmund'
+S'VfB Stuttgart'
 p358
 sg8
-S'https://www.whoscored.com/Matches/969722/Live'
+S'https://www.whoscored.com/Matches/969573/Live'
 p359
 sg10
-S'1 : 3'
+S'3 : 2'
 p360
 sa(dp361
 g4
-S'Eintracht Frankfurt'
+S'Ingolstadt'
 p362
 sg6
-S'Wolfsburg'
+S'Borussia Dortmund'
 p363
 sg8
-S'https://www.whoscored.com/Matches/969724/Live'
+S'https://www.whoscored.com/Matches/969579/Live'
 p364
 sg10
-S'3 : 2'
+S'0 : 4'
 p365
 sa(dp366
 g4
-S'Schalke 04'
+S'Borussia M.Gladbach'
 p367
 sg6
-S'Werder Bremen'
+S'Mainz 05'
 p368
 sg8
-S'https://www.whoscored.com/Matches/969721/Live'
+S'https://www.whoscored.com/Matches/969572/Live'
 p369
 sg10
-S'1 : 3'
+S'1 : 2'
 p370
-sasS'Nov'
-p371
-(lp372
-(dp373
+sa(dp371
 g4
-S'VfB Stuttgart'
-p374
-sg6
-S'Darmstadt'
-p375
-sg8
-S'https://www.whoscored.com/Matches/969660/Live'
-p376
-sg10
-S'2 : 0'
-p377
-sa(dp378
-g4
-S'Hamburger SV'
-p379
-sg6
-S'Hannover 96'
-p380
-sg8
-S'https://www.whoscored.com/Matches/969659/Live'
-p381
-sg10
-S'1 : 2'
-p382
-sa(dp383
-g4
-S'Hannover 96'
-p384
-sg6
-S'Hertha Berlin'
-p385
-sg8
-S'https://www.whoscored.com/Matches/969671/Live'
-p386
-sg10
-S'1 : 3'
-p387
-sa(dp388
-g4
-S'Bayern Munich'
-p389
-sg6
-S'VfB Stuttgart'
-p390
-sg8
-S'https://www.whoscored.com/Matches/969666/Live'
-p391
-sg10
-S'4 : 0'
-p392
-sa(dp393
-g4
-S'Bayer Leverkusen'
-p394
-sg6
-S'FC Cologne'
-p395
-sg8
-S'https://www.whoscored.com/Matches/969668/Live'
-p396
-sg10
-S'1 : 2'
-p397
-sa(dp398
-g4
-S'Borussia M.Gladbach'
-p399
-sg6
-S'Ingolstadt'
-p400
-sg8
-S'https://www.whoscored.com/Matches/969669/Live'
-p401
-sg10
-S'0 : 0'
-p402
-sa(dp403
-g4
-S'Hoffenheim'
-p404
-sg6
-S'Eintracht Frankfurt'
-p405
-sg8
-S'https://www.whoscored.com/Matches/969672/Live'
-p406
-sg10
-S'0 : 0'
-p407
-sa(dp408
-g4
-S'Mainz 05'
-p409
-sg6
 S'Wolfsburg'
-p410
-sg8
-S'https://www.whoscored.com/Matches/969673/Live'
-p411
-sg10
-S'2 : 0'
-p412
-sa(dp413
-g4
-S'Darmstadt'
-p414
-sg6
-S'Hamburger SV'
-p415
-sg8
-S'https://www.whoscored.com/Matches/969674/Live'
-p416
-sg10
-S'1 : 1'
-p417
-sa(dp418
-g4
-S'Borussia Dortmund'
-p419
+p372
 sg6
 S'Schalke 04'
+p373
+sg8
+S'https://www.whoscored.com/Matches/969582/Live'
+p374
+sg10
+S'3 : 0'
+p375
+sa(dp376
+g4
+S'VfB Stuttgart'
+p377
+sg6
+S'Eintracht Frankfurt'
+p378
+sg8
+S'https://www.whoscored.com/Matches/969583/Live'
+p379
+sg10
+S'1 : 4'
+p380
+sa(dp381
+g4
+S'Augsburg'
+p382
+sg6
+S'Ingolstadt'
+p383
+sg8
+S'https://www.whoscored.com/Matches/969584/Live'
+p384
+sg10
+S'0 : 1'
+p385
+sa(dp386
+g4
+S'FC Cologne'
+p387
+sg6
+S'Hamburger SV'
+p388
+sg8
+S'https://www.whoscored.com/Matches/969586/Live'
+p389
+sg10
+S'2 : 1'
+p390
+sa(dp391
+g4
+S'Mainz 05'
+p392
+sg6
+S'Hannover 96'
+p393
+sg8
+S'https://www.whoscored.com/Matches/969587/Live'
+p394
+sg10
+S'3 : 0'
+p395
+sa(dp396
+g4
+S'Darmstadt'
+p397
+sg6
+S'Hoffenheim'
+p398
+sg8
+S'https://www.whoscored.com/Matches/969588/Live'
+p399
+sg10
+S'0 : 0'
+p400
+sa(dp401
+g4
+S'Bayern Munich'
+p402
+sg6
+S'Bayer Leverkusen'
+p403
+sg8
+S'https://www.whoscored.com/Matches/969580/Live'
+p404
+sg10
+S'3 : 0'
+p405
+sa(dp406
+g4
+S'Borussia Dortmund'
+p407
+sg6
+S'Hertha Berlin'
+p408
+sg8
+S'https://www.whoscored.com/Matches/969581/Live'
+p409
+sg10
+S'3 : 1'
+p410
+sa(dp411
+g4
+S'Werder Bremen'
+p412
+sg6
+S'Borussia M.Gladbach'
+p413
+sg8
+S'https://www.whoscored.com/Matches/969585/Live'
+p414
+sg10
+S'2 : 1'
+p415
+sasS'Sep'
+p416
+(lp417
+(dp418
+g4
+S'Borussia M.Gladbach'
+p419
+sg6
+S'Hamburger SV'
 p420
 sg8
-S'https://www.whoscored.com/Matches/969667/Live'
+S'https://www.whoscored.com/Matches/969593/Live'
 p421
 sg10
-S'3 : 2'
+S'0 : 3'
 p422
 sa(dp423
 g4
-S'Augsburg'
+S'Bayern Munich'
 p424
 sg6
-S'Werder Bremen'
+S'Augsburg'
 p425
 sg8
-S'https://www.whoscored.com/Matches/969670/Live'
+S'https://www.whoscored.com/Matches/969590/Live'
 p426
 sg10
-S'1 : 2'
+S'2 : 1'
 p427
 sa(dp428
 g4
-S'Hamburger SV'
+S'Hannover 96'
 p429
 sg6
 S'Borussia Dortmund'
 p430
 sg8
-S'https://www.whoscored.com/Matches/969678/Live'
+S'https://www.whoscored.com/Matches/969595/Live'
 p431
 sg10
-S'3 : 1'
+S'2 : 4'
 p432
 sa(dp433
 g4
-S'Borussia M.Gladbach'
+S'Hertha Berlin'
 p434
 sg6
-S'Hannover 96'
+S'VfB Stuttgart'
 p435
 sg8
-S'https://www.whoscored.com/Matches/969676/Live'
+S'https://www.whoscored.com/Matches/969596/Live'
 p436
 sg10
 S'2 : 1'
 p437
 sa(dp438
 g4
-S'Wolfsburg'
+S'Ingolstadt'
 p439
 sg6
-S'Werder Bremen'
+S'Wolfsburg'
 p440
 sg8
-S'https://www.whoscored.com/Matches/969677/Live'
+S'https://www.whoscored.com/Matches/969598/Live'
 p441
 sg10
-S'6 : 0'
+S'0 : 0'
 p442
 sa(dp443
 g4
-S'VfB Stuttgart'
+S'Bayer Leverkusen'
 p444
 sg6
-S'Augsburg'
+S'Darmstadt'
 p445
 sg8
-S'https://www.whoscored.com/Matches/969679/Live'
+S'https://www.whoscored.com/Matches/969592/Live'
 p446
 sg10
-S'0 : 4'
+S'0 : 1'
 p447
 sa(dp448
 g4
 S'Eintracht Frankfurt'
 p449
 sg6
-S'Bayer Leverkusen'
+S'FC Cologne'
 p450
 sg8
-S'https://www.whoscored.com/Matches/969680/Live'
+S'https://www.whoscored.com/Matches/969594/Live'
 p451
 sg10
-S'1 : 3'
+S'6 : 2'
 p452
 sa(dp453
 g4
-S'FC Cologne'
+S'Hoffenheim'
 p454
 sg6
-S'Mainz 05'
+S'Werder Bremen'
 p455
 sg8
-S'https://www.whoscored.com/Matches/969681/Live'
+S'https://www.whoscored.com/Matches/969597/Live'
 p456
 sg10
-S'0 : 0'
+S'1 : 3'
 p457
 sa(dp458
 g4
 S'Schalke 04'
 p459
 sg6
-S'Bayern Munich'
+S'Mainz 05'
 p460
 sg8
-S'https://www.whoscored.com/Matches/969675/Live'
+S'https://www.whoscored.com/Matches/969591/Live'
 p461
 sg10
-S'1 : 3'
+S'2 : 1'
 p462
 sa(dp463
 g4
-S'Hertha Berlin'
+S'Mainz 05'
 p464
 sg6
 S'Hoffenheim'
 p465
 sg8
-S'https://www.whoscored.com/Matches/969682/Live'
+S'https://www.whoscored.com/Matches/969606/Live'
 p466
 sg10
-S'1 : 0'
+S'3 : 1'
 p467
 sa(dp468
 g4
-S'Ingolstadt'
+S'Darmstadt'
 p469
 sg6
-S'Darmstadt'
+S'Bayern Munich'
 p470
 sg8
-S'https://www.whoscored.com/Matches/969683/Live'
+S'https://www.whoscored.com/Matches/969607/Live'
 p471
 sg10
-S'3 : 1'
+S'0 : 3'
 p472
 sa(dp473
 g4
-S'Darmstadt'
+S'Wolfsburg'
 p474
 sg6
-S'FC Cologne'
+S'Hertha Berlin'
 p475
 sg8
-S'https://www.whoscored.com/Matches/969693/Live'
+S'https://www.whoscored.com/Matches/969600/Live'
 p476
 sg10
-S'0 : 0'
+S'2 : 0'
 p477
 sa(dp478
 g4
-S'Bayern Munich'
+S'Hamburger SV'
 p479
 sg6
-S'Hertha Berlin'
+S'Eintracht Frankfurt'
 p480
 sg8
-S'https://www.whoscored.com/Matches/969685/Live'
+S'https://www.whoscored.com/Matches/969601/Live'
 p481
 sg10
-S'2 : 0'
+S'0 : 0'
 p482
 sa(dp483
 g4
 S'Werder Bremen'
 p484
 sg6
-S'Hamburger SV'
+S'Ingolstadt'
 p485
 sg8
-S'https://www.whoscored.com/Matches/969689/Live'
+S'https://www.whoscored.com/Matches/969604/Live'
 p486
 sg10
-S'1 : 3'
+S'0 : 1'
 p487
 sa(dp488
 g4
-S'Hannover 96'
+S'FC Cologne'
 p489
 sg6
-S'Ingolstadt'
+S'Borussia M.Gladbach'
 p490
 sg8
-S'https://www.whoscored.com/Matches/969690/Live'
+S'https://www.whoscored.com/Matches/969605/Live'
 p491
 sg10
-S'4 : 0'
+S'1 : 0'
 p492
 sa(dp493
 g4
-S'Hoffenheim'
+S'VfB Stuttgart'
 p494
 sg6
-S'Borussia M.Gladbach'
+S'Schalke 04'
 p495
 sg8
-S'https://www.whoscored.com/Matches/969691/Live'
+S'https://www.whoscored.com/Matches/969602/Live'
 p496
 sg10
-S'3 : 3'
+S'0 : 1'
 p497
 sa(dp498
 g4
-S'Mainz 05'
+S'Augsburg'
 p499
 sg6
-S'Eintracht Frankfurt'
+S'Hannover 96'
 p500
 sg8
-S'https://www.whoscored.com/Matches/969692/Live'
+S'https://www.whoscored.com/Matches/969603/Live'
 p501
 sg10
-S'2 : 1'
+S'2 : 0'
 p502
 sa(dp503
 g4
 S'Borussia Dortmund'
 p504
 sg6
-S'VfB Stuttgart'
+S'Bayer Leverkusen'
 p505
 sg8
-S'https://www.whoscored.com/Matches/969686/Live'
+S'https://www.whoscored.com/Matches/969599/Live'
 p506
 sg10
-S'4 : 1'
+S'3 : 0'
 p507
 sa(dp508
 g4
-S'Bayer Leverkusen'
+S'Bayern Munich'
 p509
 sg6
-S'Schalke 04'
+S'Wolfsburg'
 p510
 sg8
-S'https://www.whoscored.com/Matches/969687/Live'
+S'https://www.whoscored.com/Matches/969611/Live'
 p511
 sg10
-S'1 : 1'
+S'5 : 1'
 p512
 sa(dp513
 g4
-S'Augsburg'
+S'Hertha Berlin'
 p514
 sg6
-S'Wolfsburg'
+S'FC Cologne'
 p515
 sg8
-S'https://www.whoscored.com/Matches/969688/Live'
+S'https://www.whoscored.com/Matches/969616/Live'
 p516
 sg10
-S'0 : 0'
+S'2 : 0'
 p517
-sasS'Dec'
-p518
-(lp519
-(dp520
-g4
-S'Schalke 04'
-p521
-sg6
-S'Hannover 96'
-p522
-sg8
-S'https://www.whoscored.com/Matches/969694/Live'
-p523
-sg10
-S'3 : 1'
-p524
-sa(dp525
-g4
-S'Borussia M.Gladbach'
-p526
-sg6
-S'Bayern Munich'
-p527
-sg8
-S'https://www.whoscored.com/Matches/969695/Live'
-p528
-sg10
-S'3 : 1'
-p529
-sa(dp530
-g4
-S'Hamburger SV'
-p531
-sg6
-S'Mainz 05'
-p532
-sg8
-S'https://www.whoscored.com/Matches/969697/Live'
-p533
-sg10
-S'1 : 3'
-p534
-sa(dp535
-g4
-S'FC Cologne'
-p536
-sg6
-S'Augsburg'
-p537
-sg8
-S'https://www.whoscored.com/Matches/969700/Live'
-p538
-sg10
-S'0 : 1'
-p539
-sa(dp540
-g4
-S'Hertha Berlin'
-p541
-sg6
-S'Bayer Leverkusen'
-p542
-sg8
-S'https://www.whoscored.com/Matches/969701/Live'
-p543
-sg10
-S'2 : 1'
-p544
-sa(dp545
+sa(dp518
 g4
 S'Ingolstadt'
-p546
+p519
 sg6
-S'Hoffenheim'
-p547
+S'Hamburger SV'
+p520
 sg8
-S'https://www.whoscored.com/Matches/969702/Live'
-p548
+S'https://www.whoscored.com/Matches/969618/Live'
+p521
 sg10
-S'1 : 1'
-p549
-sa(dp550
+S'0 : 1'
+p522
+sa(dp523
 g4
-S'Wolfsburg'
-p551
+S'Darmstadt'
+p524
+sg6
+S'Werder Bremen'
+p525
+sg8
+S'https://www.whoscored.com/Matches/969619/Live'
+p526
+sg10
+S'2 : 1'
+p527
+sa(dp528
+g4
+S'Hoffenheim'
+p529
 sg6
 S'Borussia Dortmund'
-p552
+p530
 sg8
-S'https://www.whoscored.com/Matches/969696/Live'
-p553
-sg10
-S'1 : 2'
-p554
-sa(dp555
-g4
-S'VfB Stuttgart'
-p556
-sg6
-S'Werder Bremen'
-p557
-sg8
-S'https://www.whoscored.com/Matches/969698/Live'
-p558
+S'https://www.whoscored.com/Matches/969617/Live'
+p531
 sg10
 S'1 : 1'
-p559
-sa(dp560
+p532
+sa(dp533
 g4
+S'Schalke 04'
+p534
+sg6
 S'Eintracht Frankfurt'
-p561
-sg6
-S'Darmstadt'
-p562
+p535
 sg8
-S'https://www.whoscored.com/Matches/969699/Live'
-p563
-sg10
-S'0 : 1'
-p564
-sa(dp565
-g4
-S'Mainz 05'
-p566
-sg6
-S'VfB Stuttgart'
-p567
-sg8
-S'https://www.whoscored.com/Matches/969710/Live'
-p568
-sg10
-S'0 : 0'
-p569
-sa(dp570
-g4
-S'Bayern Munich'
-p571
-sg6
-S'Ingolstadt'
-p572
-sg8
-S'https://www.whoscored.com/Matches/969703/Live'
-p573
+S'https://www.whoscored.com/Matches/969612/Live'
+p536
 sg10
 S'2 : 0'
-p574
-sa(dp575
-g4
-S'Wolfsburg'
-p576
-sg6
-S'Hamburger SV'
-p577
-sg8
-S'https://www.whoscored.com/Matches/969706/Live'
-p578
-sg10
-S'1 : 1'
-p579
-sa(dp580
-g4
-S'Werder Bremen'
-p581
-sg6
-S'FC Cologne'
-p582
-sg8
-S'https://www.whoscored.com/Matches/969708/Live'
-p583
-sg10
-S'1 : 1'
-p584
-sa(dp585
-g4
-S'Hoffenheim'
-p586
-sg6
-S'Hannover 96'
-p587
-sg8
-S'https://www.whoscored.com/Matches/969709/Live'
-p588
-sg10
-S'1 : 0'
-p589
-sa(dp590
-g4
-S'Darmstadt'
-p591
-sg6
-S'Hertha Berlin'
-p592
-sg8
-S'https://www.whoscored.com/Matches/969711/Live'
-p593
-sg10
-S'0 : 4'
-p594
-sa(dp595
+p537
+sa(dp538
 g4
 S'Bayer Leverkusen'
-p596
+p539
+sg6
+S'Mainz 05'
+p540
+sg8
+S'https://www.whoscored.com/Matches/969613/Live'
+p541
+sg10
+S'1 : 0'
+p542
+sa(dp543
+g4
+S'Borussia M.Gladbach'
+p544
+sg6
+S'Augsburg'
+p545
+sg8
+S'https://www.whoscored.com/Matches/969614/Live'
+p546
+sg10
+S'4 : 2'
+p547
+sa(dp548
+g4
+S'Hannover 96'
+p549
+sg6
+S'VfB Stuttgart'
+p550
+sg8
+S'https://www.whoscored.com/Matches/969615/Live'
+p551
+sg10
+S'1 : 3'
+p552
+sa(dp553
+g4
+S'FC Cologne'
+p554
+sg6
+S'Ingolstadt'
+p555
+sg8
+S'https://www.whoscored.com/Matches/969627/Live'
+p556
+sg10
+S'1 : 1'
+p557
+sa(dp558
+g4
+S'Mainz 05'
+p559
+sg6
+S'Bayern Munich'
+p560
+sg8
+S'https://www.whoscored.com/Matches/969628/Live'
+p561
+sg10
+S'0 : 3'
+p562
+sa(dp563
+g4
+S'VfB Stuttgart'
+p564
 sg6
 S'Borussia M.Gladbach'
-p597
+p565
 sg8
-S'https://www.whoscored.com/Matches/969705/Live'
-p598
+S'https://www.whoscored.com/Matches/969623/Live'
+p566
 sg10
-S'5 : 0'
-p599
-sa(dp600
+S'1 : 3'
+p567
+sa(dp568
 g4
 S'Augsburg'
-p601
+p569
+sg6
+S'Hoffenheim'
+p570
+sg8
+S'https://www.whoscored.com/Matches/969624/Live'
+p571
+sg10
+S'1 : 3'
+p572
+sa(dp573
+g4
+S'Werder Bremen'
+p574
+sg6
+S'Bayer Leverkusen'
+p575
+sg8
+S'https://www.whoscored.com/Matches/969625/Live'
+p576
+sg10
+S'0 : 3'
+p577
+sa(dp578
+g4
+S'Wolfsburg'
+p579
+sg6
+S'Hannover 96'
+p580
+sg8
+S'https://www.whoscored.com/Matches/969621/Live'
+p581
+sg10
+S'1 : 1'
+p582
+sa(dp583
+g4
+S'Hamburger SV'
+p584
 sg6
 S'Schalke 04'
+p585
+sg8
+S'https://www.whoscored.com/Matches/969622/Live'
+p586
+sg10
+S'0 : 1'
+p587
+sa(dp588
+g4
+S'Eintracht Frankfurt'
+p589
+sg6
+S'Hertha Berlin'
+p590
+sg8
+S'https://www.whoscored.com/Matches/969626/Live'
+p591
+sg10
+S'1 : 1'
+p592
+sa(dp593
+g4
+S'Borussia Dortmund'
+p594
+sg6
+S'Darmstadt'
+p595
+sg8
+S'https://www.whoscored.com/Matches/969620/Live'
+p596
+sg10
+S'2 : 2'
+p597
+sasS'Jan'
+p598
+(lp599
+(dp600
+g4
+S'Hamburger SV'
+p601
+sg6
+S'Bayern Munich'
 p602
 sg8
-S'https://www.whoscored.com/Matches/969707/Live'
+S'https://www.whoscored.com/Matches/969723/Live'
 p603
 sg10
-S'2 : 1'
+S'1 : 2'
 p604
 sa(dp605
 g4
-S'Borussia Dortmund'
+S'FC Cologne'
 p606
 sg6
-S'Eintracht Frankfurt'
+S'VfB Stuttgart'
 p607
 sg8
-S'https://www.whoscored.com/Matches/969704/Live'
+S'https://www.whoscored.com/Matches/969725/Live'
 p608
 sg10
-S'4 : 1'
+S'1 : 3'
 p609
 sa(dp610
 g4
-S'Schalke 04'
+S'Hannover 96'
 p611
 sg6
-S'Hoffenheim'
+S'Darmstadt'
 p612
 sg8
-S'https://www.whoscored.com/Matches/969712/Live'
+S'https://www.whoscored.com/Matches/969726/Live'
 p613
 sg10
-S'1 : 0'
+S'1 : 2'
 p614
 sa(dp615
 g4
-S'Hamburger SV'
+S'Hertha Berlin'
 p616
 sg6
 S'Augsburg'
 p617
 sg8
-S'https://www.whoscored.com/Matches/969714/Live'
+S'https://www.whoscored.com/Matches/969727/Live'
 p618
 sg10
-S'0 : 1'
+S'0 : 0'
 p619
 sa(dp620
 g4
-S'Eintracht Frankfurt'
+S'Hoffenheim'
 p621
 sg6
-S'Werder Bremen'
+S'Bayer Leverkusen'
 p622
 sg8
-S'https://www.whoscored.com/Matches/969716/Live'
+S'https://www.whoscored.com/Matches/969728/Live'
 p623
 sg10
-S'2 : 1'
+S'1 : 1'
 p624
 sa(dp625
 g4
-S'FC Cologne'
+S'Ingolstadt'
 p626
 sg6
-S'Borussia Dortmund'
+S'Mainz 05'
 p627
 sg8
-S'https://www.whoscored.com/Matches/969717/Live'
+S'https://www.whoscored.com/Matches/969729/Live'
 p628
 sg10
-S'2 : 1'
+S'1 : 0'
 p629
 sa(dp630
 g4
-S'Hannover 96'
+S'Borussia M.Gladbach'
 p631
 sg6
-S'Bayern Munich'
+S'Borussia Dortmund'
 p632
 sg8
-S'https://www.whoscored.com/Matches/969718/Live'
+S'https://www.whoscored.com/Matches/969722/Live'
 p633
 sg10
-S'0 : 1'
+S'1 : 3'
 p634
 sa(dp635
 g4
-S'Ingolstadt'
+S'Eintracht Frankfurt'
 p636
 sg6
-S'Bayer Leverkusen'
+S'Wolfsburg'
 p637
 sg8
-S'https://www.whoscored.com/Matches/969720/Live'
+S'https://www.whoscored.com/Matches/969724/Live'
 p638
 sg10
-S'0 : 1'
+S'3 : 2'
 p639
 sa(dp640
 g4
-S'VfB Stuttgart'
+S'Schalke 04'
 p641
 sg6
-S'Wolfsburg'
+S'Werder Bremen'
 p642
 sg8
-S'https://www.whoscored.com/Matches/969715/Live'
+S'https://www.whoscored.com/Matches/969721/Live'
 p643
 sg10
-S'3 : 1'
+S'1 : 3'
 p644
 sa(dp645
 g4
-S'Hertha Berlin'
+S'Mainz 05'
 p646
 sg6
-S'Mainz 05'
+S'Borussia M.Gladbach'
 p647
 sg8
-S'https://www.whoscored.com/Matches/969719/Live'
+S'https://www.whoscored.com/Matches/969737/Live'
 p648
 sg10
-S'2 : 0'
+S'1 : 0'
 p649
 sa(dp650
 g4
-S'Borussia M.Gladbach'
+S'Darmstadt'
 p651
 sg6
-S'Darmstadt'
+S'Schalke 04'
 p652
 sg8
-S'https://www.whoscored.com/Matches/969713/Live'
+S'https://www.whoscored.com/Matches/969738/Live'
 p653
 sg10
-S'3 : 2'
+S'0 : 2'
 p654
-sasS'Oct'
-p655
-(lp656
-(dp657
+sa(dp655
 g4
-S'Darmstadt'
+S'Borussia Dortmund'
+p656
+sg6
+S'Ingolstadt'
+p657
+sg8
+S'https://www.whoscored.com/Matches/969731/Live'
 p658
-sg6
-S'Mainz 05'
-p659
-sg8
-S'https://www.whoscored.com/Matches/969638/Live'
-p660
-sg10
-S'2 : 3'
-p661
-sa(dp662
-g4
-S'Borussia M.Gladbach'
-p663
-sg6
-S'Wolfsburg'
-p664
-sg8
-S'https://www.whoscored.com/Matches/969633/Live'
-p665
 sg10
 S'2 : 0'
-p666
-sa(dp667
+p659
+sa(dp660
 g4
+S'Bayer Leverkusen'
+p661
+sg6
 S'Hannover 96'
-p668
-sg6
-S'Werder Bremen'
-p669
+p662
 sg8
-S'https://www.whoscored.com/Matches/969634/Live'
-p670
-sg10
-S'1 : 0'
-p671
-sa(dp672
-g4
-S'Hertha Berlin'
-p673
-sg6
-S'Hamburger SV'
-p674
-sg8
-S'https://www.whoscored.com/Matches/969635/Live'
-p675
+S'https://www.whoscored.com/Matches/969732/Live'
+p663
 sg10
 S'3 : 0'
-p676
-sa(dp677
+p664
+sa(dp665
 g4
-S'Hoffenheim'
-p678
-sg6
-S'VfB Stuttgart'
-p679
-sg8
-S'https://www.whoscored.com/Matches/969636/Live'
-p680
-sg10
-S'2 : 2'
-p681
-sa(dp682
-g4
-S'Ingolstadt'
-p683
+S'Augsburg'
+p666
 sg6
 S'Eintracht Frankfurt'
-p684
+p667
 sg8
-S'https://www.whoscored.com/Matches/969637/Live'
-p685
+S'https://www.whoscored.com/Matches/969735/Live'
+p668
 sg10
-S'2 : 0'
-p686
-sa(dp687
+S'0 : 0'
+p669
+sa(dp670
 g4
-S'Schalke 04'
-p688
+S'Werder Bremen'
+p671
+sg6
+S'Hertha Berlin'
+p672
+sg8
+S'https://www.whoscored.com/Matches/969736/Live'
+p673
+sg10
+S'3 : 3'
+p674
+sa(dp675
+g4
+S'VfB Stuttgart'
+p676
+sg6
+S'Hamburger SV'
+p677
+sg8
+S'https://www.whoscored.com/Matches/969734/Live'
+p678
+sg10
+S'2 : 1'
+p679
+sa(dp680
+g4
+S'Wolfsburg'
+p681
 sg6
 S'FC Cologne'
-p689
+p682
 sg8
-S'https://www.whoscored.com/Matches/969631/Live'
-p690
+S'https://www.whoscored.com/Matches/969733/Live'
+p683
 sg10
-S'0 : 3'
-p691
-sa(dp692
+S'1 : 1'
+p684
+sa(dp685
 g4
 S'Bayern Munich'
+p686
+sg6
+S'Hoffenheim'
+p687
+sg8
+S'https://www.whoscored.com/Matches/969730/Live'
+p688
+sg10
+S'2 : 0'
+p689
+sasS'Nov'
+p690
+(lp691
+(dp692
+g4
+S'VfB Stuttgart'
 p693
 sg6
-S'Borussia Dortmund'
+S'Darmstadt'
 p694
 sg8
-S'https://www.whoscored.com/Matches/969630/Live'
+S'https://www.whoscored.com/Matches/969660/Live'
 p695
 sg10
-S'5 : 1'
+S'2 : 0'
 p696
 sa(dp697
 g4
-S'Bayer Leverkusen'
+S'Hamburger SV'
 p698
 sg6
-S'Augsburg'
+S'Hannover 96'
 p699
 sg8
-S'https://www.whoscored.com/Matches/969632/Live'
+S'https://www.whoscored.com/Matches/969659/Live'
 p700
 sg10
-S'1 : 1'
+S'1 : 2'
 p701
 sa(dp702
 g4
-S'Mainz 05'
+S'Hannover 96'
 p703
 sg6
-S'Borussia Dortmund'
+S'Hertha Berlin'
 p704
 sg8
-S'https://www.whoscored.com/Matches/969647/Live'
+S'https://www.whoscored.com/Matches/969671/Live'
 p705
 sg10
-S'0 : 2'
+S'1 : 3'
 p706
 sa(dp707
 g4
-S'Schalke 04'
+S'Hoffenheim'
 p708
 sg6
-S'Hertha Berlin'
+S'Eintracht Frankfurt'
 p709
 sg8
-S'https://www.whoscored.com/Matches/969639/Live'
+S'https://www.whoscored.com/Matches/969672/Live'
 p710
 sg10
-S'2 : 1'
+S'0 : 0'
 p711
 sa(dp712
 g4
-S'Wolfsburg'
+S'Mainz 05'
 p713
 sg6
-S'Hoffenheim'
+S'Wolfsburg'
 p714
 sg8
-S'https://www.whoscored.com/Matches/969640/Live'
+S'https://www.whoscored.com/Matches/969673/Live'
 p715
 sg10
-S'4 : 2'
+S'2 : 0'
 p716
 sa(dp717
 g4
-S'Hamburger SV'
+S'Bayer Leverkusen'
 p718
 sg6
-S'Bayer Leverkusen'
+S'FC Cologne'
 p719
 sg8
-S'https://www.whoscored.com/Matches/969641/Live'
+S'https://www.whoscored.com/Matches/969668/Live'
 p720
 sg10
-S'0 : 0'
+S'1 : 2'
 p721
 sa(dp722
 g4
-S'Augsburg'
+S'Borussia M.Gladbach'
 p723
 sg6
-S'Darmstadt'
+S'Ingolstadt'
 p724
 sg8
-S'https://www.whoscored.com/Matches/969643/Live'
+S'https://www.whoscored.com/Matches/969669/Live'
 p725
 sg10
-S'0 : 2'
+S'0 : 0'
 p726
 sa(dp727
 g4
-S'Werder Bremen'
+S'Bayern Munich'
 p728
 sg6
-S'Bayern Munich'
+S'VfB Stuttgart'
 p729
 sg8
-S'https://www.whoscored.com/Matches/969644/Live'
+S'https://www.whoscored.com/Matches/969666/Live'
 p730
 sg10
-S'0 : 1'
+S'4 : 0'
 p731
 sa(dp732
 g4
-S'Eintracht Frankfurt'
+S'Darmstadt'
 p733
 sg6
-S'Borussia M.Gladbach'
+S'Hamburger SV'
 p734
 sg8
-S'https://www.whoscored.com/Matches/969645/Live'
+S'https://www.whoscored.com/Matches/969674/Live'
 p735
 sg10
-S'1 : 5'
+S'1 : 1'
 p736
 sa(dp737
 g4
-S'FC Cologne'
+S'Borussia Dortmund'
 p738
 sg6
-S'Hannover 96'
+S'Schalke 04'
 p739
 sg8
-S'https://www.whoscored.com/Matches/969646/Live'
+S'https://www.whoscored.com/Matches/969667/Live'
 p740
 sg10
-S'0 : 1'
+S'3 : 2'
 p741
 sa(dp742
 g4
-S'VfB Stuttgart'
+S'Augsburg'
 p743
 sg6
-S'Ingolstadt'
+S'Werder Bremen'
 p744
 sg8
-S'https://www.whoscored.com/Matches/969642/Live'
+S'https://www.whoscored.com/Matches/969670/Live'
 p745
 sg10
-S'1 : 0'
+S'1 : 2'
 p746
 sa(dp747
 g4
-S'Hoffenheim'
+S'Hamburger SV'
 p748
 sg6
-S'Hamburger SV'
+S'Borussia Dortmund'
 p749
 sg8
-S'https://www.whoscored.com/Matches/969653/Live'
+S'https://www.whoscored.com/Matches/969678/Live'
 p750
 sg10
-S'0 : 1'
+S'3 : 1'
 p751
 sa(dp752
 g4
-S'Bayern Munich'
+S'VfB Stuttgart'
 p753
 sg6
-S'FC Cologne'
+S'Augsburg'
 p754
 sg8
-S'https://www.whoscored.com/Matches/969648/Live'
+S'https://www.whoscored.com/Matches/969679/Live'
 p755
 sg10
-S'4 : 0'
+S'0 : 4'
 p756
 sa(dp757
 g4
-S'Bayer Leverkusen'
+S'Eintracht Frankfurt'
 p758
 sg6
-S'VfB Stuttgart'
+S'Bayer Leverkusen'
 p759
 sg8
-S'https://www.whoscored.com/Matches/969650/Live'
+S'https://www.whoscored.com/Matches/969680/Live'
 p760
 sg10
-S'4 : 3'
+S'1 : 3'
 p761
 sa(dp762
 g4
-S'Hannover 96'
+S'FC Cologne'
 p763
 sg6
-S'Eintracht Frankfurt'
+S'Mainz 05'
 p764
 sg8
-S'https://www.whoscored.com/Matches/969652/Live'
+S'https://www.whoscored.com/Matches/969681/Live'
 p765
 sg10
-S'1 : 2'
+S'0 : 0'
 p766
 sa(dp767
 g4
-S'Mainz 05'
+S'Borussia M.Gladbach'
 p768
 sg6
-S'Werder Bremen'
+S'Hannover 96'
 p769
 sg8
-S'https://www.whoscored.com/Matches/969654/Live'
+S'https://www.whoscored.com/Matches/969676/Live'
 p770
 sg10
-S'1 : 3'
+S'2 : 1'
 p771
 sa(dp772
 g4
-S'Darmstadt'
+S'Wolfsburg'
 p773
 sg6
-S'Wolfsburg'
+S'Werder Bremen'
 p774
 sg8
-S'https://www.whoscored.com/Matches/969656/Live'
+S'https://www.whoscored.com/Matches/969677/Live'
 p775
 sg10
-S'0 : 1'
+S'6 : 0'
 p776
 sa(dp777
 g4
-S'Ingolstadt'
+S'Schalke 04'
 p778
 sg6
-S'Hertha Berlin'
+S'Bayern Munich'
 p779
 sg8
-S'https://www.whoscored.com/Matches/969655/Live'
+S'https://www.whoscored.com/Matches/969675/Live'
 p780
 sg10
-S'0 : 1'
+S'1 : 3'
 p781
 sa(dp782
 g4
-S'Borussia Dortmund'
+S'Hertha Berlin'
 p783
 sg6
-S'Augsburg'
+S'Hoffenheim'
 p784
 sg8
-S'https://www.whoscored.com/Matches/969649/Live'
+S'https://www.whoscored.com/Matches/969682/Live'
 p785
 sg10
-S'5 : 1'
+S'1 : 0'
 p786
 sa(dp787
 g4
-S'Borussia M.Gladbach'
+S'Ingolstadt'
 p788
 sg6
-S'Schalke 04'
+S'Darmstadt'
 p789
 sg8
-S'https://www.whoscored.com/Matches/969651/Live'
+S'https://www.whoscored.com/Matches/969683/Live'
 p790
 sg10
 S'3 : 1'
 p791
 sa(dp792
 g4
-S'Eintracht Frankfurt'
+S'Darmstadt'
 p793
 sg6
-S'Bayern Munich'
+S'FC Cologne'
 p794
 sg8
-S'https://www.whoscored.com/Matches/969663/Live'
+S'https://www.whoscored.com/Matches/969693/Live'
 p795
 sg10
 S'0 : 0'
 p796
 sa(dp797
 g4
-S'Schalke 04'
+S'Werder Bremen'
 p798
 sg6
-S'Ingolstadt'
+S'Hamburger SV'
 p799
 sg8
-S'https://www.whoscored.com/Matches/969657/Live'
+S'https://www.whoscored.com/Matches/969689/Live'
 p800
 sg10
-S'1 : 1'
+S'1 : 3'
 p801
 sa(dp802
 g4
-S'Augsburg'
+S'Hannover 96'
 p803
 sg6
-S'Mainz 05'
+S'Ingolstadt'
 p804
 sg8
-S'https://www.whoscored.com/Matches/969661/Live'
+S'https://www.whoscored.com/Matches/969690/Live'
 p805
 sg10
-S'3 : 3'
+S'4 : 0'
 p806
 sa(dp807
 g4
-S'Werder Bremen'
+S'Hoffenheim'
 p808
 sg6
-S'Borussia Dortmund'
+S'Borussia M.Gladbach'
 p809
 sg8
-S'https://www.whoscored.com/Matches/969662/Live'
+S'https://www.whoscored.com/Matches/969691/Live'
 p810
 sg10
-S'1 : 3'
+S'3 : 3'
 p811
 sa(dp812
 g4
-S'FC Cologne'
+S'Bayern Munich'
 p813
 sg6
-S'Hoffenheim'
+S'Hertha Berlin'
 p814
 sg8
-S'https://www.whoscored.com/Matches/969664/Live'
+S'https://www.whoscored.com/Matches/969685/Live'
 p815
 sg10
-S'0 : 0'
+S'2 : 0'
 p816
 sa(dp817
 g4
-S'Hertha Berlin'
+S'Mainz 05'
 p818
 sg6
-S'Borussia M.Gladbach'
+S'Eintracht Frankfurt'
 p819
 sg8
-S'https://www.whoscored.com/Matches/969665/Live'
+S'https://www.whoscored.com/Matches/969692/Live'
 p820
 sg10
-S'1 : 4'
+S'2 : 1'
 p821
 sa(dp822
 g4
-S'Wolfsburg'
+S'Borussia Dortmund'
 p823
 sg6
-S'Bayer Leverkusen'
+S'VfB Stuttgart'
 p824
 sg8
-S'https://www.whoscored.com/Matches/969658/Live'
+S'https://www.whoscored.com/Matches/969686/Live'
 p825
 sg10
-S'2 : 1'
+S'4 : 1'
 p826
+sa(dp827
+g4
+S'Bayer Leverkusen'
+p828
+sg6
+S'Schalke 04'
+p829
+sg8
+S'https://www.whoscored.com/Matches/969687/Live'
+p830
+sg10
+S'1 : 1'
+p831
+sa(dp832
+g4
+S'Augsburg'
+p833
+sg6
+S'Wolfsburg'
+p834
+sg8
+S'https://www.whoscored.com/Matches/969688/Live'
+p835
+sg10
+S'0 : 0'
+p836
+sasS'Dec'
+p837
+(lp838
+(dp839
+g4
+S'Schalke 04'
+p840
+sg6
+S'Hannover 96'
+p841
+sg8
+S'https://www.whoscored.com/Matches/969694/Live'
+p842
+sg10
+S'3 : 1'
+p843
+sa(dp844
+g4
+S'Borussia M.Gladbach'
+p845
+sg6
+S'Bayern Munich'
+p846
+sg8
+S'https://www.whoscored.com/Matches/969695/Live'
+p847
+sg10
+S'3 : 1'
+p848
+sa(dp849
+g4
+S'Hamburger SV'
+p850
+sg6
+S'Mainz 05'
+p851
+sg8
+S'https://www.whoscored.com/Matches/969697/Live'
+p852
+sg10
+S'1 : 3'
+p853
+sa(dp854
+g4
+S'FC Cologne'
+p855
+sg6
+S'Augsburg'
+p856
+sg8
+S'https://www.whoscored.com/Matches/969700/Live'
+p857
+sg10
+S'0 : 1'
+p858
+sa(dp859
+g4
+S'Hertha Berlin'
+p860
+sg6
+S'Bayer Leverkusen'
+p861
+sg8
+S'https://www.whoscored.com/Matches/969701/Live'
+p862
+sg10
+S'2 : 1'
+p863
+sa(dp864
+g4
+S'Ingolstadt'
+p865
+sg6
+S'Hoffenheim'
+p866
+sg8
+S'https://www.whoscored.com/Matches/969702/Live'
+p867
+sg10
+S'1 : 1'
+p868
+sa(dp869
+g4
+S'Wolfsburg'
+p870
+sg6
+S'Borussia Dortmund'
+p871
+sg8
+S'https://www.whoscored.com/Matches/969696/Live'
+p872
+sg10
+S'1 : 2'
+p873
+sa(dp874
+g4
+S'VfB Stuttgart'
+p875
+sg6
+S'Werder Bremen'
+p876
+sg8
+S'https://www.whoscored.com/Matches/969698/Live'
+p877
+sg10
+S'1 : 1'
+p878
+sa(dp879
+g4
+S'Eintracht Frankfurt'
+p880
+sg6
+S'Darmstadt'
+p881
+sg8
+S'https://www.whoscored.com/Matches/969699/Live'
+p882
+sg10
+S'0 : 1'
+p883
+sa(dp884
+g4
+S'Mainz 05'
+p885
+sg6
+S'VfB Stuttgart'
+p886
+sg8
+S'https://www.whoscored.com/Matches/969710/Live'
+p887
+sg10
+S'0 : 0'
+p888
+sa(dp889
+g4
+S'Darmstadt'
+p890
+sg6
+S'Hertha Berlin'
+p891
+sg8
+S'https://www.whoscored.com/Matches/969711/Live'
+p892
+sg10
+S'0 : 4'
+p893
+sa(dp894
+g4
+S'Wolfsburg'
+p895
+sg6
+S'Hamburger SV'
+p896
+sg8
+S'https://www.whoscored.com/Matches/969706/Live'
+p897
+sg10
+S'1 : 1'
+p898
+sa(dp899
+g4
+S'Werder Bremen'
+p900
+sg6
+S'FC Cologne'
+p901
+sg8
+S'https://www.whoscored.com/Matches/969708/Live'
+p902
+sg10
+S'1 : 1'
+p903
+sa(dp904
+g4
+S'Hoffenheim'
+p905
+sg6
+S'Hannover 96'
+p906
+sg8
+S'https://www.whoscored.com/Matches/969709/Live'
+p907
+sg10
+S'1 : 0'
+p908
+sa(dp909
+g4
+S'Bayern Munich'
+p910
+sg6
+S'Ingolstadt'
+p911
+sg8
+S'https://www.whoscored.com/Matches/969703/Live'
+p912
+sg10
+S'2 : 0'
+p913
+sa(dp914
+g4
+S'Bayer Leverkusen'
+p915
+sg6
+S'Borussia M.Gladbach'
+p916
+sg8
+S'https://www.whoscored.com/Matches/969705/Live'
+p917
+sg10
+S'5 : 0'
+p918
+sa(dp919
+g4
+S'Augsburg'
+p920
+sg6
+S'Schalke 04'
+p921
+sg8
+S'https://www.whoscored.com/Matches/969707/Live'
+p922
+sg10
+S'2 : 1'
+p923
+sa(dp924
+g4
+S'Borussia Dortmund'
+p925
+sg6
+S'Eintracht Frankfurt'
+p926
+sg8
+S'https://www.whoscored.com/Matches/969704/Live'
+p927
+sg10
+S'4 : 1'
+p928
+sa(dp929
+g4
+S'Schalke 04'
+p930
+sg6
+S'Hoffenheim'
+p931
+sg8
+S'https://www.whoscored.com/Matches/969712/Live'
+p932
+sg10
+S'1 : 0'
+p933
+sa(dp934
+g4
+S'Ingolstadt'
+p935
+sg6
+S'Bayer Leverkusen'
+p936
+sg8
+S'https://www.whoscored.com/Matches/969720/Live'
+p937
+sg10
+S'0 : 1'
+p938
+sa(dp939
+g4
+S'Hamburger SV'
+p940
+sg6
+S'Augsburg'
+p941
+sg8
+S'https://www.whoscored.com/Matches/969714/Live'
+p942
+sg10
+S'0 : 1'
+p943
+sa(dp944
+g4
+S'Eintracht Frankfurt'
+p945
+sg6
+S'Werder Bremen'
+p946
+sg8
+S'https://www.whoscored.com/Matches/969716/Live'
+p947
+sg10
+S'2 : 1'
+p948
+sa(dp949
+g4
+S'FC Cologne'
+p950
+sg6
+S'Borussia Dortmund'
+p951
+sg8
+S'https://www.whoscored.com/Matches/969717/Live'
+p952
+sg10
+S'2 : 1'
+p953
+sa(dp954
+g4
+S'Hannover 96'
+p955
+sg6
+S'Bayern Munich'
+p956
+sg8
+S'https://www.whoscored.com/Matches/969718/Live'
+p957
+sg10
+S'0 : 1'
+p958
+sa(dp959
+g4
+S'VfB Stuttgart'
+p960
+sg6
+S'Wolfsburg'
+p961
+sg8
+S'https://www.whoscored.com/Matches/969715/Live'
+p962
+sg10
+S'3 : 1'
+p963
+sa(dp964
+g4
+S'Hertha Berlin'
+p965
+sg6
+S'Mainz 05'
+p966
+sg8
+S'https://www.whoscored.com/Matches/969719/Live'
+p967
+sg10
+S'2 : 0'
+p968
+sa(dp969
+g4
+S'Borussia M.Gladbach'
+p970
+sg6
+S'Darmstadt'
+p971
+sg8
+S'https://www.whoscored.com/Matches/969713/Live'
+p972
+sg10
+S'3 : 2'
+p973
+sasS'Oct'
+p974
+(lp975
+(dp976
+g4
+S'Darmstadt'
+p977
+sg6
+S'Mainz 05'
+p978
+sg8
+S'https://www.whoscored.com/Matches/969638/Live'
+p979
+sg10
+S'2 : 3'
+p980
+sa(dp981
+g4
+S'Borussia M.Gladbach'
+p982
+sg6
+S'Wolfsburg'
+p983
+sg8
+S'https://www.whoscored.com/Matches/969633/Live'
+p984
+sg10
+S'2 : 0'
+p985
+sa(dp986
+g4
+S'Hannover 96'
+p987
+sg6
+S'Werder Bremen'
+p988
+sg8
+S'https://www.whoscored.com/Matches/969634/Live'
+p989
+sg10
+S'1 : 0'
+p990
+sa(dp991
+g4
+S'Hertha Berlin'
+p992
+sg6
+S'Hamburger SV'
+p993
+sg8
+S'https://www.whoscored.com/Matches/969635/Live'
+p994
+sg10
+S'3 : 0'
+p995
+sa(dp996
+g4
+S'Hoffenheim'
+p997
+sg6
+S'VfB Stuttgart'
+p998
+sg8
+S'https://www.whoscored.com/Matches/969636/Live'
+p999
+sg10
+S'2 : 2'
+p1000
+sa(dp1001
+g4
+S'Ingolstadt'
+p1002
+sg6
+S'Eintracht Frankfurt'
+p1003
+sg8
+S'https://www.whoscored.com/Matches/969637/Live'
+p1004
+sg10
+S'2 : 0'
+p1005
+sa(dp1006
+g4
+S'Schalke 04'
+p1007
+sg6
+S'FC Cologne'
+p1008
+sg8
+S'https://www.whoscored.com/Matches/969631/Live'
+p1009
+sg10
+S'0 : 3'
+p1010
+sa(dp1011
+g4
+S'Bayer Leverkusen'
+p1012
+sg6
+S'Augsburg'
+p1013
+sg8
+S'https://www.whoscored.com/Matches/969632/Live'
+p1014
+sg10
+S'1 : 1'
+p1015
+sa(dp1016
+g4
+S'Bayern Munich'
+p1017
+sg6
+S'Borussia Dortmund'
+p1018
+sg8
+S'https://www.whoscored.com/Matches/969630/Live'
+p1019
+sg10
+S'5 : 1'
+p1020
+sa(dp1021
+g4
+S'Mainz 05'
+p1022
+sg6
+S'Borussia Dortmund'
+p1023
+sg8
+S'https://www.whoscored.com/Matches/969647/Live'
+p1024
+sg10
+S'0 : 2'
+p1025
+sa(dp1026
+g4
+S'Augsburg'
+p1027
+sg6
+S'Darmstadt'
+p1028
+sg8
+S'https://www.whoscored.com/Matches/969643/Live'
+p1029
+sg10
+S'0 : 2'
+p1030
+sa(dp1031
+g4
+S'Werder Bremen'
+p1032
+sg6
+S'Bayern Munich'
+p1033
+sg8
+S'https://www.whoscored.com/Matches/969644/Live'
+p1034
+sg10
+S'0 : 1'
+p1035
+sa(dp1036
+g4
+S'Schalke 04'
+p1037
+sg6
+S'Hertha Berlin'
+p1038
+sg8
+S'https://www.whoscored.com/Matches/969639/Live'
+p1039
+sg10
+S'2 : 1'
+p1040
+sa(dp1041
+g4
+S'Wolfsburg'
+p1042
+sg6
+S'Hoffenheim'
+p1043
+sg8
+S'https://www.whoscored.com/Matches/969640/Live'
+p1044
+sg10
+S'4 : 2'
+p1045
+sa(dp1046
+g4
+S'Hamburger SV'
+p1047
+sg6
+S'Bayer Leverkusen'
+p1048
+sg8
+S'https://www.whoscored.com/Matches/969641/Live'
+p1049
+sg10
+S'0 : 0'
+p1050
+sa(dp1051
+g4
+S'Eintracht Frankfurt'
+p1052
+sg6
+S'Borussia M.Gladbach'
+p1053
+sg8
+S'https://www.whoscored.com/Matches/969645/Live'
+p1054
+sg10
+S'1 : 5'
+p1055
+sa(dp1056
+g4
+S'FC Cologne'
+p1057
+sg6
+S'Hannover 96'
+p1058
+sg8
+S'https://www.whoscored.com/Matches/969646/Live'
+p1059
+sg10
+S'0 : 1'
+p1060
+sa(dp1061
+g4
+S'VfB Stuttgart'
+p1062
+sg6
+S'Ingolstadt'
+p1063
+sg8
+S'https://www.whoscored.com/Matches/969642/Live'
+p1064
+sg10
+S'1 : 0'
+p1065
+sa(dp1066
+g4
+S'Hoffenheim'
+p1067
+sg6
+S'Hamburger SV'
+p1068
+sg8
+S'https://www.whoscored.com/Matches/969653/Live'
+p1069
+sg10
+S'0 : 1'
+p1070
+sa(dp1071
+g4
+S'Mainz 05'
+p1072
+sg6
+S'Werder Bremen'
+p1073
+sg8
+S'https://www.whoscored.com/Matches/969654/Live'
+p1074
+sg10
+S'1 : 3'
+p1075
+sa(dp1076
+g4
+S'Darmstadt'
+p1077
+sg6
+S'Wolfsburg'
+p1078
+sg8
+S'https://www.whoscored.com/Matches/969656/Live'
+p1079
+sg10
+S'0 : 1'
+p1080
+sa(dp1081
+g4
+S'Hannover 96'
+p1082
+sg6
+S'Eintracht Frankfurt'
+p1083
+sg8
+S'https://www.whoscored.com/Matches/969652/Live'
+p1084
+sg10
+S'1 : 2'
+p1085
+sa(dp1086
+g4
+S'Bayer Leverkusen'
+p1087
+sg6
+S'VfB Stuttgart'
+p1088
+sg8
+S'https://www.whoscored.com/Matches/969650/Live'
+p1089
+sg10
+S'4 : 3'
+p1090
+sa(dp1091
+g4
+S'Bayern Munich'
+p1092
+sg6
+S'FC Cologne'
+p1093
+sg8
+S'https://www.whoscored.com/Matches/969648/Live'
+p1094
+sg10
+S'4 : 0'
+p1095
+sa(dp1096
+g4
+S'Ingolstadt'
+p1097
+sg6
+S'Hertha Berlin'
+p1098
+sg8
+S'https://www.whoscored.com/Matches/969655/Live'
+p1099
+sg10
+S'0 : 1'
+p1100
+sa(dp1101
+g4
+S'Borussia Dortmund'
+p1102
+sg6
+S'Augsburg'
+p1103
+sg8
+S'https://www.whoscored.com/Matches/969649/Live'
+p1104
+sg10
+S'5 : 1'
+p1105
+sa(dp1106
+g4
+S'Borussia M.Gladbach'
+p1107
+sg6
+S'Schalke 04'
+p1108
+sg8
+S'https://www.whoscored.com/Matches/969651/Live'
+p1109
+sg10
+S'3 : 1'
+p1110
+sa(dp1111
+g4
+S'Eintracht Frankfurt'
+p1112
+sg6
+S'Bayern Munich'
+p1113
+sg8
+S'https://www.whoscored.com/Matches/969663/Live'
+p1114
+sg10
+S'0 : 0'
+p1115
+sa(dp1116
+g4
+S'FC Cologne'
+p1117
+sg6
+S'Hoffenheim'
+p1118
+sg8
+S'https://www.whoscored.com/Matches/969664/Live'
+p1119
+sg10
+S'0 : 0'
+p1120
+sa(dp1121
+g4
+S'Hertha Berlin'
+p1122
+sg6
+S'Borussia M.Gladbach'
+p1123
+sg8
+S'https://www.whoscored.com/Matches/969665/Live'
+p1124
+sg10
+S'1 : 4'
+p1125
+sa(dp1126
+g4
+S'Augsburg'
+p1127
+sg6
+S'Mainz 05'
+p1128
+sg8
+S'https://www.whoscored.com/Matches/969661/Live'
+p1129
+sg10
+S'3 : 3'
+p1130
+sa(dp1131
+g4
+S'Werder Bremen'
+p1132
+sg6
+S'Borussia Dortmund'
+p1133
+sg8
+S'https://www.whoscored.com/Matches/969662/Live'
+p1134
+sg10
+S'1 : 3'
+p1135
+sa(dp1136
+g4
+S'Schalke 04'
+p1137
+sg6
+S'Ingolstadt'
+p1138
+sg8
+S'https://www.whoscored.com/Matches/969657/Live'
+p1139
+sg10
+S'1 : 1'
+p1140
+sa(dp1141
+g4
+S'Wolfsburg'
+p1142
+sg6
+S'Bayer Leverkusen'
+p1143
+sg8
+S'https://www.whoscored.com/Matches/969658/Live'
+p1144
+sg10
+S'2 : 1'
+p1145
 sas.
