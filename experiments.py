@@ -486,9 +486,9 @@ for the creation on the examples.'''
                 _dtc_scores = {int(_lk):self._loaded_data[_lk][0] for _lk in self._loaded_data}
                 _rfc_scores = {int(_lk):self._loaded_data[_lk][1] for _lk in self._loaded_data}
                 
-                train_sizes = _dtc_scores.keys()
-                train_scores = [value for (key, value) in _dtc_scores.items()]
-                test_scores = [value for (key, value) in _rfc_scores.items()] 
+                train_sizes = sorted(_dtc_scores.keys())
+                train_scores = [value for (key, value) in sorted(_dtc_scores.items())]
+                test_scores = [value for (key, value) in sorted(_rfc_scores.items())] 
                 
                 train_scores_mean = np.mean(train_scores, axis=1)
                 train_scores_std = np.std(train_scores, axis=1)
