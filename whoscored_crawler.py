@@ -361,7 +361,7 @@ class WhoScoredCrawler(object):
     
 def start_crawl(kwargs):
     '''
-    @todo: create a crawler by the kwargs and run in parllel.
+    Start crawling, given the arguments
     '''
     year = kwargs['year']
     league = kwargs['league']

@@ -11,7 +11,7 @@ from argparse import ArgumentParser
 
 class ExperimentArgsParser(object):
     
-    experiments = ['Best_Params','AdaBoost','Best_Lookback','Best_Forest_Size','Bayes','Learning_Curve','Best_Proba','Final_Year']
+    experiments = ['Best_Params','AdaBoost','Best_Lookback','Best_Forest_Size','Bayes','Learning_Curve','Best_Proba','Final_Year','Default_Params']
     actions = ['run','report']
     
     def __init__(self):

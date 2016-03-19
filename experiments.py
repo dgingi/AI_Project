@@ -12,6 +12,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier as DTC
 from tabulate import tabulate
 import warnings
+import itertools
 
 from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
@@ -204,10 +205,35 @@ Decision Tree classifier and the Random Forest classifier.'''
         '''
         Reporting on low verbosity
         '''
-        return '\n'.join(['Decision Tree after search accuracy score: {0:.4f}'.format(self._loaded_data['Tree'].best_score_),\
-                          str(self._loaded_data['Tree'].best_params_),
-        'Random Forest after search accuracy score: {0:.4f}'.format(self._loaded_data['Forest'].best_score_),\
-        str(self._loaded_data['Forest'].best_params_)])
+        _def_exp = DefaultParamsExperiment('Default_Params')
+        try:
+            self._load_prev_experiment(_def_exp)
+        except:
+            pass
+        tree_cross_scores = max(self._loaded_data['Tree'].grid_scores_,key= lambda x: x[1])[2]
+        forest_cross_scores = max(self._loaded_data['Forest'].grid_scores_,key= lambda x: x[1])[2]
+        def_tree_scores = _def_exp._loaded_data['Default_Tree']
+        def_forest_scores = _def_exp._loaded_data['Default_Forest']
+        
+        def _evaluate(before,after):
+            prob , is_sig , is_better = self.t_test(before[0], after[0])
+            res = '\n'.join(['Paired T Test result between {before_name} and {after_name}: {proba:.5f}'.format(before_name = before[1],after_name=after[1],proba=prob),\
+                             'The results {sig} statically significant, while {before_name} is {better} with score {before_score:.4f} than {after_name} with score {after_score:.4f}'.format(before_name = before[1],after_name=after[1],prob=prob,before_score=before[0].mean(),
+                                                                after_score=after[0].mean(),sig = 'are' if is_sig else "aren't",
+                                                                better= 'better' if not is_better else 'worse')])
+            
+            return res
+        trees_t_test = _evaluate((def_tree_scores,'Decision Tree before search'), (tree_cross_scores,'Decision Tree after search'))
+        forests_t_test = _evaluate((def_forest_scores,'Random Forest before search'), (forest_cross_scores,'Random Forest after search'))
+        tree_forest_test = _evaluate((tree_cross_scores,'Decision Tree after search'), (forest_cross_scores,'Random Forest after search'))
+        _res = '\n'.join(['Decision Tree before search accuracy score: {0:.4f}'.format(def_tree_scores.mean()),\
+                          'Decision Tree after search accuracy score: {0:.4f}'.format(self._loaded_data['Tree'].best_score_),\
+                          trees_t_test,'Best Decision Tree hyper parameters:\n'+str(self._loaded_data['Tree'].best_params_),
+        'Random Forest before search accuracy score: {0:.4f}'.format(def_forest_scores.mean()),\
+        forests_t_test,'Random Forest after search accuracy score: {0:.4f}'.format(self._loaded_data['Forest'].best_score_),\
+        'Best Random Forest hyper parameters:\n'+str(self._loaded_data['Forest'].best_params_),tree_forest_test])
+        
+        return _res
     @timed    
     def run(self):
         '''
@@ -233,7 +259,7 @@ class BayesExperiment(Experiment):
         self._loaded_data = {'Bayes':bayes_score}
         self.save(self._loaded_data)
         
-    _begining_report = '''This experiment tried a Naive Bayes classifer.'''
+    _begining_report = '''This experiment tried a Naive Bayes classifier.'''
             
     _ending_report = '''Done'''
     
@@ -243,7 +269,30 @@ class BayesExperiment(Experiment):
         Reporting on low verbosity
         '''
         return '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['Bayes'].mean())])
+     
+class DefaultParamsExperiment(Experiment):
+    def __init__(self,dir_name,test=False):
+        Experiment.__init__(self,dir_name,test)
+        self.name = 'Default_Params'
         
+    def run(self):
+        Experiment.run(self)
+        tree_score = cross_val_score(DTC(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        forest_score = cross_val_score(RFC(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        self._loaded_data = {'Default_Tree':tree_score,'Default_Forest':forest_score}
+        self.save(self._loaded_data)
+        
+    _begining_report = '''This experiment tried both the Decision Tree and the Random Forest classifiers with default hyper parameters.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        return '\n'.join(['Decision Tree with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Tree'].mean()),\
+                          'Random Forest with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Forest'].mean())])   
     
 class LearningCurveExperiment(Experiment):
     def __init__(self,dir_name,test=False):
@@ -393,7 +442,6 @@ class BestLookbackExperimet(Experiment):
             self._remote = False
             dtc_score = cross_val_score(self.estimators[0], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
             rfc_score = cross_val_score(self.estimators[1], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
-#             ada_score = cross_val_score(self.estimators[2], self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
             results[str(lookback)] = (dtc_score,rfc_score)
         self._loaded_data = results
         self.save(self._loaded_data)
@@ -415,6 +463,55 @@ for the creation on the examples.'''
                            ['Random Forest']+[value for (key, value) in sorted(_rfc_scores.items())]],\
                           headers=['Classifier / Lookback']+sorted(_dtc_scores),tablefmt="fancy_grid",floatfmt=".4f")
         return 'Cross validation scores for each classifier by lookback:\n%s\n'%_table
+    
+    @property
+    def _detail(self):
+        '''
+        Medium verbosity - show plotted graphs
+        '''
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import numpy as np
+            import matplotlib.pyplot as plt
+    
+    
+            def plot_lookback_curve(title, ylim=None):
+          
+                plt.figure()
+                plt.title(title)
+                if ylim is not None:
+                    plt.ylim(*ylim)
+                plt.xlabel("Number of fixtures to look back")
+                plt.ylabel("Score")
+                _dtc_scores = {int(_lk):self._loaded_data[_lk][0] for _lk in self._loaded_data}
+                _rfc_scores = {int(_lk):self._loaded_data[_lk][1] for _lk in self._loaded_data}
+                
+                train_sizes = _dtc_scores.keys()
+                train_scores = [value for (key, value) in _dtc_scores.items()]
+                test_scores = [value for (key, value) in _rfc_scores.items()] 
+                
+                train_scores_mean = np.mean(train_scores, axis=1)
+                train_scores_std = np.std(train_scores, axis=1)
+                test_scores_mean = np.mean(test_scores, axis=1)
+                test_scores_std = np.std(test_scores, axis=1)
+                plt.grid()
+            
+                plt.fill_between(train_sizes, train_scores_mean - train_scores_std,
+                                 train_scores_mean + train_scores_std, alpha=0.1,
+                                 color="r")
+                plt.fill_between(train_sizes, test_scores_mean - test_scores_std,
+                                 test_scores_mean + test_scores_std, alpha=0.1, color="g")
+                plt.plot(train_sizes, train_scores_mean, 'o-', color="r",
+                         label="Decision Tree score")
+                plt.plot(train_sizes, test_scores_mean, 'o-', color="g",
+                         label="Random Forest score")
+            
+                plt.legend(loc="best")
+                return plt
+        
+        plot_lookback_curve('Best Look Back')
+        plt.show()
+        return ''
 
 class BestForestSizeExperiment(Experiment):
     '''
@@ -647,7 +744,9 @@ we start making the decisions.'''
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
-    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,'Best_Forest_Size':BestForestSizeExperiment,'Best_Proba':BestProbaForDecision,'Final_Year':FinalSeasonExperimentAllL,'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment}
+    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,\
+                    'Best_Forest_Size':BestForestSizeExperiment,'Best_Proba':BestProbaForDecision,'Final_Year':FinalSeasonExperimentAllL,\
+                    'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment}
 
     if args.action == 'run':
         _experiments[args.exp](dir_name=args.out_dir).run()
