@@ -17,7 +17,7 @@ import warnings
 
 from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
-from utils.constants import LEAGUES, MAX_YEAR
+from utils.constants import LEAGUES, MAX_YEAR, MIN_YEAR
 from utils.decorators import timed
 
 
@@ -363,10 +363,6 @@ Will plot the learning curves on screen.'''
             plt.show()
             return ''
         
-        
-        
-    
-        
 class AdaBoostExperimet(Experiment):
     '''
     A class the experiments the AdaBoost algorithm.
@@ -612,58 +608,66 @@ class BestProbaForDecision(Experiment):
     
     def load_params(self):
         best_param_exp = BestParamsExperiment("Best_Params", self._test)
-        if not self._load_prev_experiment(best_param_exp): 
-            return False
+        try:
+            best_param_exp.load()
+        except Exception as e:
+            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
+            ans = raw_input('>>>')
+            if ans == 'Yes I am sure':
+                best_param_exp.run()
+            else:
+                return
         self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RFC':best_param_exp._loaded_data['Forest'].best_params_}
-        return True
     
     def run(self):
         Experiment.run(self)
-        if not self.load_params():
-            print 'Can not load previous experiment'
-            return
-        
+        self.load_params()
         if self._test:
             self.ranges = [0.34,0.35]
         else:
             self.ranges = [(float(_i)/100) for _i in range(34,60)]
-        self._loaded_data = {k:(0,0) for k in self.ranges}
+        self._loaded_data = {}
+        self._loaded_data['DTC'] = {k:(0,0) for k in self.ranges}
+        self._loaded_data['RFC'] = {k:(0,0) for k in self.ranges}
         
-        prog_bar = ChargingBar('Running experiemnt...',max=len(self.ranges))
         for _range in self.ranges:
-            tree_decision_result = 0.0
-            tree_score = 0
-            tree_curr_decisions = 0
-            forest_decision_result = 0.0
-            forest_score = 0
-            forest_curr_decisions = 0
+            dt_decision_result = 0.0
+            dt_score = 0
+            dt_curr_decisions = 0
+            
+            rf_decision_result = 0.0
+            rf_score = 0
+            rf_curr_decisions = 0
             
             for train , test in self.cv._leagues_cross_validation():  
-                _tree = DTC(**self.estimators_params['DTC'])
-                _tree = _tree.fit(train[0],train[1])
-                tree_res_tags = _tree.predict(test[0])
-                tree_res_proba = _tree.predict_proba(test[0])
-                _forest = RFC(**self.estimators_params['RFC'])
-                _forest = _forest.fit(train[0],train[1])
-                forest_res_tags = _forest.predict(test[0])
-                forest_res_proba = _tree.forest_proba(test[0])
+                clf_dt = DTC(**self.estimators_params['DTC'])
+                clf_dt = clf_dt.fit(train[0],train[1])
+                
+                clf_rf = RFC(**self.estimators_params['RFC'])
+                clf_rf = clf_rf.fit(train[0],train[1])
+                
+                dt_res_tags = clf_dt.predict(test[0])
+                dt_res_proba = clf_dt.predict_proba(test[0])
+                
+                rf_res_tags = clf_rf.predict(test[0])
+                rf_res_proba = clf_rf.predict_proba(test[0])
                     
-                for i in range(len(tree_res_tags)):
-                    if max(tree_res_proba[i]) >= _range:
-                        tree_curr_decisions += 1
-                        if tree_res_tags[i] == test[1][i]:
-                            tree_score += 1
-                            
-                for i in range(len(forest_res_tags)):
-                    if max(forest_res_proba[i]) >= _range:
-                        forest_curr_decisions += 1
-                        if forest_res_tags[i] == test[1][i]:
-                            forest_score += 1
-                        
-            tree_decision_result = (tree_score*1.0)/tree_curr_decisions
-            forest_decision_result = (forest_score*1.0)/forest_curr_decisions
-            self._loaded_data[_range] = ((tree_curr_decisions,tree_decision_result),(forest_curr_decisions,forest_decision_result))
-            prog_bar.next()
+                for i in range(len(dt_res_tags)):
+                    if max(dt_res_proba[i]) >= _range:
+                        dt_curr_decisions += 1
+                        if dt_res_tags[i] == test[1][i]:
+                            dt_score += 1
+                
+                for i in range(len(rf_res_tags)):
+                    if max(rf_res_proba[i]) >= _range:
+                        rf_curr_decisions += 1
+                        if rf_res_tags[i] == test[1][i]:
+                            rf_score += 1 
+                                   
+            dt_decision_result = (dt_score*1.0)/dt_curr_decisions
+            rf_decision_result = (rf_score*1.0)/rf_curr_decisions
+            self._loaded_data['DTC'][_range] = (dt_curr_decisions,dt_decision_result)
+            self._loaded_data['RFC'][_range] = (rf_curr_decisions,rf_decision_result)
         self.save(self._loaded_data)
         
     _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
@@ -676,15 +680,11 @@ we start making the decisions.'''
         '''
         Reporting on low verbosity
         '''
-        _tree_proba_scores = {float(_k):self._loaded_data[_k][0] for _k in self._loaded_data.keys()}
-        _tree_inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_tree_proba_scores.items())]
-        _tree_table = tabulate([data for data in _tree_inner_table],\
-                          headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-        _forest_proba_scores = {float(_k):self._loaded_data[_k][0] for _k in self._loaded_data.keys()}
-        _forest_inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_forest_proba_scores.items())]
-        _forest_table = tabulate([data for data in _forest_inner_table],\
-                          headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-        return 'Decision Tree Classifier Results :\n%s\nRandom Forest Classifier Results :\n%s\n'%(_tree_table,_forest_table)
+        _proba_scores = {float(_k):(self._loaded_data['DTC'][_k],self._loaded_data['RFC'][_k]) for _k in self._loaded_data['DTC'].keys()}
+        _inner_table = [[key,tup[0][0],tup[0][1],tup[1][0],tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
+        _table = tabulate([data for data in _inner_table],\
+                          headers=['Probability','Amount Above DT','Score DT','Amount Above RF','Score RF'],tablefmt="fancy_grid",floatfmt=".4f")
+        return 'Results :\n%s\n'%_table
   
 class FinalSeasonExperimentAllL(Experiment):
     '''
@@ -709,9 +709,7 @@ class FinalSeasonExperimentAllL(Experiment):
     
         
     def run(self):
-        print "start"
         Experiment.run(self)
-        print "get data finish"
         self.load_params()
         clf = DTC(**self.estimators_params['DTC'])
         clf = clf.fit(self.X,self.y)
@@ -723,15 +721,15 @@ class FinalSeasonExperimentAllL(Experiment):
             temp_examples, temp_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,current=True)
             raw_curr_examples += temp_examples
             curr_tags += temp_tags
-        curr_examples = [_ex[0] for _ex in raw_curr_examples]
+        curr_examples = [_ex["Ex"] for _ex in raw_curr_examples]
         result_tags = clf.predict(curr_examples)
         self._loaded_data = {"score":clf.score(curr_examples, curr_tags),"array":[],"dict":{i:0 for i in range(61)}}
         amount_games_per_fix = {i:0 for i in range(61)}
         for i in range(len(raw_curr_examples)):
             _ex = raw_curr_examples[i]
-            curr_fix = _ex[1]
-            curr_result = _ex[2]
-            self._loaded_data["array"] += [(curr_result,result_tags[i])]
+            curr_fix = _ex["Fix"]
+            curr_result = _ex["Res"]
+            self._loaded_data["array"] += [(_ex["League"],_ex["Home"],_ex["Away"],curr_result,result_tags[i])]
             amount_games_per_fix[curr_fix] += 1
             if result_tags[i] == curr_tags[i]:
                 self._loaded_data["dict"][curr_fix] += 1
@@ -756,21 +754,144 @@ we start making the decisions.'''
         '''
         _scores = {int(_lk):self._loaded_data["dict"][_lk] for _lk in self._loaded_data["dict"]}
         _scores[0] = self._loaded_data["score"]
-        _inner_table = [[key,_scores[key]] for key in sorted(_scores.keys())]
+        _inner_table = [[key,_scores[key]] for key in sorted(_scores.keys()) if _scores[key] != 0.0]
         _table = tabulate([data for data in _inner_table],\
                           headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-        return 'Results :\n%s\n'%_table
+        print 'Results :\n%s\n'%_table
+        
+        for league in LEAGUES:
+            _inner_table = [[elem[1],elem[2],elem[3][0]+"-"+elem[3][1],elem[4]] for elem in self._loaded_data["array"] if elem[0]==league]
+            _table = tabulate([data for data in _inner_table],\
+                          headers=['Home','Away','Result','Tag'],tablefmt="fancy_grid")
+            with open("Results\\Final_Year\\"+league+".txt",'w') as output:
+                output.write(_table.encode("utf-8"))
+                output.close()
+        
+class FinalSeasonExperimentSpecL(Experiment):
+    '''
+    A class that experiments the results of the classifier for last season (2015-2016).
+    '''
+    def __init__(self, dir_name, test=False):
+        Experiment.__init__(self, dir_name, test=test)
+        self.name = 'Final_Season_Spec'
     
+    def load_params(self):
+        best_param_exp = BestParamsExperiment("Best_Params", self._test)
+        try:
+            best_param_exp.load()
+        except Exception as e:
+            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
+            ans = raw_input('>>>')
+            if ans == 'Yes I am sure':
+                best_param_exp.run()
+            else:
+                return
+        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
+    
+    def run(self):
+        self.cv = CrossValidation(test=self._test)
+        self.load_params()
+        clf = DTC(**self.estimators_params['DTC'])
+        self._loaded_data = {}
+        for _league in LEAGUES:
+            self.cv.dbh.league = _league
+            self.X = []
+            self.y = []
+            for year in range(MIN_YEAR,MAX_YEAR):
+                temp_ex, temp_ta = self.cv.dbh.create_examples(year,lookback=15,current=False)
+                self.X += temp_ex
+                self.y += temp_ta
+            clf = clf.fit(self.X,self.y)
+            raw_curr_examples = []
+            curr_tags = []    
+            raw_curr_examples, curr_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,current=True)
+            
+            curr_examples = [_ex["Ex"] for _ex in raw_curr_examples]
+            result_tags = clf.predict(curr_examples)
+            self._loaded_data[_league] = {"score":clf.score(curr_examples, curr_tags),"array":[],"dict":{i:0 for i in range(61)}}
+            amount_games_per_fix = {i:0 for i in range(61)}
+            for i in range(len(raw_curr_examples)):
+                _ex = raw_curr_examples[i]
+                curr_fix = _ex["Fix"]
+                curr_result = _ex["Res"]
+                self._loaded_data[_league]["array"] += [(_ex["League"],_ex["Home"],_ex["Away"],curr_result,result_tags[i])]
+                amount_games_per_fix[curr_fix] += 1
+                if result_tags[i] == curr_tags[i]:
+                    self._loaded_data[_league]["dict"][curr_fix] += 1
+            
+            for _k in self._loaded_data[_league]["dict"].keys():
+                score = float(self._loaded_data[_league]["dict"][_k])
+                if amount_games_per_fix[_k] == 0:
+                    self._loaded_data[_league]["dict"][_k] = score
+                else:
+                    self._loaded_data[_league]["dict"][_k] = score / amount_games_per_fix[_k]
+        self.save(self._loaded_data)
+        
+    _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
+we start making the decisions.'''
+            
+    _ending_report = '''Done'''
+    
+    @property        
+    def _no_detail(self):
+        '''
+        Reporting on low verbosity
+        '''
+        all_scores = {}
+        amount_overlap = {}
+        flag_first = True
+        for league in LEAGUES:
+            _scores = {int(_lk):self._loaded_data[league]["dict"][_lk] for _lk in self._loaded_data[league]["dict"]}
+            _scores[0] = self._loaded_data[league]["score"]
+            if flag_first:
+                for _k in _scores:
+                    if _scores[_k] == 0.0:
+                        continue
+                    amount_overlap[_k] = 1
+                    all_scores[_k] = _scores[_k]
+                flag_first = False
+            else:
+                for _k in _scores:
+                    if _scores[_k] == 0.0:
+                        continue
+                    if _k not in all_scores.keys():
+                        amount_overlap[_k] = 1
+                        all_scores[_k] = _scores[_k]
+                    else:
+                        amount_overlap[_k] += 1
+                        all_scores[_k] += _scores[_k]
+            _inner_table = [[key,_scores[key]] for key in sorted(_scores.keys()) if _scores[key] != 0.0]
+            _table = tabulate([data for data in _inner_table],\
+                              headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
+            with open("Results\\Final_Year_S\\"+league+"_fix_res.txt",'w') as output:
+                output.write(_table.encode("utf-8"))
+                output.close()
+            
+            _inner_table = [[elem[1],elem[2],elem[3][0]+"-"+elem[3][1],elem[4]] for elem in self._loaded_data[league]["array"] if elem[0]==league]
+            _table = tabulate([data for data in _inner_table],\
+                          headers=['Home','Away','Result','Tag'],tablefmt="fancy_grid")
+            with open("Results\\Final_Year_S\\"+league+"_results.txt",'w') as output:
+                output.write(_table.encode("utf-8"))
+                output.close()
+                
+        for _k in all_scores:
+            all_scores[_k] = all_scores[_k] / amount_overlap[_k]
+        _inner_table = [[key,all_scores[key]] for key in sorted(all_scores.keys())]
+        _table = tabulate([data for data in _inner_table],\
+                            headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
+        print 'Results :\n%s\n'%_table
+            
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
     _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,\
                     'Best_Forest_Size':BestForestSizeExperiment,'Best_Proba':BestProbaForDecision,'Final_Year':FinalSeasonExperimentAllL,\
-                    'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment}
+                    'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment,\
+                    'Final_Year_S':FinalSeasonExperimentSpecL}
 
     if args.action == 'run':
         _experiments[args.exp](dir_name=args.out_dir).run()
     else:
         _experiments[args.exp](dir_name=args.out_dir).report(verbosity=args.verbosity,outfile=args.outfile)
-        
+       
         
