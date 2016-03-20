@@ -145,17 +145,6 @@ class Experiment():
         elif verbosity == 2:
             print self._more_detail
         print self._ending_report
-#         top_scores = sorted(grid_scores, key=itemgetter(1),reverse=True)[:n_top]
-#         for i, score in enumerate(top_scores):
-#             print("Model with rank: {0}".format(i + 1))
-#             print(("Mean validation score: "
-#                    "{0:.3f} (std: {1:.3f})").format(
-#                    score.mean_validation_score,
-#                    np.std(score.cv_validation_scores)))
-#             print("Parameters: {0}".format(score.parameters))
-#             print("")
-#     
-#         return top_scores[0].parameters
 
 class BestParamsExperiment(Experiment):
     '''
@@ -639,6 +628,8 @@ class BestProbaForDecision(Experiment):
             rf_score = 0
             rf_curr_decisions = 0
             
+            tot_games = 0
+            
             for train , test in self.cv._leagues_cross_validation():  
                 clf_dt = DTC(**self.estimators_params['DTC'])
                 clf_dt = clf_dt.fit(train[0],train[1])
@@ -653,6 +644,7 @@ class BestProbaForDecision(Experiment):
                 rf_res_proba = clf_rf.predict_proba(test[0])
                     
                 for i in range(len(dt_res_tags)):
+                    tot_games += 1
                     if max(dt_res_proba[i]) >= _range:
                         dt_curr_decisions += 1
                         if dt_res_tags[i] == test[1][i]:
@@ -668,6 +660,7 @@ class BestProbaForDecision(Experiment):
             rf_decision_result = (rf_score*1.0)/rf_curr_decisions
             self._loaded_data['DTC'][_range] = (dt_curr_decisions,dt_decision_result)
             self._loaded_data['RFC'][_range] = (rf_curr_decisions,rf_decision_result)
+            self._loaded_data["AG"] = tot_games
         self.save(self._loaded_data)
         
     _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
@@ -681,9 +674,9 @@ we start making the decisions.'''
         Reporting on low verbosity
         '''
         _proba_scores = {float(_k):(self._loaded_data['DTC'][_k],self._loaded_data['RFC'][_k]) for _k in self._loaded_data['DTC'].keys()}
-        _inner_table = [[key,tup[0][0],tup[0][1],tup[1][0],tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
+        _inner_table = [[key,tup[0][0],tup[0][1],(float(tup[0][0])/self._loaded_data["AG"])*tup[0][1],tup[1][0],tup[1][1],(float(tup[1][0])/self._loaded_data["AG"])*tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
         _table = tabulate([data for data in _inner_table],\
-                          headers=['Probability','Amount Above DT','Score DT','Amount Above RF','Score RF'],tablefmt="fancy_grid",floatfmt=".4f")
+                          headers=['Probability','QG DT','Score DT','AS DT','QG RF','Score RF','AS RF'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
   
 class FinalSeasonExperiment(Experiment):
