@@ -643,7 +643,7 @@ class BestProbaForDecision(Experiment):
                 _tree = _tree.fit(train[0],train[1])
                 tree_res_tags = _tree.predict(test[0])
                 tree_res_proba = _tree.predict_proba(test[0])
-                _forest = DTC(**self.estimators_params['RFC'])
+                _forest = RFC(**self.estimators_params['RFC'])
                 _forest = _forest.fit(train[0],train[1])
                 forest_res_tags = _forest.predict(test[0])
                 forest_res_proba = _tree.forest_proba(test[0])
