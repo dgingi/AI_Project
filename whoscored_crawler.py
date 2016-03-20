@@ -102,8 +102,6 @@ class WhoScoredCrawler(object):
     def crawl(self,current=False):
         '''
         The main function - crawl the league and mine some data.
-        
-        
         '''
         logging.info('Starting crawl')
         self.driver.get(self.league_link)
@@ -190,6 +188,9 @@ class WhoScoredCrawler(object):
         update_team(away_team_name, "away", poss[1],home_team_name)
  
     def get_player_name(self,str_list):
+        '''
+        Given a a list of strings that represents a player name, return the player name
+        '''
         _str=""
         for i in range(len(str_list)):
             if 'A' <= str_list[i][0] <= 'Z':
@@ -275,6 +276,9 @@ class WhoScoredCrawler(object):
         logging.info('Finished loading previous data')
             
     def _get_curr_fix(self,team_name):
+        '''
+        Given a team name, return the next fixture that the team is playing
+        '''
         for key in self.all_teams_dict[team_name]:
             if not(self.all_teams_dict[team_name][key]):
                 return key
@@ -297,10 +301,16 @@ class WhoScoredCrawler(object):
         logging.info('Finished fixtures')
         
     def save_fixtures(self):
+        '''
+        Saves the fixtures to disc
+        '''
         with open(self._bkup_fixtures_links,'wb') as fixutres_bkup:
             pickle.dump(self.fixtures, fixutres_bkup)
     
     def save_month(self,month):
+        '''
+        Saves all data mined until month (included) to disc
+        '''
         with open(path.join(self._bkup_folder,month+'.pckl'),'wb') as month_bkup:
             pickle.dump(self.all_teams_dict,month_bkup)
         nxt_fix_dict = {name:self._get_curr_fix(name) for name in self.team_names}
@@ -330,7 +340,6 @@ class WhoScoredCrawler(object):
         '''
         Finding the start month for the current run of the crawler.
         '''
-        
         logging.info('Finding the start month')
         if path.exists(self._bkup_fixtures_links):
             pckl_files = glob.glob('%s/*.pckl'%self._bkup_folder)
