@@ -156,7 +156,8 @@ class DBHandler():
                     rel_all, rel_att, rel_def = relative_features(all_teams_dict[team][fix], all_teams_dict[curr_game["VS"]][vs_curr_fix], features_names)
                     examples += [np.array(all_teams_dict[team][fix])-np.array(all_teams_dict[curr_game["VS"]][vs_curr_fix])]
                     examples[-1] = np.concatenate((examples[-1],[rel_all, rel_att, rel_def]))
-                    curr_examples += [(examples[-1],curr_game["Fix"],curr_game["Result"])]
+                    temp_dict = {"Ex":examples[-1],"Fix":curr_game["Fix"],"Res":curr_game["Result"],"Home":team,"Away":curr_game["VS"],"League":self.league}
+                    curr_examples += [temp_dict]
                     tags += [curr_game["Tag"]]
         if not current:
             return examples,tags
