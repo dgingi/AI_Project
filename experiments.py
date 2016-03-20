@@ -145,17 +145,6 @@ class Experiment():
         elif verbosity == 2:
             print self._more_detail
         print self._ending_report
-#         top_scores = sorted(grid_scores, key=itemgetter(1),reverse=True)[:n_top]
-#         for i, score in enumerate(top_scores):
-#             print("Model with rank: {0}".format(i + 1))
-#             print(("Mean validation score: "
-#                    "{0:.3f} (std: {1:.3f})").format(
-#                    score.mean_validation_score,
-#                    np.std(score.cv_validation_scores)))
-#             print("Parameters: {0}".format(score.parameters))
-#             print("")
-#     
-#         return top_scores[0].parameters
 
 class BestParamsExperiment(Experiment):
     '''
@@ -629,7 +618,7 @@ class BestProbaForDecision(Experiment):
         self._loaded_data = {}
         self._loaded_data['DTC'] = {k:(0,0) for k in self.ranges}
         self._loaded_data['RFC'] = {k:(0,0) for k in self.ranges}
-        prog_bar = ChargingBar('Running experiemnt...',max=len(self.ranges))
+        
         for _range in self.ranges:
             dt_decision_result = 0.0
             dt_score = 0
@@ -638,6 +627,8 @@ class BestProbaForDecision(Experiment):
             rf_decision_result = 0.0
             rf_score = 0
             rf_curr_decisions = 0
+            
+            tot_games = 0
             
             for train , test in self.cv._leagues_cross_validation():  
                 clf_dt = DTC(**self.estimators_params['DTC'])
@@ -653,6 +644,7 @@ class BestProbaForDecision(Experiment):
                 rf_res_proba = clf_rf.predict_proba(test[0])
                     
                 for i in range(len(dt_res_tags)):
+                    tot_games += 1
                     if max(dt_res_proba[i]) >= _range:
                         dt_curr_decisions += 1
                         if dt_res_tags[i] == test[1][i]:
@@ -668,7 +660,7 @@ class BestProbaForDecision(Experiment):
             rf_decision_result = (rf_score*1.0)/rf_curr_decisions
             self._loaded_data['DTC'][_range] = (dt_curr_decisions,dt_decision_result)
             self._loaded_data['RFC'][_range] = (rf_curr_decisions,rf_decision_result)
-            prog_bar.next()
+            self._loaded_data["AG"] = tot_games
         self.save(self._loaded_data)
         prog_bar.finish()
         
@@ -683,18 +675,18 @@ we start making the decisions.'''
         Reporting on low verbosity
         '''
         _proba_scores = {float(_k):(self._loaded_data['DTC'][_k],self._loaded_data['RFC'][_k]) for _k in self._loaded_data['DTC'].keys()}
-        _inner_table = [[key,tup[0][0],tup[0][1],tup[1][0],tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
+        _inner_table = [[key,tup[0][0],tup[0][1],(float(tup[0][0])/self._loaded_data["AG"])*tup[0][1],tup[1][0],tup[1][1],(float(tup[1][0])/self._loaded_data["AG"])*tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
         _table = tabulate([data for data in _inner_table],\
-                          headers=['Probability','Amount Above DT','Score DT','Amount Above RF','Score RF'],tablefmt="fancy_grid",floatfmt=".4f")
+                          headers=['Probability','QG DT','Score DT','AS DT','QG RF','Score RF','AS RF'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
   
-class FinalSeasonExperimentAllL(Experiment):
+class FinalSeasonExperiment(Experiment):
     '''
     A class that experiments the results of the classifier for last season (2015-2016).
     '''
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
-        self.name = 'Final_Season'
+        self.name = dir_name
     
     def load_params(self):
         best_param_exp = BestParamsExperiment("Best_Params", self._test)
@@ -708,102 +700,32 @@ class FinalSeasonExperimentAllL(Experiment):
             else:
                 return
         self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
-    
-        
-    def run(self):
-        Experiment.run(self)
-        self.load_params()
-        clf = DTC(**self.estimators_params['DTC'])
-        clf = clf.fit(self.X,self.y)
-        raw_curr_examples = []
-        curr_tags = []
-        for _league in LEAGUES:
-            print "league"    
-            self.cv.dbh.league = _league
-            temp_examples, temp_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,current=True)
-            raw_curr_examples += temp_examples
-            curr_tags += temp_tags
-        curr_examples = [_ex["Ex"] for _ex in raw_curr_examples]
-        result_tags = clf.predict(curr_examples)
-        self._loaded_data = {"score":clf.score(curr_examples, curr_tags),"array":[],"dict":{i:0 for i in range(61)}}
-        amount_games_per_fix = {i:0 for i in range(61)}
-        for i in range(len(raw_curr_examples)):
-            _ex = raw_curr_examples[i]
-            curr_fix = _ex["Fix"]
-            curr_result = _ex["Res"]
-            self._loaded_data["array"] += [(_ex["League"],_ex["Home"],_ex["Away"],curr_result,result_tags[i])]
-            amount_games_per_fix[curr_fix] += 1
-            if result_tags[i] == curr_tags[i]:
-                self._loaded_data["dict"][curr_fix] += 1
-        
-        for _k in self._loaded_data["dict"].keys():
-            score = float(self._loaded_data["dict"][_k])
-            if amount_games_per_fix[_k] == 0:
-                self._loaded_data["dict"][_k] = score
-            else:
-                self._loaded_data["dict"][_k] = score / amount_games_per_fix[_k]
-        self.save(self._loaded_data)
-        
-    _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
-we start making the decisions.'''
             
-    _ending_report = '''Done'''
-    
-    @property        
-    def _no_detail(self):
-        '''
-        Reporting on low verbosity
-        '''
-        _scores = {int(_lk):self._loaded_data["dict"][_lk] for _lk in self._loaded_data["dict"]}
-        _scores[0] = self._loaded_data["score"]
-        _inner_table = [[key,_scores[key]] for key in sorted(_scores.keys()) if _scores[key] != 0.0]
-        _table = tabulate([data for data in _inner_table],\
-                          headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-        print 'Results :\n%s\n'%_table
-        
-        for league in LEAGUES:
-            _inner_table = [[elem[1],elem[2],elem[3][0]+"-"+elem[3][1],elem[4]] for elem in self._loaded_data["array"] if elem[0]==league]
-            _table = tabulate([data for data in _inner_table],\
-                          headers=['Home','Away','Result','Tag'],tablefmt="fancy_grid")
-            with open("Results\\Final_Year\\"+league+".txt",'w') as output:
-                output.write(_table.encode("utf-8"))
-                output.close()
-        
-class FinalSeasonExperimentSpecL(Experiment):
-    '''
-    A class that experiments the results of the classifier for last season (2015-2016).
-    '''
-    def __init__(self, dir_name, test=False):
-        Experiment.__init__(self, dir_name, test=test)
-        self.name = 'Final_Season_Spec'
-    
-    def load_params(self):
-        best_param_exp = BestParamsExperiment("Best_Params", self._test)
-        try:
-            best_param_exp.load()
-        except Exception as e:
-            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
-            ans = raw_input('>>>')
-            if ans == 'Yes I am sure':
-                best_param_exp.run()
-            else:
-                return
-        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
-    
     def run(self):
-        self.cv = CrossValidation(test=self._test)
-        self.load_params()
-        clf = DTC(**self.estimators_params['DTC'])
-        self._loaded_data = {}
+        if self.name == "Final_Season":
+            Experiment.run(self)
+            self.load_params()
+            clf = DTC(**self.estimators_params['DTC'])
+            clf = clf.fit(self.X,self.y)
+        else:
+            self.cv = CrossValidation(test=self._test)
+            self.load_params()
+            clf = DTC(**self.estimators_params['DTC'])
+        
+        self._loaded_data = {}   
+        
         for _league in LEAGUES:
             self.cv.dbh.league = _league
-            self.X = []
-            self.y = []
-            for year in range(MIN_YEAR,MAX_YEAR):
-                temp_ex, temp_ta = self.cv.dbh.create_examples(year,lookback=15,current=False)
-                self.X += temp_ex
-                self.y += temp_ta
-            clf = clf.fit(self.X,self.y)
+
+            if self.name == "Final_Season_S":
+                self.X = []
+                self.y = []
+                for year in range(MIN_YEAR,MAX_YEAR):
+                    temp_ex, temp_ta = self.cv.dbh.create_examples(year,lookback=15,current=False)
+                    self.X += temp_ex
+                    self.y += temp_ta
+                clf = clf.fit(self.X,self.y)
+            
             raw_curr_examples = []
             curr_tags = []    
             raw_curr_examples, curr_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,current=True)
@@ -865,14 +787,14 @@ we start making the decisions.'''
             _inner_table = [[key,_scores[key]] for key in sorted(_scores.keys()) if _scores[key] != 0.0]
             _table = tabulate([data for data in _inner_table],\
                               headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-            with open("Results\\Final_Year_S\\"+league+"_fix_res.txt",'w') as output:
+            with open(self._dir_name+league+"_fix_res.txt",'w') as output:
                 output.write(_table.encode("utf-8"))
                 output.close()
             
             _inner_table = [[elem[1],elem[2],elem[3][0]+"-"+elem[3][1],elem[4]] for elem in self._loaded_data[league]["array"] if elem[0]==league]
             _table = tabulate([data for data in _inner_table],\
                           headers=['Home','Away','Result','Tag'],tablefmt="fancy_grid")
-            with open("Results\\Final_Year_S\\"+league+"_results.txt",'w') as output:
+            with open(self._dir_name+league+"_results.txt",'w') as output:
                 output.write(_table.encode("utf-8"))
                 output.close()
                 
@@ -882,14 +804,27 @@ we start making the decisions.'''
         _table = tabulate([data for data in _inner_table],\
                             headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
         print 'Results :\n%s\n'%_table
-            
+
+class FinalSeasonAux(Experiment):
+    def __init__(self, dir_name, test=False):
+        Experiment.__init__(self, dir_name, test=test)
+        self.name = dir_name
+        
+    @timed
+    def run(self):
+        FinalSeasonExperiment("Final_Season",self._test).run()
+        FinalSeasonExperiment("Final_Season_S",self._test).run()
+        
+    def report(self, verbosity, outfile):
+        FinalSeasonExperiment("Final_Season",self._test).report(self, verbosity, outfile)
+        FinalSeasonExperiment("Final_Season_S",self._test).report(self, verbosity, outfile)
+        
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
     _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,\
-                    'Best_Forest_Size':BestForestSizeExperiment,'Best_Proba':BestProbaForDecision,'Final_Year':FinalSeasonExperimentAllL,\
-                    'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment,\
-                    'Final_Year_S':FinalSeasonExperimentSpecL}
+                    'Best_Forest_Size':BestForestSizeExperiment,'Best_Proba':BestProbaForDecision,'Final_Season':FinalSeasonAux,\
+                    'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment}
 
     if args.action == 'run':
         _experiments[args.exp](dir_name=args.out_dir).run()
