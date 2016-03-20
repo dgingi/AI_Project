@@ -611,8 +611,10 @@ class BestProbaForDecision(Experiment):
     
     def load_params(self):
         best_param_exp = BestParamsExperiment("Best_Params", self._test)
-        if not self._load_prev_experiment(best_param_exp): return False
+        if not self._load_prev_experiment(best_param_exp): 
+            return False
         self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RFC':best_param_exp._loaded_data['Forest'].best_params_}
+        return True
     
     def run(self):
         Experiment.run(self)
