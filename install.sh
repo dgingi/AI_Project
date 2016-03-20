@@ -20,3 +20,5 @@ sudo -H pip install selenium
 sudo -H pip install sklearn
 sudo -H pip install progress==1.2
 sudo -H pip install tabulate
+sudo -H pip install pydot2==1.0.33
+sudo -H pip install networkx

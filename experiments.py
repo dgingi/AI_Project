@@ -670,6 +670,7 @@ class BestProbaForDecision(Experiment):
             self._loaded_data['RFC'][_range] = (rf_curr_decisions,rf_decision_result)
             prog_bar.next()
         self.save(self._loaded_data)
+        prog_bar.finish()
         
     _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
 we start making the decisions.'''
