@@ -646,7 +646,7 @@ class BestProbaForDecision(Experiment):
                 _forest = RFC(**self.estimators_params['RFC'])
                 _forest = _forest.fit(train[0],train[1])
                 forest_res_tags = _forest.predict(test[0])
-                forest_res_proba = _tree.forest_proba(test[0])
+                forest_res_proba = _forest.predict_proba(test[0])
                     
                 for i in range(len(tree_res_tags)):
                     if max(tree_res_proba[i]) >= _range:
