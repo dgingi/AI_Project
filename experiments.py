@@ -1,7 +1,9 @@
 from glob import glob
+import itertools
 from os import  makedirs
 from os.path import exists, join as join_path
 from pickle import dump , load
+from progress.bar import ChargingBar
 from scipy.stats import ttest_rel
 from sklearn.cross_validation import  cross_val_score
 from sklearn.ensemble import AdaBoostClassifier as AdaC
@@ -12,12 +14,12 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier as DTC
 from tabulate import tabulate
 import warnings
-import itertools
 
 from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
-from utils.decorators import timed
 from utils.constants import LEAGUES, MAX_YEAR
+from utils.decorators import timed
+
 
 class Experiment():
     '''
@@ -609,45 +611,56 @@ class BestProbaForDecision(Experiment):
     
     def load_params(self):
         best_param_exp = BestParamsExperiment("Best_Params", self._test)
-        try:
-            best_param_exp.load()
-        except Exception as e:
-            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
-            ans = raw_input('>>>')
-            if ans == 'Yes I am sure':
-                best_param_exp.run()
-            else:
-                return
-        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
+        if not self._load_prev_experiment(best_param_exp): return False
+        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RFC':best_param_exp._loaded_data['Forest'].best_params_}
     
     def run(self):
         Experiment.run(self)
-        self.load_params()
+        if not self.load_params():
+            print 'Can not load previous experiment'
+            return
+        
         if self._test:
             self.ranges = [0.34,0.35]
         else:
             self.ranges = [(float(_i)/100) for _i in range(34,60)]
         self._loaded_data = {k:(0,0) for k in self.ranges}
         
+        prog_bar = ChargingBar('Running experiemnt...',max=len(self.ranges))
         for _range in self.ranges:
-            decision_result = 0.0
-            score = 0
-            curr_decisions = 0
+            tree_decision_result = 0.0
+            tree_score = 0
+            tree_curr_decisions = 0
+            forest_decision_result = 0.0
+            forest_score = 0
+            forest_curr_decisions = 0
             
             for train , test in self.cv._leagues_cross_validation():  
-                clf = DTC(**self.estimators_params['DTC'])
-                clf = clf.fit(train[0],train[1])
-                res_tags = clf.predict(test[0])
-                res_proba = clf.predict_proba(test[0])
+                _tree = DTC(**self.estimators_params['DTC'])
+                _tree = _tree.fit(train[0],train[1])
+                tree_res_tags = _tree.predict(test[0])
+                tree_res_proba = _tree.predict_proba(test[0])
+                _forest = DTC(**self.estimators_params['RFC'])
+                _forest = _forest.fit(train[0],train[1])
+                forest_res_tags = _forest.predict(test[0])
+                forest_res_proba = _tree.forest_proba(test[0])
                     
-                for i in range(len(res_tags)):
-                    if max(res_proba[i]) >= _range:
-                        curr_decisions += 1
-                        if res_tags[i] == test[1][i]:
-                            score += 1
+                for i in range(len(tree_res_tags)):
+                    if max(tree_res_proba[i]) >= _range:
+                        tree_curr_decisions += 1
+                        if tree_res_tags[i] == test[1][i]:
+                            tree_score += 1
+                            
+                for i in range(len(forest_res_tags)):
+                    if max(forest_res_proba[i]) >= _range:
+                        forest_curr_decisions += 1
+                        if forest_res_tags[i] == test[1][i]:
+                            forest_score += 1
                         
-            decision_result = (score*1.0)/curr_decisions
-            self._loaded_data[_range] = (curr_decisions,decision_result)
+            tree_decision_result = (tree_score*1.0)/tree_curr_decisions
+            forest_decision_result = (forest_score*1.0)/forest_curr_decisions
+            self._loaded_data[_range] = ((tree_curr_decisions,tree_decision_result),(forest_curr_decisions,forest_decision_result))
+            prog_bar.next()
         self.save(self._loaded_data)
         
     _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
@@ -660,11 +673,15 @@ we start making the decisions.'''
         '''
         Reporting on low verbosity
         '''
-        _proba_scores = {float(_k):self._loaded_data[_k] for _k in self._loaded_data.keys()}
-        _inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_proba_scores.items())]
-        _table = tabulate([data for data in _inner_table],\
+        _tree_proba_scores = {float(_k):self._loaded_data[_k][0] for _k in self._loaded_data.keys()}
+        _tree_inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_tree_proba_scores.items())]
+        _tree_table = tabulate([data for data in _tree_inner_table],\
                           headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-        return 'Results :\n%s\n'%_table
+        _forest_proba_scores = {float(_k):self._loaded_data[_k][0] for _k in self._loaded_data.keys()}
+        _forest_inner_table = [[key,value[0],value[1]] for (key, value) in sorted(_forest_proba_scores.items())]
+        _forest_table = tabulate([data for data in _forest_inner_table],\
+                          headers=['Probability','Amount Above','Score'],tablefmt="fancy_grid",floatfmt=".4f")
+        return 'Decision Tree Classifier Results :\n%s\nRandom Forest Classifier Results :\n%s\n'%(_tree_table,_forest_table)
   
 class FinalSeasonExperimentAllL(Experiment):
     '''
