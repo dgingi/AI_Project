@@ -25,7 +25,7 @@ $ experiments.py exp1 Best_Params report -v 1
         self.parser.add_argument('exp', metavar='Experiment', type=str,
                            help='The experiment to run \ report. Choices are: '+' '.join(self.experiments),choices=self.experiments)
         self.parser.add_argument('action', metavar='Run\Report', type=str,choices=self.actions,help='Choices are: '+' / '.join(self.actions))
-        self.parser.add_argument("-v", "--verbosity", type=int, choices=[0, 1, 2],default=0,
+        self.parser.add_argument("-v", "--verbosity", type=int, choices=[0, 1],default=0,
                     help="Increase the output verbosity for reporting an experiment")
         self.parser.add_argument("-o", "--outfile", type=str,default='', 
                     help="Outputs the report into the file specified. Defaults to standard output.")

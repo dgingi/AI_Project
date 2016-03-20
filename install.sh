@@ -14,6 +14,7 @@ sudo update-alternatives --set liblapack.so.3 /usr/lib/atlas-base/atlas/liblapac
 sudo apt-get install -y python-matplotlib
 sudo apt-get install -y python-pip
 
+
 #Installing pyMongo, scikit-learn, Selenium
 sudo -H pip install pymongo
 sudo -H pip install selenium
@@ -21,4 +22,4 @@ sudo -H pip install sklearn
 sudo -H pip install progress==1.2
 sudo -H pip install tabulate
 sudo -H pip install pydot2==1.0.33
-sudo -H pip install networkx
+

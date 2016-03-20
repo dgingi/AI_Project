@@ -1,11 +1,13 @@
 from glob import glob
 import itertools
 from os import  makedirs
+import os
 from os.path import exists, join as join_path
 from pickle import dump , load
 from progress.bar import ChargingBar
 from scipy.stats import ttest_rel
 from sklearn.cross_validation import  cross_val_score
+from sklearn.datasets.base import load_iris
 from sklearn.ensemble import AdaBoostClassifier as AdaC
 from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
@@ -195,7 +197,7 @@ Decision Tree classifier and the Random Forest classifier.'''
     @property        
     def _no_detail(self):
         '''
-        Reporting on low verbosity
+        Reporting on low verbosity - only tables
         '''
         _def_exp = DefaultParamsExperiment('Default_Params')
         try:
@@ -226,6 +228,89 @@ Decision Tree classifier and the Random Forest classifier.'''
         'Best Random Forest hyper parameters:\n'+str(self._loaded_data['Forest'].best_params_),tree_forest_test])
         
         return _res
+    
+    @property
+    def _detail(self):
+        '''
+        Plots the Decision Tree classifier after search and after fitting all of the data.
+        
+        Saves in results folder, in pdf format.
+        '''
+        from sklearn.tree import export_graphviz
+        from sklearn.externals.six import StringIO
+        import pydot
+        _names = ['avg_AccCrosses_by_all_pos_by_all_HA',\
+                 'avg_AccCrosses_by_all_pos_by_home',\
+                 'avg_AccLB_by_all_pos_by_all_HA',\
+                 'avg_AccLB_by_all_pos_by_home',\
+                 'avg_AccThB_by_all_pos_by_all_HA',\
+                 'avg_AccThB_by_all_pos_by_home',\
+                 'avg_AerialsWon_by_all_pos_by_all_HA',\
+                 'avg_AerialsWon_by_all_pos_by_home',\
+                 'avg_BlockedShots_by_def_pos_by_all_HA',\
+                 'avg_BlockedShots_by_def_pos_by_home',\
+                 'avg_Clearances_by_def_pos_by_all_HA',\
+                 'avg_Clearances_by_def_pos_by_home',\
+                 'avg_Crosses_by_all_pos_by_all_HA',\
+                 'avg_Crosses_by_all_pos_by_home',\
+                 'avg_Disp_by_att_pos_by_all_HA',\
+                 'avg_Disp_by_att_pos_by_home',\
+                 'avg_Dribbles_by_att_pos_by_all_HA',\
+                 'avg_Dribbles_by_att_pos_by_home',\
+                 'avg_Fouled_by_att_pos_by_all_HA',\
+                 'avg_Fouled_by_att_pos_by_home',\
+                 'avg_Fouls_by_def_pos_by_all_HA',\
+                 'avg_Fouls_by_def_pos_by_home',\
+                 'avg_Interceptions_by_def_pos_by_all_HA',\
+                 'avg_Interceptions_by_def_pos_by_home',\
+                 'avg_KeyPasses_by_att_pos_by_all_HA',\
+                 'avg_KeyPasses_by_att_pos_by_home',\
+                 'avg_LB_by_all_pos_by_all_HA',\
+                 'avg_LB_by_all_pos_by_home',\
+                 'avg_Offsides_by_att_pos_by_all_HA',\
+                 'avg_Offsides_by_att_pos_by_home',\
+                 'avg_PA%_by_all_pos_by_all_HA',\
+                 'avg_PA%_by_all_pos_by_home',\
+                 'avg_Passes_by_all_pos_by_all_HA',\
+                 'avg_Passes_by_all_pos_by_home',\
+                 'avg_ShotsOT_by_att_pos_by_all_HA',\
+                 'avg_ShotsOT_by_att_pos_by_home',\
+                 'avg_Shots_by_att_pos_by_all_HA',\
+                 'avg_Shots_by_att_pos_by_home',\
+                 'avg_ThB_by_all_pos_by_all_HA',\
+                 'avg_ThB_by_all_pos_by_home',\
+                 'avg_TotalTackles_by_def_pos_by_all_HA',\
+                 'avg_TotalTackles_by_def_pos_by_home',\
+                 'avg_Touches_by_all_pos_by_all_HA',\
+                 'avg_Touches_by_all_pos_by_home',\
+                 'avg_UnsTouches_by_att_pos_by_all_HA',\
+                 'avg_UnsTouches_by_att_pos_by_home',\
+                 'avg_Goals_by_fix_by_all_HA',\
+                 'avg_Goals_by_fix_by_all_HA_specific',\
+                 'avg_Goals_by_fix_by_home',\
+                 'avg_Goals_by_fix_by_home_specific',\
+                 'avg_Possession_rate_by_all_HA',\
+                 'avg_Possession_rate_by_all_HA_specific',\
+                 'avg_Possession_rate_by_home',\
+                 'avg_Possession_rate_by_home_specific',\
+                 'avg_Success_rate_by_all_HA',\
+                 'avg_Success_rate_by_all_HA_specific',\
+                 'avg_Success_rate_by_home',\
+                 'avg_Success_rate_by_home_specific',\
+                 'avg_received_Goals_by_fix_by_all_HA',\
+                 'avg_received_Goals_by_fix_by_all_HA_specific',\
+                 'avg_received_Goals_by_fix_by_home',\
+                 'avg_received_Goals_by_fix_by_home_specific',\
+                 'relative_all_pos',\
+                 'relative_att_pos',\
+                 'relative_def_pos']
+        dot_data = StringIO()
+        export_graphviz(self._loaded_data['Tree'].best_estimator_, out_file=dot_data,rounded=True,class_names=['Win (Home)','Draw','Win (Away)'],\
+                        feature_names=_names)
+        graph = pydot.graph_from_dot_data(dot_data.getvalue())
+        graph.write_pdf(join_path(self.results_dir,"best_tree.pdf"))
+        return 'The plotted Decision Tree classifier is saved in {0}.'.format(os.path.abspath(join_path(self.results_dir,"best_tree.pdf")))
+
     @timed    
     def run(self):
         '''
@@ -241,6 +326,9 @@ Decision Tree classifier and the Random Forest classifier.'''
         self.save(self._loaded_data)
         
 class BayesExperiment(Experiment):
+    '''
+    An experiment to test Naive Bayes classifier.
+    '''
     def __init__(self,dir_name,test=False):
         Experiment.__init__(self,dir_name,test)
         self.name = 'Bayes'
@@ -258,16 +346,22 @@ class BayesExperiment(Experiment):
     @property        
     def _no_detail(self):
         '''
-        Reporting on low verbosity
+        Reporting on low verbosity - only results.
         '''
         return '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['Bayes'].mean())])
      
 class DefaultParamsExperiment(Experiment):
+    '''
+    Experiment to test Decision Tree and Random Forest classifiers without adjusting their respective hyper parameters.
+    '''
     def __init__(self,dir_name,test=False):
         Experiment.__init__(self,dir_name,test)
         self.name = 'Default_Params'
         
     def run(self):
+        '''
+        Runs cross validation against Decision Tree and Random Forest classifiers. 
+        '''
         Experiment.run(self)
         tree_score = cross_val_score(DTC(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
         forest_score = cross_val_score(RFC(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
@@ -281,17 +375,25 @@ class DefaultParamsExperiment(Experiment):
     @property        
     def _no_detail(self):
         '''
-        Reporting on low verbosity
+        Reporting on low verbosity - only results.
         '''
         return '\n'.join(['Decision Tree with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Tree'].mean()),\
                           'Random Forest with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Forest'].mean())])   
     
 class LearningCurveExperiment(Experiment):
+    '''
+    An experiment to test the learning curves of the classifiers (Decision Tree, Random Forest, Naive Bayes).
+    
+    The learning curve shows the classifier's accuracy correlation with the size of the training data.
+    '''
     def __init__(self,dir_name,test=False):
         Experiment.__init__(self,dir_name,test)
         self.name = 'Learning_Curve'
         
     def run(self):
+        '''
+        Runs learning curve on all classifiers.
+        '''
         Experiment.run(self)
         best_param_exp = BestParamsExperiment(self._dir_name, self._test)
         self._load_prev_experiment(best_param_exp)
@@ -309,7 +411,7 @@ Will plot the learning curves on screen.'''
     @property        
     def _no_detail(self):
         '''
-        Reporting on low verbosity
+        Reporting on low verbosity- plots the learning curves
         '''
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
@@ -352,50 +454,11 @@ Will plot the learning curves on screen.'''
             plt.show()
             return ''
         
-class AdaBoostExperimet(Experiment):
-    '''
-    A class the experiments the AdaBoost algorithm.
-    '''
-    def __init__(self, dir_name, test=False):
-        Experiment.__init__(self, dir_name, test=test)
-        self.name = 'AdaBoost'
-        
-    def load_params(self,estimators=[]):
-        if not self._test:
-            return {'base_estimator':estimators,\
-                'n_estimators':range(100,501,50),\
-                }
-        else:
-            return {'base_estimator':estimators,\
-                    'n_estimators':range(50,151,50)}
-            
-    def run(self):
-        Experiment.run(self)
-        best_param_exp = BestParamsExperiment(self._dir_name, self._test)
-        self._load_prev_experiment(best_param_exp)
-        estimators = [DTC(),RFC(),DTC(**best_param_exp._loaded_data['Tree'].best_params_),RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
-        _grid = self.load_params(estimators)
-        ada_boost = GridSearchCV(AdaC(), _grid, n_jobs=-1, cv=self.cv.leagues_cross_validation)
-        ada_boost.fit(self.cv.complete_examples,self.cv.complete_tags)
-        self._loaded_data = {'AdaBoost':ada_boost}
-        self.save(self._loaded_data)
-        
-    _begining_report = '''This experiment performed a Grid Search upon the hyper parameters grid for the \
-AdaBoost classifier.'''
-            
-    _ending_report = '''Done'''
-    
-    @property        
-    def _no_detail(self):
-        '''
-        Reporting on low verbosity
-        '''
-        return '\n'.join(['AdaBoost after search accuracy score: {0:.4f}'.format(self._loaded_data['AdaBoost'].best_score_),\
-                          str(self._loaded_data['AdaBoost'].best_params_)])
-        
 class BestLookbackExperimet(Experiment):
     '''
     A class that experiments the best lookback for making examples.
+    
+    The lookback parameter defines how many previous games we are taking in consideration while generating the examples. 
     '''
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
@@ -404,12 +467,10 @@ class BestLookbackExperimet(Experiment):
     
     def load_params(self,estimators=[]):
         best_param_exp = BestParamsExperiment(self._dir_name, self._test)
-        self._load_prev_experiment(best_param_exp)
-#         ada_exp = AdaBoostExperimet(self._dir_name, self._test)
-#         self._load_prev_experiment(ada_exp)
+        if not self._load_prev_experiment(best_param_exp): return False
         self.estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),\
                            RFC(**best_param_exp._loaded_data['Forest'].best_params_)]
-#                            AdaC(**ada_exp._loaded_data['AdaBoost'].best_params_)]
+        return True
         
     def get_data(self,lookback):
         self.cv = CrossValidation(test=self._test,remote=self._remote)
@@ -418,6 +479,9 @@ class BestLookbackExperimet(Experiment):
         self.y = self.cv.complete_tags
         
     def run(self):
+        '''
+        For each fixture in range [1,66] (in jumps of 5), run a cross validation on both Decision Tree and Random Forest.
+        '''
         if self._test:
             self.ranges = [15,30]
         else:
@@ -443,7 +507,7 @@ for the creation on the examples.'''
     @property        
     def _no_detail(self):
         '''
-        Reporting on low verbosity
+        Reporting on low verbosity - only tables
         '''
         _dtc_scores = {int(_lk):self._loaded_data[_lk][0].mean() for _lk in self._loaded_data}
         _rfc_scores = {int(_lk):self._loaded_data[_lk][1].mean() for _lk in self._loaded_data}
@@ -501,95 +565,9 @@ for the creation on the examples.'''
         plt.show()
         return ''
 
-class BestForestSizeExperiment(Experiment):
-    '''
-    A class that experiments the best size of a non-random forest.
-    All trees are the same tree but decision tree gives different result each time you do fit so this experoment checks
-    the best size of a forest.
-    '''
-    def __init__(self, dir_name, test=False):
-        Experiment.__init__(self, dir_name, test=test)
-        self.name = 'Best_Forest_Size'
-    
-    def load_params(self):
-        best_param_exp = BestParamsExperiment("Best_Params", self._test)
-        try:
-            best_param_exp.load()
-        except Exception as e:
-            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
-            ans = raw_input('>>>')
-            if ans == 'Yes I am sure':
-                best_param_exp.run()
-            else:
-                return
-        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
-    
-    def run(self):
-        Experiment.run(self)
-        self.load_params()
-        if self._test:
-            self.ranges = [1,3]
-        else:
-            self.ranges = [1,3,5,7,9,11,13,15]
-        self._loaded_data = {k:0 for k in self.ranges}
-        
-        for _range in self.ranges:
-            cross_size = 0
-            decision_result = 0.0
-            
-            for train , test in self.cv._leagues_cross_validation():  
-                cross_size += 1
-                
-                tags_array = []
-                for i in range(_range):
-                    clf = DTC(**self.estimators_params['DTC'])
-                    clf = clf.fit(train[0],train[1])
-                    res_tags = clf.predict(test[0])
-                    tags_array += [res_tags]
-                
-                final_decsion = []
-                for i in range(len(tags_array[0])):
-                    temp = []
-                    for j in range(_range):
-                        temp += [tags_array[j][i]]
-                    decision_dict = {-1:0,0:0,1:0}
-                    for res in temp:
-                        decision_dict[res]+=1
-                    
-                    max_list = []
-                    for key in decision_dict:
-                        max_list += [(decision_dict[key],key)]
-                    final_decsion += [max(max_list)[1]]
-                
-                score = 0
-                for i in range(len(final_decsion)):
-                    if final_decsion[i] == test[1][i]:
-                        score+=1
-                        
-                decision_result += (score*1.0)/len(final_decsion)
-            decision_result /= cross_size
-            self._loaded_data[_range] = decision_result
-        self.save(self._loaded_data)
-        
-    _begining_report = '''This experiment checks the best size of a non-random forest. \
-Due to decision-tree behavior we build a forest from the same tree and the result of an example will be \
-determined by max result from all trees.'''
-            
-    _ending_report = '''Done'''
-    
-    @property        
-    def _no_detail(self):
-        '''
-        Reporting on low verbosity
-        '''
-        _tree_size_scores = {int(_k):self._loaded_data[_k] for _k in self._loaded_data.keys()}
-        _table = tabulate([['Forest Size']+[value for (key, value) in sorted(_tree_size_scores.items())]],\
-                          headers=['Experiment / Size']+sorted(_tree_size_scores),tablefmt="fancy_grid",floatfmt=".4f")
-        return 'Cross validation scores for each non-random forest size :\n%s\n'%_table
-  
 class BestProbaForDecision(Experiment):
     '''
-    A class that experiments the best proba from which we want to make the decision.
+    A class that experiments the best probability from which we want to make the decision.
     '''
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
@@ -597,20 +575,20 @@ class BestProbaForDecision(Experiment):
     
     def load_params(self):
         best_param_exp = BestParamsExperiment("Best_Params", self._test)
-        try:
-            best_param_exp.load()
-        except Exception as e:
-            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
-            ans = raw_input('>>>')
-            if ans == 'Yes I am sure':
-                best_param_exp.run()
-            else:
-                return
+        if not self._load_prev_experiment(best_param_exp): return False
         self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RFC':best_param_exp._loaded_data['Forest'].best_params_}
+        return True
     
     def run(self):
+        '''
+        For each probability p in [0.34,0.59] (in jumps of 0.01), make the decision only if classifier's probability is greater or equal to p.
+
+        @todo: explain scoring system
+        '''
         Experiment.run(self)
-        self.load_params()
+        if not self.load_params(): 
+            print 'Can not run- must load previous experiment'
+            return
         if self._test:
             self.ranges = [0.34,0.35]
         else:
@@ -662,7 +640,7 @@ class BestProbaForDecision(Experiment):
             self._loaded_data['RFC'][_range] = (rf_curr_decisions,rf_decision_result)
             self._loaded_data["AG"] = tot_games
         self.save(self._loaded_data)
-        prog_bar.finish()
+        
         
     _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
 we start making the decisions.'''
@@ -672,7 +650,7 @@ we start making the decisions.'''
     @property        
     def _no_detail(self):
         '''
-        Reporting on low verbosity
+        Reporting on low verbosity - only tables
         '''
         _proba_scores = {float(_k):(self._loaded_data['DTC'][_k],self._loaded_data['RFC'][_k]) for _k in self._loaded_data['DTC'].keys()}
         _inner_table = [[key,tup[0][0],tup[0][1],(float(tup[0][0])/self._loaded_data["AG"])*tup[0][1],tup[1][0],tup[1][1],(float(tup[1][0])/self._loaded_data["AG"])*tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
@@ -690,27 +668,41 @@ class FinalSeasonExperiment(Experiment):
     
     def load_params(self):
         best_param_exp = BestParamsExperiment("Best_Params", self._test)
-        try:
-            best_param_exp.load()
-        except Exception as e:
-            print 'Failed to load previous %s experiment\n. If you would like to run the %s experiment, Please type:\n Yes I am sure'
-            ans = raw_input('>>>')
-            if ans == 'Yes I am sure':
-                best_param_exp.run()
-            else:
-                return
-        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RTC':best_param_exp._loaded_data['Forest'].best_params_}
-            
+        if not self._load_prev_experiment(best_param_exp): return False
+        best_lookback_exp = BestLookbackExperimet("Best_Params", self._test)
+        if not self._load_prev_experiment(best_lookback_exp): return False
+        self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RFC':best_param_exp._loaded_data['Forest'].best_params_,\
+                                  'Fix':int(max([(best_lookback_exp._loaded_data[_lk][1].mean(),_lk) for _lk in best_lookback_exp._loaded_data])[1])}
+        return True
+    
+    def get_data(self):
+        '''
+        Loads all the examples and tags needed for the experiment - building the examples based on the lookback found in previous experiments.
+        
+        Loads the all of the examples and tags, and also creates cross validation for the classifiers..
+        '''
+        self.cv = CrossValidation(test=self._test)
+        lookback = self._loaded_data['Fix']
+        self.cv.load_data(lookback)
+        self.X = self.cv.complete_examples
+        self.y = self.cv.complete_tags
+    
     def run(self):
+        '''
+        Runs prediction against the current season (2015-2016).
+        
+        Tries both building a classifier from all the leagues and predict, and building a specific classifier for each league and predict only that league.
+        '''
+        if not self.load_params():
+            print 'Can not run- must load previous experiment'
+            return
         if self.name == "Final_Season":
             Experiment.run(self)
-            self.load_params()
-            clf = DTC(**self.estimators_params['DTC'])
+            clf = RFC(**self.estimators_params['RFC'])
             clf = clf.fit(self.X,self.y)
         else:
             self.cv = CrossValidation(test=self._test)
-            self.load_params()
-            clf = DTC(**self.estimators_params['DTC'])
+            clf = RFC(**self.estimators_params['RFC'])
         
         self._loaded_data = {}   
         
@@ -721,14 +713,14 @@ class FinalSeasonExperiment(Experiment):
                 self.X = []
                 self.y = []
                 for year in range(MIN_YEAR,MAX_YEAR):
-                    temp_ex, temp_ta = self.cv.dbh.create_examples(year,lookback=15,current=False)
+                    temp_ex, temp_ta = self.cv.dbh.create_examples(year,lookback=self._loaded_data['Fix'],current=False)
                     self.X += temp_ex
                     self.y += temp_ta
                 clf = clf.fit(self.X,self.y)
             
             raw_curr_examples = []
             curr_tags = []    
-            raw_curr_examples, curr_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=15,current=True)
+            raw_curr_examples, curr_tags = self.cv.dbh.create_examples(MAX_YEAR,lookback=self._loaded_data['Fix'],current=True)
             
             curr_examples = [_ex["Ex"] for _ex in raw_curr_examples]
             result_tags = clf.predict(curr_examples)
@@ -759,7 +751,7 @@ we start making the decisions.'''
     @property        
     def _no_detail(self):
         '''
-        Reporting on low verbosity
+        Reporting on low verbosity - generates prediction in for each league (all games in current season), and prints averaged accuracy for each fixture.
         '''
         all_scores = {}
         amount_overlap = {}
@@ -806,6 +798,9 @@ we start making the decisions.'''
         print 'Results :\n%s\n'%_table
 
 class FinalSeasonAux(Experiment):
+    '''
+    Auxiliary experiment around the Final Season experiment modes.
+    '''
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
         self.name = dir_name
@@ -822,8 +817,8 @@ class FinalSeasonAux(Experiment):
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()
-    _experiments = {'Best_Params':BestParamsExperiment,'AdaBoost':AdaBoostExperimet,'Best_Lookback':BestLookbackExperimet,\
-                    'Best_Forest_Size':BestForestSizeExperiment,'Best_Proba':BestProbaForDecision,'Final_Season':FinalSeasonAux,\
+    _experiments = {'Best_Params':BestParamsExperiment,'Best_Lookback':BestLookbackExperimet,\
+                    'Best_Proba':BestProbaForDecision,'Final_Season':FinalSeasonAux,\
                     'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment}
 
     if args.action == 'run':
