@@ -11,6 +11,7 @@ Contents:
 
 .. toctree::
    :maxdepth: 5
+   :numbered:
    
    before.rst
    data_classes.rst

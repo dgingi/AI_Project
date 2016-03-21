@@ -67,6 +67,7 @@ class Experiment():
         self.cv.load_data(lookback)
         self.X = self.cv.complete_examples
         self.y = self.cv.complete_tags
+    
     @timed    
     def run(self):
         """
@@ -688,7 +689,7 @@ class FinalSeasonExperiment(Experiment):
         Loads the all of the examples and tags, and also creates cross validation for the classifiers..
         """
         self.cv = CrossValidation(test=self._test)
-        lookback = self._loaded_data['Fix']
+        lookback = self.estimators_params['Fix']
         self.cv.load_data(lookback)
         self.X = self.cv.complete_examples
         self.y = self.cv.complete_tags

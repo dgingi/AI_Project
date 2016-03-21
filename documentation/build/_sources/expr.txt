@@ -1,64 +1,64 @@
-All the project Experiments
-***************************
+Project Experiments
+*******************
 This module contains all the experiemnts of this project.
 
-class Experiment
+Experiment class 
 ================
 .. autoclass:: experiments.Experiment 
    :members:
    :private-members:
    :special-members:
    
-class BestParamsExperiment
+BestParamsExperiment class 
 ==========================
 .. autoclass:: experiments.BestParamsExperiment 
    :members:
    :private-members:
    :special-members:
    
-class BayesExperiment
+BayesExperiment class 
 =====================
 .. autoclass:: experiments.BayesExperiment 
    :members:
    :private-members:
    :special-members:
    
-class DefaultParamsExperiment
+DefaultParamsExperiment class 
 =============================
 .. autoclass:: experiments.DefaultParamsExperiment
    :members:
    :private-members:
    :special-members:
    
-class LearningCurveExperiment
+LearningCurveExperiment class 
 =============================
 .. autoclass:: experiments.LearningCurveExperiment
    :members:
    :private-members:
    :special-members:
    
-class BestLookbackExperimet
+BestLookbackExperimet class 
 ===========================
 .. autoclass:: experiments.BestLookbackExperimet
    :members:
    :private-members:
    :special-members:
    
-class BestProbaForDecision
+BestProbaForDecision class 
 ==========================
 .. autoclass:: experiments.BestProbaForDecision
    :members:
    :private-members:
    :special-members:
    
-class FinalSeasonExperiment
+FinalSeasonExperiment class 
 ===========================
 .. autoclass:: experiments.FinalSeasonExperiment
    :members:
    :private-members:
    :special-members:
    
-class FinalSeasonAux
+FinalSeasonAux class 
 ===========================
 .. autoclass:: experiments.FinalSeasonAux
    :members:

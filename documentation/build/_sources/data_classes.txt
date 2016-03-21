@@ -1,5 +1,5 @@
-All The Project Data Handeling Classes
-**************************************
+Project Data Handeling Classes
+******************************
 This module contains all the classes that were build in-order to make this project very simple to understand and handled with.
 
 Web-Crawler Class

@@ -1,5 +1,5 @@
-Things you need to install before getting started
-*************************************************
+Things To Install
+*****************
 
 Before you start using our project you need to install several packages and external programs.
 

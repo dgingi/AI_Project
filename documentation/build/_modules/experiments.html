@@ -115,7 +115,8 @@
         <span class="n">lookback</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span> <span class="k">else</span> <span class="mi">15</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">lookback</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_examples</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span>
+    </div>
     <span class="nd">@timed</span>    
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -737,7 +738,7 @@
 <span class="sd">        Loads the all of the examples and tags, and also creates cross validation for the classifiers..</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">CrossValidation</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">)</span>
-        <span class="n">lookback</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Fix&#39;</span><span class="p">]</span>
+        <span class="n">lookback</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;Fix&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">lookback</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_examples</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span>
@@ -928,6 +929,14 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../before.html">1. Things To Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_classes.html">2. Project Data Handeling Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_classes.html">3. Project Utils Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../expr.html">4. Project Experiments</a></li>
+</ul>
+
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
