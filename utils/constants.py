@@ -19,6 +19,8 @@ We can Add new leagues or remove current ones.
 **MONTHS** = *['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']*
 
 """
+import os
+
 
 MIN_YEAR = 2010
 MAX_YEAR = 2015
@@ -30,4 +32,6 @@ LEAGUES = ['Primer_League','Serie_A','Ligue1','La_Liga','Bundesliga']
 LEAGUES_ABV = ['PL','SA','L1','LL','BL']
 
 MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 

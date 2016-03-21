@@ -3,10 +3,11 @@ from os import  makedirs
 import os
 from os.path import exists, join as join_path
 from pickle import dump , load
+import pickle
 from scipy.stats import ttest_rel
 from sklearn.cross_validation import  cross_val_score
 from sklearn.ensemble import RandomForestClassifier as RFC
-from sklearn.grid_search import RandomizedSearchCV
+from sklearn.grid_search import  RandomizedSearchCV
 from sklearn.learning_curve import learning_curve
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier as DTC
@@ -16,7 +17,7 @@ import warnings
 from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
 from utils.constants import LEAGUES, MAX_YEAR, MIN_YEAR
-from utils.decorators import timed
+from utils.decorators import timed, move_to_root_dir
 
 
 class Experiment():
@@ -568,7 +569,7 @@ for the creation on the examples."""
 
 class BestProbaForDecision(Experiment):
     """
-    An experiment to test what is the best threshold from which we want to make the decision.
+    An experiment to test what is the best threshold from which we want to make the decision about a draw.
     
     """
     def __init__(self, dir_name, test=False):
@@ -583,18 +584,22 @@ class BestProbaForDecision(Experiment):
     
     def run(self):
         """
-        For each probability p in [0.34,0.59] (in jumps of 0.01), make the decision only if classifier's probability is greater or equal to p.
-
-        For each probability we calculate the amount of games that qulified and the score will be calculated by this amount.
+        Using the predict_proba methods of the classifiers, we wish to test a new decision rule that will allow us to tag games as draw.
+        
+        The predict_proba methods return a list of distributions (of the possible tags) for all the examples in the test, e.g:
+            [[0.1,0.2,0.7],[0.3,0.2,0.5],...]
+        
+        For each probability p in [0.01,0.19] (in jumps of 0.01), do a cross validation test with the following decision rule instead of the default one:
+        
+            if |P(Home Team Winning) - P(Away Team Winning)| >= p:
+                tag as draw instead of choosing the tag with the highest probability
         """
         Experiment.run(self)
         if not self.load_params(): 
             print 'Can not run- must load previous experiment'
             return
-        if self._test:
-            self.ranges = [0.34,0.35]
-        else:
-            self.ranges = [(float(_i)/100) for _i in range(34,60)]
+        
+        self.ranges = [(float(_i)/100) for _i in range(1,20,2)]
         self._loaded_data = {}
         self._loaded_data['DTC'] = {k:(0,0) for k in self.ranges}
         self._loaded_data['RFC'] = {k:(0,0) for k in self.ranges}
@@ -625,19 +630,31 @@ class BestProbaForDecision(Experiment):
                     
                 for i in range(len(dt_res_tags)):
                     tot_games += 1
-                    if max(dt_res_proba[i]) >= _range:
-                        dt_curr_decisions += 1
-                        if dt_res_tags[i] == test[1][i]:
-                            dt_score += 1
+                    if max(dt_res_proba[i]) <= 0.55: #if the max is greater than 0.52 - will trust the classifier
+                        if abs(dt_res_proba[i][0]-dt_res_proba[i][2])<=_range: #diff between win - loss is very small - must be draw! 
+                            dt_res_tags[i] = 0
                 
                 for i in range(len(rf_res_tags)):
-                    if max(rf_res_proba[i]) >= _range:
-                        rf_curr_decisions += 1
-                        if rf_res_tags[i] == test[1][i]:
-                            rf_score += 1 
+                    if max(rf_res_proba[i]) <= 0.55: #if the max is greater than 0.52 - will trust the classifier
+                        if abs(rf_res_proba[i][0]-rf_res_proba[i][2])<=_range: #diff between win - loss is very small - must be draw! 
+                            dt_res_tags[i] = 0 
+                
+                def _score(prediction,test):
+                    '''
+                    Given a prediction array and a test array, returns averaged score of prediction against test.
+                    
+                    Both arrays should be numpy arrays.
+                    '''
+                    from numpy import count_nonzero
+                    return float(len(prediction)-count_nonzero(prediction-test))/len(prediction)
+                
+                dt_score += _score(dt_res_tags,test[1])
+                rf_score += _score(rf_res_tags,test[1])
+                dt_curr_decisions += len(dt_res_tags)
+                rf_curr_decisions += len(rf_res_tags)
                                    
-            dt_decision_result = (dt_score*1.0)/dt_curr_decisions
-            rf_decision_result = (rf_score*1.0)/rf_curr_decisions
+            dt_decision_result = (dt_score*1.0)/5
+            rf_decision_result = (rf_score*1.0)/5
             self._loaded_data['DTC'][_range] = (dt_curr_decisions,dt_decision_result)
             self._loaded_data['RFC'][_range] = (rf_curr_decisions,rf_decision_result)
             self._loaded_data["AG"] = tot_games
@@ -750,9 +767,11 @@ class FinalSeasonExperiment(Experiment):
                 else:
                     self._loaded_data[_league]["dict"][_k] = score / amount_games_per_fix[_k]
         self.save(self._loaded_data)
-        
-    _begining_report = """This experiment checks the results of the classifier for last season. one classifier from all the leagues and \
-one specific classifier for each league."""
+    
+    
+    with open('last_crawl.date','r') as _date_file:
+        _last_crawl = pickle.load(_date_file)    
+    _begining_report = "This experiment checks the results of the classifier for last season in 2 ways: One classifier from all the leagues and one specific classifier for each league.\nLast games are from {}".format(_last_crawl.strftime("%A %d. %B %Y"))
             
     _ending_report = """Done"""
     
@@ -862,14 +881,15 @@ class FinalSeasonAux(Experiment):
        
         
 if __name__ == '__main__':
-    args = ExperimentArgsParser().parse()
-    _experiments = {'Best_Params':BestParamsExperiment,'Best_Lookback':BestLookbackExperimet,\
-                    'Best_Proba':BestProbaForDecision,'Final_Season':FinalSeasonAux,\
-                    'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment}
-
-    if args.action == 'run':
-        _experiments[args.exp](dir_name=args.out_dir).run()
-    else:
-        _experiments[args.exp](dir_name=args.out_dir).report(verbosity=args.verbosity,outfile=args.outfile)
+    with move_to_root_dir():
+        args = ExperimentArgsParser().parse()
+        _experiments = {'Best_Params':BestParamsExperiment,'Best_Lookback':BestLookbackExperimet,\
+                        'Best_Proba':BestProbaForDecision,'Final_Season':FinalSeasonAux,\
+                        'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment}
+    
+        if args.action == 'run':
+            _experiments[args.exp](dir_name=args.out_dir).run()
+        else:
+            _experiments[args.exp](dir_name=args.out_dir).report(verbosity=args.verbosity,outfile=args.outfile)
        
         

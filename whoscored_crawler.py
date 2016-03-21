@@ -15,7 +15,7 @@ from datetime import datetime
 
 from data.dbhandler import DBHandler
 from utils.argumet_parsers import CrawlerArgsParser
-from utils.decorators import retry
+from utils.decorators import retry, move_to_root_dir
 
 
 args_parser = CrawlerArgsParser()
@@ -45,7 +45,7 @@ class WhoScoredCrawler(object):
         self.league_link = link
         self.chrome_oprtions = webdriver.ChromeOptions()
         self.chrome_oprtions.add_extension('1.4.0_0.crx')
-        self.driver = webdriver.Chrome(chrome_options=self.chrome_oprtions)
+        self.driver = webdriver.Chrome('./chromedriver',chrome_options=self.chrome_oprtions)
         self.driver.implicitly_wait(30)
         self._create_backup()
         if not path.exists('logs'):
@@ -374,18 +374,22 @@ def start_crawl(kwargs):
     if args_parser.update:
         args_parser.LEAGUE_NAME = kwargs['r_league']
     WhoScoredCrawler(args_parser.LEAGUE_NAME,year,league).crawl(args_parser.update)
+    if args_parser.update:
+        with open('last_crawl.date','w') as _date_file:
+            pickle.dump(datetime.now()), _date_file)
     
     
 if __name__ == '__main__':
-    args_parser.parse()
-    if not args_parser.update:
-        if args_parser.multi:
-            p = Pool(cpu_count())
-            p.map(start_crawl, args_parser.range_kwargs)
+    with move_to_root_dir():
+        args_parser.parse()
+        if not args_parser.update:
+            if args_parser.multi:
+                p = Pool(cpu_count())
+                p.map(start_crawl, args_parser.range_kwargs)
+            else:
+                start_crawl(args_parser.kwargs)
         else:
-            start_crawl(args_parser.kwargs)
-    else:
-#         for kwargs in args_parser.update_kwargs:
-#             start_crawl(kwargs)
-        p = Pool(cpu_count()/2)
-        p.map(start_crawl, args_parser.update_kwargs)
+    #         for kwargs in args_parser.update_kwargs:
+    #             start_crawl(kwargs)
+            p = Pool(cpu_count()/2)
+            p.map(start_crawl, args_parser.update_kwargs)

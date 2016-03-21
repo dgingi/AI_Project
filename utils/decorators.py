@@ -1,5 +1,26 @@
 from datetime import datetime,timedelta
 import logging
+from contextlib import contextmanager
+import os
+from utils.constants import PROJECT_ROOT
+
+@contextmanager
+def move_to_root_dir():
+    '''
+    Context manager to move automatically move to the project root directory in case we are not running from it.
+    
+    Usage::
+    
+        with move_to_root_dir():
+            do_some_stuff()
+    '''
+    if os.getcwd() != PROJECT_ROOT:
+        print 'Moving from %s to %s'%(os.getcwd(),PROJECT_ROOT)
+        os.chdir(PROJECT_ROOT)
+    yield
+    if os.getcwd() != PROJECT_ROOT:
+        os.chdir(PROJECT_ROOT)
+
 
 def timed(f):
     """
