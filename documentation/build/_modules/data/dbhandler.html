@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>data.dbhandler &mdash; AI_Project 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="AI_Project 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AI_Project 0.0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for data.dbhandler</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">progress.bar</span> <span class="kn">import</span> <span class="n">ChargingBar</span>
+<span class="kn">import</span> <span class="nn">pymongo</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">utils.constants</span> <span class="kn">import</span> <span class="n">MAX_YEAR</span><span class="p">,</span> <span class="n">MIN_YEAR</span><span class="p">,</span> <span class="n">LEAGUES</span><span class="p">,</span> <span class="n">MONTHS</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;..&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DBHandler"><a class="viewcode-back" href="../../data_classes.html#data.dbhandler.DBHandler">[docs]</a><span class="k">class</span> <span class="nc">DBHandler</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is incharge of handling with all database realted functions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DBHandler.__init__"><a class="viewcode-back" href="../../data_classes.html#data.dbhandler.DBHandler.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">league</span><span class="p">,</span><span class="n">remote</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The Init function has the option to connect to the local database or our remote on-server database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_host</span> <span class="o">=</span> <span class="s">&#39;46.101.204.132&#39;</span> <span class="k">if</span> <span class="n">remote</span> <span class="k">else</span> <span class="s">&#39;localhost&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">_host</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span> <span class="o">=</span> <span class="s">&#39;test&#39;</span> <span class="k">if</span> <span class="n">test</span> <span class="k">else</span> <span class="s">&#39;leagues_db&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DB</span> <span class="o">=</span> <span class="p">{</span><span class="n">temp_league</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="p">][</span><span class="n">temp_league</span><span class="p">]</span> <span class="k">for</span> <span class="n">temp_league</span> <span class="ow">in</span> <span class="n">LEAGUES</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">DB</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">DB</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">create_index</span><span class="p">([(</span><span class="s">&#39;Year&#39;</span><span class="p">,</span><span class="n">pymongo</span><span class="o">.</span><span class="n">DESCENDING</span><span class="p">),(</span><span class="s">&#39;GName&#39;</span><span class="p">,</span><span class="n">pymongo</span><span class="o">.</span><span class="n">ASCENDING</span><span class="p">),(</span><span class="s">&#39;PName&#39;</span><span class="p">,</span><span class="n">pymongo</span><span class="o">.</span><span class="n">ASCENDING</span><span class="p">),(</span><span class="s">&#39;Fix&#39;</span><span class="p">,</span><span class="n">pymongo</span><span class="o">.</span><span class="n">DESCENDING</span><span class="p">)],</span>\
+                             <span class="n">unique</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">league</span> <span class="o">=</span> <span class="n">league</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_test</span> <span class="o">=</span> <span class="n">test</span>
+        <span class="k">if</span> <span class="n">remote</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temp_DB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone_db</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temp_DB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DB</span> 
+    </div>
+<div class="viewcode-block" id="DBHandler.clone_db"><a class="viewcode-back" href="../../data_classes.html#data.dbhandler.DBHandler.clone_db">[docs]</a>    <span class="k">def</span> <span class="nf">clone_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function clones the database from the server to the local computer inorder the save time in making queries.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">bson.son</span> <span class="kn">import</span> <span class="n">SON</span>
+        <span class="n">temp_client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">)</span>
+        <span class="n">_db</span> <span class="o">=</span> <span class="s">&#39;leagues_db&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span> <span class="k">else</span> <span class="s">&#39;test&#39;</span>
+        <span class="n">temp_DB</span> <span class="o">=</span> <span class="n">temp_client</span><span class="p">[</span><span class="n">_db</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">league</span> <span class="ow">in</span> <span class="n">LEAGUES</span><span class="p">:</span>
+            <span class="n">temp_col</span> <span class="o">=</span> <span class="n">temp_DB</span><span class="p">[</span><span class="n">league</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span> <span class="ow">or</span> <span class="n">temp_DB</span><span class="p">[</span><span class="n">league</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">temp_col</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                <span class="n">temp_DB</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">SON</span><span class="p">([(</span><span class="s">&quot;cloneCollection&quot;</span><span class="p">,</span><span class="s">&quot;</span><span class="si">%s</span><span class="s">.&quot;</span><span class="o">%</span><span class="n">_db</span><span class="o">+</span><span class="n">league</span><span class="p">),(</span><span class="s">&quot;from&quot;</span><span class="p">,</span><span class="s">&#39;46.101.204.132&#39;</span><span class="p">)]))</span>
+        <span class="k">return</span> <span class="n">temp_DB</span>
+        
+    </div>
+<div class="viewcode-block" id="DBHandler.convert"><a class="viewcode-back" href="../../data_classes.html#data.dbhandler.DBHandler.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function converts the data from our crawler to fit out database.  </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">name</span><span class="p">:{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">):</span><span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">-</span><span class="mi">1</span><span class="p">)}</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+    </div>
+<div class="viewcode-block" id="DBHandler.explode"><a class="viewcode-back" href="../../data_classes.html#data.dbhandler.DBHandler.explode">[docs]</a>    <span class="k">def</span> <span class="nf">explode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">year</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function create all the table, making it by keys and saving as a list of entries.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">fix</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">]</span> <span class="o">==</span> <span class="p">{}:</span>
+                    <span class="k">continue</span>
+                <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;Players&#39;</span><span class="p">]:</span>
+                    <span class="n">line</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;Players&#39;</span><span class="p">][</span><span class="n">player</span><span class="p">]:</span>
+                        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;Players&#39;</span><span class="p">][</span><span class="n">player</span><span class="p">][</span><span class="n">table</span><span class="p">]:</span>
+                            <span class="n">line</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;Players&#39;</span><span class="p">][</span><span class="n">player</span><span class="p">][</span><span class="n">table</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;PName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">player</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;GName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">team</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;Fix&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fix</span><span class="p">)</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;HA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;HA&#39;</span><span class="p">]</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;Result&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;Result&#39;</span><span class="p">]</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;Possession&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;Possession&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;%&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;VS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;VS&#39;</span><span class="p">]</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;Tag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">][</span><span class="s">&#39;Tag&#39;</span><span class="p">])</span>
+                        <span class="n">line</span><span class="p">[</span><span class="s">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+                        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+    </div>
+<div class="viewcode-block" id="DBHandler.insert_to_db"><a class="viewcode-back" href="../../data_classes.html#data.dbhandler.DBHandler.insert_to_db">[docs]</a>    <span class="k">def</span> <span class="nf">insert_to_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">year</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function insert the data from the crawler to our database.</span>
+<span class="sd">        </span>
+<span class="sd">        This function uses both explde and convert methods.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">DB</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">({</span><span class="s">&#39;Year&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)})</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">DB</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="n">year</span><span class="p">),</span><span class="n">continue_on_error</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        
+</div>
+<div class="viewcode-block" id="DBHandler.drop"><a class="viewcode-back" href="../../data_classes.html#data.dbhandler.DBHandler.drop">[docs]</a>    <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">year</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function deletes data from our database.</span>
+<span class="sd">        </span>
+<span class="sd">        If year == None then it delets the entire data for self.league, otherwise just the requested year for self.league .</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">year</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">DB</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">({</span><span class="s">&#39;Year&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">DB</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+    
+       </div>
+<div class="viewcode-block" id="DBHandler.create_examples"><a class="viewcode-back" href="../../data_classes.html#data.dbhandler.DBHandler.create_examples">[docs]</a>    <span class="k">def</span> <span class="nf">create_examples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">year</span><span class="p">,</span><span class="n">lookback</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">current</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function creates all the examples for self.league, year.</span>
+<span class="sd">        </span>
+<span class="sd">        The examples are created using the given lookback.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">update_all_teams_dict</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">all_teams_dict</span><span class="p">,</span><span class="n">team</span><span class="p">,</span><span class="n">first</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">fix</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">fix</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">res</span><span class="p">[</span><span class="n">fix</span><span class="p">]</span> <span class="o">==</span> <span class="p">{}:</span>
+                    <span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+                    <span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="n">fix</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">fix</span><span class="p">])]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="n">fix</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">fix</span><span class="p">])]</span>
+        
+        <span class="k">def</span> <span class="nf">relative_features</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span><span class="n">arr2</span><span class="p">,</span><span class="n">fn</span><span class="p">):</span>
+            <span class="n">combined_list_all_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span><span class="n">fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;all_pos&quot;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="p">]</span>
+            <span class="n">combined_list_att_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span><span class="n">fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;att_pos&quot;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="p">]</span>
+            <span class="n">combined_list_def_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span><span class="n">fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;def_pos&quot;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="p">]</span>
+            
+            <span class="n">combined_list_all_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arr2</span><span class="p">,</span><span class="n">fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;all_pos&quot;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="p">]</span>
+            <span class="n">combined_list_att_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arr2</span><span class="p">,</span><span class="n">fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;att_pos&quot;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="p">]</span>
+            <span class="n">combined_list_def_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arr2</span><span class="p">,</span><span class="n">fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;def_pos&quot;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span> <span class="p">]</span>
+            
+            <span class="n">all_rel</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="p">(</span><span class="n">val1</span><span class="p">,</span><span class="n">val2</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span> <span class="p">(</span><span class="n">combined_list_all_1</span><span class="p">,</span><span class="n">combined_list_all_2</span><span class="p">)</span> <span class="k">if</span> <span class="n">val1</span> <span class="o">&gt;</span> <span class="n">val2</span><span class="p">]</span>
+            <span class="n">att_rel</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="p">(</span><span class="n">val1</span><span class="p">,</span><span class="n">val2</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span> <span class="p">(</span><span class="n">combined_list_att_1</span><span class="p">,</span><span class="n">combined_list_att_2</span><span class="p">)</span> <span class="k">if</span> <span class="n">val1</span> <span class="o">&gt;</span> <span class="n">val2</span><span class="p">]</span>
+            <span class="n">def_rel</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="p">(</span><span class="n">val1</span><span class="p">,</span><span class="n">val2</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span> <span class="p">(</span><span class="n">combined_list_def_1</span><span class="p">,</span><span class="n">combined_list_def_2</span><span class="p">)</span> <span class="k">if</span> <span class="n">val1</span> <span class="o">&gt;</span> <span class="n">val2</span><span class="p">]</span>
+            
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">all_rel</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">combined_list_all_1</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">att_rel</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">combined_list_att_1</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">def_rel</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">combined_list_def_1</span><span class="p">)</span>
+        
+        <span class="kn">from</span> <span class="nn">features.features</span> <span class="kn">import</span> <span class="n">Features</span>
+        <span class="n">temp_DB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_DB</span>
+        <span class="n">all_teams_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="s">&#39;_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">temp_DB</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">]</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([{</span><span class="s">&quot;$match&quot;</span><span class="p">:{</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)}},{</span><span class="s">&quot;$group&quot;</span><span class="p">:{</span><span class="s">&quot;_id&quot;</span><span class="p">:</span><span class="s">&quot;$GName&quot;</span><span class="p">}}])]</span>
+        <span class="n">all_teams_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:{}</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">all_teams_names</span><span class="p">}</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">Features</span><span class="p">(</span><span class="n">temp_DB</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">],</span><span class="n">year</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">)</span>
+        <span class="n">features_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">prog_bar</span> <span class="o">=</span> <span class="n">ChargingBar</span><span class="p">(</span><span class="s">&#39;Creating examples for </span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">,</span><span class="n">year</span><span class="p">),</span><span class="nb">max</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">all_teams_dict</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">all_teams_dict</span><span class="p">:</span>
+            <span class="n">res_by_all</span><span class="p">,</span> <span class="n">res_by_non_avg</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">create_features</span><span class="p">(</span><span class="n">team</span><span class="p">,</span><span class="n">lookback</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">features_names</span><span class="p">:</span> <span class="n">features_names</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">features_names</span>
+            <span class="n">update_all_teams_dict</span><span class="p">(</span><span class="n">res_by_all</span><span class="p">,</span> <span class="n">all_teams_dict</span><span class="p">,</span> <span class="n">team</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+            <span class="n">update_all_teams_dict</span><span class="p">(</span><span class="n">res_by_non_avg</span><span class="p">,</span> <span class="n">all_teams_dict</span><span class="p">,</span> <span class="n">team</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="n">prog_bar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="n">examples</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">tags</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">curr_examples</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">prog_bar</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">all_teams_names</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">fix</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team</span><span class="p">]):</span>
+                <span class="k">if</span> <span class="n">fix</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">]</span><span class="o">==</span><span class="p">[]:</span>
+                    <span class="k">continue</span>
+                <span class="n">curr_game</span> <span class="o">=</span> <span class="n">temp_DB</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">]</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">team</span><span class="p">,</span><span class="s">&quot;Fix&quot;</span><span class="p">:</span><span class="n">fix</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)})</span>
+                <span class="k">if</span> <span class="n">curr_game</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;HA&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;home&quot;</span><span class="p">:</span>
+                    <span class="n">vs_curr_game</span> <span class="o">=</span> <span class="n">temp_DB</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">]</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;VS&quot;</span><span class="p">],</span><span class="s">&quot;VS&quot;</span><span class="p">:</span><span class="n">team</span><span class="p">,</span><span class="s">&quot;HA&quot;</span><span class="p">:</span><span class="s">&quot;away&quot;</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)})</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">vs_curr_fix</span> <span class="o">=</span> <span class="n">vs_curr_game</span><span class="p">[</span><span class="s">&quot;Fix&quot;</span><span class="p">]</span>
+                    <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">vs_curr_fix</span> <span class="o">=</span> <span class="n">fix</span><span class="o">+</span><span class="mi">1</span>
+                        <span class="n">all_teams_dict</span><span class="p">[</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;VS&quot;</span><span class="p">]][</span><span class="n">vs_curr_fix</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">if</span> <span class="n">all_teams_dict</span><span class="p">[</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;VS&quot;</span><span class="p">]][</span><span class="n">vs_curr_fix</span><span class="p">]</span> <span class="o">==</span> <span class="p">[]:</span>
+                        <span class="k">continue</span>
+                    <span class="n">rel_all</span><span class="p">,</span> <span class="n">rel_att</span><span class="p">,</span> <span class="n">rel_def</span> <span class="o">=</span> <span class="n">relative_features</span><span class="p">(</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">],</span> <span class="n">all_teams_dict</span><span class="p">[</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;VS&quot;</span><span class="p">]][</span><span class="n">vs_curr_fix</span><span class="p">],</span> <span class="n">features_names</span><span class="p">)</span>
+                    <span class="n">examples</span> <span class="o">+=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team</span><span class="p">][</span><span class="n">fix</span><span class="p">])</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;VS&quot;</span><span class="p">]][</span><span class="n">vs_curr_fix</span><span class="p">])]</span>
+                    <span class="n">examples</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">examples</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="n">rel_all</span><span class="p">,</span> <span class="n">rel_att</span><span class="p">,</span> <span class="n">rel_def</span><span class="p">]))</span>
+                    <span class="n">temp_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Ex&quot;</span><span class="p">:</span><span class="n">examples</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="s">&quot;Fix&quot;</span><span class="p">:</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;Fix&quot;</span><span class="p">],</span><span class="s">&quot;Res&quot;</span><span class="p">:</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;Result&quot;</span><span class="p">],</span><span class="s">&quot;Home&quot;</span><span class="p">:</span><span class="n">team</span><span class="p">,</span><span class="s">&quot;Away&quot;</span><span class="p">:</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;VS&quot;</span><span class="p">],</span><span class="s">&quot;League&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">}</span>
+                    <span class="n">curr_examples</span> <span class="o">+=</span> <span class="p">[</span><span class="n">temp_dict</span><span class="p">]</span>
+                    <span class="n">tags</span> <span class="o">+=</span> <span class="p">[</span><span class="n">curr_game</span><span class="p">[</span><span class="s">&quot;Tag&quot;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">current</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">examples</span><span class="p">,</span><span class="n">tags</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">curr_examples</span><span class="p">,</span><span class="n">tags</span>
+        
+</div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">league</span> <span class="ow">in</span> <span class="n">LEAGUES</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MIN_YEAR</span><span class="p">,</span><span class="n">MAX_YEAR</span><span class="o">+</span><span class="mi">1</span><span class="p">)]:</span>
+            <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">MONTHS</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;../backup/</span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">.pckl&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">league</span><span class="p">,</span><span class="n">year</span><span class="p">,</span><span class="n">month</span><span class="p">),</span><span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">games</span><span class="p">:</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">games</span><span class="p">)</span>
+                        <span class="k">print</span> <span class="s">&#39;Loading </span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">league</span><span class="p">,</span><span class="n">year</span><span class="p">)</span>
+                        <span class="n">DBHandler</span><span class="p">(</span><span class="n">league</span><span class="p">)</span><span class="o">.</span><span class="n">insert_to_db</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+                    <span class="k">continue</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AI_Project 0.0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Ory Jonay, Dror Porat.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

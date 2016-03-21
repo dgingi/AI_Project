@@ -1,16 +1,12 @@
 from glob import glob
-import itertools
 from os import  makedirs
 import os
 from os.path import exists, join as join_path
 from pickle import dump , load
-from progress.bar import ChargingBar
 from scipy.stats import ttest_rel
 from sklearn.cross_validation import  cross_val_score
-from sklearn.datasets.base import load_iris
-from sklearn.ensemble import AdaBoostClassifier as AdaC
 from sklearn.ensemble import RandomForestClassifier as RFC
-from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
+from sklearn.grid_search import RandomizedSearchCV
 from sklearn.learning_curve import learning_curve
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier as DTC
@@ -24,19 +20,19 @@ from utils.decorators import timed
 
 
 class Experiment():
-    '''
+    """
     Abstract Experiment class.
     
     Experiments classes provide basic functionality to running an experiment-
             allows saving and loading the results
             automatically loads data for cross validation
-    '''
+    """
     def __init__(self,dir_name,test=False):
-        '''
+        """
         Creates a new Experiment instance.
         
         Requires a dir_name (to save results) and a flag to indicate whether it's test environment or not.
-        '''
+        """
         self._dir_name = dir_name
         self.results_dir = join_path('Results',dir_name)
         self._test = test
@@ -44,28 +40,28 @@ class Experiment():
         self._loaded_data = None
         
     def save(self,data):
-        '''
+        """
         Saves data into the results dir under the special format {experiment_name}.results
-        '''
+        """
         if not exists(self.results_dir):
             makedirs(self.results_dir)
         with open(join_path(self.results_dir,self.name+'.results'),'w') as _f:
             dump(data, _f)
         
     def load(self):
-        '''
+        """
         Loads results from previous runs into _loaded_data attribute.
-        '''
+        """
         _path = glob(join_path(self.results_dir,'%s.results'%self.name)).pop()
         with open(_path,'r') as _f:
             self._loaded_data = load(_f)
     
     def get_data(self):
-        '''
+        """
         Loads all the examples and tags needed for the experiment.
         
         Loads the all of the examples and tags, and also creates a cross validation for using in the estimators \ searches.
-        '''
+        """
         self.cv = CrossValidation(test=self._test)
         lookback = 2 if self._test else 15
         self.cv.load_data(lookback)
@@ -73,28 +69,28 @@ class Experiment():
         self.y = self.cv.complete_tags
     @timed    
     def run(self):
-        '''
+        """
         Runs the experiment.
         
         You should override this function in derived classes to configure the experiment
-        '''
+        """
         self.get_data()
         
     def load_params(self):
-        '''
+        """
         Loads the parameters of the experiment.
         
         You should override this in derived classes to configure the experiment parameters
-        '''
+        """
         raise NotImplementedError
     
-    '''
+    """
     @todo:    t_test for 2 algs
               validate & report
-    '''
+    """
       
     def t_test(self,original_measurements, measurements_after_alteration):
-        '''
+        """
         This is the paired T-test (for repeated measurements):
         Given two sets of measurements on the SAME data points (folds) before and after some change,
         Checks whether or not they come from the same distribution. 
@@ -105,7 +101,7 @@ class Experiment():
             The probability the measurements come the same distributions
             A flag that indicates whether the result is statically significant
             A flag that indicates whether the new measurements are better than the old measurements
-        '''
+        """
         SIGNIFICANCE_THRESHOLD= 0.05
         
         test_value, probability= ttest_rel(original_measurements, measurements_after_alteration)
@@ -114,9 +110,9 @@ class Experiment():
         return probability/2 if is_better else 1-probability/2, is_significant, is_better
     
     def _load_prev_experiment(self,exp):
-        '''
+        """
         A function to load a previous experiment.
-        '''
+        """
         try:
             exp.load()
             return True
@@ -129,9 +125,9 @@ class Experiment():
                 return False
   
     def report(self,verbosity,outfile):
-        '''
+        """
         A method to report the experiment's results.
-        '''
+        """
         if self._loaded_data is None:
             try:
                 self.load()
@@ -149,22 +145,22 @@ class Experiment():
         print self._ending_report
 
 class BestParamsExperiment(Experiment):
-    '''
-    An Experiment class to search for the best hyperparameters for an estimator.
+    """
+    An experiment class to search for the best hyperparameters for an estimator.
     
     The search is done using RandomGridSearchCV, on the DecisionTreeClassifer estimator and the 
     RandomForestClassifier estimator. 
-    '''
+    """
     def __init__(self,dir_name,test=False):
         Experiment.__init__(self,dir_name,test)
         self.name = 'Best_Params'
         
     def load_params(self):
-        '''
+        """
         Loads the parameters for the experiment - the grids to search on.
         
         To change parameters or values for one of the estimators - change to correct field.
-        '''
+        """
         if not self._test:
             return {'DTC':{'criterion':['gini','entropy'],\
                            'max_depth':range(5,61,5),\
@@ -189,16 +185,16 @@ class BestParamsExperiment(Experiment):
                            'n_jobs':[-1]}]}
     
     
-    _begining_report = '''This experiment performed a Randomized Search for 1000 iterations upon the hyper parameters grid for both the \
-Decision Tree classifier and the Random Forest classifier.'''
+    _begining_report = """This experiment performed a Randomized Search for 1000 iterations upon the hyper parameters grid for both the \
+Decision Tree classifier and the Random Forest classifier."""
             
-    _ending_report = '''Done'''
+    _ending_report = """Done"""
     
     @property        
     def _no_detail(self):
-        '''
+        """
         Reporting on low verbosity - only tables
-        '''
+        """
         _def_exp = DefaultParamsExperiment('Default_Params')
         try:
             self._load_prev_experiment(_def_exp)
@@ -231,11 +227,11 @@ Decision Tree classifier and the Random Forest classifier.'''
     
     @property
     def _detail(self):
-        '''
+        """
         Plots the Decision Tree classifier after search and after fitting all of the data.
         
         Saves in results folder, in pdf format.
-        '''
+        """
         from sklearn.tree import export_graphviz
         from sklearn.externals.six import StringIO
         import pydot
@@ -313,9 +309,9 @@ Decision Tree classifier and the Random Forest classifier.'''
 
     @timed    
     def run(self):
-        '''
+        """
         Runs a RandomizedSearch on both DecisionTree and RandomForest classifiers.
-        '''
+        """
         Experiment.run(self)
         _grids = self.load_params()
         grid_tree = RandomizedSearchCV(DTC(), _grids['DTC'], n_jobs=-1, cv=self.cv.leagues_cross_validation,n_iter=1000)
@@ -326,9 +322,9 @@ Decision Tree classifier and the Random Forest classifier.'''
         self.save(self._loaded_data)
         
 class BayesExperiment(Experiment):
-    '''
+    """
     An experiment to test Naive Bayes classifier.
-    '''
+    """
     def __init__(self,dir_name,test=False):
         Experiment.__init__(self,dir_name,test)
         self.name = 'Bayes'
@@ -339,61 +335,61 @@ class BayesExperiment(Experiment):
         self._loaded_data = {'Bayes':bayes_score}
         self.save(self._loaded_data)
         
-    _begining_report = '''This experiment tried a Naive Bayes classifier.'''
+    _begining_report = """This experiment tried a Naive Bayes classifier."""
             
-    _ending_report = '''Done'''
+    _ending_report = """Done"""
     
     @property        
     def _no_detail(self):
-        '''
+        """
         Reporting on low verbosity - only results.
-        '''
+        """
         return '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['Bayes'].mean())])
      
 class DefaultParamsExperiment(Experiment):
-    '''
-    Experiment to test Decision Tree and Random Forest classifiers without adjusting their respective hyper parameters.
-    '''
+    """
+    An experiment to test Decision Tree and Random Forest classifiers without adjusting their respective hyper parameters.
+    """
     def __init__(self,dir_name,test=False):
         Experiment.__init__(self,dir_name,test)
         self.name = 'Default_Params'
         
     def run(self):
-        '''
+        """
         Runs cross validation against Decision Tree and Random Forest classifiers. 
-        '''
+        """
         Experiment.run(self)
         tree_score = cross_val_score(DTC(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
         forest_score = cross_val_score(RFC(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
         self._loaded_data = {'Default_Tree':tree_score,'Default_Forest':forest_score}
         self.save(self._loaded_data)
         
-    _begining_report = '''This experiment tried both the Decision Tree and the Random Forest classifiers with default hyper parameters.'''
+    _begining_report = """This experiment tried both the Decision Tree and the Random Forest classifiers with default hyper parameters."""
             
-    _ending_report = '''Done'''
+    _ending_report = """Done"""
     
     @property        
     def _no_detail(self):
-        '''
+        """
         Reporting on low verbosity - only results.
-        '''
+        """
         return '\n'.join(['Decision Tree with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Tree'].mean()),\
                           'Random Forest with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Forest'].mean())])   
     
 class LearningCurveExperiment(Experiment):
-    '''
+    """
     An experiment to test the learning curves of the classifiers (Decision Tree, Random Forest, Naive Bayes).
     
     The learning curve shows the classifier's accuracy correlation with the size of the training data.
-    '''
+    """
     def __init__(self,dir_name,test=False):
         Experiment.__init__(self,dir_name,test)
         self.name = 'Learning_Curve'
         
     def run(self):
-        '''
+        """
         Runs learning curve on all classifiers.
-        '''
+        """
         Experiment.run(self)
         best_param_exp = BestParamsExperiment(self._dir_name, self._test)
         self._load_prev_experiment(best_param_exp)
@@ -403,16 +399,16 @@ class LearningCurveExperiment(Experiment):
         self._loaded_data = {'Tree_Curve':tree_curve,'Forest_Curve':forest_curve,'Bayes_Curve':bayes_curve}
         self.save(self._loaded_data)
         
-    _begining_report = '''This experiment checks the learning curve for all the classifiers. \n
-Will plot the learning curves on screen.'''
+    _begining_report = """This experiment checks the learning curve for all the classifiers. \n
+Will plot the learning curves on screen."""
             
-    _ending_report = '''Done'''
+    _ending_report = """Done"""
     
     @property        
     def _no_detail(self):
-        '''
+        """
         Reporting on low verbosity- plots the learning curves
-        '''
+        """
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             import numpy as np
@@ -455,17 +451,21 @@ Will plot the learning curves on screen.'''
             return ''
         
 class BestLookbackExperimet(Experiment):
-    '''
-    A class that experiments the best lookback for making examples.
+    """
+    An experiment to test what is thebest lookback for creating the examples.
     
     The lookback parameter defines how many previous games we are taking in consideration while generating the examples. 
-    '''
+    """
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
         self.name = 'Best_Lookback'
-             
-    
+               
     def load_params(self,estimators=[]):
+        """
+        The load_params for this experiment loads the best params for the decision tree and random forest.
+        
+        This params found by the experiment best_param.
+        """
         best_param_exp = BestParamsExperiment(self._dir_name, self._test)
         if not self._load_prev_experiment(best_param_exp): return False
         self.estimators = [DTC(**best_param_exp._loaded_data['Tree'].best_params_),\
@@ -479,9 +479,9 @@ class BestLookbackExperimet(Experiment):
         self.y = self.cv.complete_tags
         
     def run(self):
-        '''
+        """
         For each fixture in range [1,66] (in jumps of 5), run a cross validation on both Decision Tree and Random Forest.
-        '''
+        """
         if self._test:
             self.ranges = [15,30]
         else:
@@ -499,16 +499,16 @@ class BestLookbackExperimet(Experiment):
         self.save(self._loaded_data)
         
 
-    _begining_report = '''This experiment checks both classifier's accuracy correlation with the lookback parameter \
-for the creation on the examples.'''
+    _begining_report = """This experiment checks both classifier's accuracy correlation with the lookback parameter \
+for the creation on the examples."""
             
-    _ending_report = '''Done'''
+    _ending_report = """Done"""
     
     @property        
     def _no_detail(self):
-        '''
+        """
         Reporting on low verbosity - only tables
-        '''
+        """
         _dtc_scores = {int(_lk):self._loaded_data[_lk][0].mean() for _lk in self._loaded_data}
         _rfc_scores = {int(_lk):self._loaded_data[_lk][1].mean() for _lk in self._loaded_data}
         _table = tabulate([['Decision Tree']+[value for (key, value) in sorted(_dtc_scores.items())],\
@@ -518,9 +518,9 @@ for the creation on the examples.'''
     
     @property
     def _detail(self):
-        '''
+        """
         Medium verbosity - show plotted graphs
-        '''
+        """
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             import numpy as np
@@ -566,9 +566,10 @@ for the creation on the examples.'''
         return ''
 
 class BestProbaForDecision(Experiment):
-    '''
-    A class that experiments the best probability from which we want to make the decision.
-    '''
+    """
+    An experiment to test what is the best threshold from which we want to make the decision.
+    
+    """
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
         self.name = 'Best_Proba'
@@ -580,11 +581,11 @@ class BestProbaForDecision(Experiment):
         return True
     
     def run(self):
-        '''
+        """
         For each probability p in [0.34,0.59] (in jumps of 0.01), make the decision only if classifier's probability is greater or equal to p.
 
-        @todo: explain scoring system
-        '''
+        For each probability we calculate the amount of games that qulified and the score will be calculated by this amount.
+        """
         Experiment.run(self)
         if not self.load_params(): 
             print 'Can not run- must load previous experiment'
@@ -642,16 +643,16 @@ class BestProbaForDecision(Experiment):
         self.save(self._loaded_data)
         
         
-    _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
-we start making the decisions.'''
+    _begining_report = """This experiment checks the best probability given by the Decision Tree from which  \
+we start making the decisions."""
             
-    _ending_report = '''Done'''
+    _ending_report = """Done"""
     
     @property        
     def _no_detail(self):
-        '''
+        """
         Reporting on low verbosity - only tables
-        '''
+        """
         _proba_scores = {float(_k):(self._loaded_data['DTC'][_k],self._loaded_data['RFC'][_k]) for _k in self._loaded_data['DTC'].keys()}
         _inner_table = [[key,tup[0][0],tup[0][1],(float(tup[0][0])/self._loaded_data["AG"])*tup[0][1],tup[1][0],tup[1][1],(float(tup[1][0])/self._loaded_data["AG"])*tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
         _table = tabulate([data for data in _inner_table],\
@@ -659,14 +660,19 @@ we start making the decisions.'''
         return 'Results :\n%s\n'%_table
   
 class FinalSeasonExperiment(Experiment):
-    '''
-    A class that experiments the results of the classifier for last season (2015-2016).
-    '''
+    """
+    An experiment to test the results of the classifier for last season (2015-2016).
+    """
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
         self.name = dir_name
     
     def load_params(self):
+        """
+        The load_params for this experiment loads the best params for the decision tree and random forest and also the best lookback.
+        
+        This params found by the experiment best_param, lookback by best_lookback.
+        """
         best_param_exp = BestParamsExperiment("Best_Params", self._test)
         if not self._load_prev_experiment(best_param_exp): return False
         best_lookback_exp = BestLookbackExperimet("Best_Params", self._test)
@@ -676,11 +682,11 @@ class FinalSeasonExperiment(Experiment):
         return True
     
     def get_data(self):
-        '''
+        """
         Loads all the examples and tags needed for the experiment - building the examples based on the lookback found in previous experiments.
         
         Loads the all of the examples and tags, and also creates cross validation for the classifiers..
-        '''
+        """
         self.cv = CrossValidation(test=self._test)
         lookback = self._loaded_data['Fix']
         self.cv.load_data(lookback)
@@ -688,11 +694,11 @@ class FinalSeasonExperiment(Experiment):
         self.y = self.cv.complete_tags
     
     def run(self):
-        '''
+        """
         Runs prediction against the current season (2015-2016).
         
         Tries both building a classifier from all the leagues and predict, and building a specific classifier for each league and predict only that league.
-        '''
+        """
         if not self.load_params():
             print 'Can not run- must load previous experiment'
             return
@@ -724,13 +730,14 @@ class FinalSeasonExperiment(Experiment):
             
             curr_examples = [_ex["Ex"] for _ex in raw_curr_examples]
             result_tags = clf.predict(curr_examples)
+            result_proba = clf.predict_proba(curr_examples)
             self._loaded_data[_league] = {"score":clf.score(curr_examples, curr_tags),"array":[],"dict":{i:0 for i in range(61)}}
             amount_games_per_fix = {i:0 for i in range(61)}
             for i in range(len(raw_curr_examples)):
                 _ex = raw_curr_examples[i]
                 curr_fix = _ex["Fix"]
                 curr_result = _ex["Res"]
-                self._loaded_data[_league]["array"] += [(_ex["League"],_ex["Home"],_ex["Away"],curr_result,result_tags[i])]
+                self._loaded_data[_league]["array"] += [(_ex["League"],_ex["Home"],_ex["Away"],curr_result,result_tags[i],result_proba[i])]
                 amount_games_per_fix[curr_fix] += 1
                 if result_tags[i] == curr_tags[i]:
                     self._loaded_data[_league]["dict"][curr_fix] += 1
@@ -743,16 +750,60 @@ class FinalSeasonExperiment(Experiment):
                     self._loaded_data[_league]["dict"][_k] = score / amount_games_per_fix[_k]
         self.save(self._loaded_data)
         
-    _begining_report = '''This experiment checks the best probability given by the Decision Tree from which  \
-we start making the decisions.'''
+    _begining_report = """This experiment checks the results of the classifier for last season. one classifier from all the leagues and \
+one specific classifier for each league."""
             
-    _ending_report = '''Done'''
+    _ending_report = """Done"""
     
     @property        
     def _no_detail(self):
-        '''
+        """
         Reporting on low verbosity - generates prediction in for each league (all games in current season), and prints averaged accuracy for each fixture.
-        '''
+        
+        For each fixture we get avareged accuracy for all leagues and avarege accuracy per league.
+        """
+        all_scores = {}
+        all_scores_league = {}
+        amount_overlap = {}
+        flag_first = True
+        for league in LEAGUES:
+            _scores = {int(_lk):self._loaded_data[league]["dict"][_lk] for _lk in self._loaded_data[league]["dict"]}
+            _scores[0] = self._loaded_data[league]["score"]
+            all_scores_league[league] = _scores
+            if flag_first:
+                for _k in _scores:
+                    if _scores[_k] == 0.0:
+                        continue
+                    amount_overlap[_k] = 1
+                    all_scores[_k] = _scores[_k]
+                flag_first = False
+            else:
+                for _k in _scores:
+                    if _scores[_k] == 0.0:
+                        continue
+                    if _k not in all_scores.keys():
+                        amount_overlap[_k] = 1
+                        all_scores[_k] = _scores[_k]
+                    else:
+                        amount_overlap[_k] += 1
+                        all_scores[_k] += _scores[_k]
+        for _k in all_scores:
+            all_scores[_k] = all_scores[_k] / amount_overlap[_k]
+        _inner_table = [[key,all_scores[key]] for key in sorted(all_scores.keys())]
+        for i in range(len(_inner_table)):
+            _inner_table[i] += [all_scores_league[_l] for _l in sorted(LEAGUES)]
+        curr_headers = ['Fix','Score'] + [_l for _l in sorted(LEAGUES)]
+        _table = tabulate([data for data in _inner_table],\
+                            headers=curr_headers,tablefmt="fancy_grid",floatfmt=".4f")
+        print 'Results for experiment %s :\n%s\n'%(self.name,_table)
+        
+    @property
+    def _detail(self):
+        """
+        Medium verbosity - save external files 
+        
+        For each league we save {fix,success_rate} , {team_a,team_b,result,tag,proba(-1),proba(0),proba(1)
+        """
         all_scores = {}
         amount_overlap = {}
         flag_first = True
@@ -779,28 +830,21 @@ we start making the decisions.'''
             _inner_table = [[key,_scores[key]] for key in sorted(_scores.keys()) if _scores[key] != 0.0]
             _table = tabulate([data for data in _inner_table],\
                               headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-            with open(self._dir_name+league+"_fix_res.txt",'w') as output:
+            with open(os.path.join(self._dir_name,league+"_fix_res.txt"),'w') as output:
                 output.write(_table.encode("utf-8"))
                 output.close()
             
-            _inner_table = [[elem[1],elem[2],elem[3][0]+"-"+elem[3][1],elem[4]] for elem in self._loaded_data[league]["array"] if elem[0]==league]
+            _inner_table = [[elem[1],elem[2],elem[3][0]+"-"+elem[3][1],elem[4],elem[5][0],elem[5][1],elem[5][2]] for elem in self._loaded_data[league]["array"] if elem[0]==league]
             _table = tabulate([data for data in _inner_table],\
-                          headers=['Home','Away','Result','Tag'],tablefmt="fancy_grid")
-            with open(self._dir_name+league+"_results.txt",'w') as output:
+                          headers=['Home','Away','Result','Tag','-1','0','1'],tablefmt="fancy_grid")
+            with open(os.path.join(self._dir_name,league+"_results.txt"),'w') as output:
                 output.write(_table.encode("utf-8"))
                 output.close()
-                
-        for _k in all_scores:
-            all_scores[_k] = all_scores[_k] / amount_overlap[_k]
-        _inner_table = [[key,all_scores[key]] for key in sorted(all_scores.keys())]
-        _table = tabulate([data for data in _inner_table],\
-                            headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-        print 'Results :\n%s\n'%_table
 
 class FinalSeasonAux(Experiment):
-    '''
+    """
     Auxiliary experiment around the Final Season experiment modes.
-    '''
+    """
     def __init__(self, dir_name, test=False):
         Experiment.__init__(self, dir_name, test=test)
         self.name = dir_name
@@ -811,9 +855,10 @@ class FinalSeasonAux(Experiment):
         FinalSeasonExperiment("Final_Season_S",self._test).run()
         
     def report(self, verbosity, outfile):
-        FinalSeasonExperiment("Final_Season",self._test).report(self, verbosity, outfile)
-        FinalSeasonExperiment("Final_Season_S",self._test).report(self, verbosity, outfile)
+        FinalSeasonExperiment("Final_Season",self._test).report(verbosity, outfile)
+        FinalSeasonExperiment("Final_Season_S",self._test).report(verbosity, outfile)
         
+       
         
 if __name__ == '__main__':
     args = ExperimentArgsParser().parse()

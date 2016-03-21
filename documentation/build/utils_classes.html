@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>All The Project Utils Classes &mdash; AI_Project 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="AI_Project 0.0.1 documentation" href="index.html" />
+    <link rel="next" title="All the project Experiments" href="expr.html" />
+    <link rel="prev" title="All The Project Data Handeling Classes" href="data_classes.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="expr.html" title="All the project Experiments"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="data_classes.html" title="All The Project Data Handeling Classes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AI_Project 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="all-the-project-utils-classes">
+<h1>All The Project Utils Classes<a class="headerlink" href="#all-the-project-utils-classes" title="Permalink to this headline">¶</a></h1>
+<p>This module contains all the classes that were build in-order to make this project very simple to understand and handled with.</p>
+<div class="section" id="experiment-arguments-parser-class">
+<h2>Experiment Arguments Parser Class<a class="headerlink" href="#experiment-arguments-parser-class" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="crawler-arguments-parser-class">
+<h2>Crawler Arguments Parser Class<a class="headerlink" href="#crawler-arguments-parser-class" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-utils.constants">
+<span id="project-constants"></span><h2>Project Constants<a class="headerlink" href="#module-utils.constants" title="Permalink to this headline">¶</a></h2>
+<p>This are the constants used in our project.</p>
+<p><strong>MIN_YEAR</strong> = <em>2010</em></p>
+<p><strong>MAX_YEAR</strong> = <em>2015</em></p>
+<p>MAX_YEAR and MIN_YEAR should be changed according to current year (up to August it should be last year) and
+MAX_YEAR - 5 , due to inforamtion that is not saved before.</p>
+<p><strong>YEARS</strong> = <em>[str(i) for i in range(MIN_YEAR,MAX_YEAR)]</em></p>
+<p><strong>LEAGUES</strong> = <em>[&#8216;Primer_League&#8217;,&#8217;Serie_A&#8217;,&#8217;Ligue1&#8217;,&#8217;La_Liga&#8217;,&#8217;Bundesliga&#8217;]</em></p>
+<p>We can Add new leagues or remove current ones.</p>
+<p><strong>LEAGUES_ABV</strong> = <em>[&#8216;PL&#8217;,&#8217;SA&#8217;,&#8217;L1&#8217;,&#8217;LL&#8217;,&#8217;BL&#8217;]</em></p>
+<p><strong>MONTHS</strong> = <em>[&#8216;Jan&#8217;,&#8217;Feb&#8217;,&#8217;Mar&#8217;,&#8217;Apr&#8217;,&#8217;May&#8217;,&#8217;Jun&#8217;,&#8217;Jul&#8217;,&#8217;Aug&#8217;,&#8217;Sep&#8217;,&#8217;Oct&#8217;,&#8217;Nov&#8217;,&#8217;Dec&#8217;]</em></p>
+</div>
+<div class="section" id="module-utils.decorators">
+<span id="project-decorators"></span><h2>Project Decorators<a class="headerlink" href="#module-utils.decorators" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="utils.decorators.retry">
+<code class="descclassname">utils.decorators.</code><code class="descname">retry</code><span class="sig-paren">(</span><em>restart=False</em>, <em>num_retries=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/decorators.html#retry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.decorators.retry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for retrying a function in case of an exception.</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre>@retry
+def some_function(*args,**kwargs):
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.decorators.timed">
+<code class="descclassname">utils.decorators.</code><code class="descname">timed</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils/decorators.html#timed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#utils.decorators.timed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for printing the timing of functions</p>
+<p>Usage:</p>
+<div class="highlight-python"><div class="highlight"><pre>@timed
+def some_funcion(args...):
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">All The Project Utils Classes</a><ul>
+<li><a class="reference internal" href="#experiment-arguments-parser-class">Experiment Arguments Parser Class</a></li>
+<li><a class="reference internal" href="#crawler-arguments-parser-class">Crawler Arguments Parser Class</a></li>
+<li><a class="reference internal" href="#module-utils.constants">Project Constants</a></li>
+<li><a class="reference internal" href="#module-utils.decorators">Project Decorators</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="data_classes.html"
+                        title="previous chapter">All The Project Data Handeling Classes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="expr.html"
+                        title="next chapter">All the project Experiments</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/utils_classes.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="expr.html" title="All the project Experiments"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="data_classes.html" title="All The Project Data Handeling Classes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AI_Project 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Ory Jonay, Dror Porat.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

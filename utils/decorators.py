@@ -1,16 +1,15 @@
-'''
-Decorators and various generic utilities for the project.
-
-@author: Ory Jonay
-'''
 from datetime import datetime,timedelta
 import logging
 
 def timed(f):
-    '''decorator for printing the timing of functions
-    usage: 
-    @timed
-    def some_funcion(args...):'''
+    """
+    Decorator for printing the timing of functions
+    
+    Usage:: 
+    
+        @timed
+        def some_funcion(args...):
+    """
     
     def wrap(*x, **d):
         start = datetime.now()
@@ -20,14 +19,14 @@ def timed(f):
     return wrap
 
 def retry(restart=False,num_retries=3):
-    '''
+    """
     Decorator for retrying a function in case of an exception.
     
-    Usage:
+    Usage::
     
-    @retry
-    def some_function(*args,**kwargs):
-    '''
+        @retry
+        def some_function(*args,**kwargs):
+    """
     def _wrap(f):
         def wrap(*x,**d):
             for i in range(num_retries):

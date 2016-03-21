@@ -1,16 +1,10 @@
-'''
-Created on Nov 7, 2015
-
-Implementations of different command line arguments parsers.
-
-@author: root
-'''
-
 from utils.constants import MIN_YEAR,MAX_YEAR
 from argparse import ArgumentParser
 
 class ExperimentArgsParser(object):
-    
+    """
+    This class is incharge of parsering the arguments related to the experiments. 
+    """
     experiments = ['Best_Params','AdaBoost','Best_Lookback','Best_Forest_Size','Bayes','Learning_Curve','Best_Proba','Final_Season','Default_Params']
     actions = ['run','report']
     
@@ -35,9 +29,9 @@ $ experiments.py exp1 Best_Params report -v 1
 
         
 class CrawlerArgsParser(object):
-    '''
-    Arguments parser for the Selenium based web crawler module.
-    '''
+    """
+    This class is a parser for the Selenium based web crawler module arguments.
+    """
     leagues = ['Primer_League','Serie_A','La_Liga','Ligue1','Bundesliga']
     leagues_links = {'PL_2010':'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/2458/Stages/4345/Show/England-Premier-League-2010-2011',\
                         'PL_2011':'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/2935/Stages/5476/Show/England-Premier-League-2011-2012',\
@@ -72,8 +66,6 @@ class CrawlerArgsParser(object):
 
 
     def __init__(self):
-        
-    
         self.multi = False
         self.range_kwargs= []
         self.parser = ArgumentParser(description='Crawl whoscored.com for the specified league and years.')
@@ -88,6 +80,11 @@ class CrawlerArgsParser(object):
      
      
     def _default_ranges(self):
+        """
+        This function defines the defult ranges for the crawler.
+        
+        Using our constants MIN_YEAR and MAX_YEAR.
+        """
         return [str(i) for i in range(MIN_YEAR,MAX_YEAR)]+['-'.join([str(i),str(j)]) for i in range(MIN_YEAR,MAX_YEAR) for j in range(MIN_YEAR,MAX_YEAR) if i<j]
 
     def parse(self):
@@ -116,6 +113,11 @@ class CrawlerArgsParser(object):
                 self.update_kwargs.append(dict(self.kwargs))
         
     def _hash_league_names_and_years(self,league,year):
+        """
+        This function is used as a hash function f:(long_league_name) --> short_league_name
+        
+        For example - f(Primer_League) = PL.
+        """
         abv_league = ''
         if league == 'Primer_League':
             abv_league = 'PL'
@@ -128,3 +130,4 @@ class CrawlerArgsParser(object):
         elif league == 'Serie_A':
             abv_league = 'SA'
         return '_'.join([abv_league,str(year)])
+    

@@ -1,0 +1,432 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>All the project Experiments &mdash; AI_Project 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="AI_Project 0.0.1 documentation" href="index.html" />
+    <link rel="prev" title="All The Project Utils Classes" href="utils_classes.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="utils_classes.html" title="All The Project Utils Classes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AI_Project 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="all-the-project-experiments">
+<h1>All the project Experiments<a class="headerlink" href="#all-the-project-experiments" title="Permalink to this headline">¶</a></h1>
+<p>This module contains all the experiemnts of this project.</p>
+<div class="section" id="class-experiment">
+<h2>class Experiment<a class="headerlink" href="#class-experiment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.Experiment">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">Experiment</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract Experiment class.</p>
+<dl class="docutils">
+<dt>Experiments classes provide basic functionality to running an experiment-</dt>
+<dd>allows saving and loading the results
+automatically loads data for cross validation</dd>
+</dl>
+<dl class="method">
+<dt id="experiments.Experiment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new Experiment instance.</p>
+<p>Requires a dir_name (to save results) and a flag to indicate whether it&#8217;s test environment or not.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.Experiment._load_prev_experiment">
+<code class="descname">_load_prev_experiment</code><span class="sig-paren">(</span><em>exp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment._load_prev_experiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment._load_prev_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function to load a previous experiment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.Experiment.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all the examples and tags needed for the experiment.</p>
+<p>Loads the all of the examples and tags, and also creates a cross validation for using in the estimators searches.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.Experiment.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads results from previous runs into _loaded_data attribute.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.Experiment.load_params">
+<code class="descname">load_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.load_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.load_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the parameters of the experiment.</p>
+<p>You should override this in derived classes to configure the experiment parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.Experiment.report">
+<code class="descname">report</code><span class="sig-paren">(</span><em>verbosity</em>, <em>outfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>A method to report the experiment&#8217;s results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.Experiment.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves data into the results dir under the special format {experiment_name}.results</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.Experiment.t_test">
+<code class="descname">t_test</code><span class="sig-paren">(</span><em>original_measurements</em>, <em>measurements_after_alteration</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.t_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.t_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the paired T-test (for repeated measurements):
+Given two sets of measurements on the SAME data points (folds) before and after some change,
+Checks whether or not they come from the same distribution.</p>
+<p>This T-test assumes the measurements come from normal distributions.</p>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd>The probability the measurements come the same distributions
+A flag that indicates whether the result is statically significant
+A flag that indicates whether the new measurements are better than the old measurements</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="class-bestparamsexperiment">
+<h2>class BestParamsExperiment<a class="headerlink" href="#class-bestparamsexperiment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.BestParamsExperiment">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">BestParamsExperiment</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestParamsExperiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestParamsExperiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment class to search for the best hyperparameters for an estimator.</p>
+<p>The search is done using RandomGridSearchCV, on the DecisionTreeClassifer estimator and the 
+RandomForestClassifier estimator.</p>
+<dl class="method">
+<dt id="experiments.BestParamsExperiment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestParamsExperiment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestParamsExperiment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BestParamsExperiment._detail">
+<code class="descname">_detail</code><a class="headerlink" href="#experiments.BestParamsExperiment._detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the Decision Tree classifier after search and after fitting all of the data.</p>
+<p>Saves in results folder, in pdf format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BestParamsExperiment._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.BestParamsExperiment._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity - only tables</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.BestParamsExperiment.load_params">
+<code class="descname">load_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestParamsExperiment.load_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestParamsExperiment.load_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the parameters for the experiment - the grids to search on.</p>
+<p>To change parameters or values for one of the estimators - change to correct field.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="class-bayesexperiment">
+<h2>class BayesExperiment<a class="headerlink" href="#class-bayesexperiment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.BayesExperiment">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">BayesExperiment</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BayesExperiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BayesExperiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment to test Naive Bayes classifier.</p>
+<dl class="method">
+<dt id="experiments.BayesExperiment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BayesExperiment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BayesExperiment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BayesExperiment._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.BayesExperiment._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity - only results.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="class-defaultparamsexperiment">
+<h2>class DefaultParamsExperiment<a class="headerlink" href="#class-defaultparamsexperiment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.DefaultParamsExperiment">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">DefaultParamsExperiment</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#DefaultParamsExperiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.DefaultParamsExperiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment to test Decision Tree and Random Forest classifiers without adjusting their respective hyper parameters.</p>
+<dl class="method">
+<dt id="experiments.DefaultParamsExperiment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#DefaultParamsExperiment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.DefaultParamsExperiment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.DefaultParamsExperiment._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.DefaultParamsExperiment._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity - only results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.DefaultParamsExperiment.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#DefaultParamsExperiment.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.DefaultParamsExperiment.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs cross validation against Decision Tree and Random Forest classifiers.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="class-learningcurveexperiment">
+<h2>class LearningCurveExperiment<a class="headerlink" href="#class-learningcurveexperiment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.LearningCurveExperiment">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">LearningCurveExperiment</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#LearningCurveExperiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.LearningCurveExperiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment to test the learning curves of the classifiers (Decision Tree, Random Forest, Naive Bayes).</p>
+<p>The learning curve shows the classifier&#8217;s accuracy correlation with the size of the training data.</p>
+<dl class="method">
+<dt id="experiments.LearningCurveExperiment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#LearningCurveExperiment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.LearningCurveExperiment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.LearningCurveExperiment._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.LearningCurveExperiment._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity- plots the learning curves</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.LearningCurveExperiment.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#LearningCurveExperiment.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.LearningCurveExperiment.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs learning curve on all classifiers.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="class-bestlookbackexperimet">
+<h2>class BestLookbackExperimet<a class="headerlink" href="#class-bestlookbackexperimet" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.BestLookbackExperimet">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">BestLookbackExperimet</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestLookbackExperimet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestLookbackExperimet" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment to test what is thebest lookback for creating the examples.</p>
+<p>The lookback parameter defines how many previous games we are taking in consideration while generating the examples.</p>
+<dl class="method">
+<dt id="experiments.BestLookbackExperimet.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestLookbackExperimet.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestLookbackExperimet.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BestLookbackExperimet._detail">
+<code class="descname">_detail</code><a class="headerlink" href="#experiments.BestLookbackExperimet._detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Medium verbosity - show plotted graphs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BestLookbackExperimet._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.BestLookbackExperimet._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity - only tables</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.BestLookbackExperimet.load_params">
+<code class="descname">load_params</code><span class="sig-paren">(</span><em>estimators=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestLookbackExperimet.load_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestLookbackExperimet.load_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>The load_params for this experiment loads the best params for the decision tree and random forest.</p>
+<p>This params found by the experiment best_param.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.BestLookbackExperimet.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestLookbackExperimet.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestLookbackExperimet.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>For each fixture in range [1,66] (in jumps of 5), run a cross validation on both Decision Tree and Random Forest.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="class-bestprobafordecision">
+<h2>class BestProbaForDecision<a class="headerlink" href="#class-bestprobafordecision" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.BestProbaForDecision">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">BestProbaForDecision</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaForDecision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaForDecision" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment to test what is the best threshold from which we want to make the decision.</p>
+<dl class="method">
+<dt id="experiments.BestProbaForDecision.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaForDecision.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaForDecision.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BestProbaForDecision._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.BestProbaForDecision._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity - only tables</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.BestProbaForDecision.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaForDecision.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaForDecision.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>For each probability p in [0.34,0.59] (in jumps of 0.01), make the decision only if classifier&#8217;s probability is greater or equal to p.</p>
+<p>For each probability we calculate the amount of games that qulified and the score will be calculated by this amount.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="class-finalseasonexperiment">
+<h2>class FinalSeasonExperiment<a class="headerlink" href="#class-finalseasonexperiment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.FinalSeasonExperiment">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">FinalSeasonExperiment</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonExperiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonExperiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment to test the results of the classifier for last season (2015-2016).</p>
+<dl class="method">
+<dt id="experiments.FinalSeasonExperiment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonExperiment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonExperiment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.FinalSeasonExperiment._detail">
+<code class="descname">_detail</code><a class="headerlink" href="#experiments.FinalSeasonExperiment._detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Medium verbosity - save external files</p>
+<p>For each league we save {fix,success_rate} , {team_a,team_b,result,tag,proba(-1),proba(0),proba(1)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.FinalSeasonExperiment._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.FinalSeasonExperiment._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity - generates prediction in for each league (all games in current season), and prints averaged accuracy for each fixture.</p>
+<p>For each fixture we get avareged accuracy for all leagues and avarege accuracy per league.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.FinalSeasonExperiment.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonExperiment.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonExperiment.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all the examples and tags needed for the experiment - building the examples based on the lookback found in previous experiments.</p>
+<p>Loads the all of the examples and tags, and also creates cross validation for the classifiers..</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.FinalSeasonExperiment.load_params">
+<code class="descname">load_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonExperiment.load_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonExperiment.load_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>The load_params for this experiment loads the best params for the decision tree and random forest and also the best lookback.</p>
+<p>This params found by the experiment best_param, lookback by best_lookback.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.FinalSeasonExperiment.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonExperiment.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonExperiment.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs prediction against the current season (2015-2016).</p>
+<p>Tries both building a classifier from all the leagues and predict, and building a specific classifier for each league and predict only that league.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="class-finalseasonaux">
+<h2>class FinalSeasonAux<a class="headerlink" href="#class-finalseasonaux" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.FinalSeasonAux">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">FinalSeasonAux</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonAux"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonAux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auxiliary experiment around the Final Season experiment modes.</p>
+<dl class="method">
+<dt id="experiments.FinalSeasonAux.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonAux.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonAux.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">All the project Experiments</a><ul>
+<li><a class="reference internal" href="#class-experiment">class Experiment</a></li>
+<li><a class="reference internal" href="#class-bestparamsexperiment">class BestParamsExperiment</a></li>
+<li><a class="reference internal" href="#class-bayesexperiment">class BayesExperiment</a></li>
+<li><a class="reference internal" href="#class-defaultparamsexperiment">class DefaultParamsExperiment</a></li>
+<li><a class="reference internal" href="#class-learningcurveexperiment">class LearningCurveExperiment</a></li>
+<li><a class="reference internal" href="#class-bestlookbackexperimet">class BestLookbackExperimet</a></li>
+<li><a class="reference internal" href="#class-bestprobafordecision">class BestProbaForDecision</a></li>
+<li><a class="reference internal" href="#class-finalseasonexperiment">class FinalSeasonExperiment</a></li>
+<li><a class="reference internal" href="#class-finalseasonaux">class FinalSeasonAux</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="utils_classes.html"
+                        title="previous chapter">All The Project Utils Classes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/expr.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="utils_classes.html" title="All The Project Utils Classes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AI_Project 0.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Ory Jonay, Dror Porat.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

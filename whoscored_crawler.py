@@ -1,8 +1,3 @@
-'''
-Created on Nov 27, 2015
-
-@author: Ory Jonay
-'''
 import glob
 from itertools import izip
 from os import path
@@ -27,21 +22,23 @@ args_parser = CrawlerArgsParser()
 
 
 class WhoScoredCrawler(object):
-    '''
+    """
     WhoScoredCrawler - A web crawler and data mining tool for the whoscored.com site.
     
     Requires Google Chrome and ChromeDriver in order to work. 
-    '''
+    """
 
 
     def __init__(self, league,year,link):
-        '''
+        """
         Constructor for the WhoScoredCrawler class.
         
-        @keyword league: The specific league to collect the data from.
-        @keyword year: The specific year to collect the data from.
-        @keyword link: The link corresponding to the league and year.
-        '''
+        **@keyword** *league*: The specific league to collect the data from.
+        
+        **@keyword** *year*: The specific year to collect the data from.
+        
+        **@keyword** *link*: The link corresponding to the league and year.
+        """
         logging.basicConfig(filename=path.join('logs','%s%s.log'%(league,year)),format='%(levelname)s: %(asctime)s %(message)s', datefmt='%d/%m/%Y %H:%M %p',level=logging.INFO)
         self.league = league
         self.year = year
@@ -56,20 +53,20 @@ class WhoScoredCrawler(object):
         logging.info('Finished crawler initialization')
         
     def restart_driver(self):
-        '''
+        """
         Restarts the driver.
         
         In case of the driver getting laggy and it needs a restart, quits, sleeps for 10 seconds and reopens the browser.
-        '''
+        """
         self.driver.quit()
         sleep(10)
         self.driver = webdriver.Chrome(chrome_options=self.chrome_oprtions)
         self.driver.implicitly_wait(30)
         
     def _create_backup(self):
-        '''
+        """
         Helper function to create backup folders and files for the data mined.
-        '''
+        """
         logging.info('Creating backup folders')
         self._bkup_folder = path.join('backup','-'.join([self.league,str(self.year)]))
         self._bkup_fixtures_links = path.join(self._bkup_folder,'fixtures.pckl')  
@@ -78,9 +75,9 @@ class WhoScoredCrawler(object):
         logging.info('Finished creating backup folders')
             
     def get_played_months(self):
-        '''
+        """
         Function to get the played months for the league.
-        '''
+        """
         logging.info('Finding played months')
         self.driver = self.driver
         config_button = self.driver.find_element_by_id('date-config-toggle-button')
@@ -100,9 +97,9 @@ class WhoScoredCrawler(object):
         return months  
     
     def crawl(self,current=False):
-        '''
+        """
         The main function - crawl the league and mine some data.
-        '''
+        """
         logging.info('Starting crawl')
         self.driver.get(self.league_link)
         self.team_names = set([unidecode(thr.text) for thr in \
@@ -132,9 +129,9 @@ class WhoScoredCrawler(object):
         
     @retry(True)        
     def parse_game(self,game):
-        '''
+        """
         Parses a game and updates the dictionaries all_team_dict and all_teams_curr_fix
-        '''
+        """
         self.driver.get(game['link'])
         WebDriverWait(self.driver,15).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="sub-sub-navigation"]/ul/li[2]/a')))
         players_stats_link = self.driver.find_element_by_xpath('//*[@id="sub-sub-navigation"]/ul/li[2]/a').get_attribute("href")
@@ -188,9 +185,9 @@ class WhoScoredCrawler(object):
         update_team(away_team_name, "away", poss[1],home_team_name)
  
     def get_player_name(self,str_list):
-        '''
+        """
         Given a a list of strings that represents a player name, return the player name
-        '''
+        """
         _str=""
         for i in range(len(str_list)):
             if 'A' <= str_list[i][0] <= 'Z':
@@ -200,9 +197,9 @@ class WhoScoredCrawler(object):
         return _str
         
     def parse_teams(self):
-        '''
+        """
         Parses the teams players tables - 8 tables in total.
-        '''
+        """
         for dict in self.players_dict:
             opt_tabels = self.driver.find_element_by_id("live-player-"+dict+"-options")
             linked_tabels = opt_tabels.find_elements_by_xpath(".//a")
@@ -238,9 +235,9 @@ class WhoScoredCrawler(object):
                     self.players_dict[dict][player_name][link_table.text] = {h:d for h,d in izip(team_header,player_data_line)}
        
     def load_previous_data(self,current=False):
-        '''
+        """
         Loads the data collected in previous run in order to resume crawling from that point.
-        '''
+        """
         logging.info('Loading data from previous runs')
         if not current:
             if not path.exists(self._bkup_fixtures_links):
@@ -276,17 +273,17 @@ class WhoScoredCrawler(object):
         logging.info('Finished loading previous data')
             
     def _get_curr_fix(self,team_name):
-        '''
+        """
         Given a team name, return the next fixture that the team is playing
-        '''
+        """
         for key in self.all_teams_dict[team_name]:
             if not(self.all_teams_dict[team_name][key]):
                 return key
     
     def get_fixtures(self,current=False):
-        '''
+        """
         Parse the fixtures page for the games links and save them.
-        '''
+        """
         logging.info('Getting fixtures')
         self.played_months = self.played_months[:self.played_months.index(datetime.now().strftime('%b'))-1:-1][::-1] if current else self.played_months 
         self.fixtures = {month:None for month in self.played_months}
@@ -301,16 +298,16 @@ class WhoScoredCrawler(object):
         logging.info('Finished fixtures')
         
     def save_fixtures(self):
-        '''
+        """
         Saves the fixtures to disc
-        '''
+        """
         with open(self._bkup_fixtures_links,'wb') as fixutres_bkup:
             pickle.dump(self.fixtures, fixutres_bkup)
     
     def save_month(self,month):
-        '''
+        """
         Saves all data mined until month (included) to disc
-        '''
+        """
         with open(path.join(self._bkup_folder,month+'.pckl'),'wb') as month_bkup:
             pickle.dump(self.all_teams_dict,month_bkup)
         nxt_fix_dict = {name:self._get_curr_fix(name) for name in self.team_names}
@@ -327,9 +324,9 @@ class WhoScoredCrawler(object):
             
     @retry()       
     def parse_fixture(self,fixture):
-        '''
+        """
         Parses a fixture and return a dictionary containing all data concerning that fixture.
-        '''
+        """
         link = unidecode(fixture.find_element_by_xpath('./td/a[@class="result-1 rc"]').get_attribute("href"))
         home = unidecode(fixture.find_elements_by_xpath('./td[@data-id]/a')[0].text)
         result = unidecode(fixture.find_element_by_xpath('./td/a[@class="result-1 rc"]').text)
@@ -337,9 +334,9 @@ class WhoScoredCrawler(object):
         return {'link':link,'home':home,'result':result,'away':away}
                                   
     def find_start_month(self,current=False):
-        '''
+        """
         Finding the start month for the current run of the crawler.
-        '''
+        """
         logging.info('Finding the start month')
         if path.exists(self._bkup_fixtures_links):
             pckl_files = glob.glob('%s/*.pckl'%self._bkup_folder)
@@ -369,9 +366,9 @@ class WhoScoredCrawler(object):
     
     
 def start_crawl(kwargs):
-    '''
+    """
     Start crawling, given the arguments
-    '''
+    """
     year = kwargs['year']
     league = kwargs['league']
     if args_parser.update:

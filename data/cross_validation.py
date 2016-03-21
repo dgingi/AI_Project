@@ -1,11 +1,12 @@
-import sklearn
-
 from dbhandler import DBHandler
 import numpy
 from utils.constants import LEAGUES, YEARS
 
 
 class CrossValidation(object):
+    """
+    This class is incharge of creating end evaluating a cross-validation
+    """
     
     def __init__(self,test=False,remote=True):
         self._test = test

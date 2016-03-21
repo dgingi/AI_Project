@@ -1,26 +1,21 @@
-'''
-A module to handle the backend of the project.
-
-@author: Dror Porat & Ory Jonay
-'''
 import logging
 import pickle
 from progress.bar import ChargingBar
 import pymongo
-import sys, os
-
+import sys
 import numpy as np
 from utils.constants import MAX_YEAR, MIN_YEAR, LEAGUES, MONTHS
-from utils.decorators import timed
-
 
 sys.path.append('..')
 
-
-
-
 class DBHandler():
+    """
+    This class is incharge of handling with all database realted functions.
+    """
     def __init__(self,league,remote=True,test=False):
+        """
+        The Init function has the option to connect to the local database or our remote on-server database.
+        """
         _host = '46.101.204.132' if remote else 'localhost'
         self.client = pymongo.MongoClient(host=_host)
         self._db = 'test' if test else 'leagues_db'
@@ -36,6 +31,9 @@ class DBHandler():
             self.temp_DB = self.DB 
     
     def clone_db(self):
+        """
+        This function clones the database from the server to the local computer inorder the save time in making queries.
+        """
         from bson.son import SON
         temp_client = pymongo.MongoClient('localhost')
         _db = 'leagues_db' if not self._test else 'test'
@@ -49,9 +47,15 @@ class DBHandler():
         
     
     def convert(self,data):
+        """
+        This function converts the data from our crawler to fit out database.  
+        """
         return {name:{str(i):data[name][i] for i in range(1,2*len(data.keys())-1)} for name in data.keys()}
     
     def explode(self,data,year):
+        """
+        This function create all the table, making it by keys and saving as a list of entries.
+        """
         res = []
         for team in data:
             for fix in sorted(data[team]):
@@ -76,6 +80,11 @@ class DBHandler():
         return res
     
     def insert_to_db(self,data,year):
+        """
+        This function insert the data from the crawler to our database.
+        
+        This function uses both explde and convert methods.
+        """
         try:
             self.DB[self.league].remove({'Year':int(year)})
         except Exception as e:
@@ -87,6 +96,11 @@ class DBHandler():
         
 
     def drop(self,year=None):
+        """
+        This function deletes data from our database.
+        
+        If year == None then it delets the entire data for self.league, otherwise just the requested year for self.league .
+        """
         if year:
             self.DB[self.league].remove({'Year':int(year)})
         else:
@@ -94,7 +108,11 @@ class DBHandler():
     
        
     def create_examples(self,year,lookback=15,current=False):
+        """
+        This function creates all the examples for self.league, year.
         
+        The examples are created using the given lookback.
+        """
         def update_all_teams_dict(res,all_teams_dict,team,first):
             for fix in sorted(res):
                 if fix == 1 and res[fix] == {}:

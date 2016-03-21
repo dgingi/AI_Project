@@ -10,10 +10,13 @@ Contents:
 +++++++++
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    
    before.rst
-   old_utils.rst
+   data_classes.rst
+   utils_classes.rst
+   expr.rst
+   
    
 Indices and tables
 ==================

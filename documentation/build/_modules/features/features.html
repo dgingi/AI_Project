@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>features.features &mdash; AI_Project 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="AI_Project 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AI_Project 0.0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for features.features</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">utils.constants</span> <span class="kn">import</span> <span class="n">MIN_YEAR</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<div class="viewcode-block" id="Features"><a class="viewcode-back" href="../../data_classes.html#features.features.Features">[docs]</a><span class="k">class</span> <span class="nc">Features</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class handles the creation of the features for the classifier. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Features.__init__"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">year</span><span class="p">,</span><span class="n">league</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function initializes several lists of positions and important keys, such as:</span>
+<span class="sd">        </span>
+<span class="sd">        attack position list = [&quot;FW&quot;,&quot;AR&quot;,&quot;AL&quot;,&quot;AC&quot;,&quot;AMC&quot;,&quot;AML&quot;,&quot;AMR&quot;]</span>
+<span class="sd">        </span>
+<span class="sd">        attack keys = [&quot;Shots&quot;,&quot;ShotsOT&quot;,&quot;KeyPasses&quot;,&quot;Dribbles&quot;,&quot;Fouled&quot;,&quot;Offsides&quot;,&quot;Disp&quot;,&quot;UnsTouches&quot;]</span>
+<span class="sd">        </span>
+<span class="sd">        it also saves the current year and previous year as an int.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="n">data</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">non_avg_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Position&quot;</span><span class="p">,</span><span class="s">&quot;PName&quot;</span><span class="p">,</span><span class="s">&quot;GName&quot;</span><span class="p">,</span><span class="s">&quot;Result&quot;</span><span class="p">,</span><span class="s">&quot;HA&quot;</span><span class="p">,</span><span class="s">&quot;_id&quot;</span><span class="p">,</span><span class="s">&quot;Tag&quot;</span><span class="p">,</span><span class="s">&quot;VS&quot;</span><span class="p">,</span><span class="s">&quot;Goals&quot;</span><span class="p">,</span><span class="s">&quot;Fix&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;PA%&quot;</span><span class="p">,</span><span class="s">&quot;AerialsWon&quot;</span><span class="p">,</span><span class="s">&quot;Touches&quot;</span><span class="p">,</span><span class="s">&quot;Passes&quot;</span><span class="p">,</span><span class="s">&quot;Crosses&quot;</span><span class="p">,</span><span class="s">&quot;AccCrosses&quot;</span><span class="p">,</span><span class="s">&quot;LB&quot;</span><span class="p">,</span><span class="s">&quot;AccLB&quot;</span><span class="p">,</span><span class="s">&quot;ThB&quot;</span><span class="p">,</span><span class="s">&quot;AccThB&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">att_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Shots&quot;</span><span class="p">,</span><span class="s">&quot;ShotsOT&quot;</span><span class="p">,</span><span class="s">&quot;KeyPasses&quot;</span><span class="p">,</span><span class="s">&quot;Dribbles&quot;</span><span class="p">,</span><span class="s">&quot;Fouled&quot;</span><span class="p">,</span><span class="s">&quot;Offsides&quot;</span><span class="p">,</span><span class="s">&quot;Disp&quot;</span><span class="p">,</span><span class="s">&quot;UnsTouches&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">def_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;TotalTackles&quot;</span><span class="p">,</span><span class="s">&quot;Interceptions&quot;</span><span class="p">,</span><span class="s">&quot;Clearances&quot;</span><span class="p">,</span><span class="s">&quot;BlockedShots&quot;</span><span class="p">,</span><span class="s">&quot;Fouls&quot;</span><span class="p">]</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">d_pos</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;DR&quot;</span><span class="p">,</span><span class="s">&quot;DL&quot;</span><span class="p">,</span><span class="s">&quot;DC&quot;</span><span class="p">,</span><span class="s">&quot;DMC&quot;</span><span class="p">,</span><span class="s">&quot;DML&quot;</span><span class="p">,</span><span class="s">&quot;DMR&quot;</span><span class="p">,</span><span class="s">&quot;MR&quot;</span><span class="p">,</span><span class="s">&quot;MC&quot;</span><span class="p">,</span><span class="s">&quot;ML&quot;</span><span class="p">,</span><span class="s">&quot;Sub&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a_pos</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;FW&quot;</span><span class="p">,</span><span class="s">&quot;AR&quot;</span><span class="p">,</span><span class="s">&quot;AL&quot;</span><span class="p">,</span><span class="s">&quot;AC&quot;</span><span class="p">,</span><span class="s">&quot;AMC&quot;</span><span class="p">,</span><span class="s">&quot;AML&quot;</span><span class="p">,</span><span class="s">&quot;AMR&quot;</span><span class="p">,</span><span class="s">&quot;MR&quot;</span><span class="p">,</span><span class="s">&quot;MC&quot;</span><span class="p">,</span><span class="s">&quot;ML&quot;</span><span class="p">,</span><span class="s">&quot;Sub&quot;</span><span class="p">]</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span> <span class="o">-</span> <span class="mi">1</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">league</span> <span class="o">=</span> <span class="n">league</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="s">&#39;..&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;logs&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s">&#39;.&#39;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span><span class="s">&#39;logs&#39;</span><span class="p">,</span><span class="s">&#39;features-</span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">.log&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">league</span><span class="p">,</span><span class="n">year</span><span class="p">)),</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(levelname)s</span><span class="s">: </span><span class="si">%(asctime)s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%d</span><span class="s">/%m/%Y %H:%M %p&#39;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="Features.create_features"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.create_features">[docs]</a>    <span class="k">def</span> <span class="nf">create_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">lookback</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function is used to create features for a team, according to the lookback.</span>
+<span class="sd">        </span>
+<span class="sd">        This method returns 4 different dictionaries.</span>
+<span class="sd">        </span>
+<span class="sd">        Each dicitionary is in the form of --&gt; {fix_num(int) : {key:key_result} }</span>
+<span class="sd">        </span>
+<span class="sd">        There are 4 dictionaries:</span>
+<span class="sd">            1. res_by_all: this dicitionary has features that are aggregated and avareged first by each fix and then the avg of all fixtures.</span>
+<span class="sd">            </span>
+<span class="sd">            2. res_by_fix: this dicitionary has features that are aggregated and avareged by all fixtures togther.</span>
+<span class="sd">            </span>
+<span class="sd">            3. res_by_non_avg: this dicitionary has features that are aggregated and avareged by summing up all values and avarging by amount of players.</span>
+<span class="sd">            </span>
+<span class="sd">            4. res_by_fix_sum: this dicitionary has features that are aggregated and avareged by first summing all fixtures toghter and making an avarege by amount of fixtures.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_fix</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">g</span><span class="p">[</span><span class="s">&quot;Fix&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span><span class="p">})])</span>
+        <span class="n">res_by_all</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">create_avg_up_to</span><span class="p">(</span><span class="n">t_name</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">lookback</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">max_fix</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span>
+        <span class="n">res_by_non_avg</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">create_avg_of_non_avg_f</span><span class="p">(</span><span class="n">t_name</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">lookback</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">max_fix</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="n">res_by_all</span><span class="p">,</span><span class="n">res_by_non_avg</span>
+           </div>
+<div class="viewcode-block" id="Features.get_curr_HA"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.get_curr_HA">[docs]</a>    <span class="k">def</span> <span class="nf">get_curr_HA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        This function returns the tag (home / away) of the requested team for the requested game.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">,</span><span class="s">&quot;Fix&quot;</span><span class="p">:</span><span class="n">fix</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span><span class="p">})[</span><span class="s">&quot;HA&quot;</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="Features.get_curr_VS"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.get_curr_VS">[docs]</a>    <span class="k">def</span> <span class="nf">get_curr_VS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function returns the matching team name that played against Team=(t_name) in Fix=fix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">,</span><span class="s">&quot;Fix&quot;</span><span class="p">:</span><span class="n">fix</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span><span class="p">})[</span><span class="s">&quot;VS&quot;</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="Features.get_agg_size"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.get_agg_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_agg_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">agg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function returns size of giving aggregation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">agg_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">cursor</span> <span class="ow">in</span> <span class="n">agg</span><span class="p">:</span>
+            <span class="n">agg_size</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">agg_size</span>
+    </div>
+<div class="viewcode-block" id="Features.check_for_history"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.check_for_history">[docs]</a>    <span class="k">def</span> <span class="nf">check_for_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">,</span><span class="n">lookback</span><span class="p">,</span><span class="n">need_history</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function returns if for the current fixture that we are checking and according to the size of lookback </span>
+<span class="sd">        requested, we have enough games in this current year or not.</span>
+<span class="sd">        </span>
+<span class="sd">        For example if we are trying to search some features for fixture 5 and the lookback is 10 then we need to add 5 more games from the previous season.</span>
+<span class="sd">        </span>
+<span class="sd">        This function returns True if we need to add games from previous year for the requested aggregation and False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_his</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">prev_year</span><span class="p">,</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">})</span>
+        <span class="k">if</span> <span class="n">fix</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">check_his</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span><span class="p">,</span><span class="n">need_history</span>
+        <span class="k">if</span> <span class="n">fix</span> <span class="o">-</span> <span class="n">lookback</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">check_his</span><span class="p">:</span>
+            <span class="n">need_history</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">True</span><span class="p">,</span><span class="n">need_history</span>
+    </div>
+<div class="viewcode-block" id="Features.select_recieved_goals"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.select_recieved_goals">[docs]</a>    <span class="k">def</span> <span class="nf">select_recieved_goals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">HA</span><span class="p">,</span><span class="n">result</span><span class="p">,</span><span class="n">bool_for_recieved</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function takes takes a result of game, requested team location (home/away) and returns the goals recieved in this game.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">HA</span><span class="o">==</span><span class="s">&quot;home&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">bool_for_recieved</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">bool_for_recieved</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            </div>
+<div class="viewcode-block" id="Features.get_history"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.get_history">[docs]</a>    <span class="k">def</span> <span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">diff</span><span class="p">,</span><span class="n">year</span><span class="p">,</span><span class="n">HA_list</span><span class="p">,</span><span class="n">group_q</span><span class="p">,</span><span class="n">add_to_key</span><span class="p">,</span><span class="n">pos_list</span><span class="o">=</span><span class="p">[],</span><span class="n">all_feat</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function add history data to a current query.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temp_f</span> <span class="o">=</span> <span class="n">Features</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">max_fix</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">g</span><span class="p">[</span><span class="s">&quot;Fix&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">temp_f</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="n">temp_f</span><span class="o">.</span><span class="n">curr_year</span><span class="p">})])</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">pipe</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&quot;$match&quot;</span><span class="p">:{</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="n">temp_f</span><span class="o">.</span><span class="n">curr_year</span><span class="p">,</span><span class="s">&quot;Touches&quot;</span><span class="p">:{</span><span class="s">&quot;$gt&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="s">&quot;Fix&quot;</span><span class="p">:{</span><span class="s">&quot;$lte&quot;</span><span class="p">:</span><span class="n">max_fix</span><span class="p">,</span><span class="s">&quot;$gt&quot;</span><span class="p">:</span><span class="n">max_fix</span><span class="o">-</span><span class="n">diff</span><span class="p">},</span><span class="s">&quot;HA&quot;</span><span class="p">:{</span><span class="s">&quot;$in&quot;</span><span class="p">:</span><span class="n">HA_list</span><span class="p">}}}]</span>
+        <span class="k">if</span> <span class="n">pos_list</span><span class="p">:</span>
+            <span class="n">pipe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&quot;$match&quot;</span><span class="p">][</span><span class="s">&quot;Position&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;$in&quot;</span><span class="p">:</span><span class="n">pos_list</span><span class="p">}</span>
+        <span class="n">pipe</span> <span class="o">+=</span> <span class="p">[</span><span class="n">group_q</span><span class="p">]</span>
+        <span class="n">agg</span> <span class="o">=</span> <span class="n">temp_f</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">pipe</span><span class="p">)</span>
+        <span class="n">num_of_games</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_agg_size</span><span class="p">(</span><span class="n">agg</span><span class="p">)</span>
+        <span class="n">agg</span> <span class="o">=</span> <span class="n">temp_f</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">pipe</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">cursor</span> <span class="ow">in</span> <span class="n">agg</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span><span class="o">!=</span><span class="s">&quot;_id&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">all_feat</span><span class="p">:</span>
+                        <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Goals_by_fix&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_recieved_goals</span><span class="p">(</span><span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;HA&quot;</span><span class="p">],</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;Result&quot;</span><span class="p">],</span><span class="bp">False</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">all_feat</span><span class="p">:</span>
+                        <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_received_Goals_by_fix&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_recieved_goals</span><span class="p">(</span><span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;HA&quot;</span><span class="p">],</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;Result&quot;</span><span class="p">],</span><span class="bp">True</span><span class="p">)</span>
+                        <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Success_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;Tag&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+                        <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Possession_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;Possession&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">num_of_games</span><span class="p">,</span><span class="n">max_fix</span><span class="o">-</span><span class="n">diff</span>
+        </div>
+<div class="viewcode-block" id="Features.create_avg_of_non_avg_f"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.create_avg_of_non_avg_f">[docs]</a>    <span class="k">def</span> <span class="nf">create_avg_of_non_avg_f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">,</span><span class="n">lookback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function creates all features that cannot be avareged by amount of players.</span>
+<span class="sd">        </span>
+<span class="sd">        This features our defined in self.non_avg_keys</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">def</span> <span class="nf">create_avg</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">,</span><span class="n">by_loc</span><span class="p">,</span><span class="n">HA_list</span><span class="p">,</span><span class="n">lookback</span><span class="p">,</span><span class="n">vs</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+            
+            <span class="n">need_history</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">his_num_of_games</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">break_or_continue</span><span class="p">,</span><span class="n">need_history</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_for_history</span><span class="p">(</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">,</span> <span class="n">lookback</span><span class="p">,</span> <span class="n">need_history</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">break_or_continue</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">lookback</span> <span class="o">=</span> <span class="n">fix</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">need_history</span> <span class="k">else</span> <span class="n">lookback</span>  
+            
+            <span class="n">prev_pipe</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&quot;$match&quot;</span><span class="p">:{</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">,</span><span class="s">&quot;Touches&quot;</span><span class="p">:{</span><span class="s">&quot;$gt&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="s">&quot;HA&quot;</span><span class="p">:{</span><span class="s">&quot;$in&quot;</span><span class="p">:</span><span class="n">HA_list</span><span class="p">},</span><span class="s">&quot;VS&quot;</span><span class="p">:</span><span class="n">vs</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:{</span><span class="s">&quot;$in&quot;</span><span class="p">:[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MIN_YEAR</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span><span class="p">)]}}}]</span>
+            <span class="n">pipe</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&quot;$match&quot;</span><span class="p">:{</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span><span class="p">,</span><span class="s">&quot;Touches&quot;</span><span class="p">:{</span><span class="s">&quot;$gt&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="s">&quot;Fix&quot;</span><span class="p">:{</span><span class="s">&quot;$lt&quot;</span><span class="p">:</span><span class="n">fix</span><span class="p">,</span><span class="s">&quot;$gte&quot;</span><span class="p">:</span><span class="n">fix</span><span class="o">-</span><span class="n">lookback</span><span class="p">},</span><span class="s">&quot;HA&quot;</span><span class="p">:{</span><span class="s">&quot;$in&quot;</span><span class="p">:</span><span class="n">HA_list</span><span class="p">}}}]</span>
+            <span class="k">if</span> <span class="n">vs</span><span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">pipe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&quot;$match&quot;</span><span class="p">][</span><span class="s">&quot;VS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vs</span>           
+            <span class="n">group_q</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;$group&quot;</span><span class="p">:{</span><span class="s">&quot;_id&quot;</span><span class="p">:{</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="s">&quot;$GName&quot;</span><span class="p">,</span><span class="s">&quot;Fix&quot;</span><span class="p">:</span><span class="s">&quot;$Fix&quot;</span><span class="p">,</span><span class="s">&quot;HA&quot;</span><span class="p">:</span><span class="s">&quot;$HA&quot;</span><span class="p">,</span><span class="s">&quot;Result&quot;</span><span class="p">:</span><span class="s">&quot;$Result&quot;</span><span class="p">,</span><span class="s">&quot;Tag&quot;</span><span class="p">:</span><span class="s">&quot;$Tag&quot;</span><span class="p">,</span><span class="s">&quot;Possession&quot;</span><span class="p">:</span><span class="s">&quot;$Possession&quot;</span><span class="p">}}}</span>
+            <span class="n">prev_pipe</span> <span class="o">+=</span> <span class="p">[</span><span class="n">group_q</span><span class="p">]</span>
+            <span class="n">pipe</span> <span class="o">+=</span> <span class="p">[</span><span class="n">group_q</span><span class="p">]</span>
+
+            <span class="n">add_to_key</span> <span class="o">=</span> <span class="n">by_loc</span> <span class="k">if</span> <span class="n">vs</span> <span class="o">==</span> <span class="s">&quot;&quot;</span> <span class="k">else</span> <span class="n">by_loc</span> <span class="o">+</span> <span class="s">&quot;_specific&quot;</span>
+            
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Goals_by_fix&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_received_Goals_by_fix&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Success_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Possession_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+            
+            <span class="n">agg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">pipe</span><span class="p">)</span>
+            <span class="n">num_of_games</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_agg_size</span><span class="p">(</span><span class="n">agg</span><span class="p">)</span>
+            <span class="n">agg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">pipe</span><span class="p">)</span> 
+            <span class="n">agg_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">agg</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">vs</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">prev_agg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">prev_pipe</span><span class="p">)</span>
+                <span class="n">num_of_games</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_agg_size</span><span class="p">(</span><span class="n">prev_agg</span><span class="p">)</span>
+                <span class="n">prev_agg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">prev_pipe</span><span class="p">)</span>
+                <span class="n">agg_list</span> <span class="o">+=</span> <span class="p">[</span><span class="n">prev_agg</span><span class="p">]</span>
+                
+            <span class="k">for</span> <span class="n">agg</span> <span class="ow">in</span> <span class="n">agg_list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">cursor</span> <span class="ow">in</span> <span class="n">agg</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">key</span><span class="o">!=</span><span class="s">&quot;_id&quot;</span><span class="p">:</span>
+                            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Goals_by_fix&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_recieved_goals</span><span class="p">(</span><span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;HA&quot;</span><span class="p">],</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;Result&quot;</span><span class="p">],</span><span class="bp">False</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_received_Goals_by_fix&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">select_recieved_goals</span><span class="p">(</span><span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;HA&quot;</span><span class="p">],</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;Result&quot;</span><span class="p">],</span><span class="bp">True</span><span class="p">)</span>
+                            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Success_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;Tag&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+                            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Possession_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">&quot;Possession&quot;</span><span class="p">]</span>
+                        
+            <span class="k">if</span> <span class="n">need_history</span> <span class="ow">and</span> <span class="n">vs</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">fix</span><span class="o">-</span><span class="n">lookback</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">curr_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span>
+                <span class="n">his_num_of_games</span><span class="p">,</span><span class="n">more_his</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_history</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">t_name</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">curr_year</span><span class="p">,</span> <span class="n">HA_list</span><span class="p">,</span> <span class="n">group_q</span><span class="p">,</span> <span class="n">add_to_key</span><span class="p">)</span>
+                <span class="k">while</span> <span class="n">more_his</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">curr_year</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">curr_year</span> <span class="o">&lt;</span> <span class="n">MIN_YEAR</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="n">diff</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">more_his</span>
+                    <span class="n">temp_his_num_of_games</span><span class="p">,</span><span class="n">more_his</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_history</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">t_name</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">curr_year</span><span class="p">,</span> <span class="n">HA_list</span><span class="p">,</span> <span class="n">group_q</span><span class="p">,</span> <span class="n">add_to_key</span><span class="p">)</span>
+                    <span class="n">his_num_of_games</span> <span class="o">+=</span> <span class="n">temp_his_num_of_games</span>
+                    
+            <span class="k">if</span> <span class="n">num_of_games</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">his_num_of_games</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Got 0 in num_of_games and his_... with fix:</span><span class="si">%s</span><span class="s">, lookback:</span><span class="si">%s</span><span class="s">, team:</span><span class="si">%s</span><span class="s">, vs:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fix</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">lookback</span><span class="p">),</span><span class="n">t_name</span><span class="p">,</span><span class="n">vs</span><span class="p">))</span>
+                <span class="n">his_num_of_games</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Goals_by_fix&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">/=</span> <span class="p">(</span><span class="n">num_of_games</span><span class="o">+</span><span class="n">his_num_of_games</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_received_Goals_by_fix&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">/=</span> <span class="p">(</span><span class="n">num_of_games</span><span class="o">+</span><span class="n">his_num_of_games</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Success_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">/=</span> <span class="p">(</span><span class="n">num_of_games</span><span class="o">+</span><span class="n">his_num_of_games</span><span class="p">)</span>
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Success_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">100</span>
+            <span class="n">res</span><span class="p">[</span><span class="s">&quot;avg_Possession_rate&quot;</span><span class="o">+</span><span class="n">add_to_key</span><span class="p">]</span> <span class="o">/=</span> <span class="p">(</span><span class="n">num_of_games</span><span class="o">+</span><span class="n">his_num_of_games</span><span class="p">)</span>
+              
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">curr_HA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_curr_HA</span><span class="p">(</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">)</span> 
+        <span class="n">curr_VS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_curr_VS</span><span class="p">(</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">)</span>
+        
+        <span class="n">create_avg</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">,</span> <span class="s">&quot;_by_all_HA&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;home&quot;</span><span class="p">,</span><span class="s">&quot;away&quot;</span><span class="p">],</span> <span class="n">lookback</span><span class="p">)</span>
+        <span class="n">create_avg</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">,</span> <span class="s">&quot;_by_&quot;</span><span class="o">+</span><span class="n">curr_HA</span><span class="p">,</span> <span class="p">[</span><span class="n">curr_HA</span><span class="p">],</span> <span class="n">lookback</span><span class="p">)</span>
+        
+        <span class="n">create_avg</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">,</span> <span class="s">&quot;_by_all_HA&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;home&quot;</span><span class="p">,</span><span class="s">&quot;away&quot;</span><span class="p">],</span> <span class="n">lookback</span><span class="p">,</span> <span class="n">curr_VS</span><span class="p">)</span>
+        <span class="n">create_avg</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">,</span> <span class="s">&quot;_by_&quot;</span><span class="o">+</span><span class="n">curr_HA</span><span class="p">,</span> <span class="p">[</span><span class="n">curr_HA</span><span class="p">],</span> <span class="n">lookback</span><span class="p">,</span> <span class="n">curr_VS</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_navg_feat_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">res</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">res</span>
+        </div>
+<div class="viewcode-block" id="Features.create_avg_up_to"><a class="viewcode-back" href="../../data_classes.html#features.features.Features.create_avg_up_to">[docs]</a>    <span class="k">def</span> <span class="nf">create_avg_up_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">,</span><span class="n">lookback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function creates all features that can be avareged by amount of players.</span>
+<span class="sd">        </span>
+<span class="sd">        This features our defined in self.all_keys, self.att_keys, self.def_keys</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">def</span> <span class="nf">make_curr_lists</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="s">&#39;all&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[],</span><span class="bp">self</span><span class="o">.</span><span class="n">all_keys</span>
+            <span class="k">elif</span> <span class="n">pos</span> <span class="o">==</span> <span class="s">&#39;def&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">d_pos</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">def_keys</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a_pos</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">att_keys</span>
+          
+        <span class="k">def</span> <span class="nf">update_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">,</span><span class="n">lookback</span><span class="p">,</span><span class="n">by_pos</span><span class="p">,</span><span class="n">by_loc</span><span class="p">,</span><span class="n">HA_list</span><span class="p">,</span><span class="n">pos_list</span><span class="p">,</span><span class="n">key_list</span><span class="p">):</span>
+            
+            <span class="k">def</span> <span class="nf">create_pipe</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">,</span><span class="n">lookback</span><span class="p">,</span><span class="n">by_pos</span><span class="p">,</span><span class="n">by_loc</span><span class="p">,</span><span class="n">HA_list</span><span class="p">,</span><span class="n">pos_list</span><span class="p">,</span><span class="n">key_list</span><span class="p">):</span>
+                
+                <span class="k">def</span> <span class="nf">all_features</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">by_pos</span><span class="p">,</span><span class="n">by_loc</span><span class="p">,</span><span class="n">group_q</span><span class="p">,</span><span class="n">key_list</span><span class="p">):</span>
+                    <span class="n">temp_group_q</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">group_q</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">find_one</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key_list</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                        <span class="n">index</span> <span class="o">=</span> <span class="s">&quot;$&quot;</span><span class="o">+</span><span class="n">key</span>
+                        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s">&quot;PA%&quot;</span><span class="p">:</span>
+                            <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;avg_&quot;</span><span class="o">+</span><span class="n">key</span><span class="o">+</span><span class="s">&quot;_&quot;</span><span class="o">+</span><span class="n">by_pos</span><span class="o">+</span><span class="s">&quot;_&quot;</span><span class="o">+</span><span class="n">by_loc</span><span class="p">,{</span><span class="s">&quot;$avg&quot;</span><span class="p">:</span><span class="n">index</span><span class="p">})</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;avg_&quot;</span><span class="o">+</span><span class="n">key</span><span class="o">+</span><span class="s">&quot;_&quot;</span><span class="o">+</span><span class="n">by_pos</span><span class="o">+</span><span class="s">&quot;_&quot;</span><span class="o">+</span><span class="n">by_loc</span><span class="p">,{</span><span class="s">&quot;$sum&quot;</span><span class="p">:</span><span class="n">index</span><span class="p">})</span>
+                        <span class="n">res</span><span class="p">[</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">0.0</span>
+                        <span class="n">temp_group_q</span><span class="p">[</span><span class="s">&quot;$group&quot;</span><span class="p">][</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">return</span> <span class="n">temp_group_q</span>
+                
+                <span class="n">pipe</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&quot;$match&quot;</span><span class="p">:{</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="n">t_name</span><span class="p">,</span><span class="s">&quot;Year&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span><span class="p">,</span><span class="s">&quot;Touches&quot;</span><span class="p">:{</span><span class="s">&quot;$gt&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span><span class="s">&quot;Fix&quot;</span><span class="p">:{</span><span class="s">&quot;$lt&quot;</span><span class="p">:</span><span class="n">fix</span><span class="p">,</span><span class="s">&quot;$gte&quot;</span><span class="p">:</span><span class="n">fix</span><span class="o">-</span><span class="n">lookback</span><span class="p">},</span><span class="s">&quot;HA&quot;</span><span class="p">:{</span><span class="s">&quot;$in&quot;</span><span class="p">:</span><span class="n">HA_list</span><span class="p">}}}]</span>
+                <span class="k">if</span> <span class="n">pos_list</span><span class="p">:</span>
+                    <span class="n">pipe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&quot;$match&quot;</span><span class="p">][</span><span class="s">&quot;Position&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;$in&quot;</span><span class="p">:</span><span class="n">pos_list</span><span class="p">}</span>
+                <span class="n">group_q</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;$group&quot;</span><span class="p">:{</span><span class="s">&quot;_id&quot;</span><span class="p">:{</span><span class="s">&quot;GName&quot;</span><span class="p">:</span><span class="s">&quot;$GName&quot;</span><span class="p">,</span><span class="s">&quot;Fix&quot;</span><span class="p">:</span><span class="s">&quot;$Fix&quot;</span><span class="p">}}}</span>
+                <span class="n">new_group_q</span> <span class="o">=</span> <span class="n">all_features</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">by_pos</span><span class="p">,</span><span class="n">by_loc</span><span class="p">,</span> <span class="n">group_q</span><span class="p">,</span><span class="n">key_list</span><span class="p">)</span> 
+                <span class="n">pipe</span> <span class="o">+=</span> <span class="p">[</span><span class="n">new_group_q</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">pipe</span><span class="p">,</span><span class="n">new_group_q</span>
+            
+            <span class="n">need_history</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="n">his_num_of_games</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">break_or_continue</span><span class="p">,</span><span class="n">need_history</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_for_history</span><span class="p">(</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">,</span> <span class="n">lookback</span><span class="p">,</span> <span class="n">need_history</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">break_or_continue</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">lookback</span> <span class="o">=</span> <span class="n">fix</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">need_history</span> <span class="k">else</span> <span class="n">lookback</span>
+            
+            <span class="n">temp_res</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">pipe</span><span class="p">,</span><span class="n">group_q</span> <span class="o">=</span> <span class="n">create_pipe</span><span class="p">(</span><span class="n">temp_res</span><span class="p">,</span> <span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">,</span> <span class="n">lookback</span><span class="p">,</span> <span class="n">by_pos</span><span class="p">,</span> <span class="n">by_loc</span><span class="p">,</span> <span class="n">HA_list</span><span class="p">,</span> <span class="n">pos_list</span><span class="p">,</span><span class="n">key_list</span><span class="p">)</span>
+            
+            <span class="n">agg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">pipe</span><span class="p">)</span>
+            <span class="n">num_of_games</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_agg_size</span><span class="p">(</span><span class="n">agg</span><span class="p">)</span>
+            <span class="n">agg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">pipe</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cursor</span> <span class="ow">in</span> <span class="n">agg</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s">&quot;_id&quot;</span><span class="p">:</span>
+                        <span class="n">temp_res</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cursor</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            
+            <span class="k">if</span> <span class="n">need_history</span><span class="p">:</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">fix</span><span class="o">-</span><span class="n">lookback</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">curr_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">curr_year</span>
+                <span class="n">his_num_of_games</span><span class="p">,</span><span class="n">more_his</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_history</span><span class="p">(</span><span class="n">temp_res</span><span class="p">,</span> <span class="n">t_name</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">curr_year</span><span class="p">,</span> <span class="n">HA_list</span><span class="p">,</span> <span class="n">group_q</span><span class="p">,</span> <span class="s">&quot;add_to_key&quot;</span><span class="p">,</span> <span class="n">pos_list</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+                <span class="k">while</span> <span class="n">more_his</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">curr_year</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">curr_year</span> <span class="o">&lt;</span> <span class="n">MIN_YEAR</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="n">diff</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">more_his</span>
+                    <span class="n">temp_his_num_of_games</span><span class="p">,</span><span class="n">more_his</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_history</span><span class="p">(</span><span class="n">temp_res</span><span class="p">,</span> <span class="n">t_name</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">curr_year</span><span class="p">,</span> <span class="n">HA_list</span><span class="p">,</span> <span class="n">group_q</span><span class="p">,</span> <span class="s">&quot;add_to_key&quot;</span><span class="p">,</span> <span class="n">pos_list</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+                    <span class="n">his_num_of_games</span> <span class="o">+=</span> <span class="n">temp_his_num_of_games</span>
+                    
+                
+            
+            <span class="k">if</span> <span class="n">num_of_games</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">his_num_of_games</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Got 0 in num_of_games and his_... with fix:</span><span class="si">%s</span><span class="s">, lookback:</span><span class="si">%s</span><span class="s">, team:</span><span class="si">%s</span><span class="s">&quot;</span><span class="o">%</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fix</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">lookback</span><span class="p">),</span><span class="n">t_name</span><span class="p">))</span>
+                <span class="n">his_num_of_games</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">temp_res</span><span class="p">:</span>
+                <span class="n">temp_res</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">/=</span> <span class="p">(</span><span class="n">num_of_games</span><span class="o">+</span><span class="n">his_num_of_games</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">temp_res</span><span class="p">)</span>
+                                
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">curr_HA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_curr_HA</span><span class="p">(</span><span class="n">t_name</span><span class="p">,</span> <span class="n">fix</span><span class="p">)</span>
+        <span class="n">pos_list</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;by_all_pos&quot;</span><span class="p">,</span><span class="s">&quot;by_def_pos&quot;</span><span class="p">,</span><span class="s">&quot;by_att_pos&quot;</span><span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">pos_list</span><span class="p">:</span>
+            <span class="n">curr_pos_list</span><span class="p">,</span><span class="n">curr_key_list</span> <span class="o">=</span> <span class="n">make_curr_lists</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+            <span class="n">update_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">,</span><span class="n">lookback</span><span class="p">,</span><span class="n">pos</span><span class="p">,</span> <span class="s">&quot;by_all_HA&quot;</span><span class="p">,[</span><span class="s">&quot;home&quot;</span><span class="p">,</span><span class="s">&quot;away&quot;</span><span class="p">],</span><span class="n">curr_pos_list</span><span class="p">,</span><span class="n">curr_key_list</span><span class="p">)</span>
+            <span class="n">update_res</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">t_name</span><span class="p">,</span><span class="n">fix</span><span class="p">,</span><span class="n">lookback</span><span class="p">,</span><span class="n">pos</span><span class="p">,</span> <span class="s">&quot;by_&quot;</span><span class="o">+</span><span class="n">curr_HA</span><span class="p">,</span> <span class="p">[</span><span class="n">curr_HA</span><span class="p">],</span><span class="n">curr_pos_list</span><span class="p">,</span><span class="n">curr_key_list</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">_avg_feat_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">res</span><span class="p">)]</span>     
+        <span class="k">return</span> <span class="n">res</span>   
+    </div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">features_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function return the names of all featurs used in this class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_avg_feat_names</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_navg_feat_names</span> <span class="o">+</span> <span class="p">[</span><span class="s">&quot;relative_all_pos&quot;</span><span class="p">,</span><span class="s">&quot;relative_att_pos&quot;</span><span class="p">,</span><span class="s">&quot;relative_def_pos&quot;</span><span class="p">]</span>
+                 </div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AI_Project 0.0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Ory Jonay, Dror Porat.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

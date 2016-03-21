@@ -1,29 +1,18 @@
-'''
-Created on Jan 19, 2016
-
-@author: dror
-'''
-
-from utils.decorators import timed
 from utils.constants import MIN_YEAR
 import logging
 from os import path
 
 class Features():
-    """This class handles the creation of the features for the classifier. 
-
+    """
+    This class handles the creation of the features for the classifier. 
     """
     def __init__(self,data,year,league):
-        """Init method - used to create new instance of Features.
-
-        Args:
-           data(dictionary):  A dictionary of {"year": all data for this year}.
-           
-           year(str): This is the year that we want to create the features for.
-        
-        This function initializes several lists of positions, such as:
+        """
+        This function initializes several lists of positions and important keys, such as:
         
         attack position list = ["FW","AR","AL","AC","AMC","AML","AMR"]
+        
+        attack keys = ["Shots","ShotsOT","KeyPasses","Dribbles","Fouled","Offsides","Disp","UnsTouches"]
         
         it also saves the current year and previous year as an int.
         """
@@ -43,17 +32,10 @@ class Features():
         self.league = league
         prev = '..' if not path.exists('logs') else '.'
         logging.basicConfig(filename=path.join(prev,'logs','features-%s-%s.log'%(league,year)),format='%(levelname)s: %(asctime)s %(message)s', datefmt='%d/%m/%Y %H:%M %p',level=logging.INFO)
-    
-    
-    def create_features(self,t_name,lookback=15):
-        """A method to create features for a team, according to the lookback.
-
-        Args:
-           * t_name (str):  The name of the team we want to make the features for.
-           
-           * lookback(int): The amount of lookback to make all the aggregation.
         
-        Returns:
+    def create_features(self,t_name,lookback=15):
+        """
+        This function is used to create features for a team, according to the lookback.
         
         This method returns 4 different dictionaries.
         
@@ -67,14 +49,6 @@ class Features():
             3. res_by_non_avg: this dicitionary has features that are aggregated and avareged by summing up all values and avarging by amount of players.
             
             4. res_by_fix_sum: this dicitionary has features that are aggregated and avareged by first summing all fixtures toghter and making an avarege by amount of fixtures.
-            
-        Example of use:
-        
-        ::
-            
-             res_by_all,res_by_fix,res_by_non_avg,res_by_fix_sum = create_features("Chelsea",15)
-             res_by_non_avg[3]["avg_Goals_Scored"] = 2.7
-             
         """
         max_fix = max([g["Fix"] for g in self.col.find({"GName":t_name,"Year":self.curr_year})])
         res_by_all = {i:self.create_avg_up_to(t_name, i, lookback) for i in range(1,max_fix+1)}
@@ -82,72 +56,20 @@ class Features():
         return res_by_all,res_by_non_avg
            
     def get_curr_HA(self,t_name,fix):
-        """This method returns whether t_name played as home / away in the game fix. 
-
-        Args:
-           * t_name (str):  The name of the team we want to find the current location of the game.
-           
-           * fix(int): The fix that we want to search.
-        
-        Returns:
-        
+        """ 
         This function returns the tag (home / away) of the requested team for the requested game.
-        
-        Example of use:
-        
-        ::
-            
-             curr_HA = get_curr_HA("Chelsea",3)
-             curr_HA
-             --> away
-             curr_HA = get_curr_HA("liverpool",3)
-             curr_HA
-             --> home
-             
         """
         return self.col.find_one({"GName":t_name,"Fix":fix,"Year":self.curr_year})["HA"]
     
     def get_curr_VS(self,t_name,fix):
-        """This function returns the matching team name that played against Team=(t_name) in Fix=fix.
-
-        Args:
-           * t_name (str):  The name of the group we want to find it's opponent.
-           
-           * fix(int): The fix that we want to search.
-        
-        Returns:
-        
-        This function returns the name of the relative team.
-        
-        Example of use:
-        
-        ::
-            
-             curr_VS = get_curr_HA("Chelsea",3)
-             curr_VS
-             --> Liverpool
-             
+        """
+        This function returns the matching team name that played against Team=(t_name) in Fix=fix.
         """
         return self.col.find_one({"GName":t_name,"Fix":fix,"Year":self.curr_year})["VS"]
     
     def get_agg_size(self,agg):
-        """This function returns size of giving aggregation.
-
-        Args:
-           * agg(MongoCursor) : The aggregation we want to check.
-        
-        Returns:
-        
-        This function returns the size of the aggregation as int.
-        
-        Example of use:
-        
-        ::
-            
-             agg_size = get_agg_size(some_agg)
-             agg_size
-             --> 7
-             
+        """
+        This function returns size of giving aggregation.
         """
         agg_size = 0
         for cursor in agg:
@@ -155,34 +77,13 @@ class Features():
         return agg_size
     
     def check_for_history(self,t_name,fix,lookback,need_history):
-        """This function returns if for the current fixture that we are checking and according to the size of lookback 
+        """
+        This function returns if for the current fixture that we are checking and according to the size of lookback 
         requested, we have enough games in this current year or not.
         
-        for example if we are trying to search some features for fixture 5 and the lookback is 10 then we need to add 5 more games from the previous season.
-
-        Args:
-           * fix(int): The fix that we want to check.
-           
-           * lookback(int): The size of the requested lookback.
-           
-           * need_history(bool): This paramter will also save this function result for further usage.
-        
-        Returns:
+        For example if we are trying to search some features for fixture 5 and the lookback is 10 then we need to add 5 more games from the previous season.
         
         This function returns True if we need to add games from previous year for the requested aggregation and False otherwise.
-        
-        Example of use:
-        
-        ::
-        
-            need_history = False
-            if check_for_history(5,7,need_history):
-                ....
-            else:
-                ....
-            need_history
-            --> True
-            
         """
         check_his = self.col.find_one({"Year":self.prev_year,"GName":t_name})
         if fix == 1 and not check_his:
@@ -192,18 +93,24 @@ class Features():
         return True,need_history
     
     def select_recieved_goals(self,HA,result,bool_for_recieved):
-            if HA=="home":
-                if bool_for_recieved:
-                    return int(result[1])
-                else:
-                    return int(result[0])
+        """
+        This function takes takes a result of game, requested team location (home/away) and returns the goals recieved in this game.
+        """
+        if HA=="home":
+            if bool_for_recieved:
+                return int(result[1])
             else:
-                if bool_for_recieved:
-                    return int(result[0])
-                else:
-                    return int(result[1])
+                return int(result[0])
+        else:
+            if bool_for_recieved:
+                return int(result[0])
+            else:
+                return int(result[1])
             
     def get_history(self,res,t_name,diff,year,HA_list,group_q,add_to_key,pos_list=[],all_feat=False):
+        """
+        This function add history data to a current query.
+        """
         temp_f = Features(self.col,str(year),self.league)
         try:
             max_fix = max([g["Fix"] for g in temp_f.col.find({"GName":t_name,"Year":temp_f.curr_year})])
@@ -231,6 +138,11 @@ class Features():
         return num_of_games,max_fix-diff
         
     def create_avg_of_non_avg_f(self,t_name,fix,lookback):
+        """
+        This function creates all features that cannot be avareged by amount of players.
+        
+        This features our defined in self.non_avg_keys
+        """
         
         def create_avg(res,t_name,fix,by_loc,HA_list,lookback,vs=""):
             
@@ -311,6 +223,11 @@ class Features():
         return res
         
     def create_avg_up_to(self,t_name,fix,lookback):
+        """
+        This function creates all features that can be avareged by amount of players.
+        
+        This features our defined in self.all_keys, self.att_keys, self.def_keys
+        """
         
         def make_curr_lists(str):
             pos = str.split('_')[1]
@@ -400,5 +317,8 @@ class Features():
     
     @property
     def features_names(self):
+        """
+        This function return the names of all featurs used in this class.
+        """
         return self._avg_feat_names + self._navg_feat_names + ["relative_all_pos","relative_att_pos","relative_def_pos"]
                  

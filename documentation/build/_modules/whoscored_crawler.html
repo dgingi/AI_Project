@@ -1,0 +1,483 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>whoscored_crawler &mdash; AI_Project 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="AI_Project 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AI_Project 0.0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for whoscored_crawler</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">izip</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span><span class="o">,</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">progress.bar</span> <span class="kn">import</span> <span class="n">ChargingBar</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support</span> <span class="kn">import</span> <span class="n">expected_conditions</span> <span class="k">as</span> <span class="n">EC</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.support.wait</span> <span class="kn">import</span> <span class="n">WebDriverWait</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">unidecode</span> <span class="kn">import</span> <span class="n">unidecode</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span><span class="p">,</span> <span class="n">cpu_count</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span> <span class="nn">data.dbhandler</span> <span class="kn">import</span> <span class="n">DBHandler</span>
+<span class="kn">from</span> <span class="nn">utils.argumet_parsers</span> <span class="kn">import</span> <span class="n">CrawlerArgsParser</span>
+<span class="kn">from</span> <span class="nn">utils.decorators</span> <span class="kn">import</span> <span class="n">retry</span>
+
+
+<span class="n">args_parser</span> <span class="o">=</span> <span class="n">CrawlerArgsParser</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="WhoScoredCrawler"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler">[docs]</a><span class="k">class</span> <span class="nc">WhoScoredCrawler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    WhoScoredCrawler - A web crawler and data mining tool for the whoscored.com site.</span>
+<span class="sd">    </span>
+<span class="sd">    Requires Google Chrome and ChromeDriver in order to work. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="WhoScoredCrawler.__init__"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">league</span><span class="p">,</span><span class="n">year</span><span class="p">,</span><span class="n">link</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor for the WhoScoredCrawler class.</span>
+<span class="sd">        </span>
+<span class="sd">        **@keyword** *league*: The specific league to collect the data from.</span>
+<span class="sd">        </span>
+<span class="sd">        **@keyword** *year*: The specific year to collect the data from.</span>
+<span class="sd">        </span>
+<span class="sd">        **@keyword** *link*: The link corresponding to the league and year.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;logs&#39;</span><span class="p">,</span><span class="s">&#39;</span><span class="si">%s%s</span><span class="s">.log&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">league</span><span class="p">,</span><span class="n">year</span><span class="p">)),</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(levelname)s</span><span class="s">: </span><span class="si">%(asctime)s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">datefmt</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%d</span><span class="s">/%m/%Y %H:%M %p&#39;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">league</span> <span class="o">=</span> <span class="n">league</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">league_link</span> <span class="o">=</span> <span class="n">link</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chrome_oprtions</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chrome_oprtions</span><span class="o">.</span><span class="n">add_extension</span><span class="p">(</span><span class="s">&#39;1.4.0_0.crx&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">chrome_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chrome_oprtions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_backup</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;logs&#39;</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">&#39;logs&#39;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished crawler initialization&#39;</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="WhoScoredCrawler.restart_driver"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.restart_driver">[docs]</a>    <span class="k">def</span> <span class="nf">restart_driver</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Restarts the driver.</span>
+<span class="sd">        </span>
+<span class="sd">        In case of the driver getting laggy and it needs a restart, quits, sleeps for 10 seconds and reopens the browser.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+        <span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">chrome_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chrome_oprtions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="WhoScoredCrawler._create_backup"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler._create_backup">[docs]</a>    <span class="k">def</span> <span class="nf">_create_backup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper function to create backup folders and files for the data mined.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Creating backup folders&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;backup&#39;</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">)]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bkup_fixtures_links</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="s">&#39;fixtures.pckl&#39;</span><span class="p">)</span>  
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished creating backup folders&#39;</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="WhoScoredCrawler.get_played_months"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.get_played_months">[docs]</a>    <span class="k">def</span> <span class="nf">get_played_months</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to get the played months for the league.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finding played months&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span>
+        <span class="n">config_button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&#39;date-config-toggle-button&#39;</span><span class="p">)</span>
+        <span class="n">config_button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="c">#     months_menu = self.driver.find_element_by_id(&#39;date-config&#39;)</span>
+        <span class="n">years</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&#39;//*[@id=&quot;date-config&quot;]/div[1]/div/table/tbody/tr/td[1]/div/table/tbody/tr/td&#39;</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&#39;//*[@id=&quot;date-config&quot;]/div[1]/div/table/tbody/tr/td[2]/div/table/tbody/tr&#39;</span><span class="p">)</span>
+        <span class="n">months</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+            <span class="n">months</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">find_elements_by_class_name</span><span class="p">(</span><span class="s">&#39;selectable&#39;</span><span class="p">))]</span>
+        <span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&#39;//*[@id=&quot;date-config&quot;]/div[1]/div/table/tbody/tr/td[2]/div/table/tbody/tr&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+            <span class="n">months</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">find_elements_by_class_name</span><span class="p">(</span><span class="s">&#39;selectable&#39;</span><span class="p">))]</span>
+        <span class="n">config_button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished getting played months&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">months</span>  
+    </div>
+<div class="viewcode-block" id="WhoScoredCrawler.crawl"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.crawl">[docs]</a>    <span class="k">def</span> <span class="nf">crawl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">current</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The main function - crawl the league and mine some data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Starting crawl&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">league_link</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">team_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">unidecode</span><span class="p">(</span><span class="n">thr</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">thr</span> <span class="ow">in</span> \
+                               <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s">&quot;stat-table&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find_elements_by_class_name</span><span class="p">(</span><span class="s">&quot;team-link&quot;</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span> <span class="s">&#39;//*[@id=&quot;sub-navigation&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">PARTIAL_LINK_TEXT</span><span class="p">,</span> <span class="s">&#39;Fixtures&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_played_months</span><span class="p">()</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_previous_data</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">prog_bar</span> <span class="o">=</span> <span class="n">ChargingBar</span><span class="p">(</span><span class="s">&#39;Progress of </span><span class="si">%s</span><span class="s"> crawling:&#39;</span><span class="o">%</span><span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">league</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">)]),</span><span class="nb">max</span><span class="o">=</span><span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fixtures</span><span class="p">[</span><span class="n">month</span><span class="p">])</span> <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_month</span><span class="p">)::</span><span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+        <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_month</span><span class="p">)::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">game</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fixtures</span><span class="p">[</span><span class="n">month</span><span class="p">]:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Starting to parse game&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">game</span><span class="p">:</span> 
+                    <span class="bp">self</span><span class="o">.</span><span class="n">parse_game</span><span class="p">(</span><span class="n">game</span><span class="p">)</span>
+                <span class="n">prog_bar</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished game, moving to the next one&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished month, saving to disk&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">save_month</span><span class="p">(</span><span class="n">month</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">current</span><span class="p">:</span>
+                    <span class="k">pass</span>
+<span class="c">#                     DBHandler(args_parser.LEAGUE_NAME).update_db(self.all_teams_dict,str(self.year))</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c">#we&#39;re done - we can save to the DB now</span>
+<span class="c">#             if not current:</span>
+            <span class="n">DBHandler</span><span class="p">(</span><span class="n">args_parser</span><span class="o">.</span><span class="n">LEAGUE_NAME</span><span class="p">)</span><span class="o">.</span><span class="n">insert_to_db</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+        <span class="n">prog_bar</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+        </div>
+    <span class="nd">@retry</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>        
+    <span class="k">def</span> <span class="nf">parse_game</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">game</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses a game and updates the dictionaries all_team_dict and all_teams_curr_fix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">game</span><span class="p">[</span><span class="s">&#39;link&#39;</span><span class="p">])</span>
+        <span class="n">WebDriverWait</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">EC</span><span class="o">.</span><span class="n">element_to_be_clickable</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span><span class="s">&#39;//*[@id=&quot;sub-sub-navigation&quot;]/ul/li[2]/a&#39;</span><span class="p">)))</span>
+        <span class="n">players_stats_link</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s">&#39;//*[@id=&quot;sub-sub-navigation&quot;]/ul/li[2]/a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s">&quot;href&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">players_stats_link</span><span class="p">)</span>
+        
+        <span class="n">home_team_name</span> <span class="o">=</span> <span class="n">game</span><span class="p">[</span><span class="s">&#39;home&#39;</span><span class="p">]</span>
+        <span class="n">away_team_name</span> <span class="o">=</span> <span class="n">game</span><span class="p">[</span><span class="s">&#39;away&#39;</span><span class="p">]</span>
+        
+        <span class="n">stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&#39;match-report-team-statistics&#39;</span><span class="p">)</span>
+        <span class="n">raw_poss</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&#39;./div[2]/div[2]/span/span[@class=&quot;stat-value&quot;]&#39;</span><span class="p">)</span>
+        <span class="n">poss</span> <span class="o">=</span> <span class="p">[</span><span class="n">unidecode</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">raw_poss</span><span class="p">]</span>
+        
+        <span class="k">def</span> <span class="nf">create_dicts_from_table</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
+            <span class="n">players</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">find_elements_by_class_name</span><span class="p">(</span><span class="s">&quot;player-link&quot;</span><span class="p">)</span>
+            <span class="n">players_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">get_player_name</span><span class="p">(</span><span class="n">unidecode</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players</span><span class="p">])</span>
+            <span class="n">players_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:{</span><span class="s">&quot;Summary&quot;</span><span class="p">:{},</span><span class="s">&quot;Offensive&quot;</span><span class="p">:{},</span><span class="s">&quot;Defensive&quot;</span><span class="p">:{},</span><span class="s">&quot;Passing&quot;</span><span class="p">:{}}</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">players_names</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">players_dict</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">players_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">players_dict</span><span class="p">[</span><span class="s">&#39;home&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_dicts_from_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&quot;live-player-home-stats&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">players_dict</span><span class="p">[</span><span class="s">&#39;away&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_dicts_from_table</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&quot;live-player-away-stats&quot;</span><span class="p">))</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">parse_teams</span><span class="p">()</span>
+        
+        <span class="n">raw_result</span> <span class="o">=</span> <span class="n">unidecode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s">&quot;result&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">raw_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">+</span><span class="p">[</span><span class="n">raw_result</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+        
+        <span class="k">def</span> <span class="nf">update_team</span><span class="p">(</span><span class="n">team_name</span><span class="p">,</span><span class="n">HA</span><span class="p">,</span><span class="n">curr_poss</span><span class="p">,</span><span class="n">vs</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">parse_result</span><span class="p">(</span><span class="n">result_list</span><span class="p">,</span><span class="n">curr_team</span><span class="p">):</span>
+                <span class="n">winner</span> <span class="o">=</span> <span class="s">&quot;tie&quot;</span>
+                <span class="k">if</span> <span class="n">result_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">result_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">winner</span> <span class="o">=</span> <span class="s">&quot;home&quot;</span>
+                <span class="k">elif</span> <span class="n">result_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">result_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">winner</span> <span class="o">=</span> <span class="s">&quot;away&quot;</span>
+                <span class="k">if</span> <span class="n">winner</span> <span class="o">==</span> <span class="n">curr_team</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="mi">1</span>
+                <span class="k">elif</span> <span class="n">winner</span> <span class="o">!=</span> <span class="s">&quot;tie&quot;</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="mi">0</span>
+            <span class="n">team_curr_fix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_curr_fix</span><span class="p">[</span><span class="n">team_name</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team_name</span><span class="p">][</span><span class="n">team_curr_fix</span><span class="p">][</span><span class="s">&quot;Players&quot;</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">players_dict</span><span class="p">[</span><span class="n">HA</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team_name</span><span class="p">][</span><span class="n">team_curr_fix</span><span class="p">][</span><span class="s">&quot;HA&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">HA</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team_name</span><span class="p">][</span><span class="n">team_curr_fix</span><span class="p">][</span><span class="s">&quot;Result&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team_name</span><span class="p">][</span><span class="n">team_curr_fix</span><span class="p">][</span><span class="s">&quot;Tag&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">parse_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">HA</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team_name</span><span class="p">][</span><span class="n">team_curr_fix</span><span class="p">][</span><span class="s">&quot;Possession&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">curr_poss</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team_name</span><span class="p">][</span><span class="n">team_curr_fix</span><span class="p">][</span><span class="s">&quot;VS&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">vs</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_curr_fix</span><span class="p">[</span><span class="n">team_name</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
+            
+        <span class="n">update_team</span><span class="p">(</span><span class="n">home_team_name</span><span class="p">,</span> <span class="s">&quot;home&quot;</span><span class="p">,</span> <span class="n">poss</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">away_team_name</span><span class="p">)</span>
+        <span class="n">update_team</span><span class="p">(</span><span class="n">away_team_name</span><span class="p">,</span> <span class="s">&quot;away&quot;</span><span class="p">,</span> <span class="n">poss</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">home_team_name</span><span class="p">)</span>
+ 
+<div class="viewcode-block" id="WhoScoredCrawler.get_player_name"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.get_player_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_player_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">str_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a a list of strings that represents a player name, return the player name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_str</span><span class="o">=</span><span class="s">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str_list</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="s">&#39;A&#39;</span> <span class="o">&lt;=</span> <span class="n">str_list</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s">&#39;Z&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                    <span class="n">_str</span><span class="o">+=</span><span class="s">&quot; &quot;</span>
+                <span class="n">_str</span><span class="o">+=</span><span class="n">str_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">_str</span>
+        </div>
+<div class="viewcode-block" id="WhoScoredCrawler.parse_teams"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.parse_teams">[docs]</a>    <span class="k">def</span> <span class="nf">parse_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses the teams players tables - 8 tables in total.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="nb">dict</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">players_dict</span><span class="p">:</span>
+            <span class="n">opt_tabels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&quot;live-player-&quot;</span><span class="o">+</span><span class="nb">dict</span><span class="o">+</span><span class="s">&quot;-options&quot;</span><span class="p">)</span>
+            <span class="n">linked_tabels</span> <span class="o">=</span> <span class="n">opt_tabels</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&quot;.//a&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">link_table</span> <span class="ow">in</span> <span class="n">linked_tabels</span><span class="p">:</span>
+                <span class="n">link_table</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+                <span class="n">findStr</span> <span class="o">=</span> <span class="s">&quot;live-player-&quot;</span><span class="o">+</span><span class="nb">dict</span><span class="o">+</span><span class="s">&quot;-&quot;</span><span class="o">+</span><span class="n">link_table</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="n">WebDriverWait</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">EC</span><span class="o">.</span><span class="n">visibility_of_element_located</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span><span class="n">findStr</span><span class="p">)))</span>
+                <span class="n">rel_table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="n">findStr</span><span class="p">)</span>
+                <span class="n">table</span> <span class="o">=</span> <span class="n">rel_table</span><span class="o">.</span><span class="n">find_element_by_id</span><span class="p">(</span><span class="s">&quot;top-player-stats-summary-grid&quot;</span><span class="p">)</span>
+                <span class="n">team_header</span> <span class="o">=</span> <span class="p">[</span><span class="n">unidecode</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s">&quot;thead&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find_elements_by_tag_name</span><span class="p">(</span><span class="s">&quot;th&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]]</span>
+                <span class="k">if</span> <span class="n">link_table</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s">&quot;summary&quot;</span><span class="p">:</span>
+                    <span class="n">team_header</span> <span class="o">+=</span> <span class="p">[</span><span class="s">&quot;Position&quot;</span><span class="p">]</span>
+                    <span class="n">team_header</span> <span class="o">+=</span> <span class="p">[</span><span class="s">&quot;Goals&quot;</span><span class="p">]</span>
+                <span class="n">team_body</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">find_element_by_tag_name</span><span class="p">(</span><span class="s">&quot;tbody&quot;</span><span class="p">)</span>
+                <span class="n">team_lines</span> <span class="o">=</span> <span class="n">team_body</span><span class="o">.</span><span class="n">find_elements_by_tag_name</span><span class="p">(</span><span class="s">&quot;tr&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">team_lines</span><span class="p">:</span>
+                    <span class="n">player_data_line</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">find_elements_by_tag_name</span><span class="p">(</span><span class="s">&quot;td&quot;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]]</span>
+                    <span class="n">key_events</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find_elements_by_tag_name</span><span class="p">(</span><span class="s">&quot;td&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">player_link</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s">&quot;player-link&quot;</span><span class="p">)</span>    
+                    <span class="n">all_player_info</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find_element_by_class_name</span><span class="p">(</span><span class="s">&#39;pn&#39;</span><span class="p">)</span>
+                    <span class="n">player_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_player_name</span><span class="p">(</span><span class="n">unidecode</span><span class="p">(</span><span class="n">player_link</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">link_table</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">==</span><span class="s">&quot;summary&quot;</span><span class="p">:</span>
+                        <span class="n">player_pos</span> <span class="o">=</span> <span class="n">unidecode</span><span class="p">(</span><span class="n">all_player_info</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&#39;./span[@class=&quot;player-meta-data&quot;]&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="n">goals</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="n">player_data_line</span> <span class="o">+=</span> <span class="p">[</span><span class="n">player_pos</span><span class="p">]</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                            <span class="n">events</span> <span class="o">=</span> <span class="n">key_events</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&#39;./span/span&#39;</span><span class="p">)</span>
+                            <span class="n">goals</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s">&quot;data-type&quot;</span><span class="p">)</span><span class="o">==</span><span class="s">&quot;16&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s">&quot;data-event-satisfier-goalown&quot;</span><span class="p">))]</span>
+                        <span class="k">finally</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+                            <span class="n">player_data_line</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">goals</span><span class="p">))]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">players_dict</span><span class="p">[</span><span class="nb">dict</span><span class="p">][</span><span class="n">player_name</span><span class="p">][</span><span class="n">link_table</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="p">:</span><span class="n">d</span> <span class="k">for</span> <span class="n">h</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">team_header</span><span class="p">,</span><span class="n">player_data_line</span><span class="p">)}</span>
+       </div>
+<div class="viewcode-block" id="WhoScoredCrawler.load_previous_data"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.load_previous_data">[docs]</a>    <span class="k">def</span> <span class="nf">load_previous_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">current</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Loads the data collected in previous run in order to resume crawling from that point.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Loading data from previous runs&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">current</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_fixtures_links</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_fixtures</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_fixtures_links</span><span class="p">,</span><span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_bkup_f</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">fixtures</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_bkup_f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_fixtures</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_month</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_start_month</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s">&#39;Finished&#39;</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span><span class="o">+</span><span class="s">&#39;.pckl&#39;</span><span class="p">),</span><span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_bkup_f</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_bkup_f</span><span class="p">)</span>
+                <span class="k">return</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_month</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span><span class="o">+</span><span class="s">&#39;.pckl&#39;</span><span class="p">),</span><span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_bkup_f</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_bkup_f</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">current</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span><span class="o">+</span><span class="s">&#39;-nxtFix.pckl&#39;</span><span class="p">),</span><span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_bkup_f</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_curr_fix</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_bkup_f</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span> <span class="o">!=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%b&#39;</span><span class="p">):</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span><span class="o">+</span><span class="s">&#39;-nxtFix.pckl&#39;</span><span class="p">),</span><span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_bkup_f</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_curr_fix</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_bkup_f</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;-nxtFix.pckl&#39;</span><span class="p">),</span><span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_bkup_f</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_curr_fix</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">_bkup_f</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:{</span><span class="n">i</span><span class="p">:{}</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">team_names</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)}</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">team_names</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_curr_fix</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="mi">1</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">team_names</span><span class="p">}</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished loading previous data&#39;</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="WhoScoredCrawler._get_curr_fix"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler._get_curr_fix">[docs]</a>    <span class="k">def</span> <span class="nf">_get_curr_fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">team_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Given a team name, return the next fixture that the team is playing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team_name</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">[</span><span class="n">team_name</span><span class="p">][</span><span class="n">key</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="n">key</span>
+    </div>
+<div class="viewcode-block" id="WhoScoredCrawler.get_fixtures"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.get_fixtures">[docs]</a>    <span class="k">def</span> <span class="nf">get_fixtures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">current</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse the fixtures page for the games links and save them.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Getting fixtures&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%b&#39;</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">current</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">fixtures</span> <span class="o">=</span> <span class="p">{</span><span class="n">month</span><span class="p">:</span><span class="bp">None</span> <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">}</span>
+        <span class="n">prev_month</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s">&#39;//*[@id=&quot;date-controller&quot;]/a[1]&#39;</span><span class="p">)</span>
+        <span class="n">xpath_query</span> <span class="o">=</span> <span class="s">&#39;//div[@id=&quot;tournament-fixture-wrapper&quot;]/table/tbody/tr[@class!=&quot;rowgroupheader&quot;]&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">current</span> <span class="k">else</span> <span class="s">&#39;//div[@id=&quot;tournament-fixture-wrapper&quot;]/table/tbody/tr[@class!=&quot;rowgroupheader&quot;]//a[@class=&quot;result-1 rc&quot;]/../..&#39;</span>
+        <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">:</span>
+            <span class="n">WebDriverWait</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">until</span><span class="p">(</span><span class="n">EC</span><span class="o">.</span><span class="n">text_to_be_present_in_element</span><span class="p">((</span><span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span><span class="s">&quot;rowgroupheader&quot;</span><span class="p">),</span><span class="n">month</span><span class="p">))</span>
+            <span class="n">all_res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="n">xpath_query</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fixtures</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parse_fixture</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">all_res</span><span class="p">]</span>
+            <span class="n">prev_month</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_fixtures</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished fixtures&#39;</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="WhoScoredCrawler.save_fixtures"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.save_fixtures">[docs]</a>    <span class="k">def</span> <span class="nf">save_fixtures</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the fixtures to disc</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_fixtures_links</span><span class="p">,</span><span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fixutres_bkup</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fixtures</span><span class="p">,</span> <span class="n">fixutres_bkup</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="WhoScoredCrawler.save_month"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.save_month">[docs]</a>    <span class="k">def</span> <span class="nf">save_month</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">month</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves all data mined until month (included) to disc</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="n">month</span><span class="o">+</span><span class="s">&#39;.pckl&#39;</span><span class="p">),</span><span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">month_bkup</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">all_teams_dict</span><span class="p">,</span><span class="n">month_bkup</span><span class="p">)</span>
+        <span class="n">nxt_fix_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_curr_fix</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">team_names</span><span class="p">}</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="n">month</span><span class="o">+</span><span class="s">&#39;-nxtFix.pckl&#39;</span><span class="p">),</span><span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">month_nf_bkup</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">nxt_fix_dict</span><span class="p">,</span><span class="n">month_nf_bkup</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">month</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">month</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;.pckl&#39;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">month</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;-nxtFix.pckl&#39;</span><span class="p">)):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">month</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;-nxtFix.pckl&#39;</span><span class="p">))</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                    <span class="k">pass</span>
+            </div>
+    <span class="nd">@retry</span><span class="p">()</span>       
+    <span class="k">def</span> <span class="nf">parse_fixture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fixture</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parses a fixture and return a dictionary containing all data concerning that fixture.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">link</span> <span class="o">=</span> <span class="n">unidecode</span><span class="p">(</span><span class="n">fixture</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s">&#39;./td/a[@class=&quot;result-1 rc&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_attribute</span><span class="p">(</span><span class="s">&quot;href&quot;</span><span class="p">))</span>
+        <span class="n">home</span> <span class="o">=</span> <span class="n">unidecode</span><span class="p">(</span><span class="n">fixture</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&#39;./td[@data-id]/a&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">unidecode</span><span class="p">(</span><span class="n">fixture</span><span class="o">.</span><span class="n">find_element_by_xpath</span><span class="p">(</span><span class="s">&#39;./td/a[@class=&quot;result-1 rc&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">away</span> <span class="o">=</span> <span class="n">unidecode</span><span class="p">(</span><span class="n">fixture</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s">&#39;./td[@data-id]/a&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s">&#39;link&#39;</span><span class="p">:</span><span class="n">link</span><span class="p">,</span><span class="s">&#39;home&#39;</span><span class="p">:</span><span class="n">home</span><span class="p">,</span><span class="s">&#39;result&#39;</span><span class="p">:</span><span class="n">result</span><span class="p">,</span><span class="s">&#39;away&#39;</span><span class="p">:</span><span class="n">away</span><span class="p">}</span>
+                                  
+<div class="viewcode-block" id="WhoScoredCrawler.find_start_month"><a class="viewcode-back" href="../data_classes.html#whoscored_crawler.WhoScoredCrawler.find_start_month">[docs]</a>    <span class="k">def</span> <span class="nf">find_start_month</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">current</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finding the start month for the current run of the crawler.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finding the start month&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_fixtures_links</span><span class="p">):</span>
+            <span class="n">pckl_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">/*.pckl&#39;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">_bkup_folder</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">pckl_files</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;Too many files, should only be fixtures and games for up to the last month&#39;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pckl_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+            <span class="c">#TODO fix to match 3 files</span>
+            <span class="k">def</span> <span class="nf">_get_last_save_month</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pckl_files</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">pckl_files</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">pckl_files</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span> <span class="o">=</span> <span class="n">_get_last_save_month</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">current</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished finding start month&#39;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s">&#39;Finished crawling&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Finished&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%b&#39;</span><span class="p">):</span>    
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span><span class="p">)]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_save_month</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Finished finding start month&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">played_months</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    
+    </div></div>
+<span class="k">def</span> <span class="nf">start_crawl</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Start crawling, given the arguments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">year</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">]</span>
+    <span class="n">league</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;league&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">args_parser</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
+        <span class="n">args_parser</span><span class="o">.</span><span class="n">LEAGUE_NAME</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;r_league&#39;</span><span class="p">]</span>
+    <span class="n">WhoScoredCrawler</span><span class="p">(</span><span class="n">args_parser</span><span class="o">.</span><span class="n">LEAGUE_NAME</span><span class="p">,</span><span class="n">year</span><span class="p">,</span><span class="n">league</span><span class="p">)</span><span class="o">.</span><span class="n">crawl</span><span class="p">(</span><span class="n">args_parser</span><span class="o">.</span><span class="n">update</span><span class="p">)</span>
+    
+    
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">args_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args_parser</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args_parser</span><span class="o">.</span><span class="n">multi</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">cpu_count</span><span class="p">())</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">start_crawl</span><span class="p">,</span> <span class="n">args_parser</span><span class="o">.</span><span class="n">range_kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start_crawl</span><span class="p">(</span><span class="n">args_parser</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+<span class="c">#         for kwargs in args_parser.update_kwargs:</span>
+<span class="c">#             start_crawl(kwargs)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">cpu_count</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">start_crawl</span><span class="p">,</span> <span class="n">args_parser</span><span class="o">.</span><span class="n">update_kwargs</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">AI_Project 0.0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Ory Jonay, Dror Porat.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
