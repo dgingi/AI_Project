@@ -1,6 +1,0 @@
-selenium
-sphinx
-sklearn
-pymongo
-numpy
-matplotlib
