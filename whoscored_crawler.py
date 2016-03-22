@@ -376,7 +376,7 @@ def start_crawl(kwargs):
     WhoScoredCrawler(args_parser.LEAGUE_NAME,year,league).crawl(args_parser.update)
     if args_parser.update:
         with open('last_crawl.date','w') as _date_file:
-            pickle.dump(datetime.now()), _date_file)
+            pickle.dump(datetime.now(), _date_file)
     
     
 if __name__ == '__main__':

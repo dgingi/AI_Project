@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"leagues_db.La_Liga"},{"v":1,"unique":true,"key":{"Year":-1,"GName":1,"PName":1,"Fix":-1},"name":"Year_-1_GName_1_PName_1_Fix_-1","ns":"leagues_db.La_Liga"}]}

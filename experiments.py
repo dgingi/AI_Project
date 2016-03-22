@@ -784,10 +784,10 @@ class BestProbaDiffForDrawDecision(Experiment):
             if |P(Home Team Winning) - P(Away Team Winning)| <= p:
                 tag as draw instead of choosing the tag with the highest probability
         """
-        Experiment.run(self)
         if not self.load_params(): 
             print 'Can not run- must load previous experiment'
             return
+        Experiment.run(self)
         
         self.ranges = [(float(_i)/100) for _i in range(1,25)]
         self._loaded_data = {}
