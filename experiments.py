@@ -19,6 +19,7 @@ from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
 from utils.constants import LEAGUES, MAX_YEAR, MIN_YEAR
 from utils.decorators import timed, move_to_root_dir
+from datetime import datetime
 
 
 class Experiment():
@@ -954,8 +955,11 @@ class FinalSeasonExperiment(Experiment):
         self.save(self._loaded_data)
     
     
-    with open('last_crawl.date','r') as _date_file:
-        _last_crawl = pickle.load(_date_file)    
+    try:
+        with open('last_crawl.date','r') as _date_file:
+            _last_crawl = pickle.load(_date_file)
+    except IOError:
+        _last_crawl = datetime(2016,3,12)
     _begining_report = "This experiment checks the results of the classifier for last season in 2 ways: One classifier from all the leagues and one specific classifier for each league.\nLast games are from {}".format(_last_crawl.strftime("%A %d. %B %Y"))
             
     _ending_report = """Done"""
