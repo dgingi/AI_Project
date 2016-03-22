@@ -12,14 +12,13 @@ Show what the library does as concisely as possible, developers should be able t
 ## Installation
 
 Under Linux distributions, change into the project root and run the following commands:
+
 	sudo chmod +x install.sh
 	sudo ./install.sh
 
 ## API Reference
 
 API reference is under documentation/build/index.html.
-[API reference available here.](documentation/build/index.html)
-
 
 ## Contributors
 
