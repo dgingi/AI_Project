@@ -311,7 +311,7 @@ Decision Tree classifier and the Random Forest classifier."""
         graph.write_pdf(join_path(self.results_dir,"best_tree.pdf"))
         return 'The plotted Decision Tree classifier is saved in {0}.'.format(os.path.abspath(join_path(self.results_dir,"best_tree.pdf")))
 
-    @timed    
+    #@timed    
     def run(self):
         """
         Runs a RandomizedSearch on both DecisionTree and RandomForest classifiers.
@@ -334,6 +334,9 @@ class BayesExperiment(Experiment):
         self.name = 'Bayes'
         
     def run(self):
+        """
+        Runs a cross validation on Naive Bayes Classfier.
+        """
         Experiment.run(self)
         bayes_score = cross_val_score(GaussianNB(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
         self._loaded_data = {'Bayes':bayes_score}

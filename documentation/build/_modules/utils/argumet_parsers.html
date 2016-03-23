@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>utils.argumet_parsers &mdash; AI_Project 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="AI_Project 0.0.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AI_Project 0.0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for utils.argumet_parsers</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">utils.constants</span> <span class="kn">import</span> <span class="n">MIN_YEAR</span><span class="p">,</span><span class="n">MAX_YEAR</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
+
+<div class="viewcode-block" id="ExperimentArgsParser"><a class="viewcode-back" href="../../utils_classes.html#utils.argumet_parsers.ExperimentArgsParser">[docs]</a><span class="k">class</span> <span class="nc">ExperimentArgsParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is incharge of parsering the arguments related to the experiments. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">experiments</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Best_Params&#39;</span><span class="p">,</span><span class="s">&#39;Bayes&#39;</span><span class="p">,</span><span class="s">&#39;OVR&#39;</span><span class="p">,</span><span class="s">&#39;Default_Params&#39;</span><span class="p">,</span><span class="s">&#39;Learning_Curve&#39;</span><span class="p">,</span><span class="s">&#39;Best_Lookback&#39;</span><span class="p">,</span><span class="s">&#39;Best_Proba&#39;</span><span class="p">,</span><span class="s">&#39;Best_Proba_Diff&#39;</span><span class="p">,</span><span class="s">&#39;Final_Season&#39;</span><span class="p">]</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;run&#39;</span><span class="p">,</span><span class="s">&#39;report&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="ExperimentArgsParser.__init__"><a class="viewcode-back" href="../../utils_classes.html#utils.argumet_parsers.ExperimentArgsParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">usage</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;experiments.py Output_Directory Experiment Run\Report  [-v {0,1,2}] [-o OUTFILE] [-h] </span>
+<span class="s">example: </span>
+<span class="s">$ experiments.py exp1 Best_Params report -v 1</span>
+<span class="s">                      &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&#39;The different experiments for the project.&#39;</span><span class="p">,</span><span class="n">usage</span><span class="o">=</span><span class="n">usage</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;out_dir&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;Output_Directory&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                           <span class="n">help</span><span class="o">=</span><span class="s">&#39;The directory to store experiments or a directory that holds previous experiments.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;exp&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;Experiment&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                           <span class="n">help</span><span class="o">=</span><span class="s">&#39;The experiment to run \ report. Choices are: &#39;</span><span class="o">+</span><span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">experiments</span><span class="p">),</span><span class="n">choices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">experiments</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;action&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;Run\Report&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span><span class="n">choices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="s">&#39;Choices are: &#39;</span><span class="o">+</span><span class="s">&#39; / &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;-v&quot;</span><span class="p">,</span> <span class="s">&quot;--verbosity&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;Increase the output verbosity for reporting an experiment&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&quot;-o&quot;</span><span class="p">,</span> <span class="s">&quot;--outfile&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> 
+                    <span class="n">help</span><span class="o">=</span><span class="s">&quot;Outputs the report into the file specified. Defaults to standard output.&quot;</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="ExperimentArgsParser.parse"><a class="viewcode-back" href="../../utils_classes.html#utils.argumet_parsers.ExperimentArgsParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+        </div></div>
+<div class="viewcode-block" id="CrawlerArgsParser"><a class="viewcode-back" href="../../utils_classes.html#utils.argumet_parsers.CrawlerArgsParser">[docs]</a><span class="k">class</span> <span class="nc">CrawlerArgsParser</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is a parser for the Selenium based web crawler module arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">leagues</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Primer_League&#39;</span><span class="p">,</span><span class="s">&#39;Serie_A&#39;</span><span class="p">,</span><span class="s">&#39;La_Liga&#39;</span><span class="p">,</span><span class="s">&#39;Ligue1&#39;</span><span class="p">,</span><span class="s">&#39;Bundesliga&#39;</span><span class="p">]</span>
+    <span class="n">leagues_links</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;PL_2010&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/2458/Stages/4345/Show/England-Premier-League-2010-2011&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;PL_2011&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/2935/Stages/5476/Show/England-Premier-League-2011-2012&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;PL_2012&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/3389/Stages/6531/Show/England-Premier-League-2012-2013&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;PL_2013&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/3853/Stages/7794/Show/England-Premier-League-2013-2014&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;PL_2014&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/4311/Stages/9155/Show/England-Premier-League-2014-2015&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;PL_2015&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/252/Tournaments/2/England-Premier-League&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;SA_2010&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/2626/Stages/4659/Show/Italy-Serie-A-2010-2011&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;SA_2011&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/3054/Stages/5667/Show/Italy-Serie-A-2011-2012&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;SA_2012&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/3512/Stages/6739/Show/Italy-Serie-A-2012-2013&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;SA_2013&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/3978/Stages/8019/Show/Italy-Serie-A-2013-2014&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;SA_2014&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/5441/Stages/11369/Show/Italy-Serie-A-2014-2015&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;SA_2015&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/108/Tournaments/5/Italy-Serie-A&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;LL_2010&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/2596/Stages/4624/Show/Spain-La-Liga-2010-2011&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;LL_2011&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/3004/Stages/5577/Show/Spain-La-Liga-2011-2012&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;LL_2012&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/3470/Stages/6652/Show/Spain-La-Liga-2012-2013&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;LL_2013&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/3922/Stages/7920/Show/Spain-La-Liga-2013-2014&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;LL_2014&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/5435/Stages/11363/Show/Spain-La-Liga-2014-2015&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;LL_2015&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/206/Tournaments/4/Spain-La-Liga&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;BL_2010&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/2520/Stages/4448/Show/Germany-Bundesliga-2010-2011&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;BL_2011&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/2949/Stages/5492/Show/Germany-Bundesliga-2011-2012&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;BL_2012&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/3424/Stages/6576/Show/Germany-Bundesliga-2012-2013&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;BL_2013&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/3863/Stages/7806/Show/Germany-Bundesliga-2013-2014&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;BL_2014&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/4336/Stages/9192/Show/Germany-Bundesliga-2014-2015&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;BL_2015&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/81/Tournaments/3/Germany-Bundesliga&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;L1_2010&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/2417/Stages/4273/Show/France-Ligue-1-2010-2011&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;L1_2011&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/2920/Stages/5451/Show/France-Ligue-1-2011-2012&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;L1_2012&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/3356/Stages/6476/Show/France-Ligue-1-2012-2013&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;L1_2013&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/3836/Stages/7771/Show/France-Ligue-1-2013-2014&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;L1_2014&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/4279/Stages/9105/Show/France-Ligue-1-2014-2015&#39;</span><span class="p">,</span>\
+                        <span class="s">&#39;L1_2015&#39;</span><span class="p">:</span><span class="s">&#39;http://www.whoscored.com/Regions/74/Tournaments/22/France-Ligue-1&#39;</span><span class="p">,}</span>
+
+
+<div class="viewcode-block" id="CrawlerArgsParser.__init__"><a class="viewcode-back" href="../../utils_classes.html#utils.argumet_parsers.CrawlerArgsParser.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">multi</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">range_kwargs</span><span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&#39;Crawl whoscored.com for the specified league and years.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;league&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;League&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                           <span class="n">help</span><span class="o">=</span><span class="s">&#39;A league to parse. The leagues are: &#39;</span><span class="o">+</span><span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">leagues</span><span class="p">),</span>
+                           <span class="n">choices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">leagues</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s">&#39;?&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;year&#39;</span><span class="p">,</span> <span class="n">metavar</span><span class="o">=</span><span class="s">&#39;Years&#39;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;?&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s">&#39;A year to parse. Valid years are: &#39;</span><span class="o">+</span><span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MIN_YEAR</span><span class="p">,</span><span class="n">MAX_YEAR</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="s">&#39; or any range of them, separated by -.&#39;</span><span class="p">]),</span>
+                            <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span><span class="mi">2015</span><span class="p">))),</span>\
+                            <span class="n">choices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_default_ranges</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;-u&#39;</span><span class="p">,</span><span class="s">&#39;--update&#39;</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="s">&#39;Crawel current year on all leagues for update&#39;</span><span class="p">)</span>
+     
+     </div>
+<div class="viewcode-block" id="CrawlerArgsParser._default_ranges"><a class="viewcode-back" href="../../utils_classes.html#utils.argumet_parsers.CrawlerArgsParser._default_ranges">[docs]</a>    <span class="k">def</span> <span class="nf">_default_ranges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function defines the defult ranges for the crawler.</span>
+<span class="sd">        </span>
+<span class="sd">        Using our constants MIN_YEAR and MAX_YEAR.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MIN_YEAR</span><span class="p">,</span><span class="n">MAX_YEAR</span><span class="p">)]</span><span class="o">+</span><span class="p">[</span><span class="s">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MIN_YEAR</span><span class="p">,</span><span class="n">MAX_YEAR</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MIN_YEAR</span><span class="p">,</span><span class="n">MAX_YEAR</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="CrawlerArgsParser.parse"><a class="viewcode-back" href="../../utils_classes.html#utils.argumet_parsers.CrawlerArgsParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">update</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">LEAGUE_NAME</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">)[</span><span class="s">&#39;league&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="s">&#39;-&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">)[</span><span class="s">&#39;year&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">multi</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="n">start</span> <span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">)[</span><span class="s">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;-&#39;</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">start</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">end</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;league&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leagues_links</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash_league_names_and_years</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LEAGUE_NAME</span><span class="p">,</span><span class="n">year</span><span class="p">)]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">range_kwargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">)[</span><span class="s">&#39;year&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;league&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leagues_links</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash_league_names_and_years</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LEAGUE_NAME</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">])]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_kwargs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">league</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">leagues</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;league&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leagues_links</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_hash_league_names_and_years</span><span class="p">(</span><span class="n">league</span><span class="p">,</span><span class="n">MAX_YEAR</span><span class="p">)]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAX_YEAR</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;r_league&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">league</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_kwargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">))</span>
+        </div>
+<div class="viewcode-block" id="CrawlerArgsParser._hash_league_names_and_years"><a class="viewcode-back" href="../../utils_classes.html#utils.argumet_parsers.CrawlerArgsParser._hash_league_names_and_years">[docs]</a>    <span class="k">def</span> <span class="nf">_hash_league_names_and_years</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">league</span><span class="p">,</span><span class="n">year</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function is used as a hash function f:(long_league_name) --&gt; short_league_name</span>
+<span class="sd">        </span>
+<span class="sd">        For example - f(Primer_League) = PL.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">abv_league</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">league</span> <span class="o">==</span> <span class="s">&#39;Primer_League&#39;</span><span class="p">:</span>
+            <span class="n">abv_league</span> <span class="o">=</span> <span class="s">&#39;PL&#39;</span>
+        <span class="k">elif</span> <span class="n">league</span> <span class="o">==</span> <span class="s">&#39;La_Liga&#39;</span><span class="p">:</span>
+            <span class="n">abv_league</span> <span class="o">=</span> <span class="s">&#39;LL&#39;</span>
+        <span class="k">elif</span> <span class="n">league</span> <span class="o">==</span> <span class="s">&#39;Bundesliga&#39;</span><span class="p">:</span>
+            <span class="n">abv_league</span> <span class="o">=</span> <span class="s">&#39;BL&#39;</span>
+        <span class="k">elif</span> <span class="n">league</span> <span class="o">==</span> <span class="s">&#39;Ligue1&#39;</span><span class="p">:</span>
+            <span class="n">abv_league</span> <span class="o">=</span> <span class="s">&#39;L1&#39;</span>
+        <span class="k">elif</span> <span class="n">league</span> <span class="o">==</span> <span class="s">&#39;Serie_A&#39;</span><span class="p">:</span>
+            <span class="n">abv_league</span> <span class="o">=</span> <span class="s">&#39;SA&#39;</span>
+        <span class="k">return</span> <span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">abv_league</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)])</span>
+    </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../before.html">1. Things To Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_classes.html">2. Data Handling Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils_classes.html">3. Utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../expr.html">4. Experiments Module</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">AI_Project 0.0.1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Ory Jonay, Dror Porat.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
