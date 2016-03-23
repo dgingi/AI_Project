@@ -1,3 +1,4 @@
+from datetime import datetime
 from glob import glob
 from os import  makedirs
 import os
@@ -9,9 +10,9 @@ from sklearn.cross_validation import  cross_val_score
 from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.grid_search import RandomizedSearchCV
 from sklearn.learning_curve import learning_curve
+from sklearn.multiclass import OneVsRestClassifier as OVRC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier as DTC
-from sklearn.multiclass import OneVsRestClassifier as OVRC
 from tabulate import tabulate
 import warnings
 
@@ -19,7 +20,6 @@ from data.cross_validation import CrossValidation
 from utils.argumet_parsers import ExperimentArgsParser
 from utils.constants import LEAGUES, MAX_YEAR, MIN_YEAR
 from utils.decorators import timed, move_to_root_dir
-from datetime import datetime
 
 
 class Experiment():
@@ -386,8 +386,8 @@ class OneVsRestExperiment(Experiment):
             print 'Can not run- must load previous experiment'
             return
         Experiment.run(self)
-        ovr_tree_score = cross_val_score(OVRC(self.estimators_params['DTC'],-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
-        ovr_forest_score = cross_val_score(OVRC(self.estimators_params['RFC'],-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        ovr_tree_score = cross_val_score(OVRC(DTC(**self.estimators_params['DTC'].best_params_),-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        ovr_forest_score = cross_val_score(OVRC(RFC(**self.estimators_params['RFC'].best_params_),-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
         self._loaded_data = {'OvR Tree':ovr_tree_score,'OvR Forest':ovr_forest_score}
         self.save(self._loaded_data)
 #         cross_size = 0
@@ -411,7 +411,7 @@ class OneVsRestExperiment(Experiment):
 #         self._loaded_data['RFC'] = (self._loaded_data['RFC']*1.0) / cross_size
         
         
-    _begining_report = """This experiment tried a OneVsRest classifier."""
+    _begining_report = """This experiment tried a OneVsRest classifier with both Decision Tree and Random Forest as base estimators."""
             
     _ending_report = """Done"""
     
@@ -420,7 +420,8 @@ class OneVsRestExperiment(Experiment):
         """
         Reporting on low verbosity - only results.
         """
-        return '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['DTC'].mean())])
+        return '\n'.join(['One Vs Rest with Decision Tree accuracy score: {0:.4f}'.format(self._loaded_data['OvR Tree'].mean()),\
+                          'One Vs Rest with Random Forest accuracy score: {0:.4f}'.format(self._loaded_data['OvR Forest'].mean())])
      
 class DefaultParamsExperiment(Experiment):
     """
@@ -615,8 +616,8 @@ for the creation on the examples."""
                 _rfc_scores = {int(_lk):self._loaded_data[_lk][1] for _lk in self._loaded_data}
                 
                 train_sizes = sorted(_dtc_scores.keys())
-                train_scores = [value for (key, value) in sorted(_dtc_scores.items())]
-                test_scores = [value for (key, value) in sorted(_rfc_scores.items())] 
+                train_scores = [value for (_, value) in sorted(_dtc_scores.items())]
+                test_scores = [value for (_, value) in sorted(_rfc_scores.items())] 
                 
                 train_scores_mean = np.mean(train_scores, axis=1)
                 train_scores_std = np.std(train_scores, axis=1)
@@ -752,14 +753,52 @@ we start making the decisions."""
         _proba_scores = {float(_k):(self._loaded_data['DTC'][_k],self._loaded_data['RFC'][_k]) for _k in self._loaded_data['DTC'].keys()}
         _inner_table = [[key,tup[0][0],tup[0][1],(float(tup[0][0])/self._loaded_data["AG"])*tup[0][1],tup[1][0],tup[1][1],(float(tup[1][0])/self._loaded_data["AG"])*tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
         _table = tabulate([data for data in _inner_table],\
-                          headers=['Probability','QG DT','Score DT','AS DT','QG RF','Score RF','AS RF'],tablefmt="fancy_grid",floatfmt=".4f")
+                          headers=['Probability','#Examples Tree','Score Tree','AS DT','#Examples Forest','Score Forest','AS RF'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
     
     @property
     def _detail(self):
         """
-        Plots the graph of probability vs. accuracy score
+        Medium verbosity - show plotted graphs
         """
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import matplotlib.pyplot as plt
+    
+    
+            def plot_lookback_curve(title, ylim=None,_dtc_scores=[],_rfc_scores=[],kwargs={}):
+          
+                plt.figure()
+                plt.title(title)
+                if ylim is not None:
+                    plt.ylim(*ylim)
+                plt.xlabel(kwargs['xlabel'])
+                plt.ylabel(kwargs['ylabel'])
+                
+                tree_train_sizes = sorted(_dtc_scores.keys())
+                forest_train_sizes = sorted(_rfc_scores.keys())
+                train_scores_mean = [value for (_, value) in sorted(_dtc_scores.items())] 
+                test_scores_mean = [value for (_, value) in sorted(_rfc_scores.items())] 
+                plt.grid()
+            
+                plt.plot(tree_train_sizes, train_scores_mean, 'o-', color="r",
+                         label=kwargs['tree'])
+                plt.plot(forest_train_sizes, test_scores_mean, 'o-', color="g",
+                         label='forest')
+            
+                plt.legend(loc="best")
+                return plt
+        _dtc_scores = {float(_k):self._loaded_data['DTC'][_k][0] for _k in self._loaded_data['DTC']}
+        _rfc_scores = {float(_k):self._loaded_data['RFC'][_k][0] for _k in self._loaded_data['RFC']}
+        kwargs = {'xlabel':'Probability','ylabel':'#Examples who has a class with greater probability',\
+                  'tree':'Decision Tree Classifier','forest':'Random Forest Classifer'}
+        plot_lookback_curve("Number of examples by probability",None,_dtc_scores,_rfc_scores,kwargs)
+        _dtc_scores = {self._loaded_data['DTC'][_k][0]:self._loaded_data['DTC'][_k][1] for _k in self._loaded_data['DTC']}
+        _rfc_scores = {self._loaded_data['RFC'][_k][0]:self._loaded_data['RFC'][_k][1] for _k in self._loaded_data['RFC']}
+        kwargs = {'xlabel':'Number of examples','ylabel':'Mean score',\
+                  'tree':'Decision Tree Classifier','forest':'Random Forest Classifer'}
+        plot_lookback_curve("Mean score by number of examples",None,_dtc_scores,_rfc_scores,kwargs)
+        plt.show()
         return ''
 
 class BestProbaDiffForDrawDecision(Experiment):
@@ -889,10 +928,42 @@ the decision will be a Draw."""
     @property
     def _detail(self):
         """
-        Plots the graph of probability vs. accuracy score
+        Medium verbosity - show plotted graphs
         """
-        return ''
-  
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import numpy as np
+            import matplotlib.pyplot as plt
+    
+    
+            def plot_lookback_curve(title, ylim=None):
+          
+                plt.figure()
+                plt.title(title)
+                if ylim is not None:
+                    plt.ylim(*ylim)
+                plt.xlabel("Maximum difference between P(Home win) and P(Away win)")
+                plt.ylabel("Mean Cross Validation Score")
+                _dtc_scores = {float(_k):self._loaded_data['DTC'][_k] for _k in self._loaded_data['DTC']}
+                _rfc_scores = {float(_k):self._loaded_data['RFC'][_k] for _k in self._loaded_data['RFC']}
+                
+                train_sizes = sorted(_dtc_scores.keys())
+                train_scores_mean = [value for (_, value) in sorted(_dtc_scores.items())] 
+                test_scores_mean = [value for (_, value) in sorted(_rfc_scores.items())] 
+                plt.grid()
+            
+                plt.plot(train_sizes, train_scores_mean, 'o-', color="r",
+                         label="Decision Tree score")
+                plt.plot(train_sizes, test_scores_mean, 'o-', color="g",
+                         label="Random Forest score")
+            
+                plt.legend(loc="best")
+                return plt
+        
+        plot_lookback_curve('Correlation of difference and mean validation score')
+        plt.show()
+        return ''  
+    
 class FinalSeasonExperiment(Experiment):
     """
     An experiment to test the results of the classifier for last season (2015-2016).
@@ -999,7 +1070,7 @@ class FinalSeasonExperiment(Experiment):
         """
         Reporting on low verbosity - generates prediction in for each league (all games in current season), and prints averaged accuracy for each fixture.
         
-        For each fixture we get avareged accuracy for all leagues and avarege accuracy per league.
+        For each fixture we get averaged accuracy for all leagues and average accuracy per league.
         """
         all_scores = {}
         all_scores_league = {}
@@ -1027,7 +1098,7 @@ class FinalSeasonExperiment(Experiment):
                         amount_overlap[_k] += 1
                         all_scores[_k] += _scores[_k]
         for _k in all_scores:
-            all_scores[_k] = all_scores[_k] / amount_overlap[_k]
+            all_scores[_k] = float(all_scores[_k]) / amount_overlap[_k]
         _inner_table = [[key,all_scores[key]] for key in sorted(all_scores.keys())]
         for i in range(len(_inner_table)):
             _inner_table[i] += [all_scores_league[_l][i] for _l in sorted(LEAGUES)]
@@ -1038,7 +1109,9 @@ class FinalSeasonExperiment(Experiment):
         curr_headers = ['Fix','Score'] + [_l for _l in sorted(LEAGUES)]
         _table = tabulate([data for data in _inner_table],\
                             headers=curr_headers,tablefmt="fancy_grid",floatfmt=".4f")
-        print 'Results for experiment %s :\n%s\n'%(self.name,_table)
+        from numpy import array
+        print 'Results for experiment %s:\n%s\nMean accuracy for all leagues: %.4f'%(self.name,_table,array([data[1] for data in _inner_table]).mean())
+        return ''
         
     @property
     def _detail(self):
