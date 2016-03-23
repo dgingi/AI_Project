@@ -84,6 +84,8 @@ class Experiment():
         """
         Loads the parameters of the experiment.
         
+        This is a virtual function.
+        
         You should override this in derived classes to configure the experiment parameters
         """
         raise NotImplementedError

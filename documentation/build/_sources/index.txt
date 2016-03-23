@@ -15,8 +15,8 @@ Contents:
    
    before.rst
    data_classes.rst
-   utils_classes.rst
    expr.rst
+   utils_classes.rst
    
    
 Indices and tables

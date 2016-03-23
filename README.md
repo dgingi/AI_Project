@@ -56,6 +56,8 @@ To report the results of the Final Season experiment that saved his results in R
 For more information:
 	
 	sudo python experiments.py -h
+	
+*As a general rule of thumb, running an experiment report with -v 1 plots graph to the screen and create other additional data, while running report with -v 0 (or without -v at all) will only print the results and tables.*
 
 ## API Reference
 

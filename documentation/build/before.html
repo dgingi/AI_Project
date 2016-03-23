@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>1. Things To Install &mdash; AI_Project 0.0.1 documentation</title>
+    <title>1. Installation &mdash; AI_Project 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -52,8 +52,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="things-to-install">
-<h1>1. Things To Install<a class="headerlink" href="#things-to-install" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="installation">
+<h1>1. Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Described below are the installation procedures to run the project.</p>
+<p>The project is written in Python2.7 - please make sure to download correct packages!</p>
+<p>We personally recommend installing an Ubuntu workstation on a virtual machine and using the VM instead of installing the project personal computers.</p>
 <div class="section" id="linux-installation">
 <h2>1.1. Linux Installation<a class="headerlink" href="#linux-installation" title="Permalink to this headline">¶</a></h2>
 <p>To install under Linux, run in terminal under the project root directory:</p>
@@ -61,39 +64,44 @@
 sudo ./install
 </pre></div>
 </div>
-<p>And <strong>viola</strong>! Everything is ready!</p>
+<p>And <strong>voilà</strong>! Everything is ready!</p>
 </div>
-<div class="section" id="windows-installation">
-<h2>1.2. Windows Installation<a class="headerlink" href="#windows-installation" title="Permalink to this headline">¶</a></h2>
-<p>Before you start using our project you need to install several packages and external programs.</p>
+<div class="section" id="windows-mac-os-installation">
+<h2>1.2. Windows / Mac OS Installation<a class="headerlink" href="#windows-mac-os-installation" title="Permalink to this headline">¶</a></h2>
+<p>Before you start using our project you need to install MongoDB, Python2.7, pip and additional packages.</p>
+<div class="section" id="python2-7-and-pip">
+<h3>1.2.1. Python2.7 and pip<a class="headerlink" href="#python2-7-and-pip" title="Permalink to this headline">¶</a></h3>
+<p>Under Windows OS, we suggest installing the Anaconda Python distribution (it will save alot of time installing different packages from PyPI).
+You can download and install the ditribution from <a class="reference external" href="https://www.continuum.io/downloads">here</a>.</p>
+</div>
 <div class="section" id="mongodb">
-<h3>1.2.1. MongoDB<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic">
-<li><p class="first">Please enter this <a class="reference external" href="https://www.mongodb.org/downloads#production">link</a> and download the software.</p>
+<h3>1.2.2. MongoDB<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Please enter this <a class="reference external" href="https://docs.mongodb.org/manual/installation/#tutorials">link</a> and follow the tutorial that suits your OS to install and configure MongoDB.</p>
 </li>
-<li><dl class="first docutils">
-<dt>After you successfully installed the MongoDB software please enter this <a class="reference external" href="https://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/">site</a></dt>
-<dd><p class="first last">to understand how to configure you MongoDB successfully.</p>
-</dd>
-</dl>
-</li>
-</ol>
-</div>
-<div class="section" id="pypi-package">
-<h3>1.2.2. PyPI package<a class="headerlink" href="#pypi-package" title="Permalink to this headline">¶</a></h3>
-<p>Install with pip the following packages:</p>
-<ol class="arabic">
-<li><p class="first">selenium:</p>
-<div class="highlight-python"><div class="highlight"><pre>pip install selenium
-</pre></div>
-</div>
-</li>
-<li><p class="first">sklearn:</p>
-<div class="highlight-python"><div class="highlight"><pre>pip install sklearn
+<li><p class="first">Run from the project root directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>sudo mongorestore -d leagues_db server_dump/leagues_db
 </pre></div>
 </div>
 </li>
 </ol>
+</div></blockquote>
+</div>
+<div class="section" id="additional-packages">
+<h3>1.2.3. Additional packages<a class="headerlink" href="#additional-packages" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Install the following packages according to your OS (should be installed if using Anaconda distribution):</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://docs.scipy.org/doc/numpy-1.10.1/user/install.html">NumPy</a></li>
+<li><a class="reference external" href="http://www.scipy.org/install.html">SciPy</a></li>
+<li><a class="reference external" href="http://matplotlib.org/users/installing.html">MatplotLib</a></li>
+</ol>
+<p>Run from project root:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install -r REQUIREMENTS.txt
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 </div>
 </div>
@@ -106,18 +114,19 @@ sudo ./install
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">1. Things To Install</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="">1. Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#linux-installation">1.1. Linux Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#windows-installation">1.2. Windows Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mongodb">1.2.1. MongoDB</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pypi-package">1.2.2. PyPI package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#windows-mac-os-installation">1.2. Windows / Mac OS Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python2-7-and-pip">1.2.1. Python2.7 and pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mongodb">1.2.2. MongoDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-packages">1.2.3. Additional packages</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="data_classes.html">2. Data Handling Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils_classes.html">3. Utils package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expr.html">4. Experiments Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expr.html">3. Experiments Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils_classes.html">4. Utils package</a></li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -170,7 +179,7 @@ sudo ./install
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Ory Jonay, Dror Porat.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

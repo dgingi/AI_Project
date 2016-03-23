@@ -1,5 +1,11 @@
-Things To Install
-*****************
+Installation
+************
+
+Described below are the installation procedures to run the project.
+
+The project is written in Python2.7 - please make sure to download correct packages!
+
+We personally recommend installing an Ubuntu workstation on a virtual machine and using the VM instead of installing the project personal computers.  
 
 Linux Installation
 ==================
@@ -9,30 +15,40 @@ To install under Linux, run in terminal under the project root directory::
 	sudo chmod +x install.sh
 	sudo ./install
 	
-And **viola**! Everything is ready!
+And **voilà**! Everything is ready!
 
-Windows Installation
-====================
+Windows / Mac OS Installation
+=============================
 
-Before you start using our project you need to install several packages and external programs.
+Before you start using our project you need to install MongoDB, Python2.7, pip and additional packages.
+
+Python2.7 and pip
+-----------------
+
+Under Windows OS, we suggest installing the Anaconda Python distribution (it will save alot of time installing different packages from PyPI).
+You can download and install the ditribution from `here <https://www.continuum.io/downloads>`_.  
 
 MongoDB
 -------
-1. Please enter this `link <https://www.mongodb.org/downloads#production>`_ and download the software. 
-	
-2. After you successfully installed the MongoDB software please enter this `site <https://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/>`_
-	to understand how to configure you MongoDB successfully.
 
-PyPI package
-------------
-Install with pip the following packages:
+	#. Please enter this `link <https://docs.mongodb.org/manual/installation/#tutorials>`_ and follow the tutorial that suits your OS to install and configure MongoDB.
 	
-1. selenium::
-		
-	pip install selenium
-		
-2. sklearn::
-		
-	pip install sklearn
+	#. Run from the project root directory::
 	
+		sudo mongorestore -d leagues_db server_dump/leagues_db
+	
+	
+
+Additional packages
+-------------------
+	Install the following packages according to your OS (should be installed if using Anaconda distribution):
+	
+	#. `NumPy <http://docs.scipy.org/doc/numpy-1.10.1/user/install.html>`_
+	
+	#. `SciPy <http://www.scipy.org/install.html>`_
+	
+	#. `MatplotLib <http://matplotlib.org/users/installing.html>`_
 		
+	Run from project root::
+	
+		pip install -r REQUIREMENTS.txt 
