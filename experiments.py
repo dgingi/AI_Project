@@ -378,20 +378,36 @@ class OneVsRestExperiment(Experiment):
         
         Loads the all of the examples and tags, and also creates cross validation for the classifiers..
         """
-        self.cv = CrossValidation(test=self._test)
+        self.cv = CrossValidation(test=self._test,remote=False)
         lookback = self.estimators_params['Lookback']
         self.cv.load_data(lookback)
         self.X = self.cv.complete_examples
-        self.y = self.cv.complete_tag
+        self.y = self.cv.complete_tags
        
     def run(self):
-        Experiment.run(self)
         if not self.load_params(): 
             print 'Can not run- must load previous experiment'
             return
-        dt_score = cross_val_score(OVRC(DTC(**self.estimators_params['DTC'])), self.X, self.y,  cv=self.cv.leagues_cross_validation, n_jobs=-1)
-        rf_score = cross_val_score(OVRC(DTC(**self.estimators_params['RFC'])), self.X, self.y,  cv=self.cv.leagues_cross_validation, n_jobs=-1)
-        self._loaded_data = {'DTC':dt_score,'RFC':rf_score}
+        Experiment.run(self)
+        cross_size = 0
+        self._loaded_data = {'DTC':0,'RFC':0}
+        for train , test in self.cv._leagues_cross_validation():
+            cross_size += 1
+            
+            dt_estimator = OVRC(DTC(**self.estimators_params['DTC']),n_jobs=-1)
+            rf_estimator = OVRC(DTC(**self.estimators_params['RFC']),n_jobs=-1)
+            
+            dt_estimator = dt_estimator.fit(train[0], train[1])
+            rf_estimator = rf_estimator.fit(train[0], train[1])
+            
+            dt_score = dt_estimator.score(test[0], test[1])
+            rf_score = rf_estimator.score(test[0], test[1])
+            
+            self._loaded_data['DTC'] += dt_score
+            self._loaded_data['RFC'] += rf_score
+            
+        self._loaded_data['DTC'] = (self._loaded_data['DTC']*1.0) / cross_size
+        self._loaded_data['RFC'] = (self._loaded_data['RFC']*1.0) / cross_size
         self.save(self._loaded_data)
         
     _begining_report = """This experiment tried a OneVsRest classifier."""
@@ -1000,7 +1016,11 @@ class FinalSeasonExperiment(Experiment):
             all_scores[_k] = all_scores[_k] / amount_overlap[_k]
         _inner_table = [[key,all_scores[key]] for key in sorted(all_scores.keys())]
         for i in range(len(_inner_table)):
-            _inner_table[i] += [all_scores_league[_l] for _l in sorted(LEAGUES)]
+            _inner_table[i] += [all_scores_league[_l][i] for _l in sorted(LEAGUES)]
+        for i in range(1,len(_inner_table)):
+            for j in range(len(_inner_table[i])):
+                if _inner_table[i][j] == 0.0:
+                    _inner_table[i][j] = 'Not Played'
         curr_headers = ['Fix','Score'] + [_l for _l in sorted(LEAGUES)]
         _table = tabulate([data for data in _inner_table],\
                             headers=curr_headers,tablefmt="fancy_grid",floatfmt=".4f")
@@ -1039,14 +1059,14 @@ class FinalSeasonExperiment(Experiment):
             _inner_table = [[key,_scores[key]] for key in sorted(_scores.keys()) if _scores[key] != 0.0]
             _table = tabulate([data for data in _inner_table],\
                               headers=['Fix','Score'],tablefmt="fancy_grid",floatfmt=".4f")
-            with open(os.path.join(self._dir_name,league+"_fix_res.txt"),'w') as output:
+            with open(os.path.join(self.results_dir,league+"_fix_res.txt"),'w') as output:
                 output.write(_table.encode("utf-8"))
                 output.close()
             
             _inner_table = [[elem[1],elem[2],elem[3][0]+"-"+elem[3][1],elem[4],elem[5][0],elem[5][1],elem[5][2]] for elem in self._loaded_data[league]["array"] if elem[0]==league]
             _table = tabulate([data for data in _inner_table],\
                           headers=['Home','Away','Result','Tag','-1','0','1'],tablefmt="fancy_grid")
-            with open(os.path.join(self._dir_name,league+"_results.txt"),'w') as output:
+            with open(os.path.join(self.results_dir,league+"_results.txt"),'w') as output:
                 output.write(_table.encode("utf-8"))
                 output.close()
 
