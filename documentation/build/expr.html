@@ -106,6 +106,13 @@ automatically loads data for cross validation</dd>
 </dd></dl>
 
 <dl class="method">
+<dt id="experiments.Experiment.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the experiment.</p>
+<p>You should override this function in derived classes to configure the experiment</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="experiments.Experiment.save">
 <code class="descname">save</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#Experiment.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.Experiment.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves data into the results dir under the special format {experiment_name}.results</p>
@@ -300,6 +307,12 @@ RandomForestClassifier estimator.</p>
 <dt id="experiments.BestProbaForDecision.__init__">
 <code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaForDecision.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaForDecision.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BestProbaForDecision._detail">
+<code class="descname">_detail</code><a class="headerlink" href="#experiments.BestProbaForDecision._detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the graph of probability vs. accuracy score</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="experiments.BestProbaForDecision._no_detail">

@@ -8,7 +8,7 @@ from utils.constants import MAX_YEAR, MIN_YEAR, LEAGUES, MONTHS
 
 sys.path.append('..')
 
-class DBHandler():
+class DBHandler(object):
     """
     This class is incharge of handling with all database realted functions.
     """

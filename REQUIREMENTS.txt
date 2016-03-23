@@ -1,0 +1,6 @@
+pymongo
+selenium
+sklearn
+progress==1.2
+tabulate
+pydot2==1.0.33

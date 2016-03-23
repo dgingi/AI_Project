@@ -71,7 +71,6 @@ class Experiment():
         self.X = self.cv.complete_examples
         self.y = self.cv.complete_tags
     
-    @timed    
     def run(self):
         """
         Runs the experiment.
@@ -84,16 +83,9 @@ class Experiment():
         """
         Loads the parameters of the experiment.
         
-        This is a virtual function.
-        
         You should override this in derived classes to configure the experiment parameters
         """
         raise NotImplementedError
-    
-    """
-    @todo:    t_test for 2 algs
-              validate & report
-    """
       
     def t_test(self,original_measurements, measurements_after_alteration):
         """
@@ -313,7 +305,6 @@ Decision Tree classifier and the Random Forest classifier."""
         graph.write_pdf(join_path(self.results_dir,"best_tree.pdf"))
         return 'The plotted Decision Tree classifier is saved in {0}.'.format(os.path.abspath(join_path(self.results_dir,"best_tree.pdf")))
 
-    #@timed    
     def run(self):
         """
         Runs a RandomizedSearch on both DecisionTree and RandomForest classifiers.
@@ -388,32 +379,37 @@ class OneVsRestExperiment(Experiment):
         self.cv.load_data(lookback)
         self.X = self.cv.complete_examples
         self.y = self.cv.complete_tags
-       
+    
+    @timed   
     def run(self):
         if not self.load_params(): 
             print 'Can not run- must load previous experiment'
             return
         Experiment.run(self)
-        cross_size = 0
-        self._loaded_data = {'DTC':0,'RFC':0}
-        for train , test in self.cv._leagues_cross_validation():
-            cross_size += 1
-            
-            dt_estimator = OVRC(DTC(**self.estimators_params['DTC']),n_jobs=-1)
-            rf_estimator = OVRC(DTC(**self.estimators_params['RFC']),n_jobs=-1)
-            
-            dt_estimator = dt_estimator.fit(train[0], train[1])
-            rf_estimator = rf_estimator.fit(train[0], train[1])
-            
-            dt_score = dt_estimator.score(test[0], test[1])
-            rf_score = rf_estimator.score(test[0], test[1])
-            
-            self._loaded_data['DTC'] += dt_score
-            self._loaded_data['RFC'] += rf_score
-            
-        self._loaded_data['DTC'] = (self._loaded_data['DTC']*1.0) / cross_size
-        self._loaded_data['RFC'] = (self._loaded_data['RFC']*1.0) / cross_size
+        ovr_tree_score = cross_val_score(OVRC(self.estimators_params['DTC'],-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        ovr_forest_score = cross_val_score(OVRC(self.estimators_params['RFC'],-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        self._loaded_data = {'OvR Tree':ovr_tree_score,'OvR Forest':ovr_forest_score}
         self.save(self._loaded_data)
+#         cross_size = 0
+#         self._loaded_data = {'DTC':0,'RFC':0}
+#         for train , test in self.cv._leagues_cross_validation():
+#             cross_size += 1
+#             
+#             dt_estimator = OVRC(DTC(**self.estimators_params['DTC']),n_jobs=-1)
+#             rf_estimator = OVRC(DTC(**self.estimators_params['RFC']),n_jobs=-1)
+#             
+#             dt_estimator = dt_estimator.fit(train[0], train[1])
+#             rf_estimator = rf_estimator.fit(train[0], train[1])
+#             
+#             dt_score = dt_estimator.score(test[0], test[1])
+#             rf_score = rf_estimator.score(test[0], test[1])
+#             
+#             self._loaded_data['DTC'] += dt_score
+#             self._loaded_data['RFC'] += rf_score
+#             
+#         self._loaded_data['DTC'] = (self._loaded_data['DTC']*1.0) / cross_size
+#         self._loaded_data['RFC'] = (self._loaded_data['RFC']*1.0) / cross_size
+        
         
     _begining_report = """This experiment tried a OneVsRest classifier."""
             
@@ -424,8 +420,7 @@ class OneVsRestExperiment(Experiment):
         """
         Reporting on low verbosity - only results.
         """
-        print '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['DTC'].mean())])
-        print '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['RFC'].mean())])
+        return '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['DTC'].mean())])
      
 class DefaultParamsExperiment(Experiment):
     """
@@ -687,10 +682,10 @@ class BestProbaForDecision(Experiment):
 
         For each probability we calculate the amount of games that qulified and the score will be calculated by this amount.
         """
-        Experiment.run(self)
         if not self.load_params(): 
             print 'Can not run- must load previous experiment'
             return
+        Experiment.run(self)
         if self._test:
             self.ranges = [0.34,0.35]
         else:
@@ -759,6 +754,13 @@ we start making the decisions."""
         _table = tabulate([data for data in _inner_table],\
                           headers=['Probability','QG DT','Score DT','AS DT','QG RF','Score RF','AS RF'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
+    
+    @property
+    def _detail(self):
+        """
+        Plots the graph of probability vs. accuracy score
+        """
+        return ''
 
 class BestProbaDiffForDrawDecision(Experiment):
     """
@@ -778,8 +780,11 @@ class BestProbaDiffForDrawDecision(Experiment):
         if not self._load_prev_experiment(best_param_exp): return False
         best_lookback_exp = BestLookbackExperimet("Best_Params", self._test)
         if not self._load_prev_experiment(best_lookback_exp): return False
+        best_proba_exp = BestProbaForDecision("Best_Proba", self._test)
+        if not self._load_prev_experiment(best_proba_exp): return False
         self.estimators_params = {'DTC':best_param_exp._loaded_data['Tree'].best_params_,'RFC':best_param_exp._loaded_data['Forest'].best_params_,\
-                                  'Lookback':int(max([(best_lookback_exp._loaded_data[_lk][1].mean(),_lk) for _lk in best_lookback_exp._loaded_data])[1])}
+                                  'Lookback':int(max([(best_lookback_exp._loaded_data[_lk][1].mean(),_lk) for _lk in best_lookback_exp._loaded_data])[1]),\
+                                  'Best_Proba':0.65}
         return True
     
     def get_data(self):
@@ -837,15 +842,12 @@ class BestProbaDiffForDrawDecision(Experiment):
                 rf_res_proba = clf_rf.predict_proba(test[0])
                     
                 for i in range(len(dt_res_tags)):
-                    """
-                    @todo: put the proba of best proba decision expr
-                    """
-                    if max(dt_res_proba[i]) <= 0.65: #if the max is greater than 0.65 - will trust the classifier
+                    if max(dt_res_proba[i]) <= self.estimators_params['Best_Proba']: #if the max is greater than 0.65 - will trust the classifier
                         if abs(dt_res_proba[i][0]-dt_res_proba[i][2])<=_range: #diff between win - loss is very small - must be draw! 
                             dt_res_tags[i] = 0
                 
                 for i in range(len(rf_res_tags)):
-                    if max(rf_res_proba[i]) <= 0.65: #if the max is greater than 0.65 - will trust the classifier
+                    if max(rf_res_proba[i]) <= self.estimators_params['Best_Proba']: #if the max is greater than 0.65 - will trust the classifier
                         if abs(rf_res_proba[i][0]-rf_res_proba[i][2])<=_range: #diff between win - loss is very small - must be draw! 
                             dt_res_tags[i] = 0 
                 
@@ -883,6 +885,13 @@ the decision will be a Draw."""
         _table = tabulate([data for data in _inner_table],\
                           headers=['Probability','Score DT','Score RF'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
+    
+    @property
+    def _detail(self):
+        """
+        Plots the graph of probability vs. accuracy score
+        """
+        return ''
   
 class FinalSeasonExperiment(Experiment):
     """

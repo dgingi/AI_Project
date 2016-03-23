@@ -120,14 +120,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_examples</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span></div>
     
-    <span class="nd">@timed</span>    
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Experiment.run"><a class="viewcode-back" href="../expr.html#experiments.Experiment.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Runs the experiment.</span>
 <span class="sd">        </span>
 <span class="sd">        You should override this function in derived classes to configure the experiment</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span></div>
         
 <div class="viewcode-block" id="Experiment.load_params"><a class="viewcode-back" href="../expr.html#experiments.Experiment.load_params">[docs]</a>    <span class="k">def</span> <span class="nf">load_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -136,11 +135,6 @@
 <span class="sd">        You should override this in derived classes to configure the experiment parameters</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
-    
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    @todo:    t_test for 2 algs</span>
-<span class="sd">              validate &amp; report</span>
-<span class="sd">    &quot;&quot;&quot;</span>
       
 <div class="viewcode-block" id="Experiment.t_test"><a class="viewcode-back" href="../expr.html#experiments.Experiment.t_test">[docs]</a>    <span class="k">def</span> <span class="nf">t_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">original_measurements</span><span class="p">,</span> <span class="n">measurements_after_alteration</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -360,7 +354,6 @@
         <span class="n">graph</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="n">join_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_dir</span><span class="p">,</span><span class="s">&quot;best_tree.pdf&quot;</span><span class="p">))</span>
         <span class="k">return</span> <span class="s">&#39;The plotted Decision Tree classifier is saved in {0}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">join_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_dir</span><span class="p">,</span><span class="s">&quot;best_tree.pdf&quot;</span><span class="p">)))</span>
 
-    <span class="c">#@timed    </span>
 <div class="viewcode-block" id="BestParamsExperiment.run"><a class="viewcode-back" href="../expr.html#experiments.BestParamsExperiment.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Runs a RandomizedSearch on both DecisionTree and RandomForest classifiers.</span>
@@ -435,32 +428,37 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">lookback</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_examples</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span>
-       
+    
+    <span class="nd">@timed</span>   
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_params</span><span class="p">():</span> 
             <span class="k">print</span> <span class="s">&#39;Can not run- must load previous experiment&#39;</span>
             <span class="k">return</span>
         <span class="n">Experiment</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">cross_size</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;DTC&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s">&#39;RFC&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
-        <span class="k">for</span> <span class="n">train</span> <span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">_leagues_cross_validation</span><span class="p">():</span>
-            <span class="n">cross_size</span> <span class="o">+=</span> <span class="mi">1</span>
-            
-            <span class="n">dt_estimator</span> <span class="o">=</span> <span class="n">OVRC</span><span class="p">(</span><span class="n">DTC</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;DTC&#39;</span><span class="p">]),</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">rf_estimator</span> <span class="o">=</span> <span class="n">OVRC</span><span class="p">(</span><span class="n">DTC</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;RFC&#39;</span><span class="p">]),</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-            
-            <span class="n">dt_estimator</span> <span class="o">=</span> <span class="n">dt_estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">train</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">rf_estimator</span> <span class="o">=</span> <span class="n">rf_estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">train</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            
-            <span class="n">dt_score</span> <span class="o">=</span> <span class="n">dt_estimator</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">rf_score</span> <span class="o">=</span> <span class="n">rf_estimator</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            
-            <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;DTC&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt_score</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;RFC&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">rf_score</span>
-            
-        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;DTC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;DTC&#39;</span><span class="p">]</span><span class="o">*</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">cross_size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;RFC&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;RFC&#39;</span><span class="p">]</span><span class="o">*</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">cross_size</span>
+        <span class="n">ovr_tree_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">OVRC</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;DTC&#39;</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>  <span class="n">cv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">leagues_cross_validation</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ovr_forest_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">OVRC</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;RFC&#39;</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>  <span class="n">cv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">leagues_cross_validation</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;OvR Tree&#39;</span><span class="p">:</span><span class="n">ovr_tree_score</span><span class="p">,</span><span class="s">&#39;OvR Forest&#39;</span><span class="p">:</span><span class="n">ovr_forest_score</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">)</span>
+<span class="c">#         cross_size = 0</span>
+<span class="c">#         self._loaded_data = {&#39;DTC&#39;:0,&#39;RFC&#39;:0}</span>
+<span class="c">#         for train , test in self.cv._leagues_cross_validation():</span>
+<span class="c">#             cross_size += 1</span>
+<span class="c">#             </span>
+<span class="c">#             dt_estimator = OVRC(DTC(**self.estimators_params[&#39;DTC&#39;]),n_jobs=-1)</span>
+<span class="c">#             rf_estimator = OVRC(DTC(**self.estimators_params[&#39;RFC&#39;]),n_jobs=-1)</span>
+<span class="c">#             </span>
+<span class="c">#             dt_estimator = dt_estimator.fit(train[0], train[1])</span>
+<span class="c">#             rf_estimator = rf_estimator.fit(train[0], train[1])</span>
+<span class="c">#             </span>
+<span class="c">#             dt_score = dt_estimator.score(test[0], test[1])</span>
+<span class="c">#             rf_score = rf_estimator.score(test[0], test[1])</span>
+<span class="c">#             </span>
+<span class="c">#             self._loaded_data[&#39;DTC&#39;] += dt_score</span>
+<span class="c">#             self._loaded_data[&#39;RFC&#39;] += rf_score</span>
+<span class="c">#             </span>
+<span class="c">#         self._loaded_data[&#39;DTC&#39;] = (self._loaded_data[&#39;DTC&#39;]*1.0) / cross_size</span>
+<span class="c">#         self._loaded_data[&#39;RFC&#39;] = (self._loaded_data[&#39;RFC&#39;]*1.0) / cross_size</span>
+        
         
     <span class="n">_begining_report</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;This experiment tried a OneVsRest classifier.&quot;&quot;&quot;</span>
             
@@ -471,8 +469,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reporting on low verbosity - only results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;Gaussian Naive Bayes accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;DTC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())])</span>
-        <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;Gaussian Naive Bayes accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;RFC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())])</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;Gaussian Naive Bayes accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;DTC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())])</span>
      
 <div class="viewcode-block" id="DefaultParamsExperiment"><a class="viewcode-back" href="../expr.html#experiments.DefaultParamsExperiment">[docs]</a><span class="k">class</span> <span class="nc">DefaultParamsExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -734,10 +731,10 @@
 
 <span class="sd">        For each probability we calculate the amount of games that qulified and the score will be calculated by this amount.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Experiment</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_params</span><span class="p">():</span> 
             <span class="k">print</span> <span class="s">&#39;Can not run- must load previous experiment&#39;</span>
             <span class="k">return</span>
+        <span class="n">Experiment</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.34</span><span class="p">,</span><span class="mf">0.35</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -805,7 +802,14 @@
         <span class="n">_inner_table</span> <span class="o">=</span> <span class="p">[[</span><span class="n">key</span><span class="p">,</span><span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],(</span><span class="nb">float</span><span class="p">(</span><span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&quot;AG&quot;</span><span class="p">])</span><span class="o">*</span><span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],(</span><span class="nb">float</span><span class="p">(</span><span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&quot;AG&quot;</span><span class="p">])</span><span class="o">*</span><span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">tup</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">_proba_scores</span><span class="o">.</span><span class="n">items</span><span class="p">())]</span>
         <span class="n">_table</span> <span class="o">=</span> <span class="n">tabulate</span><span class="p">([</span><span class="n">data</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">_inner_table</span><span class="p">],</span>\
                           <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Probability&#39;</span><span class="p">,</span><span class="s">&#39;QG DT&#39;</span><span class="p">,</span><span class="s">&#39;Score DT&#39;</span><span class="p">,</span><span class="s">&#39;AS DT&#39;</span><span class="p">,</span><span class="s">&#39;QG RF&#39;</span><span class="p">,</span><span class="s">&#39;Score RF&#39;</span><span class="p">,</span><span class="s">&#39;AS RF&#39;</span><span class="p">],</span><span class="n">tablefmt</span><span class="o">=</span><span class="s">&quot;fancy_grid&quot;</span><span class="p">,</span><span class="n">floatfmt</span><span class="o">=</span><span class="s">&quot;.4f&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s">&#39;Results :</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">%</span><span class="n">_table</span></div>
+        <span class="k">return</span> <span class="s">&#39;Results :</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">%</span><span class="n">_table</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_detail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plots the graph of probability vs. accuracy score</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&#39;&#39;</span></div>
 
 <span class="k">class</span> <span class="nc">BestProbaDiffForDrawDecision</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -825,8 +829,11 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_prev_experiment</span><span class="p">(</span><span class="n">best_param_exp</span><span class="p">):</span> <span class="k">return</span> <span class="bp">False</span>
         <span class="n">best_lookback_exp</span> <span class="o">=</span> <span class="n">BestLookbackExperimet</span><span class="p">(</span><span class="s">&quot;Best_Params&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_prev_experiment</span><span class="p">(</span><span class="n">best_lookback_exp</span><span class="p">):</span> <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">best_proba_exp</span> <span class="o">=</span> <span class="n">BestProbaForDecision</span><span class="p">(</span><span class="s">&quot;Best_Proba&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_prev_experiment</span><span class="p">(</span><span class="n">best_proba_exp</span><span class="p">):</span> <span class="k">return</span> <span class="bp">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;DTC&#39;</span><span class="p">:</span><span class="n">best_param_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span><span class="s">&#39;RFC&#39;</span><span class="p">:</span><span class="n">best_param_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span>\
-                                  <span class="s">&#39;Lookback&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">([(</span><span class="n">best_lookback_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="n">_lk</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="n">_lk</span><span class="p">)</span> <span class="k">for</span> <span class="n">_lk</span> <span class="ow">in</span> <span class="n">best_lookback_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">])[</span><span class="mi">1</span><span class="p">])}</span>
+                                  <span class="s">&#39;Lookback&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">([(</span><span class="n">best_lookback_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="n">_lk</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="n">_lk</span><span class="p">)</span> <span class="k">for</span> <span class="n">_lk</span> <span class="ow">in</span> <span class="n">best_lookback_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">])[</span><span class="mi">1</span><span class="p">]),</span>\
+                                  <span class="s">&#39;Best_Proba&#39;</span><span class="p">:</span><span class="mf">0.65</span><span class="p">}</span>
         <span class="k">return</span> <span class="bp">True</span>
     
     <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -884,15 +891,12 @@
                 <span class="n">rf_res_proba</span> <span class="o">=</span> <span class="n">clf_rf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                     
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dt_res_tags</span><span class="p">)):</span>
-                    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">                    @todo: put the proba of best proba decision expr</span>
-<span class="sd">                    &quot;&quot;&quot;</span>
-                    <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">dt_res_proba</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mf">0.65</span><span class="p">:</span> <span class="c">#if the max is greater than 0.65 - will trust the classifier</span>
+                    <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">dt_res_proba</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;Best_Proba&#39;</span><span class="p">]:</span> <span class="c">#if the max is greater than 0.65 - will trust the classifier</span>
                         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dt_res_proba</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">dt_res_proba</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span><span class="o">&lt;=</span><span class="n">_range</span><span class="p">:</span> <span class="c">#diff between win - loss is very small - must be draw! </span>
                             <span class="n">dt_res_tags</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
                 
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rf_res_tags</span><span class="p">)):</span>
-                    <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">rf_res_proba</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mf">0.65</span><span class="p">:</span> <span class="c">#if the max is greater than 0.65 - will trust the classifier</span>
+                    <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">rf_res_proba</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;Best_Proba&#39;</span><span class="p">]:</span> <span class="c">#if the max is greater than 0.65 - will trust the classifier</span>
                         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rf_res_proba</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">rf_res_proba</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span><span class="o">&lt;=</span><span class="n">_range</span><span class="p">:</span> <span class="c">#diff between win - loss is very small - must be draw! </span>
                             <span class="n">dt_res_tags</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> 
                 
@@ -930,6 +934,13 @@
         <span class="n">_table</span> <span class="o">=</span> <span class="n">tabulate</span><span class="p">([</span><span class="n">data</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">_inner_table</span><span class="p">],</span>\
                           <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Probability&#39;</span><span class="p">,</span><span class="s">&#39;Score DT&#39;</span><span class="p">,</span><span class="s">&#39;Score RF&#39;</span><span class="p">],</span><span class="n">tablefmt</span><span class="o">=</span><span class="s">&quot;fancy_grid&quot;</span><span class="p">,</span><span class="n">floatfmt</span><span class="o">=</span><span class="s">&quot;.4f&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="s">&#39;Results :</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">%</span><span class="n">_table</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_detail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plots the graph of probability vs. accuracy score</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">&#39;&#39;</span>
   
 <div class="viewcode-block" id="FinalSeasonExperiment"><a class="viewcode-back" href="../expr.html#experiments.FinalSeasonExperiment">[docs]</a><span class="k">class</span> <span class="nc">FinalSeasonExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
