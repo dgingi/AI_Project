@@ -33,11 +33,11 @@ class WhoScoredCrawler(object):
         """
         Constructor for the WhoScoredCrawler class.
         
-        **@keyword** *league*: The specific league to collect the data from.
+        :param league: The specific league to collect the data from.
         
-        **@keyword** *year*: The specific year to collect the data from.
+        :param year: The specific year to collect the data from.
         
-        **@keyword** *link*: The link corresponding to the league and year.
+        :param link: The link corresponding to the league and year.
         """
         logging.basicConfig(filename=path.join('logs','%s%s.log'%(league,year)),format='%(levelname)s: %(asctime)s %(message)s', datefmt='%d/%m/%Y %H:%M %p',level=logging.INFO)
         self.league = league
@@ -376,7 +376,7 @@ def start_crawl(kwargs):
     WhoScoredCrawler(args_parser.LEAGUE_NAME,year,league).crawl(args_parser.update)
     if args_parser.update:
         with open('last_crawl.date','w') as _date_file:
-            pickle.dump(datetime.now()), _date_file)
+            pickle.dump(datetime.now(), _date_file)
     
     
 if __name__ == '__main__':

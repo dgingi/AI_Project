@@ -12,7 +12,7 @@ class DBHandler():
     """
     This class is incharge of handling with all database realted functions.
     """
-    def __init__(self,league,remote=True,test=False):
+    def __init__(self,league,remote=False,test=False):
         """
         The Init function has the option to connect to the local database or our remote on-server database.
         """

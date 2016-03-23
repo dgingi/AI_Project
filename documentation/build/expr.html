@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4. Project Experiments &mdash; AI_Project 0.0.1 documentation</title>
+    <title>4. Experiments Module &mdash; AI_Project 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="AI_Project 0.0.1 documentation" href="index.html" />
-    <link rel="prev" title="3. Project Utils Classes" href="utils_classes.html" /> 
+    <link rel="prev" title="3. Utils package" href="utils_classes.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -37,7 +37,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="utils_classes.html" title="3. Project Utils Classes"
+          <a href="utils_classes.html" title="3. Utils package"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">AI_Project 0.0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -48,9 +48,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="project-experiments">
-<h1>4. Project Experiments<a class="headerlink" href="#project-experiments" title="Permalink to this headline">¶</a></h1>
-<p>This module contains all the experiemnts of this project.</p>
+  <div class="section" id="experiments-module">
+<h1>4. Experiments Module<a class="headerlink" href="#experiments-module" title="Permalink to this headline">¶</a></h1>
+<p>This module contains all the experiments of this project.</p>
 <div class="section" id="experiment-class">
 <h2>4.1. Experiment class<a class="headerlink" href="#experiment-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -292,9 +292,23 @@ RandomForestClassifier estimator.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="experiments.BestProbaForDecision.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaForDecision.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaForDecision.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all the examples and tags needed for the experiment - building the examples based on the lookback found in previous experiments.</p>
+<p>Loads the all of the examples and tags, and also creates cross validation for the classifiers..</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.BestProbaForDecision.load_params">
+<code class="descname">load_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaForDecision.load_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaForDecision.load_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>The load_params for this experiment loads the best params for the decision tree and random forest and also the best lookback.</p>
+<p>This params found by the experiment best_param, lookback by best_lookback.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="experiments.BestProbaForDecision.run">
 <code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaForDecision.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaForDecision.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>For each probability p in [0.34,0.59] (in jumps of 0.01), make the decision only if classifier&#8217;s probability is greater or equal to p.</p>
+<dd><p>For each probability p in [0.34,0.65] (in jumps of 0.01), make the decision only if classifier&#8217;s probability is greater or equal to p.</p>
 <p>For each probability we calculate the amount of games that qulified and the score will be calculated by this amount.</p>
 </dd></dl>
 
@@ -356,11 +370,6 @@ RandomForestClassifier estimator.</p>
 <dt id="experiments.FinalSeasonAux">
 <em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">FinalSeasonAux</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonAux"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonAux" title="Permalink to this definition">¶</a></dt>
 <dd><p>Auxiliary experiment around the Final Season experiment modes.</p>
-<dl class="method">
-<dt id="experiments.FinalSeasonAux.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonAux.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonAux.__init__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 </div>
@@ -375,9 +384,9 @@ RandomForestClassifier estimator.</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="before.html">1. Things To Install</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_classes.html">2. Project Data Handeling Classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils_classes.html">3. Project Utils Classes</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">4. Project Experiments</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="data_classes.html">2. Data Handling Classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils_classes.html">3. Utils package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">4. Experiments Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#experiment-class">4.1. Experiment class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bestparamsexperiment-class">4.2. BestParamsExperiment class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bayesexperiment-class">4.3. BayesExperiment class</a></li>
@@ -393,7 +402,7 @@ RandomForestClassifier estimator.</p>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="utils_classes.html"
-                        title="previous chapter">3. Project Utils Classes</a></p>
+                        title="previous chapter">3. Utils package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -428,14 +437,14 @@ RandomForestClassifier estimator.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="utils_classes.html" title="3. Project Utils Classes"
+          <a href="utils_classes.html" title="3. Utils package"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">AI_Project 0.0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Ory Jonay, Dror Porat.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>
