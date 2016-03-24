@@ -26,7 +26,7 @@ Python2.7 and pip
 -----------------
 
 Under Windows OS, we suggest installing the Anaconda Python distribution (it will save alot of time installing different packages from PyPI).
-You can download and install the ditribution from `here <https://www.continuum.io/downloads>`_.  
+You can download and install the distribution from `here <https://www.continuum.io/downloads>`_.  
 
 MongoDB
 -------
@@ -35,7 +35,7 @@ MongoDB
 	
 	#. Run from the project root directory::
 	
-		sudo mongorestore -d leagues_db server_dump/leagues_db
+		mongorestore -d leagues_db server_dump/leagues_db
 	
 	
 
