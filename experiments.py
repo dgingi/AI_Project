@@ -386,8 +386,8 @@ class OneVsRestExperiment(Experiment):
             print 'Can not run- must load previous experiment'
             return
         Experiment.run(self)
-        ovr_tree_score = cross_val_score(OVRC(DTC(**self.estimators_params['DTC'].best_params_),-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
-        ovr_forest_score = cross_val_score(OVRC(RFC(**self.estimators_params['RFC'].best_params_),-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        ovr_tree_score = cross_val_score(OVRC(DTC(**self.estimators_params['DTC']),-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        ovr_forest_score = cross_val_score(OVRC(RFC(**self.estimators_params['RFC']),-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
         self._loaded_data = {'OvR Tree':ovr_tree_score,'OvR Forest':ovr_forest_score}
         self.save(self._loaded_data)
 #         cross_size = 0
