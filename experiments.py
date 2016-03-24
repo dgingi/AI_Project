@@ -390,27 +390,7 @@ class OneVsRestExperiment(Experiment):
         ovr_forest_score = cross_val_score(OVRC(RFC(**self.estimators_params['RFC']),-1),self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
         self._loaded_data = {'OvR Tree':ovr_tree_score,'OvR Forest':ovr_forest_score}
         self.save(self._loaded_data)
-#         cross_size = 0
-#         self._loaded_data = {'DTC':0,'RFC':0}
-#         for train , test in self.cv._leagues_cross_validation():
-#             cross_size += 1
-#             
-#             dt_estimator = OVRC(DTC(**self.estimators_params['DTC']),n_jobs=-1)
-#             rf_estimator = OVRC(DTC(**self.estimators_params['RFC']),n_jobs=-1)
-#             
-#             dt_estimator = dt_estimator.fit(train[0], train[1])
-#             rf_estimator = rf_estimator.fit(train[0], train[1])
-#             
-#             dt_score = dt_estimator.score(test[0], test[1])
-#             rf_score = rf_estimator.score(test[0], test[1])
-#             
-#             self._loaded_data['DTC'] += dt_score
-#             self._loaded_data['RFC'] += rf_score
-#             
-#         self._loaded_data['DTC'] = (self._loaded_data['DTC']*1.0) / cross_size
-#         self._loaded_data['RFC'] = (self._loaded_data['RFC']*1.0) / cross_size
-        
-        
+
     _begining_report = """This experiment tried a OneVsRest classifier with both Decision Tree and Random Forest as base estimators."""
             
     _ending_report = """Done"""
