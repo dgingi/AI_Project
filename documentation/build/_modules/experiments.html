@@ -62,6 +62,7 @@
 <span class="kn">from</span> <span class="nn">sklearn.multiclass</span> <span class="kn">import</span> <span class="n">OneVsRestClassifier</span> <span class="k">as</span> <span class="n">OVRC</span>
 <span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
 <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span> <span class="k">as</span> <span class="n">DTC</span>
+<span class="kn">from</span> <span class="nn">sklearn.dummy</span> <span class="kn">import</span> <span class="n">DummyClassifier</span>
 <span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
@@ -454,7 +455,7 @@
      
 <div class="viewcode-block" id="DefaultParamsExperiment"><a class="viewcode-back" href="../expr.html#experiments.DefaultParamsExperiment">[docs]</a><span class="k">class</span> <span class="nc">DefaultParamsExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    An experiment to test Decision Tree and Random Forest classifiers without adjusting their respective hyper parameters.</span>
+<span class="sd">    An experiment to test Decision Tree and Random Forest classifiers without adjusting their respective hyper parameters, as well as a random choosing classifier as a baseline for scores.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="DefaultParamsExperiment.__init__"><a class="viewcode-back" href="../expr.html#experiments.DefaultParamsExperiment.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dir_name</span><span class="p">,</span><span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="n">Experiment</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dir_name</span><span class="p">,</span><span class="n">test</span><span class="p">)</span>
@@ -462,15 +463,16 @@
         
 <div class="viewcode-block" id="DefaultParamsExperiment.run"><a class="viewcode-back" href="../expr.html#experiments.DefaultParamsExperiment.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Runs cross validation against Decision Tree and Random Forest classifiers. </span>
+<span class="sd">        Runs cross validation against Decision Tree and Random Forest classifiers, and against a random choosing classifier. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Experiment</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">tree_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">DTC</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>  <span class="n">cv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">leagues_cross_validation</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">forest_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">RFC</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>  <span class="n">cv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">leagues_cross_validation</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Default_Tree&#39;</span><span class="p">:</span><span class="n">tree_score</span><span class="p">,</span><span class="s">&#39;Default_Forest&#39;</span><span class="p">:</span><span class="n">forest_score</span><span class="p">}</span>
+        <span class="n">random_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">DummyClassifier</span><span class="p">(</span><span class="s">&#39;uniform&#39;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>  <span class="n">cv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">leagues_cross_validation</span><span class="p">,</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;Default_Tree&#39;</span><span class="p">:</span><span class="n">tree_score</span><span class="p">,</span><span class="s">&#39;Default_Forest&#39;</span><span class="p">:</span><span class="n">forest_score</span><span class="p">,</span><span class="s">&#39;Random&#39;</span><span class="p">:</span><span class="n">random_score</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">)</span></div>
         
-    <span class="n">_begining_report</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;This experiment tried both the Decision Tree and the Random Forest classifiers with default hyper parameters.&quot;&quot;&quot;</span>
+    <span class="n">_begining_report</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;This experiment tried both the Decision Tree and the Random Forest classifiers with default hyper parameters, as well as a random choosing classifier as a base line.&quot;&quot;&quot;</span>
             
     <span class="n">_ending_report</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Done&quot;&quot;&quot;</span>
     
@@ -480,7 +482,8 @@
 <span class="sd">        Reporting on low verbosity - only results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;Decision Tree with default hyper parameters accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>\
-                          <span class="s">&#39;Random Forest with default hyper parameters accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())])</span>   </div>
+                          <span class="s">&#39;Random Forest with default hyper parameters accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>\
+                          <span class="s">&#39;Random classifier accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Random&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())])</span>   </div>
     
 <div class="viewcode-block" id="LearningCurveExperiment"><a class="viewcode-back" href="../expr.html#experiments.LearningCurveExperiment">[docs]</a><span class="k">class</span> <span class="nc">LearningCurveExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1230,6 +1233,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../data_classes.html">2. Data Handling Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../expr.html">3. Experiments Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../utils_classes.html">4. Utils package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../after.html">5. Setting up auto mode on Linux</a></li>
 </ul>
 
 <div id="searchbox" style="display: none" role="search">

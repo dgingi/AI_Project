@@ -13,6 +13,7 @@ from sklearn.learning_curve import learning_curve
 from sklearn.multiclass import OneVsRestClassifier as OVRC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier as DTC
+from sklearn.dummy import DummyClassifier
 from tabulate import tabulate
 import warnings
 
@@ -228,8 +229,56 @@ Decision Tree classifier and the Random Forest classifier."""
         """
         Plots the Decision Tree classifier after search and after fitting all of the data.
         
+        Also plots to screen bar charts of results.
+        
         Saves in results folder, in pdf format.
         """
+        bayes_exp = BayesExperiment('Best_Params')
+        if not self._load_prev_experiment(bayes_exp): 
+            print "Can not report - failed to load previous experiment"
+            return ''
+        def_exp = DefaultParamsExperiment('Default_Params')
+        if not self._load_prev_experiment(def_exp): 
+            print "Can not report - failed to load previous experiment"
+            return ''
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import numpy as np
+            import matplotlib.pyplot as plt
+            N = 3
+            before_means = (bayes_exp._loaded_data['Bayes'].mean()*100,def_exp._loaded_data['Default_Tree'].mean()*100,\
+                        def_exp._loaded_data['Default_Forest'].mean()*100)
+            
+            ind = np.arange(N)  # the x locations for the groups
+            width = 0.35       # the width of the bars
+            
+            fig, ax = plt.subplots()
+            rects1 = ax.bar(ind+width, before_means, width, color='r')
+            
+            after_means = (bayes_exp._loaded_data['Bayes'].mean()*100,self._loaded_data['Tree'].best_score_*100,\
+                        self._loaded_data['Forest'].best_score_*100)
+            
+            rects2 = ax.bar(ind, after_means, width, color='b')
+            # add some text for labels, title and axes ticks
+            ax.set_ylabel('Accuracy Scores %')
+            ax.set_title('Scores of classifiers before and after search')
+            ax.set_xticks(ind + width)
+            ax.set_xticklabels(('Naive classifier', 'Naive Bayes', 'Decision Tree', 'Random Forest'))
+            
+            ax.legend((rects1[0], rects2[0]), ('Before Search', 'After Search'),loc=2)
+            
+            def autolabel(rects):
+                # attach some text labels
+                for rect in rects:
+                    height = rect.get_height()
+                    ax.text(rect.get_x() + rect.get_width()/2., 1.05*height,
+                            '',
+                            ha='center', va='bottom')
+            
+            autolabel(rects1)
+            autolabel(rects2)
+            plt.show()      
+        
         from sklearn.tree import export_graphviz
         from sklearn.externals.six import StringIO
         import pydot
@@ -405,7 +454,7 @@ class OneVsRestExperiment(Experiment):
      
 class DefaultParamsExperiment(Experiment):
     """
-    An experiment to test Decision Tree and Random Forest classifiers without adjusting their respective hyper parameters.
+    An experiment to test Decision Tree and Random Forest classifiers without adjusting their respective hyper parameters, as well as a random choosing classifier as a baseline for scores.
     """
     def __init__(self,dir_name,test=False):
         Experiment.__init__(self,dir_name,test)
@@ -413,15 +462,16 @@ class DefaultParamsExperiment(Experiment):
         
     def run(self):
         """
-        Runs cross validation against Decision Tree and Random Forest classifiers. 
+        Runs cross validation against Decision Tree and Random Forest classifiers, and against a random choosing classifier. 
         """
         Experiment.run(self)
         tree_score = cross_val_score(DTC(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
         forest_score = cross_val_score(RFC(), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
-        self._loaded_data = {'Default_Tree':tree_score,'Default_Forest':forest_score}
+        random_score = cross_val_score(DummyClassifier('uniform'), self.X, self.y,  cv=self.cv.leagues_cross_validation,n_jobs=-1)
+        self._loaded_data = {'Default_Tree':tree_score,'Default_Forest':forest_score,'Random':random_score}
         self.save(self._loaded_data)
         
-    _begining_report = """This experiment tried both the Decision Tree and the Random Forest classifiers with default hyper parameters."""
+    _begining_report = """This experiment tried both the Decision Tree and the Random Forest classifiers with default hyper parameters, as well as a random choosing classifier as a base line."""
             
     _ending_report = """Done"""
     
@@ -431,8 +481,48 @@ class DefaultParamsExperiment(Experiment):
         Reporting on low verbosity - only results.
         """
         return '\n'.join(['Decision Tree with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Tree'].mean()),\
-                          'Random Forest with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Forest'].mean())])   
-    
+                          'Random Forest with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Forest'].mean()),\
+                          'Random classifier accuracy score: {0:.4f}'.format(self._loaded_data['Random'].mean())])   
+    @property
+    def _detail(self):
+        """
+        Reporting on medium verbosity - plot bar charts of results
+        """
+        bayes_exp = BayesExperiment('Best_Params')
+        if not self._load_prev_experiment(bayes_exp): 
+            print "Can not report - failed to load previous experiment"
+            return ''
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import numpy as np
+            import matplotlib.pyplot as plt
+            N = 4
+            means = (self._loaded_data['Random'].mean()*100, bayes_exp._loaded_data['Bayes'].mean()*100,self._loaded_data['Default_Tree'].mean()*100,\
+                        self._loaded_data['Default_Forest'].mean()*100)
+            
+            ind = np.arange(N)  # the x locations for the groups
+            width = 0.45       # the width of the bars
+            
+            fig, ax = plt.subplots()
+            rects1 = ax.bar(ind, means, width, color='b')
+            
+            # add some text for labels, title and axes ticks
+            ax.set_ylabel('Accuracy Scores %')
+            ax.set_title('Scores of baseline classifiers')
+            ax.set_xticks(ind + width)
+            ax.set_xticklabels(('Naive classifier', 'Naive Bayes', 'Decision Tree', 'Random Forest'))
+            
+            def autolabel(rects):
+                # attach some text labels
+                for rect in rects:
+                    height = rect.get_height()
+                    ax.text(rect.get_x() + rect.get_width()/2., 1.05*height,
+                            '',
+                            ha='center', va='bottom')
+            
+            autolabel(rects1)
+            plt.show()
+            return ''
 class LearningCurveExperiment(Experiment):
     """
     An experiment to test the learning curves of the classifiers (Decision Tree, Random Forest, Naive Bayes).
