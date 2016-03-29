@@ -54,12 +54,17 @@
 each week and build a new classifier from the new games.</p>
 <p>To do just that, all you need to to is just set a <strong>crontab task</strong> to run weekly. If you don&#8217;t know what crontab is, or how to set up new tasks, just click
 <a class="reference external" href="https://help.ubuntu.com/community/CronHowto">here</a>.</p>
-<p>After opening the crontab editor of choice, simply add those two lines <em>(under the assumption that the code is in /home/AI_Project)</em>:</p>
+<p>After opening the crontab editor of choice (<strong>as sudo</strong>), simply add those two lines <em>(under the assumption that the code is in /home/AI_Project)</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre>0 01 * * 1 /usr/bin/python /home/AI_Project/whoscoredcrawler.py -u
 0 01 * * 2 /usr/bin/python /home/AI_Project/experiments.py Final_Season Final_Season run
 </pre></div>
 </div>
 <p>And now, every Monday the crawler will download new games and on Tuesday a new classifier will be built with the new games.</p>
+<div class="section" id="specifications">
+<h2>5.1. Specifications<a class="headerlink" href="#specifications" title="Permalink to this headline">¶</a></h2>
+<p>All of our experiments ran on a 4 core, 8 GB RAM, 30GB HD virtual machine running Ubuntu 14.04 LTS.
+If you want to deploy our project as a server, we suggest using the above specfications for best results.</p>
+</div>
 </div>
 
 
@@ -74,7 +79,10 @@ each week and build a new classifier from the new games.</p>
 <li class="toctree-l1"><a class="reference internal" href="data_classes.html">2. Data Handling Classes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="expr.html">3. Experiments Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils_classes.html">4. Utils package</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">5. Setting up auto mode on Linux</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">5. Setting up auto mode on Linux</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#specifications">5.1. Specifications</a></li>
+</ul>
+</li>
 </ul>
 
   <h4>Previous topic</h4>

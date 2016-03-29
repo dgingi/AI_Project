@@ -187,7 +187,7 @@ class BestParamsExperiment(Experiment):
     _begining_report = """This experiment performed a Randomized Search for 1000 iterations upon the hyper parameters grid for both the \
 Decision Tree classifier and the Random Forest classifier."""
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
@@ -206,20 +206,20 @@ Decision Tree classifier and the Random Forest classifier."""
         
         def _evaluate(before,after):
             prob , is_sig , is_better = self.t_test(before[0], after[0])
-            res = '\n'.join(['Paired T Test result between {before_name} and {after_name}: {proba:.5f}'.format(before_name = before[1],after_name=after[1],proba=prob),\
-                             'The results {sig} statically significant, while {before_name} is {better} with score {before_score:.4f} than {after_name} with score {after_score:.4f}'.format(before_name = before[1],after_name=after[1],prob=prob,before_score=before[0].mean(),
-                                                                after_score=after[0].mean(),sig = 'are' if is_sig else "aren't",
+            res = '\n'.join(['Paired T Test result between {before_name} and {after_name}: {proba:.5f}%'.format(before_name = before[1],after_name=after[1],proba=prob*100),\
+                             'The results {sig} statically significant, while {before_name} is {better} with score {before_score:.4f}% than {after_name} with score {after_score:.4f}%'.format(before_name = before[1],after_name=after[1],prob=prob,before_score=before[0].mean()*100,
+                                                                after_score=after[0].mean()*100,sig = 'are' if is_sig else "aren't",
                                                                 better= 'better' if not is_better else 'worse')])
             
             return res
         trees_t_test = _evaluate((def_tree_scores,'Decision Tree before search'), (tree_cross_scores,'Decision Tree after search'))
         forests_t_test = _evaluate((def_forest_scores,'Random Forest before search'), (forest_cross_scores,'Random Forest after search'))
         tree_forest_test = _evaluate((tree_cross_scores,'Decision Tree after search'), (forest_cross_scores,'Random Forest after search'))
-        _res = '\n'.join(['Decision Tree before search accuracy score: {0:.4f}'.format(def_tree_scores.mean()),\
-                          'Decision Tree after search accuracy score: {0:.4f}'.format(self._loaded_data['Tree'].best_score_),\
+        _res = '\n'.join(['Decision Tree before search accuracy score: {0:.4f}%'.format(def_tree_scores.mean()*100),\
+                          'Decision Tree after search accuracy score: {0:.4f}%'.format(self._loaded_data['Tree'].best_score_*100),\
                           trees_t_test,'Best Decision Tree hyper parameters:\n'+str(self._loaded_data['Tree'].best_params_),
-        'Random Forest before search accuracy score: {0:.4f}'.format(def_forest_scores.mean()),\
-        forests_t_test,'Random Forest after search accuracy score: {0:.4f}'.format(self._loaded_data['Forest'].best_score_),\
+        'Random Forest before search accuracy score: {0:.4f}%'.format(def_forest_scores.mean()*100),\
+        'Random Forest after search accuracy score: {0:.4f}%'.format(self._loaded_data['Forest'].best_score_*100),forests_t_test,\
         'Best Random Forest hyper parameters:\n'+str(self._loaded_data['Forest'].best_params_),tree_forest_test])
         
         return _res
@@ -253,7 +253,7 @@ Decision Tree classifier and the Random Forest classifier."""
             width = 0.35       # the width of the bars
             
             fig, ax = plt.subplots()
-            rects1 = ax.bar(ind+width, before_means, width, color='r')
+#             rects1 = ax.bar(ind+width, before_means, width, color='r')
             
             after_means = (bayes_exp._loaded_data['Bayes'].mean()*100,self._loaded_data['Tree'].best_score_*100,\
                         self._loaded_data['Forest'].best_score_*100)
@@ -261,11 +261,11 @@ Decision Tree classifier and the Random Forest classifier."""
             rects2 = ax.bar(ind, after_means, width, color='b')
             # add some text for labels, title and axes ticks
             ax.set_ylabel('Accuracy Scores %')
-            ax.set_title('Scores of classifiers before and after search')
+            ax.set_title('Scores of classifiers after hyperparameters calibration')
             ax.set_xticks(ind + width)
             ax.set_xticklabels(('Naive classifier', 'Naive Bayes', 'Decision Tree', 'Random Forest'))
             
-            ax.legend((rects1[0], rects2[0]), ('Before Search', 'After Search'),loc=2)
+#             ax.legend((rects1[0], rects2[0]), ('Before Search', 'After Search'),loc=2)
             
             def autolabel(rects):
                 # attach some text labels
@@ -275,7 +275,7 @@ Decision Tree classifier and the Random Forest classifier."""
                             '',
                             ha='center', va='bottom')
             
-            autolabel(rects1)
+#             autolabel(rects1)
             autolabel(rects2)
             plt.show()      
         
@@ -386,14 +386,14 @@ class BayesExperiment(Experiment):
         
     _begining_report = """This experiment tried a Naive Bayes classifier."""
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
         """
         Reporting on low verbosity - only results.
         """
-        return '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}'.format(self._loaded_data['Bayes'].mean())])
+        return '\n'.join(['Gaussian Naive Bayes accuracy score: {0:.4f}%'.format(self._loaded_data['Bayes'].mean()*100)])
 
 class OneVsRestExperiment(Experiment):
     """
@@ -442,15 +442,15 @@ class OneVsRestExperiment(Experiment):
 
     _begining_report = """This experiment tried a OneVsRest classifier with both Decision Tree and Random Forest as base estimators."""
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
         """
         Reporting on low verbosity - only results.
         """
-        return '\n'.join(['One Vs Rest with Decision Tree accuracy score: {0:.4f}'.format(self._loaded_data['OvR Tree'].mean()),\
-                          'One Vs Rest with Random Forest accuracy score: {0:.4f}'.format(self._loaded_data['OvR Forest'].mean())])
+        return '\n'.join(['One Vs Rest with Decision Tree accuracy score: {0:.4f}%'.format(self._loaded_data['OvR Tree'].mean()*100),\
+                          'One Vs Rest with Random Forest accuracy score: {0:.4f}%'.format(self._loaded_data['OvR Forest'].mean()*100)])
      
 class DefaultParamsExperiment(Experiment):
     """
@@ -473,16 +473,16 @@ class DefaultParamsExperiment(Experiment):
         
     _begining_report = """This experiment tried both the Decision Tree and the Random Forest classifiers with default hyper parameters, as well as a random choosing classifier as a base line."""
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
         """
         Reporting on low verbosity - only results.
         """
-        return '\n'.join(['Decision Tree with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Tree'].mean()),\
-                          'Random Forest with default hyper parameters accuracy score: {0:.4f}'.format(self._loaded_data['Default_Forest'].mean()),\
-                          'Random classifier accuracy score: {0:.4f}'.format(self._loaded_data['Random'].mean())])   
+        return '\n'.join(['Decision Tree with default hyper parameters accuracy score: {0:.4f}%'.format(self._loaded_data['Default_Tree'].mean()*100),\
+                          'Random Forest with default hyper parameters accuracy score: {0:.4f}%'.format(self._loaded_data['Default_Forest'].mean()*100),\
+                          'Random classifier accuracy score: {0:.4f}%'.format(self._loaded_data['Random'].mean()*100)])   
     @property
     def _detail(self):
         """
@@ -549,7 +549,7 @@ class LearningCurveExperiment(Experiment):
     _begining_report = """This experiment checks the learning curve for all the classifiers. \n
 Will plot the learning curves on screen."""
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
@@ -649,15 +649,15 @@ class BestLookbackExperimet(Experiment):
     _begining_report = """This experiment checks both classifier's accuracy correlation with the lookback parameter \
 for the creation on the examples."""
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
         """
         Reporting on low verbosity - only tables
         """
-        _dtc_scores = {int(_lk):self._loaded_data[_lk][0].mean() for _lk in self._loaded_data}
-        _rfc_scores = {int(_lk):self._loaded_data[_lk][1].mean() for _lk in self._loaded_data}
+        _dtc_scores = {int(_lk):self._loaded_data[_lk][0].mean()*100 for _lk in self._loaded_data}
+        _rfc_scores = {int(_lk):self._loaded_data[_lk][1].mean()*100 for _lk in self._loaded_data}
         _table = tabulate([['Decision Tree']+[value for (key, value) in sorted(_dtc_scores.items())],\
                            ['Random Forest']+[value for (key, value) in sorted(_rfc_scores.items())]],\
                           headers=['Classifier / Lookback']+sorted(_dtc_scores),tablefmt="fancy_grid",floatfmt=".4f")
@@ -813,7 +813,7 @@ class BestProbaForDecision(Experiment):
     _begining_report = """This experiment checks the best probability given by the Decision Tree from which  \
 we start making the decisions."""
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
@@ -821,7 +821,7 @@ we start making the decisions."""
         Reporting on low verbosity - only tables
         """
         _proba_scores = {float(_k):(self._loaded_data['DTC'][_k],self._loaded_data['RFC'][_k]) for _k in self._loaded_data['DTC'].keys()}
-        _inner_table = [[key,tup[0][0],tup[0][1],(float(tup[0][0])/self._loaded_data["AG"])*tup[0][1],tup[1][0],tup[1][1],(float(tup[1][0])/self._loaded_data["AG"])*tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
+        _inner_table = [[key,tup[0][0],tup[0][1]*100,(float(tup[0][0])/self._loaded_data["AG"])*tup[0][1],tup[1][0],tup[1][1]*100,(float(tup[1][0])/self._loaded_data["AG"])*tup[1][1]] for (key, tup) in sorted(_proba_scores.items())]
         _table = tabulate([data for data in _inner_table],\
                           headers=['Probability','#Examples Tree','Score Tree','AS DT','#Examples Forest','Score Forest','AS RF'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
@@ -982,7 +982,7 @@ class BestProbaDiffForDrawDecision(Experiment):
     _begining_report = """This experiment checks the best differnce between Win_proba and Lose_Proba such that for every lower diff  \
 the decision will be a Draw."""
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
@@ -990,7 +990,7 @@ the decision will be a Draw."""
         Reporting on low verbosity - only tables
         """
         _proba_scores = {float(_k):(self._loaded_data['DTC'][_k],self._loaded_data['RFC'][_k]) for _k in self._loaded_data['DTC'].keys()}
-        _inner_table = [[key,tup[0],tup[1]] for (key, tup) in sorted(_proba_scores.items())]
+        _inner_table = [[key,tup[0]*100,tup[1]*100] for (key, tup) in sorted(_proba_scores.items())]
         _table = tabulate([data for data in _inner_table],\
                           headers=['Probability','Score DT','Score RF'],tablefmt="fancy_grid",floatfmt=".4f")
         return 'Results :\n%s\n'%_table
@@ -1133,7 +1133,7 @@ class FinalSeasonExperiment(Experiment):
         _last_crawl = datetime(2016,3,12)
     _begining_report = "This experiment checks the results of the classifier for last season in 2 ways: One classifier from all the leagues and one specific classifier for each league.\nLast games are from {}".format(_last_crawl.strftime("%A %d. %B %Y"))
             
-    _ending_report = """Done"""
+    _ending_report = ""
     
     @property        
     def _no_detail(self):
@@ -1180,7 +1180,7 @@ class FinalSeasonExperiment(Experiment):
         _table = tabulate([data for data in _inner_table],\
                             headers=curr_headers,tablefmt="fancy_grid",floatfmt=".4f")
         from numpy import array
-        print 'Results for experiment %s:\n%s\nMean accuracy for all leagues: %.4f'%(self.name,_table,array([data[1] for data in _inner_table]).mean())
+        print 'Results for experiment %s:\n%s\nMean accuracy for all leagues: %.4f'%(self.name,_table,array([data[1] for data in _inner_table]).mean()*100)
         return ''
         
     @property

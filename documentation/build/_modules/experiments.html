@@ -278,8 +278,56 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plots the Decision Tree classifier after search and after fitting all of the data.</span>
 <span class="sd">        </span>
+<span class="sd">        Also plots to screen bar charts of results.</span>
+<span class="sd">        </span>
 <span class="sd">        Saves in results folder, in pdf format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bayes_exp</span> <span class="o">=</span> <span class="n">BayesExperiment</span><span class="p">(</span><span class="s">&#39;Best_Params&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_prev_experiment</span><span class="p">(</span><span class="n">bayes_exp</span><span class="p">):</span> 
+            <span class="k">print</span> <span class="s">&quot;Can not report - failed to load previous experiment&quot;</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+        <span class="n">def_exp</span> <span class="o">=</span> <span class="n">DefaultParamsExperiment</span><span class="p">(</span><span class="s">&#39;Default_Params&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_prev_experiment</span><span class="p">(</span><span class="n">def_exp</span><span class="p">):</span> 
+            <span class="k">print</span> <span class="s">&quot;Can not report - failed to load previous experiment&quot;</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&quot;ignore&quot;</span><span class="p">)</span>
+            <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+            <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="mi">3</span>
+            <span class="n">before_means</span> <span class="o">=</span> <span class="p">(</span><span class="n">bayes_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Bayes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="n">def_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span>\
+                        <span class="n">def_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+            
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c"># the x locations for the groups</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>       <span class="c"># the width of the bars</span>
+            
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="c">#             rects1 = ax.bar(ind+width, before_means, width, color=&#39;r&#39;)</span>
+            
+            <span class="n">after_means</span> <span class="o">=</span> <span class="p">(</span><span class="n">bayes_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Bayes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">best_score_</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span>\
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">best_score_</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+            
+            <span class="n">rects2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">after_means</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+            <span class="c"># add some text for labels, title and axes ticks</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">&#39;Accuracy Scores %&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">&#39;Scores of classifiers after hyperparameters calibration&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ind</span> <span class="o">+</span> <span class="n">width</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s">&#39;Naive classifier&#39;</span><span class="p">,</span> <span class="s">&#39;Naive Bayes&#39;</span><span class="p">,</span> <span class="s">&#39;Decision Tree&#39;</span><span class="p">,</span> <span class="s">&#39;Random Forest&#39;</span><span class="p">))</span>
+            
+<span class="c">#             ax.legend((rects1[0], rects2[0]), (&#39;Before Search&#39;, &#39;After Search&#39;),loc=2)</span>
+            
+            <span class="k">def</span> <span class="nf">autolabel</span><span class="p">(</span><span class="n">rects</span><span class="p">):</span>
+                <span class="c"># attach some text labels</span>
+                <span class="k">for</span> <span class="n">rect</span> <span class="ow">in</span> <span class="n">rects</span><span class="p">:</span>
+                    <span class="n">height</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">1.05</span><span class="o">*</span><span class="n">height</span><span class="p">,</span>
+                            <span class="s">&#39;&#39;</span><span class="p">,</span>
+                            <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
+            
+<span class="c">#             autolabel(rects1)</span>
+            <span class="n">autolabel</span><span class="p">(</span><span class="n">rects2</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>      
+        
         <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">export_graphviz</span>
         <span class="kn">from</span> <span class="nn">sklearn.externals.six</span> <span class="kn">import</span> <span class="n">StringIO</span>
         <span class="kn">import</span> <span class="nn">pydot</span>
@@ -483,8 +531,47 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;Decision Tree with default hyper parameters accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>\
                           <span class="s">&#39;Random Forest with default hyper parameters accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>\
-                          <span class="s">&#39;Random classifier accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Random&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())])</span>   </div>
-    
+                          <span class="s">&#39;Random classifier accuracy score: {0:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Random&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())])</span>   
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_detail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reporting on medium verbosity - plot bar charts of results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bayes_exp</span> <span class="o">=</span> <span class="n">BayesExperiment</span><span class="p">(</span><span class="s">&#39;Best_Params&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_prev_experiment</span><span class="p">(</span><span class="n">bayes_exp</span><span class="p">):</span> 
+            <span class="k">print</span> <span class="s">&quot;Can not report - failed to load previous experiment&quot;</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span>
+        <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&quot;ignore&quot;</span><span class="p">)</span>
+            <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+            <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+            <span class="n">means</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Random&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">bayes_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Bayes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span>\
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Default_Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+            
+            <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>  <span class="c"># the x locations for the groups</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="mf">0.45</span>       <span class="c"># the width of the bars</span>
+            
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+            <span class="n">rects1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">means</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+            
+            <span class="c"># add some text for labels, title and axes ticks</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">&#39;Accuracy Scores %&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">&#39;Scores of baseline classifiers&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ind</span> <span class="o">+</span> <span class="n">width</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s">&#39;Naive classifier&#39;</span><span class="p">,</span> <span class="s">&#39;Naive Bayes&#39;</span><span class="p">,</span> <span class="s">&#39;Decision Tree&#39;</span><span class="p">,</span> <span class="s">&#39;Random Forest&#39;</span><span class="p">))</span>
+            
+            <span class="k">def</span> <span class="nf">autolabel</span><span class="p">(</span><span class="n">rects</span><span class="p">):</span>
+                <span class="c"># attach some text labels</span>
+                <span class="k">for</span> <span class="n">rect</span> <span class="ow">in</span> <span class="n">rects</span><span class="p">:</span>
+                    <span class="n">height</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">1.05</span><span class="o">*</span><span class="n">height</span><span class="p">,</span>
+                            <span class="s">&#39;&#39;</span><span class="p">,</span>
+                            <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
+            
+            <span class="n">autolabel</span><span class="p">(</span><span class="n">rects1</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">return</span> <span class="s">&#39;&#39;</span></div>
 <div class="viewcode-block" id="LearningCurveExperiment"><a class="viewcode-back" href="../expr.html#experiments.LearningCurveExperiment">[docs]</a><span class="k">class</span> <span class="nc">LearningCurveExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An experiment to test the learning curves of the classifiers (Decision Tree, Random Forest, Naive Bayes).</span>
