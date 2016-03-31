@@ -57,7 +57,23 @@ class CrossValidation(object):
             train_data , test_data = self.create_indices_leagues(train_leagues,test_league)
             res.append((numpy.array(train_data) , numpy.array(test_data)))
         self.cv_list = res
+    
+    @property
+    def _leagues_indeces(self):
+        """
+        Return a mapping of {league:examples and tags indices}
         
+        :rtype: {league:range()}
+        """
+        pass
+        d={}
+        for league in LEAGUES:
+            if league == LEAGUES[0]:
+                d[league] = range(0,self._indces[league])
+            else:
+                d[league] = range(self._indces[LEAGUES[LEAGUES.index(league)-1]],self._indces[league])
+        return d
+    
     def create_indices_leagues(self,train,test):
         """
             Given a train set of examples and test set of examples, return a tuple of lists that holds the examples indices (for sklearn classes).

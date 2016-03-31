@@ -106,7 +106,23 @@
             <span class="n">train_data</span> <span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_indices_leagues</span><span class="p">(</span><span class="n">train_leagues</span><span class="p">,</span><span class="n">test_league</span><span class="p">)</span>
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span> <span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_data</span><span class="p">)))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv_list</span> <span class="o">=</span> <span class="n">res</span></div>
-        
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_leagues_indeces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a mapping of {league:examples and tags indices}</span>
+<span class="sd">        </span>
+<span class="sd">        :rtype: {league:range()}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+        <span class="n">d</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">for</span> <span class="n">league</span> <span class="ow">in</span> <span class="n">LEAGUES</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">league</span> <span class="o">==</span> <span class="n">LEAGUES</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">league</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_indces</span><span class="p">[</span><span class="n">league</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">league</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_indces</span><span class="p">[</span><span class="n">LEAGUES</span><span class="p">[</span><span class="n">LEAGUES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">league</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span><span class="bp">self</span><span class="o">.</span><span class="n">_indces</span><span class="p">[</span><span class="n">league</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span>
+    
 <div class="viewcode-block" id="CrossValidation.create_indices_leagues"><a class="viewcode-back" href="../../data_classes.html#data.cross_validation.CrossValidation.create_indices_leagues">[docs]</a>    <span class="k">def</span> <span class="nf">create_indices_leagues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">train</span><span class="p">,</span><span class="n">test</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Given a train set of examples and test set of examples, return a tuple of lists that holds the examples indices (for sklearn classes).</span>

@@ -518,8 +518,26 @@ class OneVsRestExperiment(Experiment):
         """
         Reporting on low verbosity - only results.
         """
+        best_exp = BestParamsExperiment('Best_Params')
+        try:
+            self._load_prev_experiment(best_exp)
+        except:
+            pass
+        tree_cross_scores = max(best_exp._loaded_data['Tree'].grid_scores_,key= lambda x: x[1])[2]
+        forest_cross_scores = max(best_exp._loaded_data['Forest'].grid_scores_,key= lambda x: x[1])[2]
+        def _evaluate(before,after):
+            prob , is_sig , is_better = self.t_test(before[0], after[0])
+            res = '\n'.join(['Paired T Test result between {before_name} and {after_name}: {proba:.5f}%'.format(before_name = before[1],after_name=after[1],proba=prob*100),\
+                             'The results {sig} statically significant, while {before_name} is {better} with score {before_score:.4f}% than {after_name} with score {after_score:.4f}%'.format(before_name = before[1],after_name=after[1],prob=prob,before_score=before[0].mean()*100,
+                                                                after_score=after[0].mean()*100,sig = 'are' if is_sig else "aren't",
+                                                                better= 'better' if not is_better else 'worse')])
+            
+            return res
+        trees_t_test = _evaluate((tree_cross_scores,'Decision Tree before using OneVsRest'), (self._loaded_data['OvR Tree'],'Decision Tree after using OneVsRest'))
+        forests_t_test = _evaluate((forest_cross_scores,'Random Forest before using OneVsRest'), (self._loaded_data['OvR Forest'],'Random Forest after using OneVsRest'))
         return '\n'.join(['One Vs Rest with Decision Tree accuracy score: {0:.4f}%'.format(self._loaded_data['OvR Tree'].mean()*100),\
-                          'One Vs Rest with Random Forest accuracy score: {0:.4f}%'.format(self._loaded_data['OvR Forest'].mean()*100)])
+                          trees_t_test,\
+                          'One Vs Rest with Random Forest accuracy score: {0:.4f}%'.format(self._loaded_data['OvR Forest'].mean()*100),forests_t_test])
      
 class DefaultParamsExperiment(Experiment):
     """
@@ -1148,11 +1166,11 @@ class FinalSeasonExperiment(Experiment):
             return
         if self.name == "Final_Season":
             Experiment.run(self)
-            clf = RFC(**self.estimators_params['RFC'])
+            clf = OVRC(RFC(**self.estimators_params['RFC']),-1)
             clf = clf.fit(self.X,self.y)
         else:
             self.cv = CrossValidation(test=self._test)
-            clf = RFC(**self.estimators_params['RFC'])
+            clf = OVRC(RFC(**self.estimators_params['RFC']))
         
         self._loaded_data = {}   
         
@@ -1160,8 +1178,6 @@ class FinalSeasonExperiment(Experiment):
             self.cv.dbh.league = _league
 
             if self.name == "Final_Season_S":
-                self.X = []
-                self.y = []
                 for year in range(MIN_YEAR,MAX_YEAR):
                     temp_ex, temp_ta = self.cv.dbh.create_examples(year,lookback=self.estimators_params['Lookback'],current=False)
                     self.X += temp_ex
