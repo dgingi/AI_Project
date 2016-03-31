@@ -142,7 +142,76 @@ class Experiment():
         elif verbosity == 2:
             print self._more_detail
         print self._ending_report
+        
+class _ResultsDistExperiments(Experiment):
+    """
+    Helper experiment to show the distribution of the final results of the games we use for data.
+    """
+    def __init__(self,dir_name,test=False):
+        Experiment.__init__(self,dir_name,test)
+        self.name = 'Results_Dist'
+        
+    def get_data(self):
+        """
+        Loads all the examples and tags needed for the experiment.
+        
+        Because in this experiment we only check the distribution of the final results, we set the lookback to 1 - for faster generation of the examples and tags
+        """
+        self.cv = CrossValidation(test=self._test)
+        lookback = 1
+        self.cv.load_data(lookback)
+        self.X = self.cv.complete_examples
+        self.y = self.cv.complete_tags
+    
+    def run(self):
+        """
+        Create examples and calculate the distribution of the final results
+        """
+        self.get_data()
+        from collections import Counter
+        self._loaded_data = {}
+        self._loaded_data['Results_Dist'] = Counter(self.y)
+        self.save(self._loaded_data)
+        
+    _begining_report = """This experiments calculates the final results distribution in all leagues for the seasons of 2010-2014."""
+    
+    _ending_report = ''
+        
+    @property        
+    def _no_detail(self):
+        """
+        Reporting on low verbosity - print the distribution
+        """
+        _denominator = float(sum(self._loaded_data['Results_Dist'].values()))
+        return 'Home Win %: {0:.4f}%, Draw %: {1:.4f}%, Away Win %: {2:.4f}%'.format(self._loaded_data['Results_Dist'][1]/_denominator,
+                                                                                  self._loaded_data['Results_Dist'][0]/_denominator,
+                                                                                  self._loaded_data['Results_Dist'][-1]/_denominator)
+        
+    @property
+    def _detail(self):
+        """
+        Reporting on medium verbosity - plot pie charts of results distribution
+        """
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import numpy as np
+            import matplotlib.pyplot as plt
+            import matplotlib.pyplot as plt
 
+            # The slices will be ordered and plotted counter-clockwise.
+            labels = 'Home Win','Draw','Away Win'
+            sizes = [self._loaded_data['Results_Dist'][1],self._loaded_data['Results_Dist'][0],self._loaded_data['Results_Dist'][-1]]
+            colors = ['yellowgreen', 'gold', 'lightcoral']
+            explode = (0, 0.1, 0)  # only "explode" the 2nd slice (i.e. 'Draw', to show how many games didn't finish in defeat of one of the teams)
+            
+            plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+                    autopct='%1.1f%%', shadow=True, startangle=90)
+            # Set aspect ratio to be equal so that pie is drawn as a circle.
+            plt.axis('equal')
+            plt.title('Final game results distribution for all league in season 2010-2014')
+            plt.show()
+        return ''
+        
 class BestParamsExperiment(Experiment):
     """
     An experiment class to search for the best hyperparameters for an estimator.
@@ -1250,7 +1319,8 @@ if __name__ == '__main__':
         args = ExperimentArgsParser().parse()
         _experiments = {'Best_Params':BestParamsExperiment,'Best_Lookback':BestLookbackExperimet,'Best_Proba':BestProbaForDecision,\
                     'Best_Proba_Diff':BestProbaDiffForDrawDecision,'Final_Season':FinalSeasonAux,'OVR':OneVsRestExperiment,\
-                    'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment}
+                    'Learning_Curve':LearningCurveExperiment,'Bayes':BayesExperiment,'Default_Params':DefaultParamsExperiment,\
+                    'Dist':_ResultsDistExperiments}
     
         if args.action == 'run':
             _experiments[args.exp](dir_name=args.out_dir).run()

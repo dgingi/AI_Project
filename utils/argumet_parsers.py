@@ -5,7 +5,7 @@ class ExperimentArgsParser(object):
     """
     This class is incharge of parsering the arguments related to the experiments. 
     """
-    experiments = ['Best_Params','Bayes','OVR','Default_Params','Learning_Curve','Best_Lookback','Best_Proba','Best_Proba_Diff','Final_Season']
+    experiments = ['Best_Params','Bayes','OVR','Default_Params','Learning_Curve','Best_Lookback','Best_Proba','Best_Proba_Diff','Final_Season','Dist']
     actions = ['run','report']
     
     def __init__(self):
