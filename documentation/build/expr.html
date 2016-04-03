@@ -351,8 +351,99 @@ RandomForestClassifier estimator.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="bestprobadifffordrawdecision-class">
+<h2>3.8. BestProbaDiffForDrawDecision class<a class="headerlink" href="#bestprobadifffordrawdecision-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.BestProbaDiffForDrawDecision">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">BestProbaDiffForDrawDecision</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaDiffForDrawDecision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaDiffForDrawDecision" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment to test what is the best threshold from which we want to make the decision about a draw.</p>
+<dl class="method">
+<dt id="experiments.BestProbaDiffForDrawDecision.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaDiffForDrawDecision.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaDiffForDrawDecision.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BestProbaDiffForDrawDecision._detail">
+<code class="descname">_detail</code><a class="headerlink" href="#experiments.BestProbaDiffForDrawDecision._detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Medium verbosity - show plotted graphs</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.BestProbaDiffForDrawDecision._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.BestProbaDiffForDrawDecision._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity - only tables</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.BestProbaDiffForDrawDecision.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaDiffForDrawDecision.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaDiffForDrawDecision.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all the examples and tags needed for the experiment - building the examples based on the lookback found in previous experiments.</p>
+<p>Loads the all of the examples and tags, and also creates cross validation for the classifiers..</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.BestProbaDiffForDrawDecision.load_params">
+<code class="descname">load_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaDiffForDrawDecision.load_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaDiffForDrawDecision.load_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>The load_params for this experiment loads the best params for the decision tree and random forest and also the best lookback.</p>
+<p>This params found by the experiment best_param, lookback by best_lookback.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.BestProbaDiffForDrawDecision.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#BestProbaDiffForDrawDecision.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.BestProbaDiffForDrawDecision.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Using the predict_proba methods of the classifiers, we wish to test a new decision rule that will allow us to tag games as draw.</p>
+<dl class="docutils">
+<dt>The predict_proba methods return a list of distributions (of the possible tags) for all the examples in the test, e.g:</dt>
+<dd>[[0.1,0.2,0.7],[0.3,0.2,0.5],...]</dd>
+</dl>
+<p>For each probability p in [0.01,0.19] (in jumps of 0.01), do a cross validation test with the following decision rule instead of the default one:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>if <a href="#id1"><span class="problematic" id="id2">|P(Home Team Winning) - P(Away Team Winning)|</span></a> &lt;= p:</dt>
+<dd>tag as draw instead of choosing the tag with the highest probability</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="onevsrestexperiment-class">
+<h2>3.9. OneVsRestExperiment class<a class="headerlink" href="#onevsrestexperiment-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="experiments.OneVsRestExperiment">
+<em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">OneVsRestExperiment</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#OneVsRestExperiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.OneVsRestExperiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>An experiment to test Naive Bayes classifier.</p>
+<dl class="method">
+<dt id="experiments.OneVsRestExperiment.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#OneVsRestExperiment.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.OneVsRestExperiment.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experiments.OneVsRestExperiment._no_detail">
+<code class="descname">_no_detail</code><a class="headerlink" href="#experiments.OneVsRestExperiment._no_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting on low verbosity - only results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.OneVsRestExperiment.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#OneVsRestExperiment.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.OneVsRestExperiment.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all the examples and tags needed for the experiment - building the examples based on the lookback found in previous experiments.</p>
+<p>Loads the all of the examples and tags, and also creates cross validation for the classifiers..</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experiments.OneVsRestExperiment.load_params">
+<code class="descname">load_params</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#OneVsRestExperiment.load_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.OneVsRestExperiment.load_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>The load_params for this experiment loads the best params for the decision tree and random forest and also the best lookback.</p>
+<p>This params found by the experiment best_param, lookback by best_lookback.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="finalseasonexperiment-class">
-<h2>3.8. FinalSeasonExperiment class<a class="headerlink" href="#finalseasonexperiment-class" title="Permalink to this headline">¶</a></h2>
+<h2>3.10. FinalSeasonExperiment class<a class="headerlink" href="#finalseasonexperiment-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="experiments.FinalSeasonExperiment">
 <em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">FinalSeasonExperiment</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonExperiment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonExperiment" title="Permalink to this definition">¶</a></dt>
@@ -401,7 +492,7 @@ RandomForestClassifier estimator.</p>
 
 </div>
 <div class="section" id="finalseasonaux-class">
-<h2>3.9. FinalSeasonAux class<a class="headerlink" href="#finalseasonaux-class" title="Permalink to this headline">¶</a></h2>
+<h2>3.11. FinalSeasonAux class<a class="headerlink" href="#finalseasonaux-class" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="experiments.FinalSeasonAux">
 <em class="property">class </em><code class="descclassname">experiments.</code><code class="descname">FinalSeasonAux</code><span class="sig-paren">(</span><em>dir_name</em>, <em>test=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/experiments.html#FinalSeasonAux"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experiments.FinalSeasonAux" title="Permalink to this definition">¶</a></dt>
@@ -429,8 +520,10 @@ RandomForestClassifier estimator.</p>
 <li class="toctree-l2"><a class="reference internal" href="#learningcurveexperiment-class">3.5. LearningCurveExperiment class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bestlookbackexperimet-class">3.6. BestLookbackExperimet class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bestprobafordecision-class">3.7. BestProbaForDecision class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#finalseasonexperiment-class">3.8. FinalSeasonExperiment class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#finalseasonaux-class">3.9. FinalSeasonAux class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bestprobadifffordrawdecision-class">3.8. BestProbaDiffForDrawDecision class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#onevsrestexperiment-class">3.9. OneVsRestExperiment class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finalseasonexperiment-class">3.10. FinalSeasonExperiment class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finalseasonaux-class">3.11. FinalSeasonAux class</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils_classes.html">4. Utils package</a></li>

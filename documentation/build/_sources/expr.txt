@@ -44,6 +44,18 @@ BestProbaForDecision class
    :members:
    :private-members:
    
+BestProbaDiffForDrawDecision class 
+===========================
+.. autoclass:: experiments.BestProbaDiffForDrawDecision
+   :members:
+   :private-members:
+   
+OneVsRestExperiment class 
+===========================
+.. autoclass:: experiments.OneVsRestExperiment
+   :members:
+   :private-members:
+   
 FinalSeasonExperiment class 
 ===========================
 .. autoclass:: experiments.FinalSeasonExperiment

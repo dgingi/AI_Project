@@ -513,15 +513,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;Gaussian Naive Bayes accuracy score: {0:.4f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Bayes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)])</span></div>
 
-<span class="k">class</span> <span class="nc">OneVsRestExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
+<div class="viewcode-block" id="OneVsRestExperiment"><a class="viewcode-back" href="../expr.html#experiments.OneVsRestExperiment">[docs]</a><span class="k">class</span> <span class="nc">OneVsRestExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An experiment to test Naive Bayes classifier.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dir_name</span><span class="p">,</span><span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="OneVsRestExperiment.__init__"><a class="viewcode-back" href="../expr.html#experiments.OneVsRestExperiment.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dir_name</span><span class="p">,</span><span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="n">Experiment</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dir_name</span><span class="p">,</span><span class="n">test</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;OneVsRest&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;OneVsRest&#39;</span></div>
     
-    <span class="k">def</span> <span class="nf">load_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="OneVsRestExperiment.load_params"><a class="viewcode-back" href="../expr.html#experiments.OneVsRestExperiment.load_params">[docs]</a>    <span class="k">def</span> <span class="nf">load_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The load_params for this experiment loads the best params for the decision tree and random forest and also the best lookback.</span>
 <span class="sd">        </span>
@@ -533,9 +533,9 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_prev_experiment</span><span class="p">(</span><span class="n">best_lookback_exp</span><span class="p">):</span> <span class="k">return</span> <span class="bp">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;DTC&#39;</span><span class="p">:</span><span class="n">best_param_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span><span class="s">&#39;RFC&#39;</span><span class="p">:</span><span class="n">best_param_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span>\
                                   <span class="s">&#39;Lookback&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">([(</span><span class="n">best_lookback_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="n">_lk</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="n">_lk</span><span class="p">)</span> <span class="k">for</span> <span class="n">_lk</span> <span class="ow">in</span> <span class="n">best_lookback_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">])[</span><span class="mi">1</span><span class="p">])}</span>
-        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">True</span></div>
     
-    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="OneVsRestExperiment.get_data"><a class="viewcode-back" href="../expr.html#experiments.OneVsRestExperiment.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loads all the examples and tags needed for the experiment - building the examples based on the lookback found in previous experiments.</span>
 <span class="sd">        </span>
@@ -545,7 +545,7 @@
         <span class="n">lookback</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;Lookback&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">lookback</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_examples</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span></div>
     
     <span class="nd">@timed</span>   
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -586,7 +586,7 @@
         <span class="n">forests_t_test</span> <span class="o">=</span> <span class="n">_evaluate</span><span class="p">((</span><span class="n">forest_cross_scores</span><span class="p">,</span><span class="s">&#39;Random Forest before using OneVsRest&#39;</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;OvR Forest&#39;</span><span class="p">],</span><span class="s">&#39;Random Forest after using OneVsRest&#39;</span><span class="p">))</span>
         <span class="k">return</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&#39;One Vs Rest with Decision Tree accuracy score: {0:.4f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;OvR Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span>\
                           <span class="n">trees_t_test</span><span class="p">,</span>\
-                          <span class="s">&#39;One Vs Rest with Random Forest accuracy score: {0:.4f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;OvR Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span><span class="n">forests_t_test</span><span class="p">])</span>
+                          <span class="s">&#39;One Vs Rest with Random Forest accuracy score: {0:.4f}%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;OvR Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span><span class="n">forests_t_test</span><span class="p">])</span></div>
      
 <div class="viewcode-block" id="DefaultParamsExperiment"><a class="viewcode-back" href="../expr.html#experiments.DefaultParamsExperiment">[docs]</a><span class="k">class</span> <span class="nc">DefaultParamsExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1007,15 +1007,15 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="k">return</span> <span class="s">&#39;&#39;</span></div>
 
-<span class="k">class</span> <span class="nc">BestProbaDiffForDrawDecision</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
+<div class="viewcode-block" id="BestProbaDiffForDrawDecision"><a class="viewcode-back" href="../expr.html#experiments.BestProbaDiffForDrawDecision">[docs]</a><span class="k">class</span> <span class="nc">BestProbaDiffForDrawDecision</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An experiment to test what is the best threshold from which we want to make the decision about a draw.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_name</span><span class="p">,</span> <span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="BestProbaDiffForDrawDecision.__init__"><a class="viewcode-back" href="../expr.html#experiments.BestProbaDiffForDrawDecision.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_name</span><span class="p">,</span> <span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="n">Experiment</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dir_name</span><span class="p">,</span> <span class="n">test</span><span class="o">=</span><span class="n">test</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Best_Proba_Draw&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Best_Proba_Draw&#39;</span></div>
         
-    <span class="k">def</span> <span class="nf">load_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BestProbaDiffForDrawDecision.load_params"><a class="viewcode-back" href="../expr.html#experiments.BestProbaDiffForDrawDecision.load_params">[docs]</a>    <span class="k">def</span> <span class="nf">load_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The load_params for this experiment loads the best params for the decision tree and random forest and also the best lookback.</span>
 <span class="sd">        </span>
@@ -1030,9 +1030,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;DTC&#39;</span><span class="p">:</span><span class="n">best_param_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Tree&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span><span class="s">&#39;RFC&#39;</span><span class="p">:</span><span class="n">best_param_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;Forest&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span>\
                                   <span class="s">&#39;Lookback&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">([(</span><span class="n">best_lookback_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="n">_lk</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="n">_lk</span><span class="p">)</span> <span class="k">for</span> <span class="n">_lk</span> <span class="ow">in</span> <span class="n">best_lookback_exp</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">])[</span><span class="mi">1</span><span class="p">]),</span>\
                                   <span class="s">&#39;Best_Proba&#39;</span><span class="p">:</span><span class="mf">0.65</span><span class="p">}</span>
-        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">True</span></div>
     
-    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BestProbaDiffForDrawDecision.get_data"><a class="viewcode-back" href="../expr.html#experiments.BestProbaDiffForDrawDecision.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Loads all the examples and tags needed for the experiment - building the examples based on the lookback found in previous experiments.</span>
 <span class="sd">        </span>
@@ -1042,9 +1042,9 @@
         <span class="n">lookback</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;Lookback&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">lookback</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_examples</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">complete_tags</span></div>
     
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BestProbaDiffForDrawDecision.run"><a class="viewcode-back" href="../expr.html#experiments.BestProbaDiffForDrawDecision.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Using the predict_proba methods of the classifiers, we wish to test a new decision rule that will allow us to tag games as draw.</span>
 <span class="sd">        </span>
@@ -1112,7 +1112,7 @@
             <span class="n">rf_decision_result</span> <span class="o">=</span> <span class="p">(</span><span class="n">rf_score</span><span class="o">*</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="mi">5</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;DTC&#39;</span><span class="p">][</span><span class="n">_range</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt_decision_result</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">[</span><span class="s">&#39;RFC&#39;</span><span class="p">][</span><span class="n">_range</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf_decision_result</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loaded_data</span><span class="p">)</span></div>
         
         
     <span class="n">_begining_report</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;This experiment checks the best differnce between Win_proba and Lose_Proba such that for every lower diff  </span><span class="se">\</span>
@@ -1168,7 +1168,7 @@
         
         <span class="n">plot_lookback_curve</span><span class="p">(</span><span class="s">&#39;Correlation of difference and mean validation score&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-        <span class="k">return</span> <span class="s">&#39;&#39;</span>  
+        <span class="k">return</span> <span class="s">&#39;&#39;</span>  </div>
     
 <div class="viewcode-block" id="FinalSeasonExperiment"><a class="viewcode-back" href="../expr.html#experiments.FinalSeasonExperiment">[docs]</a><span class="k">class</span> <span class="nc">FinalSeasonExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1227,6 +1227,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">dbh</span><span class="o">.</span><span class="n">league</span> <span class="o">=</span> <span class="n">_league</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&quot;Final_Season_S&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MIN_YEAR</span><span class="p">,</span><span class="n">MAX_YEAR</span><span class="p">):</span>
                     <span class="n">temp_ex</span><span class="p">,</span> <span class="n">temp_ta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="o">.</span><span class="n">dbh</span><span class="o">.</span><span class="n">create_examples</span><span class="p">(</span><span class="n">year</span><span class="p">,</span><span class="n">lookback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">estimators_params</span><span class="p">[</span><span class="s">&#39;Lookback&#39;</span><span class="p">],</span><span class="n">current</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">+=</span> <span class="n">temp_ex</span>
@@ -1371,7 +1372,7 @@
         
     <span class="nd">@timed</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">FinalSeasonExperiment</span><span class="p">(</span><span class="s">&quot;Final_Season&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="c">#         FinalSeasonExperiment(&quot;Final_Season&quot;,self._test).run()</span>
         <span class="n">FinalSeasonExperiment</span><span class="p">(</span><span class="s">&quot;Final_Season_S&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">_test</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
         
     <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbosity</span><span class="p">,</span> <span class="n">outfile</span><span class="p">):</span>

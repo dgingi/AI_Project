@@ -1178,6 +1178,7 @@ class FinalSeasonExperiment(Experiment):
             self.cv.dbh.league = _league
 
             if self.name == "Final_Season_S":
+                self.X,self.y = [], []
                 for year in range(MIN_YEAR,MAX_YEAR):
                     temp_ex, temp_ta = self.cv.dbh.create_examples(year,lookback=self.estimators_params['Lookback'],current=False)
                     self.X += temp_ex
@@ -1322,7 +1323,7 @@ class FinalSeasonAux(Experiment):
         
     @timed
     def run(self):
-        FinalSeasonExperiment("Final_Season",self._test).run()
+#         FinalSeasonExperiment("Final_Season",self._test).run()
         FinalSeasonExperiment("Final_Season_S",self._test).run()
         
     def report(self, verbosity, outfile):
