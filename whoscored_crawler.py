@@ -315,12 +315,18 @@ class WhoScoredCrawler(object):
             pickle.dump(nxt_fix_dict,month_nf_bkup)
         if month != self.played_months[-1]:
             os.remove(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+1]+'.pckl'))
-            if os.path.exists(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+2]+'-nxtFix.pckl')):
-                try:
-                    os.remove(path.join(self._bkup_folder,self.played_months[self.played_months.index(month)+2]+'-nxtFix.pckl'))
-                except Exception as e:
-                    logging.info(str(e))
-                    pass
+            try:
+                pp_fixtures = path.join(self._bkup_folder, self.played_months[self.played_months.index(month) + 2] + '-nxtFix.pckl')
+            except Exception as e:
+                        logging.error(str(e))
+                        pass
+            else:
+                if os.path.exists(pp_fixtures):
+                    try:
+                        os.remove(pp_fixtures)
+                    except Exception as e:
+                        logging.error(str(e))
+                        pass
             
     @retry()       
     def parse_fixture(self,fixture):
@@ -391,5 +397,5 @@ if __name__ == '__main__':
         else:
     #         for kwargs in args_parser.update_kwargs:
     #             start_crawl(kwargs)
-            p = Pool(cpu_count()/2)
+            p = Pool(cpu_count())
             p.map(start_crawl, args_parser.update_kwargs)

@@ -60,68 +60,68 @@ S'1 : 1'
 p26
 sa(dp27
 g4
-S'Sassuolo'
+S'Frosinone'
 p28
 sg6
-S'AC Milan'
+S'Udinese'
 p29
 sg8
-S'https://www.whoscored.com/Matches/1006093/Live'
+S'https://www.whoscored.com/Matches/1006096/Live'
 p30
 sg10
 S'2 : 0'
 p31
 sa(dp32
 g4
-S'Atalanta'
+S'Sassuolo'
 p33
 sg6
-S'Juventus'
+S'AC Milan'
 p34
 sg8
-S'https://www.whoscored.com/Matches/1006091/Live'
+S'https://www.whoscored.com/Matches/1006093/Live'
 p35
 sg10
-S'0 : 2'
+S'2 : 0'
 p36
 sa(dp37
 g4
-S'Genoa'
+S'Atalanta'
 p38
 sg6
-S'Empoli'
+S'Juventus'
 p39
 sg8
-S'https://www.whoscored.com/Matches/1006089/Live'
+S'https://www.whoscored.com/Matches/1006091/Live'
 p40
 sg10
-S'1 : 0'
+S'0 : 2'
 p41
 sa(dp42
 g4
-S'Bologna'
+S'Genoa'
 p43
 sg6
-S'Carpi'
+S'Empoli'
 p44
 sg8
-S'https://www.whoscored.com/Matches/1006087/Live'
+S'https://www.whoscored.com/Matches/1006089/Live'
 p45
 sg10
-S'0 : 0'
+S'1 : 0'
 p46
 sa(dp47
 g4
-S'Frosinone'
+S'Bologna'
 p48
 sg6
-S'Udinese'
+S'Carpi'
 p49
 sg8
-S'https://www.whoscored.com/Matches/1006096/Live'
+S'https://www.whoscored.com/Matches/1006087/Live'
 p50
 sg10
-S'2 : 0'
+S'0 : 0'
 p51
 sa(dp52
 g4
@@ -190,29 +190,29 @@ S'0 : 0'
 p76
 sa(dp77
 g4
-S'Udinese'
+S'Genoa'
 p78
 sg6
-S'Roma'
+S'Torino'
 p79
 sg8
-S'https://www.whoscored.com/Matches/1006113/Live'
+S'https://www.whoscored.com/Matches/1006116/Live'
 p80
 sg10
-S'1 : 2'
+S'3 : 2'
 p81
 sa(dp82
 g4
-S'Carpi'
+S'Udinese'
 p83
 sg6
-S'Frosinone'
+S'Roma'
 p84
 sg8
-S'https://www.whoscored.com/Matches/1006109/Live'
+S'https://www.whoscored.com/Matches/1006113/Live'
 p85
 sg10
-S'2 : 1'
+S'1 : 2'
 p86
 sa(dp87
 g4
@@ -229,3336 +229,3336 @@ S'1 : 1'
 p91
 sa(dp92
 g4
-S'Genoa'
+S'Carpi'
 p93
 sg6
-S'Torino'
+S'Frosinone'
 p94
 sg8
-S'https://www.whoscored.com/Matches/1006116/Live'
+S'https://www.whoscored.com/Matches/1006109/Live'
 p95
 sg10
-S'3 : 2'
+S'2 : 1'
 p96
 sa(dp97
 g4
-S'Lazio'
+S'Palermo'
 p98
 sg6
-S'Atalanta'
+S'Napoli'
 p99
 sg8
-S'https://www.whoscored.com/Matches/1006107/Live'
+S'https://www.whoscored.com/Matches/1006112/Live'
 p100
 sg10
-S'2 : 0'
+S'0 : 1'
 p101
 sa(dp102
 g4
-S'Palermo'
+S'Lazio'
 p103
 sg6
-S'Napoli'
+S'Atalanta'
 p104
 sg8
-S'https://www.whoscored.com/Matches/1006112/Live'
+S'https://www.whoscored.com/Matches/1006107/Live'
 p105
 sg10
-S'0 : 1'
+S'2 : 0'
 p106
-sasS'Feb'
-p107
-(lp108
-(dp109
-g4
-S'Sassuolo'
-p110
-sg6
-S'Roma'
-p111
-sg8
-S'https://www.whoscored.com/Matches/1006007/Live'
-p112
-sg10
-S'0 : 2'
-p113
-sa(dp114
-g4
-S'Frosinone'
-p115
-sg6
-S'Bologna'
-p116
-sg8
-S'https://www.whoscored.com/Matches/1006001/Live'
-p117
-sg10
-S'1 : 0'
-p118
-sa(dp119
-g4
-S'Fiorentina'
-p120
-sg6
-S'Carpi'
-p121
-sg8
-S'https://www.whoscored.com/Matches/1006002/Live'
-p122
-sg10
-S'2 : 1'
-p123
-sa(dp124
-g4
-S'Inter'
-p125
-sg6
-S'Chievo'
-p126
-sg8
-S'https://www.whoscored.com/Matches/1006003/Live'
-p127
-sg10
-S'1 : 0'
-p128
-sa(dp129
-g4
-S'Juventus'
-p130
-sg6
-S'Genoa'
-p131
-sg8
-S'https://www.whoscored.com/Matches/1006004/Live'
-p132
-sg10
-S'1 : 0'
-p133
-sa(dp134
-g4
-S'Palermo'
-p135
-sg6
-S'AC Milan'
-p136
-sg8
-S'https://www.whoscored.com/Matches/1006005/Live'
-p137
-sg10
-S'0 : 2'
-p138
-sa(dp139
-g4
-S'Lazio'
-p140
-sg6
-S'Napoli'
-p141
-sg8
-S'https://www.whoscored.com/Matches/1006006/Live'
-p142
-sg10
-S'0 : 2'
-p143
-sa(dp144
-g4
-S'Sampdoria'
-p145
-sg6
-S'Torino'
-p146
-sg8
-S'https://www.whoscored.com/Matches/1006008/Live'
-p147
-sg10
-S'2 : 2'
-p148
-sa(dp149
+sa(dp107
 g4
 S'Empoli'
-p150
+p108
+sg6
+S'Palermo'
+p109
+sg8
+S'https://www.whoscored.com/Matches/1006135/Live'
+p110
+sg10
+S'0 : 0'
+p111
+sa(dp112
+g4
+S'Roma'
+p113
+sg6
+S'Inter'
+p114
+sg8
+S'https://www.whoscored.com/Matches/1006132/Live'
+p115
+sg10
+S'1 : 1'
+p116
+sa(dp117
+g4
+S'Atalanta'
+p118
+sg6
+S'Bologna'
+p119
+sg8
+S'https://www.whoscored.com/Matches/1006127/Live'
+p120
+sg10
+S'2 : 0'
+p121
+sa(dp122
+g4
+S'Sassuolo'
+p123
 sg6
 S'Udinese'
-p151
+p124
 sg8
-S'https://www.whoscored.com/Matches/1006009/Live'
-p152
+S'https://www.whoscored.com/Matches/1006136/Live'
+p125
 sg10
 S'1 : 1'
-p153
-sa(dp154
+p126
+sa(dp127
 g4
-S'Verona'
-p155
+S'Torino'
+p128
 sg6
-S'Atalanta'
-p156
+S'Juventus'
+p129
 sg8
-S'https://www.whoscored.com/Matches/1006000/Live'
-p157
+S'https://www.whoscored.com/Matches/1006133/Live'
+p130
 sg10
-S'2 : 1'
-p158
-sa(dp159
+S'1 : 4'
+p131
+sa(dp132
 g4
-S'Bologna'
-p160
+S'Frosinone'
+p133
 sg6
 S'Fiorentina'
-p161
+p134
 sg8
-S'https://www.whoscored.com/Matches/1005983/Live'
-p162
+S'https://www.whoscored.com/Matches/1006130/Live'
+p135
+sg10
+S'0 : 0'
+p136
+sa(dp137
+g4
+S'Sampdoria'
+p138
+sg6
+S'Chievo'
+p139
+sg8
+S'https://www.whoscored.com/Matches/1006129/Live'
+p140
+sg10
+S'0 : 1'
+p141
+sa(dp142
+g4
+S'Verona'
+p143
+sg6
+S'Carpi'
+p144
+sg8
+S'https://www.whoscored.com/Matches/1006128/Live'
+p145
+sg10
+S'1 : 2'
+p146
+sa(dp147
+g4
+S'Napoli'
+p148
+sg6
+S'Genoa'
+p149
+sg8
+S'https://www.whoscored.com/Matches/1006131/Live'
+p150
+sg10
+S'3 : 1'
+p151
+sa(dp152
+g4
+S'AC Milan'
+p153
+sg6
+S'Lazio'
+p154
+sg8
+S'https://www.whoscored.com/Matches/1006134/Live'
+p155
 sg10
 S'1 : 1'
+p156
+sasS'Feb'
+p157
+(lp158
+(dp159
+g4
+S'Sassuolo'
+p160
+sg6
+S'Roma'
+p161
+sg8
+S'https://www.whoscored.com/Matches/1006007/Live'
+p162
+sg10
+S'0 : 2'
 p163
 sa(dp164
 g4
-S'Genoa'
+S'Frosinone'
 p165
 sg6
-S'Lazio'
+S'Bologna'
 p166
 sg8
-S'https://www.whoscored.com/Matches/1005989/Live'
+S'https://www.whoscored.com/Matches/1006001/Live'
 p167
 sg10
-S'0 : 0'
+S'1 : 0'
 p168
 sa(dp169
 g4
-S'Verona'
+S'Empoli'
 p170
 sg6
-S'Inter'
+S'Udinese'
 p171
 sg8
-S'https://www.whoscored.com/Matches/1005985/Live'
+S'https://www.whoscored.com/Matches/1006009/Live'
 p172
 sg10
-S'3 : 3'
+S'1 : 1'
 p173
 sa(dp174
 g4
-S'Frosinone'
+S'Sampdoria'
 p175
 sg6
-S'Juventus'
+S'Torino'
 p176
 sg8
-S'https://www.whoscored.com/Matches/1005987/Live'
+S'https://www.whoscored.com/Matches/1006008/Live'
 p177
 sg10
-S'0 : 2'
+S'2 : 2'
 p178
 sa(dp179
 g4
-S'Sassuolo'
+S'Lazio'
 p180
 sg6
-S'Palermo'
+S'Napoli'
 p181
 sg8
-S'https://www.whoscored.com/Matches/1005991/Live'
+S'https://www.whoscored.com/Matches/1006006/Live'
 p182
 sg10
-S'2 : 2'
+S'0 : 2'
 p183
 sa(dp184
 g4
-S'Napoli'
+S'Palermo'
 p185
 sg6
-S'Carpi'
+S'AC Milan'
 p186
 sg8
-S'https://www.whoscored.com/Matches/1005977/Live'
+S'https://www.whoscored.com/Matches/1006005/Live'
 p187
 sg10
-S'1 : 0'
+S'0 : 2'
 p188
 sa(dp189
 g4
-S'Torino'
+S'Juventus'
 p190
 sg6
-S'Chievo'
+S'Genoa'
 p191
 sg8
-S'https://www.whoscored.com/Matches/1005979/Live'
+S'https://www.whoscored.com/Matches/1006004/Live'
 p192
 sg10
-S'1 : 2'
+S'1 : 0'
 p193
 sa(dp194
 g4
-S'AC Milan'
+S'Inter'
 p195
 sg6
-S'Udinese'
+S'Chievo'
 p196
 sg8
-S'https://www.whoscored.com/Matches/1005995/Live'
+S'https://www.whoscored.com/Matches/1006003/Live'
 p197
 sg10
-S'1 : 1'
+S'1 : 0'
 p198
 sa(dp199
 g4
-S'Atalanta'
+S'Fiorentina'
 p200
 sg6
-S'Empoli'
+S'Carpi'
 p201
 sg8
-S'https://www.whoscored.com/Matches/1005981/Live'
+S'https://www.whoscored.com/Matches/1006002/Live'
 p202
 sg10
-S'0 : 0'
+S'2 : 1'
 p203
 sa(dp204
 g4
-S'Roma'
+S'Verona'
 p205
 sg6
-S'Sampdoria'
+S'Atalanta'
 p206
 sg8
-S'https://www.whoscored.com/Matches/1005993/Live'
+S'https://www.whoscored.com/Matches/1006000/Live'
 p207
 sg10
 S'2 : 1'
 p208
 sa(dp209
 g4
-S'Lazio'
+S'Bologna'
 p210
 sg6
-S'Verona'
+S'Fiorentina'
 p211
 sg8
-S'https://www.whoscored.com/Matches/1006035/Live'
+S'https://www.whoscored.com/Matches/1005983/Live'
 p212
 sg10
-S'5 : 2'
+S'1 : 1'
 p213
 sa(dp214
 g4
-S'Carpi'
+S'Genoa'
 p215
 sg6
-S'Roma'
+S'Lazio'
 p216
 sg8
-S'https://www.whoscored.com/Matches/1006021/Live'
+S'https://www.whoscored.com/Matches/1005989/Live'
 p217
 sg10
-S'1 : 3'
+S'0 : 0'
 p218
 sa(dp219
 g4
-S'Empoli'
+S'Verona'
 p220
 sg6
-S'Frosinone'
+S'Inter'
 p221
 sg8
-S'https://www.whoscored.com/Matches/1006033/Live'
+S'https://www.whoscored.com/Matches/1005985/Live'
 p222
 sg10
-S'1 : 2'
+S'3 : 3'
 p223
 sa(dp224
 g4
-S'Chievo'
+S'AC Milan'
 p225
 sg6
-S'Sassuolo'
+S'Udinese'
 p226
 sg8
-S'https://www.whoscored.com/Matches/1006023/Live'
+S'https://www.whoscored.com/Matches/1005995/Live'
 p227
 sg10
 S'1 : 1'
 p228
 sa(dp229
 g4
-S'Juventus'
+S'Sassuolo'
 p230
 sg6
-S'Napoli'
+S'Palermo'
 p231
 sg8
-S'https://www.whoscored.com/Matches/1006019/Live'
+S'https://www.whoscored.com/Matches/1005991/Live'
 p232
 sg10
-S'1 : 0'
+S'2 : 2'
 p233
 sa(dp234
 g4
-S'AC Milan'
+S'Frosinone'
 p235
 sg6
-S'Genoa'
+S'Juventus'
 p236
 sg8
-S'https://www.whoscored.com/Matches/1006034/Live'
+S'https://www.whoscored.com/Matches/1005987/Live'
 p237
 sg10
-S'2 : 1'
+S'0 : 2'
 p238
 sa(dp239
 g4
-S'Palermo'
+S'Torino'
 p240
 sg6
-S'Torino'
+S'Chievo'
 p241
 sg8
-S'https://www.whoscored.com/Matches/1006025/Live'
+S'https://www.whoscored.com/Matches/1005979/Live'
 p242
 sg10
-S'1 : 3'
+S'1 : 2'
 p243
 sa(dp244
 g4
-S'Sampdoria'
+S'Napoli'
 p245
 sg6
-S'Atalanta'
+S'Carpi'
 p246
 sg8
-S'https://www.whoscored.com/Matches/1006031/Live'
+S'https://www.whoscored.com/Matches/1005977/Live'
 p247
 sg10
-S'0 : 0'
+S'1 : 0'
 p248
 sa(dp249
 g4
-S'Udinese'
+S'Atalanta'
 p250
 sg6
-S'Bologna'
+S'Empoli'
 p251
 sg8
-S'https://www.whoscored.com/Matches/1006032/Live'
+S'https://www.whoscored.com/Matches/1005981/Live'
 p252
 sg10
-S'0 : 1'
+S'0 : 0'
 p253
 sa(dp254
 g4
-S'Fiorentina'
+S'Roma'
 p255
 sg6
-S'Inter'
+S'Sampdoria'
 p256
 sg8
-S'https://www.whoscored.com/Matches/1006036/Live'
+S'https://www.whoscored.com/Matches/1005993/Live'
 p257
 sg10
 S'2 : 1'
 p258
 sa(dp259
 g4
-S'Bologna'
+S'Lazio'
 p260
 sg6
-S'Juventus'
+S'Verona'
 p261
 sg8
-S'https://www.whoscored.com/Matches/1006051/Live'
+S'https://www.whoscored.com/Matches/1006035/Live'
 p262
 sg10
-S'0 : 0'
+S'5 : 2'
 p263
 sa(dp264
 g4
-S'Verona'
+S'Carpi'
 p265
 sg6
-S'Chievo'
+S'Roma'
 p266
 sg8
-S'https://www.whoscored.com/Matches/1006048/Live'
+S'https://www.whoscored.com/Matches/1006021/Live'
 p267
 sg10
-S'3 : 1'
+S'1 : 3'
 p268
 sa(dp269
 g4
-S'Inter'
+S'Empoli'
 p270
 sg6
-S'Sampdoria'
+S'Frosinone'
 p271
 sg8
-S'https://www.whoscored.com/Matches/1006055/Live'
+S'https://www.whoscored.com/Matches/1006033/Live'
 p272
 sg10
-S'3 : 1'
+S'1 : 2'
 p273
 sa(dp274
 g4
-S'Genoa'
+S'Chievo'
 p275
 sg6
-S'Udinese'
+S'Sassuolo'
 p276
 sg8
-S'https://www.whoscored.com/Matches/1006056/Live'
+S'https://www.whoscored.com/Matches/1006023/Live'
 p277
 sg10
-S'2 : 1'
+S'1 : 1'
 p278
 sa(dp279
 g4
-S'Sassuolo'
+S'Juventus'
 p280
 sg6
-S'Empoli'
+S'Napoli'
 p281
 sg8
-S'https://www.whoscored.com/Matches/1006049/Live'
+S'https://www.whoscored.com/Matches/1006019/Live'
 p282
 sg10
-S'3 : 2'
+S'1 : 0'
 p283
 sa(dp284
 g4
-S'Atalanta'
+S'AC Milan'
 p285
 sg6
-S'Fiorentina'
+S'Genoa'
 p286
 sg8
-S'https://www.whoscored.com/Matches/1006050/Live'
+S'https://www.whoscored.com/Matches/1006034/Live'
 p287
 sg10
-S'2 : 3'
+S'2 : 1'
 p288
 sa(dp289
 g4
-S'Torino'
+S'Udinese'
 p290
 sg6
-S'Carpi'
+S'Bologna'
 p291
 sg8
-S'https://www.whoscored.com/Matches/1006047/Live'
+S'https://www.whoscored.com/Matches/1006032/Live'
 p292
 sg10
-S'0 : 0'
+S'0 : 1'
 p293
 sa(dp294
 g4
-S'Frosinone'
+S'Sampdoria'
 p295
 sg6
-S'Lazio'
+S'Atalanta'
 p296
 sg8
-S'https://www.whoscored.com/Matches/1006052/Live'
+S'https://www.whoscored.com/Matches/1006031/Live'
 p297
 sg10
 S'0 : 0'
 p298
 sa(dp299
 g4
-S'Roma'
+S'Palermo'
 p300
 sg6
-S'Palermo'
+S'Torino'
 p301
 sg8
-S'https://www.whoscored.com/Matches/1006054/Live'
+S'https://www.whoscored.com/Matches/1006025/Live'
 p302
 sg10
-S'5 : 0'
+S'1 : 3'
 p303
 sa(dp304
 g4
-S'Napoli'
+S'Fiorentina'
 p305
 sg6
-S'AC Milan'
+S'Inter'
 p306
 sg8
-S'https://www.whoscored.com/Matches/1006053/Live'
+S'https://www.whoscored.com/Matches/1006036/Live'
 p307
 sg10
-S'1 : 1'
+S'2 : 1'
 p308
 sa(dp309
 g4
-S'Empoli'
+S'Bologna'
 p310
 sg6
-S'Roma'
+S'Juventus'
 p311
 sg8
-S'https://www.whoscored.com/Matches/1006074/Live'
+S'https://www.whoscored.com/Matches/1006051/Live'
 p312
 sg10
-S'1 : 3'
+S'0 : 0'
 p313
 sa(dp314
 g4
-S'AC Milan'
+S'Verona'
 p315
 sg6
-S'Torino'
+S'Chievo'
 p316
 sg8
-S'https://www.whoscored.com/Matches/1006076/Live'
+S'https://www.whoscored.com/Matches/1006048/Live'
 p317
 sg10
-S'1 : 0'
+S'3 : 1'
 p318
 sa(dp319
 g4
-S'Palermo'
+S'Inter'
 p320
 sg6
-S'Bologna'
+S'Sampdoria'
 p321
 sg8
-S'https://www.whoscored.com/Matches/1006068/Live'
+S'https://www.whoscored.com/Matches/1006055/Live'
 p322
 sg10
-S'0 : 0'
+S'3 : 1'
 p323
 sa(dp324
 g4
-S'Sampdoria'
+S'Genoa'
 p325
 sg6
-S'Frosinone'
+S'Udinese'
 p326
 sg8
-S'https://www.whoscored.com/Matches/1006069/Live'
+S'https://www.whoscored.com/Matches/1006056/Live'
 p327
 sg10
-S'2 : 0'
+S'2 : 1'
 p328
 sa(dp329
 g4
-S'Chievo'
+S'Atalanta'
 p330
 sg6
-S'Genoa'
+S'Fiorentina'
 p331
 sg8
-S'https://www.whoscored.com/Matches/1006070/Live'
+S'https://www.whoscored.com/Matches/1006050/Live'
 p332
 sg10
-S'1 : 0'
+S'2 : 3'
 p333
 sa(dp334
 g4
-S'Udinese'
+S'Sassuolo'
 p335
 sg6
-S'Verona'
+S'Empoli'
 p336
 sg8
-S'https://www.whoscored.com/Matches/1006071/Live'
+S'https://www.whoscored.com/Matches/1006049/Live'
 p337
 sg10
-S'2 : 0'
+S'3 : 2'
 p338
 sa(dp339
 g4
-S'Carpi'
+S'Torino'
 p340
 sg6
-S'Atalanta'
+S'Carpi'
 p341
 sg8
-S'https://www.whoscored.com/Matches/1006067/Live'
+S'https://www.whoscored.com/Matches/1006047/Live'
 p342
 sg10
-S'1 : 1'
+S'0 : 0'
 p343
 sa(dp344
 g4
-S'Juventus'
+S'Frosinone'
 p345
 sg6
-S'Inter'
+S'Lazio'
 p346
 sg8
-S'https://www.whoscored.com/Matches/1006072/Live'
+S'https://www.whoscored.com/Matches/1006052/Live'
 p347
 sg10
-S'2 : 0'
+S'0 : 0'
 p348
 sa(dp349
 g4
-S'Lazio'
+S'Roma'
 p350
 sg6
-S'Sassuolo'
+S'Palermo'
 p351
 sg8
-S'https://www.whoscored.com/Matches/1006075/Live'
+S'https://www.whoscored.com/Matches/1006054/Live'
 p352
 sg10
-S'0 : 2'
+S'5 : 0'
 p353
 sa(dp354
 g4
-S'Fiorentina'
+S'Napoli'
 p355
 sg6
-S'Napoli'
+S'AC Milan'
 p356
 sg8
-S'https://www.whoscored.com/Matches/1006073/Live'
+S'https://www.whoscored.com/Matches/1006053/Live'
 p357
 sg10
 S'1 : 1'
 p358
-sasS'Aug'
-p359
-(lp360
-(dp361
-g4
-S'Verona'
-p362
-sg6
-S'Roma'
-p363
-sg8
-S'https://www.whoscored.com/Matches/1005919/Live'
-p364
-sg10
-S'1 : 1'
-p365
-sa(dp366
-g4
-S'Lazio'
-p367
-sg6
-S'Bologna'
-p368
-sg8
-S'https://www.whoscored.com/Matches/1005922/Live'
-p369
-sg10
-S'2 : 1'
-p370
-sa(dp371
-g4
-S'Juventus'
-p372
-sg6
-S'Udinese'
-p373
-sg8
-S'https://www.whoscored.com/Matches/1005921/Live'
-p374
-sg10
-S'0 : 1'
-p375
-sa(dp376
-g4
-S'Palermo'
-p377
-sg6
-S'Genoa'
-p378
-sg8
-S'https://www.whoscored.com/Matches/1005923/Live'
-p379
-sg10
-S'1 : 0'
-p380
-sa(dp381
-g4
-S'Sampdoria'
-p382
-sg6
-S'Carpi'
-p383
-sg8
-S'https://www.whoscored.com/Matches/1005924/Live'
-p384
-sg10
-S'5 : 2'
-p385
-sa(dp386
-g4
-S'Sassuolo'
-p387
-sg6
-S'Napoli'
-p388
-sg8
-S'https://www.whoscored.com/Matches/1005925/Live'
-p389
-sg10
-S'2 : 1'
-p390
-sa(dp391
-g4
-S'Inter'
-p392
-sg6
-S'Atalanta'
-p393
-sg8
-S'https://www.whoscored.com/Matches/1005920/Live'
-p394
-sg10
-S'1 : 0'
-p395
-sa(dp396
+sa(dp359
 g4
 S'Empoli'
-p397
+p360
 sg6
-S'Chievo'
-p398
+S'Roma'
+p361
 sg8
-S'https://www.whoscored.com/Matches/1005916/Live'
-p399
+S'https://www.whoscored.com/Matches/1006074/Live'
+p362
 sg10
 S'1 : 3'
-p400
-sa(dp401
+p363
+sa(dp364
 g4
-S'Fiorentina'
-p402
-sg6
 S'AC Milan'
-p403
-sg8
-S'https://www.whoscored.com/Matches/1005917/Live'
-p404
-sg10
-S'2 : 0'
-p405
-sa(dp406
-g4
-S'Frosinone'
-p407
+p365
 sg6
 S'Torino'
-p408
+p366
 sg8
-S'https://www.whoscored.com/Matches/1005918/Live'
-p409
+S'https://www.whoscored.com/Matches/1006076/Live'
+p367
 sg10
-S'1 : 2'
-p410
-sa(dp411
+S'1 : 0'
+p368
+sa(dp369
 g4
+S'Palermo'
+p370
+sg6
 S'Bologna'
-p412
+p371
+sg8
+S'https://www.whoscored.com/Matches/1006068/Live'
+p372
+sg10
+S'0 : 0'
+p373
+sa(dp374
+g4
+S'Udinese'
+p375
+sg6
+S'Verona'
+p376
+sg8
+S'https://www.whoscored.com/Matches/1006071/Live'
+p377
+sg10
+S'2 : 0'
+p378
+sa(dp379
+g4
+S'Chievo'
+p380
+sg6
+S'Genoa'
+p381
+sg8
+S'https://www.whoscored.com/Matches/1006070/Live'
+p382
+sg10
+S'1 : 0'
+p383
+sa(dp384
+g4
+S'Sampdoria'
+p385
+sg6
+S'Frosinone'
+p386
+sg8
+S'https://www.whoscored.com/Matches/1006069/Live'
+p387
+sg10
+S'2 : 0'
+p388
+sa(dp389
+g4
+S'Carpi'
+p390
+sg6
+S'Atalanta'
+p391
+sg8
+S'https://www.whoscored.com/Matches/1006067/Live'
+p392
+sg10
+S'1 : 1'
+p393
+sa(dp394
+g4
+S'Juventus'
+p395
+sg6
+S'Inter'
+p396
+sg8
+S'https://www.whoscored.com/Matches/1006072/Live'
+p397
+sg10
+S'2 : 0'
+p398
+sa(dp399
+g4
+S'Lazio'
+p400
 sg6
 S'Sassuolo'
+p401
+sg8
+S'https://www.whoscored.com/Matches/1006075/Live'
+p402
+sg10
+S'0 : 2'
+p403
+sa(dp404
+g4
+S'Fiorentina'
+p405
+sg6
+S'Napoli'
+p406
+sg8
+S'https://www.whoscored.com/Matches/1006073/Live'
+p407
+sg10
+S'1 : 1'
+p408
+sasS'Aug'
+p409
+(lp410
+(dp411
+g4
+S'Verona'
+p412
+sg6
+S'Roma'
 p413
 sg8
-S'https://www.whoscored.com/Matches/1005927/Live'
+S'https://www.whoscored.com/Matches/1005919/Live'
 p414
 sg10
-S'0 : 1'
+S'1 : 1'
 p415
 sa(dp416
 g4
-S'AC Milan'
+S'Lazio'
 p417
 sg6
-S'Empoli'
+S'Bologna'
 p418
 sg8
-S'https://www.whoscored.com/Matches/1005931/Live'
+S'https://www.whoscored.com/Matches/1005922/Live'
 p419
 sg10
 S'2 : 1'
 p420
 sa(dp421
 g4
-S'Roma'
+S'Juventus'
 p422
 sg6
-S'Juventus'
+S'Udinese'
 p423
 sg8
-S'https://www.whoscored.com/Matches/1005933/Live'
+S'https://www.whoscored.com/Matches/1005921/Live'
 p424
 sg10
-S'2 : 1'
+S'0 : 1'
 p425
 sa(dp426
 g4
-S'Torino'
+S'Sassuolo'
 p427
 sg6
-S'Fiorentina'
+S'Napoli'
 p428
 sg8
-S'https://www.whoscored.com/Matches/1005934/Live'
+S'https://www.whoscored.com/Matches/1005925/Live'
 p429
 sg10
-S'3 : 1'
+S'2 : 1'
 p430
 sa(dp431
 g4
-S'Udinese'
+S'Sampdoria'
 p432
 sg6
-S'Palermo'
+S'Carpi'
 p433
 sg8
-S'https://www.whoscored.com/Matches/1005935/Live'
+S'https://www.whoscored.com/Matches/1005924/Live'
 p434
 sg10
-S'0 : 1'
+S'5 : 2'
 p435
 sa(dp436
 g4
-S'Napoli'
+S'Palermo'
 p437
 sg6
-S'Sampdoria'
+S'Genoa'
 p438
 sg8
-S'https://www.whoscored.com/Matches/1005932/Live'
+S'https://www.whoscored.com/Matches/1005923/Live'
 p439
 sg10
-S'2 : 2'
+S'1 : 0'
 p440
 sa(dp441
 g4
-S'Carpi'
+S'Inter'
 p442
 sg6
-S'Inter'
+S'Atalanta'
 p443
 sg8
-S'https://www.whoscored.com/Matches/1005928/Live'
+S'https://www.whoscored.com/Matches/1005920/Live'
 p444
 sg10
-S'1 : 2'
+S'1 : 0'
 p445
 sa(dp446
 g4
-S'Chievo'
+S'Frosinone'
 p447
 sg6
-S'Lazio'
+S'Torino'
 p448
 sg8
-S'https://www.whoscored.com/Matches/1005929/Live'
+S'https://www.whoscored.com/Matches/1005918/Live'
 p449
 sg10
-S'4 : 0'
+S'1 : 2'
 p450
 sa(dp451
 g4
-S'Genoa'
+S'Fiorentina'
 p452
 sg6
-S'Verona'
+S'AC Milan'
 p453
 sg8
-S'https://www.whoscored.com/Matches/1005930/Live'
+S'https://www.whoscored.com/Matches/1005917/Live'
 p454
 sg10
 S'2 : 0'
 p455
 sa(dp456
 g4
-S'Atalanta'
+S'Empoli'
 p457
 sg6
-S'Frosinone'
+S'Chievo'
 p458
 sg8
-S'https://www.whoscored.com/Matches/1005926/Live'
+S'https://www.whoscored.com/Matches/1005916/Live'
 p459
 sg10
-S'2 : 0'
+S'1 : 3'
 p460
-sasS'Sep'
-p461
-(lp462
-(dp463
+sa(dp461
 g4
-S'Fiorentina'
-p464
-sg6
-S'Genoa'
-p465
-sg8
-S'https://www.whoscored.com/Matches/1005937/Live'
-p466
-sg10
-S'1 : 0'
-p467
-sa(dp468
-g4
-S'Frosinone'
-p469
-sg6
-S'Roma'
-p470
-sg8
-S'https://www.whoscored.com/Matches/1005938/Live'
-p471
-sg10
-S'0 : 2'
-p472
-sa(dp473
-g4
-S'Juventus'
-p474
-sg6
-S'Chievo'
-p475
-sg8
-S'https://www.whoscored.com/Matches/1005941/Live'
-p476
-sg10
-S'1 : 1'
-p477
-sa(dp478
-g4
-S'Verona'
-p479
-sg6
-S'Torino'
-p480
-sg8
-S'https://www.whoscored.com/Matches/1005939/Live'
-p481
-sg10
-S'2 : 2'
-p482
-sa(dp483
-g4
-S'Palermo'
-p484
-sg6
-S'Carpi'
-p485
-sg8
-S'https://www.whoscored.com/Matches/1005943/Live'
-p486
-sg10
-S'2 : 2'
-p487
-sa(dp488
-g4
-S'Sassuolo'
-p489
-sg6
-S'Atalanta'
-p490
-sg8
-S'https://www.whoscored.com/Matches/1005945/Live'
-p491
-sg10
-S'2 : 2'
-p492
-sa(dp493
-g4
-S'Empoli'
-p494
-sg6
-S'Napoli'
-p495
-sg8
-S'https://www.whoscored.com/Matches/1005936/Live'
-p496
-sg10
-S'2 : 2'
-p497
-sa(dp498
-g4
-S'Lazio'
-p499
-sg6
-S'Udinese'
-p500
-sg8
-S'https://www.whoscored.com/Matches/1005942/Live'
-p501
-sg10
-S'2 : 0'
-p502
-sa(dp503
-g4
-S'Inter'
-p504
-sg6
-S'AC Milan'
-p505
-sg8
-S'https://www.whoscored.com/Matches/1005940/Live'
-p506
-sg10
-S'1 : 0'
-p507
-sa(dp508
-g4
-S'Sampdoria'
-p509
-sg6
 S'Bologna'
-p510
+p462
+sg6
+S'Sassuolo'
+p463
 sg8
-S'https://www.whoscored.com/Matches/1005944/Live'
-p511
+S'https://www.whoscored.com/Matches/1005927/Live'
+p464
 sg10
-S'2 : 0'
-p512
-sa(dp513
+S'0 : 1'
+p465
+sa(dp466
 g4
-S'Udinese'
-p514
+S'AC Milan'
+p467
 sg6
 S'Empoli'
-p515
+p468
 sg8
-S'https://www.whoscored.com/Matches/1005999/Live'
-p516
+S'https://www.whoscored.com/Matches/1005931/Live'
+p469
+sg10
+S'2 : 1'
+p470
+sa(dp471
+g4
+S'Roma'
+p472
+sg6
+S'Juventus'
+p473
+sg8
+S'https://www.whoscored.com/Matches/1005933/Live'
+p474
+sg10
+S'2 : 1'
+p475
+sa(dp476
+g4
+S'Udinese'
+p477
+sg6
+S'Palermo'
+p478
+sg8
+S'https://www.whoscored.com/Matches/1005935/Live'
+p479
+sg10
+S'0 : 1'
+p480
+sa(dp481
+g4
+S'Torino'
+p482
+sg6
+S'Fiorentina'
+p483
+sg8
+S'https://www.whoscored.com/Matches/1005934/Live'
+p484
+sg10
+S'3 : 1'
+p485
+sa(dp486
+g4
+S'Napoli'
+p487
+sg6
+S'Sampdoria'
+p488
+sg8
+S'https://www.whoscored.com/Matches/1005932/Live'
+p489
+sg10
+S'2 : 2'
+p490
+sa(dp491
+g4
+S'Genoa'
+p492
+sg6
+S'Verona'
+p493
+sg8
+S'https://www.whoscored.com/Matches/1005930/Live'
+p494
+sg10
+S'2 : 0'
+p495
+sa(dp496
+g4
+S'Chievo'
+p497
+sg6
+S'Lazio'
+p498
+sg8
+S'https://www.whoscored.com/Matches/1005929/Live'
+p499
+sg10
+S'4 : 0'
+p500
+sa(dp501
+g4
+S'Carpi'
+p502
+sg6
+S'Inter'
+p503
+sg8
+S'https://www.whoscored.com/Matches/1005928/Live'
+p504
 sg10
 S'1 : 2'
+p505
+sa(dp506
+g4
+S'Atalanta'
+p507
+sg6
+S'Frosinone'
+p508
+sg8
+S'https://www.whoscored.com/Matches/1005926/Live'
+p509
+sg10
+S'2 : 0'
+p510
+sasS'Sep'
+p511
+(lp512
+(dp513
+g4
+S'Frosinone'
+p514
+sg6
+S'Roma'
+p515
+sg8
+S'https://www.whoscored.com/Matches/1005938/Live'
+p516
+sg10
+S'0 : 2'
 p517
 sa(dp518
 g4
-S'AC Milan'
+S'Fiorentina'
 p519
 sg6
-S'Palermo'
+S'Genoa'
 p520
 sg8
-S'https://www.whoscored.com/Matches/1005994/Live'
+S'https://www.whoscored.com/Matches/1005937/Live'
 p521
 sg10
-S'3 : 2'
+S'1 : 0'
 p522
 sa(dp523
 g4
-S'Chievo'
+S'Juventus'
 p524
 sg6
-S'Inter'
+S'Chievo'
 p525
 sg8
-S'https://www.whoscored.com/Matches/1005990/Live'
+S'https://www.whoscored.com/Matches/1005941/Live'
 p526
 sg10
-S'0 : 1'
+S'1 : 1'
 p527
 sa(dp528
 g4
-S'Genoa'
+S'Verona'
 p529
 sg6
-S'Juventus'
+S'Torino'
 p530
 sg8
-S'https://www.whoscored.com/Matches/1005992/Live'
+S'https://www.whoscored.com/Matches/1005939/Live'
 p531
 sg10
-S'0 : 2'
+S'2 : 2'
 p532
 sa(dp533
 g4
-S'Roma'
+S'Sassuolo'
 p534
 sg6
-S'Sassuolo'
+S'Atalanta'
 p535
 sg8
-S'https://www.whoscored.com/Matches/1005997/Live'
+S'https://www.whoscored.com/Matches/1005945/Live'
 p536
 sg10
 S'2 : 2'
 p537
 sa(dp538
 g4
-S'Torino'
+S'Palermo'
 p539
 sg6
-S'Sampdoria'
+S'Carpi'
 p540
 sg8
-S'https://www.whoscored.com/Matches/1005998/Live'
+S'https://www.whoscored.com/Matches/1005943/Live'
 p541
 sg10
-S'2 : 0'
+S'2 : 2'
 p542
 sa(dp543
 g4
-S'Atalanta'
+S'Empoli'
 p544
 sg6
-S'Verona'
+S'Napoli'
 p545
 sg8
-S'https://www.whoscored.com/Matches/1005984/Live'
+S'https://www.whoscored.com/Matches/1005936/Live'
 p546
 sg10
-S'1 : 1'
+S'2 : 2'
 p547
 sa(dp548
 g4
-S'Bologna'
+S'Lazio'
 p549
 sg6
-S'Frosinone'
+S'Udinese'
 p550
 sg8
-S'https://www.whoscored.com/Matches/1005986/Live'
+S'https://www.whoscored.com/Matches/1005942/Live'
 p551
 sg10
-S'1 : 0'
+S'2 : 0'
 p552
 sa(dp553
 g4
-S'Carpi'
+S'Inter'
 p554
 sg6
-S'Fiorentina'
+S'AC Milan'
 p555
 sg8
-S'https://www.whoscored.com/Matches/1005988/Live'
+S'https://www.whoscored.com/Matches/1005940/Live'
 p556
 sg10
-S'0 : 1'
+S'1 : 0'
 p557
 sa(dp558
 g4
-S'Napoli'
+S'Sampdoria'
 p559
 sg6
-S'Lazio'
+S'Bologna'
 p560
 sg8
-S'https://www.whoscored.com/Matches/1005996/Live'
+S'https://www.whoscored.com/Matches/1005944/Live'
 p561
 sg10
-S'5 : 0'
+S'2 : 0'
 p562
 sa(dp563
 g4
 S'Udinese'
 p564
 sg6
-S'AC Milan'
+S'Empoli'
 p565
 sg8
-S'https://www.whoscored.com/Matches/1005976/Live'
+S'https://www.whoscored.com/Matches/1005999/Live'
 p566
 sg10
-S'2 : 3'
+S'1 : 2'
 p567
 sa(dp568
 g4
-S'Lazio'
+S'AC Milan'
 p569
 sg6
-S'Genoa'
+S'Palermo'
 p570
 sg8
-S'https://www.whoscored.com/Matches/1005973/Live'
+S'https://www.whoscored.com/Matches/1005994/Live'
 p571
 sg10
-S'2 : 0'
+S'3 : 2'
 p572
 sa(dp573
 g4
-S'Palermo'
+S'Chievo'
 p574
 sg6
-S'Sassuolo'
+S'Inter'
 p575
 sg8
-S'https://www.whoscored.com/Matches/1005974/Live'
+S'https://www.whoscored.com/Matches/1005990/Live'
 p576
 sg10
 S'0 : 1'
 p577
 sa(dp578
 g4
-S'Sampdoria'
+S'Torino'
 p579
 sg6
-S'Roma'
+S'Sampdoria'
 p580
 sg8
-S'https://www.whoscored.com/Matches/1005975/Live'
+S'https://www.whoscored.com/Matches/1005998/Live'
 p581
 sg10
-S'2 : 1'
+S'2 : 0'
 p582
 sa(dp583
 g4
-S'Carpi'
+S'Roma'
 p584
 sg6
-S'Napoli'
+S'Sassuolo'
 p585
 sg8
-S'https://www.whoscored.com/Matches/1006010/Live'
+S'https://www.whoscored.com/Matches/1005997/Live'
 p586
 sg10
-S'0 : 0'
+S'2 : 2'
 p587
 sa(dp588
 g4
-S'Chievo'
+S'Genoa'
 p589
 sg6
-S'Torino'
+S'Juventus'
 p590
 sg8
-S'https://www.whoscored.com/Matches/1006011/Live'
+S'https://www.whoscored.com/Matches/1005992/Live'
 p591
 sg10
-S'1 : 0'
+S'0 : 2'
 p592
 sa(dp593
 g4
-S'Fiorentina'
+S'Bologna'
 p594
 sg6
-S'Bologna'
+S'Frosinone'
 p595
 sg8
-S'https://www.whoscored.com/Matches/1006013/Live'
+S'https://www.whoscored.com/Matches/1005986/Live'
 p596
 sg10
-S'2 : 0'
+S'1 : 0'
 p597
 sa(dp598
 g4
-S'Inter'
+S'Atalanta'
 p599
 sg6
 S'Verona'
 p600
 sg8
-S'https://www.whoscored.com/Matches/1006014/Live'
+S'https://www.whoscored.com/Matches/1005984/Live'
 p601
 sg10
-S'1 : 0'
+S'1 : 1'
 p602
 sa(dp603
 g4
-S'Juventus'
+S'Carpi'
 p604
 sg6
-S'Frosinone'
+S'Fiorentina'
 p605
 sg8
-S'https://www.whoscored.com/Matches/1006015/Live'
+S'https://www.whoscored.com/Matches/1005988/Live'
 p606
 sg10
-S'1 : 1'
+S'0 : 1'
 p607
 sa(dp608
 g4
-S'Empoli'
+S'Napoli'
 p609
 sg6
-S'Atalanta'
+S'Lazio'
 p610
 sg8
-S'https://www.whoscored.com/Matches/1006012/Live'
+S'https://www.whoscored.com/Matches/1005996/Live'
 p611
 sg10
-S'0 : 1'
+S'5 : 0'
 p612
 sa(dp613
 g4
-S'Roma'
+S'Udinese'
 p614
 sg6
-S'Carpi'
+S'AC Milan'
 p615
 sg8
-S'https://www.whoscored.com/Matches/1006028/Live'
+S'https://www.whoscored.com/Matches/1005976/Live'
 p616
 sg10
-S'5 : 1'
+S'2 : 3'
 p617
 sa(dp618
 g4
-S'Napoli'
+S'Juventus'
 p619
 sg6
-S'Juventus'
+S'Frosinone'
 p620
 sg8
-S'https://www.whoscored.com/Matches/1006027/Live'
+S'https://www.whoscored.com/Matches/1006015/Live'
 p621
 sg10
-S'2 : 1'
+S'1 : 1'
 p622
 sa(dp623
 g4
-S'Genoa'
+S'Inter'
 p624
 sg6
-S'AC Milan'
+S'Verona'
 p625
 sg8
-S'https://www.whoscored.com/Matches/1006022/Live'
+S'https://www.whoscored.com/Matches/1006014/Live'
 p626
 sg10
 S'1 : 0'
 p627
 sa(dp628
 g4
-S'Verona'
+S'Fiorentina'
 p629
 sg6
-S'Lazio'
+S'Bologna'
 p630
 sg8
-S'https://www.whoscored.com/Matches/1006024/Live'
+S'https://www.whoscored.com/Matches/1006013/Live'
 p631
 sg10
-S'1 : 2'
+S'2 : 0'
 p632
 sa(dp633
 g4
-S'Sassuolo'
+S'Chievo'
 p634
 sg6
-S'Chievo'
+S'Torino'
 p635
 sg8
-S'https://www.whoscored.com/Matches/1006029/Live'
+S'https://www.whoscored.com/Matches/1006011/Live'
 p636
 sg10
-S'1 : 1'
+S'1 : 0'
 p637
 sa(dp638
 g4
-S'Torino'
+S'Carpi'
 p639
 sg6
-S'Palermo'
+S'Napoli'
 p640
 sg8
-S'https://www.whoscored.com/Matches/1006030/Live'
+S'https://www.whoscored.com/Matches/1006010/Live'
 p641
 sg10
-S'2 : 1'
+S'0 : 0'
 p642
 sa(dp643
 g4
-S'Bologna'
+S'Sampdoria'
 p644
 sg6
-S'Udinese'
+S'Roma'
 p645
 sg8
-S'https://www.whoscored.com/Matches/1006018/Live'
+S'https://www.whoscored.com/Matches/1005975/Live'
 p646
 sg10
-S'1 : 2'
+S'2 : 1'
 p647
 sa(dp648
 g4
-S'Inter'
+S'Palermo'
 p649
 sg6
-S'Fiorentina'
+S'Sassuolo'
 p650
 sg8
-S'https://www.whoscored.com/Matches/1006026/Live'
+S'https://www.whoscored.com/Matches/1005974/Live'
 p651
 sg10
-S'1 : 4'
+S'0 : 1'
 p652
 sa(dp653
 g4
-S'Frosinone'
+S'Lazio'
 p654
 sg6
-S'Empoli'
+S'Genoa'
 p655
 sg8
-S'https://www.whoscored.com/Matches/1006020/Live'
+S'https://www.whoscored.com/Matches/1005973/Live'
 p656
 sg10
 S'2 : 0'
 p657
 sa(dp658
 g4
-S'Atalanta'
+S'Empoli'
 p659
 sg6
-S'Sampdoria'
+S'Atalanta'
 p660
 sg8
-S'https://www.whoscored.com/Matches/1006017/Live'
+S'https://www.whoscored.com/Matches/1006012/Live'
 p661
 sg10
-S'2 : 1'
+S'0 : 1'
 p662
-sasS'Jan'
-p663
-(lp664
-(dp665
+sa(dp663
 g4
-S'Genoa'
-p666
-sg6
-S'Sampdoria'
-p667
-sg8
-S'https://www.whoscored.com/Matches/1006259/Live'
-p668
-sg10
-S'2 : 3'
-p669
-sa(dp670
-g4
-S'Udinese'
-p671
-sg6
-S'Atalanta'
-p672
-sg8
-S'https://www.whoscored.com/Matches/1006266/Live'
-p673
-sg10
-S'2 : 1'
-p674
-sa(dp675
-g4
-S'Chievo'
-p676
-sg6
 S'Roma'
-p677
-sg8
-S'https://www.whoscored.com/Matches/1006257/Live'
-p678
-sg10
-S'3 : 3'
-p679
-sa(dp680
-g4
-S'Palermo'
-p681
-sg6
-S'Fiorentina'
-p682
-sg8
-S'https://www.whoscored.com/Matches/1006264/Live'
-p683
-sg10
-S'1 : 3'
-p684
-sa(dp685
-g4
-S'Sassuolo'
-p686
-sg6
-S'Frosinone'
-p687
-sg8
-S'https://www.whoscored.com/Matches/1006265/Live'
-p688
-sg10
-S'2 : 2'
-p689
-sa(dp690
-g4
-S'Juventus'
-p691
-sg6
-S'Verona'
-p692
-sg8
-S'https://www.whoscored.com/Matches/1006260/Live'
-p693
-sg10
-S'3 : 0'
-p694
-sa(dp695
-g4
-S'Lazio'
-p696
+p664
 sg6
 S'Carpi'
-p697
+p665
 sg8
-S'https://www.whoscored.com/Matches/1006261/Live'
-p698
+S'https://www.whoscored.com/Matches/1006028/Live'
+p666
 sg10
-S'0 : 0'
-p699
-sa(dp700
-g4
-S'AC Milan'
-p701
-sg6
-S'Bologna'
-p702
-sg8
-S'https://www.whoscored.com/Matches/1006262/Live'
-p703
-sg10
-S'0 : 1'
-p704
-sa(dp705
-g4
-S'Empoli'
-p706
-sg6
-S'Inter'
-p707
-sg8
-S'https://www.whoscored.com/Matches/1006258/Live'
-p708
-sg10
-S'0 : 1'
-p709
-sa(dp710
+S'5 : 1'
+p667
+sa(dp668
 g4
 S'Napoli'
-p711
+p669
 sg6
-S'Torino'
-p712
+S'Juventus'
+p670
 sg8
-S'https://www.whoscored.com/Matches/1006263/Live'
-p713
+S'https://www.whoscored.com/Matches/1006027/Live'
+p671
 sg10
 S'2 : 1'
-p714
-sa(dp715
+p672
+sa(dp673
 g4
-S'Carpi'
-p716
+S'Genoa'
+p674
+sg6
+S'AC Milan'
+p675
+sg8
+S'https://www.whoscored.com/Matches/1006022/Live'
+p676
+sg10
+S'1 : 0'
+p677
+sa(dp678
+g4
+S'Torino'
+p679
+sg6
+S'Palermo'
+p680
+sg8
+S'https://www.whoscored.com/Matches/1006030/Live'
+p681
+sg10
+S'2 : 1'
+p682
+sa(dp683
+g4
+S'Sassuolo'
+p684
+sg6
+S'Chievo'
+p685
+sg8
+S'https://www.whoscored.com/Matches/1006029/Live'
+p686
+sg10
+S'1 : 1'
+p687
+sa(dp688
+g4
+S'Verona'
+p689
+sg6
+S'Lazio'
+p690
+sg8
+S'https://www.whoscored.com/Matches/1006024/Live'
+p691
+sg10
+S'1 : 2'
+p692
+sa(dp693
+g4
+S'Bologna'
+p694
 sg6
 S'Udinese'
-p717
+p695
 sg8
-S'https://www.whoscored.com/Matches/1006279/Live'
-p718
+S'https://www.whoscored.com/Matches/1006018/Live'
+p696
+sg10
+S'1 : 2'
+p697
+sa(dp698
+g4
+S'Inter'
+p699
+sg6
+S'Fiorentina'
+p700
+sg8
+S'https://www.whoscored.com/Matches/1006026/Live'
+p701
+sg10
+S'1 : 4'
+p702
+sa(dp703
+g4
+S'Frosinone'
+p704
+sg6
+S'Empoli'
+p705
+sg8
+S'https://www.whoscored.com/Matches/1006020/Live'
+p706
+sg10
+S'2 : 0'
+p707
+sa(dp708
+g4
+S'Atalanta'
+p709
+sg6
+S'Sampdoria'
+p710
+sg8
+S'https://www.whoscored.com/Matches/1006017/Live'
+p711
 sg10
 S'2 : 1'
+p712
+sasS'May'
+p713
+(lp714
+(dp715
+g4
+S'Juventus'
+p716
+sg6
+S'Carpi'
+p717
+sg8
+S'https://www.whoscored.com/Matches/1006249/Live'
+p718
+sg10
+S'2 : 0'
 p719
 sa(dp720
 g4
-S'Fiorentina'
+S'Palermo'
 p721
 sg6
-S'Lazio'
+S'Sampdoria'
 p722
 sg8
-S'https://www.whoscored.com/Matches/1006280/Live'
+S'https://www.whoscored.com/Matches/1006255/Live'
 p723
 sg10
-S'1 : 3'
+S'2 : 0'
 p724
 sa(dp725
 g4
-S'Roma'
+S'Sassuolo'
 p726
 sg6
-S'AC Milan'
+S'Verona'
 p727
 sg8
-S'https://www.whoscored.com/Matches/1006284/Live'
+S'https://www.whoscored.com/Matches/1006252/Live'
 p728
 sg10
-S'1 : 1'
+S'1 : 0'
 p729
 sa(dp730
 g4
-S'Inter'
+S'AC Milan'
 p731
 sg6
-S'Sassuolo'
+S'Frosinone'
 p732
 sg8
-S'https://www.whoscored.com/Matches/1006283/Live'
+S'https://www.whoscored.com/Matches/1006251/Live'
 p733
 sg10
-S'0 : 1'
+S'3 : 3'
 p734
 sa(dp735
 g4
-S'Atalanta'
+S'Empoli'
 p736
 sg6
-S'Genoa'
+S'Bologna'
 p737
 sg8
-S'https://www.whoscored.com/Matches/1006277/Live'
+S'https://www.whoscored.com/Matches/1006248/Live'
 p738
 sg10
-S'0 : 2'
+S'0 : 0'
 p739
 sa(dp740
 g4
-S'Bologna'
+S'Lazio'
 p741
 sg6
-S'Chievo'
+S'Inter'
 p742
 sg8
-S'https://www.whoscored.com/Matches/1006278/Live'
+S'https://www.whoscored.com/Matches/1006253/Live'
 p743
 sg10
-S'0 : 1'
+S'2 : 0'
 p744
 sa(dp745
 g4
-S'Torino'
+S'Genoa'
 p746
 sg6
-S'Empoli'
+S'Roma'
 p747
 sg8
-S'https://www.whoscored.com/Matches/1006286/Live'
+S'https://www.whoscored.com/Matches/1006254/Live'
 p748
 sg10
-S'0 : 1'
+S'2 : 3'
 p749
 sa(dp750
 g4
-S'Frosinone'
+S'Napoli'
 p751
 sg6
-S'Napoli'
+S'Atalanta'
 p752
 sg8
-S'https://www.whoscored.com/Matches/1006281/Live'
+S'https://www.whoscored.com/Matches/1006247/Live'
 p753
 sg10
-S'1 : 5'
+S'2 : 1'
 p754
 sa(dp755
 g4
-S'Verona'
+S'Inter'
 p756
 sg6
-S'Palermo'
+S'Empoli'
 p757
 sg8
-S'https://www.whoscored.com/Matches/1006282/Live'
+S'https://www.whoscored.com/Matches/1006268/Live'
 p758
 sg10
-S'0 : 1'
+S'2 : 1'
 p759
 sa(dp760
 g4
-S'Sampdoria'
+S'Bologna'
 p761
 sg6
-S'Juventus'
+S'AC Milan'
 p762
 sg8
-S'https://www.whoscored.com/Matches/1006285/Live'
+S'https://www.whoscored.com/Matches/1006272/Live'
 p763
 sg10
-S'1 : 2'
+S'0 : 1'
 p764
 sa(dp765
 g4
-S'Atalanta'
+S'Roma'
 p766
 sg6
-S'Inter'
+S'Chievo'
 p767
 sg8
-S'https://www.whoscored.com/Matches/1005955/Live'
+S'https://www.whoscored.com/Matches/1006267/Live'
 p768
 sg10
-S'1 : 1'
+S'3 : 0'
 p769
 sa(dp770
 g4
-S'Torino'
+S'Atalanta'
 p771
 sg6
-S'Frosinone'
+S'Udinese'
 p772
 sg8
-S'https://www.whoscored.com/Matches/1005951/Live'
+S'https://www.whoscored.com/Matches/1006276/Live'
 p773
 sg10
-S'4 : 2'
+S'1 : 1'
 p774
 sa(dp775
 g4
-S'Napoli'
+S'Frosinone'
 p776
 sg6
 S'Sassuolo'
 p777
 sg8
-S'https://www.whoscored.com/Matches/1005965/Live'
+S'https://www.whoscored.com/Matches/1006275/Live'
 p778
 sg10
-S'3 : 1'
+S'0 : 1'
 p779
 sa(dp780
 g4
-S'Genoa'
+S'Fiorentina'
 p781
 sg6
 S'Palermo'
 p782
 sg8
-S'https://www.whoscored.com/Matches/1005961/Live'
+S'https://www.whoscored.com/Matches/1006274/Live'
 p783
 sg10
-S'4 : 0'
+S'0 : 0'
 p784
 sa(dp785
 g4
-S'Bologna'
+S'Carpi'
 p786
 sg6
 S'Lazio'
 p787
 sg8
-S'https://www.whoscored.com/Matches/1005959/Live'
+S'https://www.whoscored.com/Matches/1006271/Live'
 p788
 sg10
-S'2 : 2'
+S'1 : 3'
 p789
 sa(dp790
 g4
-S'Udinese'
+S'Sampdoria'
 p791
 sg6
-S'Juventus'
+S'Genoa'
 p792
 sg8
-S'https://www.whoscored.com/Matches/1005957/Live'
+S'https://www.whoscored.com/Matches/1006269/Live'
 p793
 sg10
-S'0 : 4'
+S'0 : 3'
 p794
 sa(dp795
 g4
-S'Roma'
+S'Torino'
 p796
 sg6
-S'Verona'
+S'Napoli'
 p797
 sg8
-S'https://www.whoscored.com/Matches/1005953/Live'
+S'https://www.whoscored.com/Matches/1006273/Live'
 p798
 sg10
-S'1 : 1'
+S'1 : 2'
 p799
 sa(dp800
 g4
-S'Chievo'
+S'Verona'
 p801
 sg6
-S'Empoli'
+S'Juventus'
 p802
 sg8
-S'https://www.whoscored.com/Matches/1005947/Live'
+S'https://www.whoscored.com/Matches/1006270/Live'
 p803
 sg10
-S'1 : 1'
+S'2 : 1'
 p804
 sa(dp805
 g4
-S'Carpi'
+S'Juventus'
 p806
 sg6
 S'Sampdoria'
 p807
 sg8
-S'https://www.whoscored.com/Matches/1005963/Live'
+S'https://www.whoscored.com/Matches/1006295/Live'
 p808
 sg10
-S'2 : 1'
+S'5 : 0'
 p809
 sa(dp810
 g4
 S'AC Milan'
 p811
 sg6
-S'Fiorentina'
+S'Roma'
 p812
 sg8
-S'https://www.whoscored.com/Matches/1005949/Live'
+S'https://www.whoscored.com/Matches/1006294/Live'
 p813
 sg10
-S'2 : 0'
+S'1 : 3'
 p814
 sa(dp815
 g4
 S'Sassuolo'
 p816
 sg6
-S'Torino'
+S'Inter'
 p817
 sg8
-S'https://www.whoscored.com/Matches/1006225/Live'
+S'https://www.whoscored.com/Matches/1006293/Live'
 p818
 sg10
-S'1 : 1'
+S'3 : 1'
 p819
 sa(dp820
 g4
-S'Frosinone'
+S'Napoli'
 p821
 sg6
-S'Atalanta'
+S'Frosinone'
 p822
 sg8
-S'https://www.whoscored.com/Matches/1005946/Live'
+S'https://www.whoscored.com/Matches/1006291/Live'
 p823
 sg10
-S'0 : 0'
+S'4 : 0'
 p824
 sa(dp825
 g4
 S'Empoli'
 p826
 sg6
-S'AC Milan'
+S'Torino'
 p827
 sg8
-S'https://www.whoscored.com/Matches/1005956/Live'
+S'https://www.whoscored.com/Matches/1006296/Live'
 p828
 sg10
-S'2 : 2'
+S'2 : 1'
 p829
 sa(dp830
 g4
-S'Fiorentina'
+S'Chievo'
 p831
 sg6
-S'Torino'
+S'Bologna'
 p832
 sg8
-S'https://www.whoscored.com/Matches/1005962/Live'
+S'https://www.whoscored.com/Matches/1006288/Live'
 p833
 sg10
-S'2 : 0'
+S'0 : 0'
 p834
 sa(dp835
 g4
-S'Sampdoria'
+S'Genoa'
 p836
 sg6
-S'Napoli'
+S'Atalanta'
 p837
 sg8
-S'https://www.whoscored.com/Matches/1005958/Live'
+S'https://www.whoscored.com/Matches/1006287/Live'
 p838
 sg10
-S'2 : 4'
+S'1 : 2'
 p839
 sa(dp840
 g4
-S'Inter'
+S'Palermo'
 p841
 sg6
-S'Carpi'
+S'Verona'
 p842
 sg8
-S'https://www.whoscored.com/Matches/1005950/Live'
+S'https://www.whoscored.com/Matches/1006292/Live'
 p843
 sg10
-S'1 : 1'
+S'3 : 2'
 p844
 sa(dp845
 g4
-S'Sassuolo'
+S'Lazio'
 p846
 sg6
-S'Bologna'
+S'Fiorentina'
 p847
 sg8
-S'https://www.whoscored.com/Matches/1005948/Live'
+S'https://www.whoscored.com/Matches/1006290/Live'
 p848
 sg10
-S'0 : 2'
+S'2 : 4'
 p849
 sa(dp850
 g4
-S'Verona'
+S'Udinese'
 p851
 sg6
-S'Genoa'
+S'Carpi'
 p852
 sg8
-S'https://www.whoscored.com/Matches/1005954/Live'
+S'https://www.whoscored.com/Matches/1006289/Live'
 p853
 sg10
-S'1 : 1'
+S'1 : 2'
 p854
-sa(dp855
-g4
-S'Lazio'
-p856
-sg6
-S'Chievo'
-p857
-sg8
-S'https://www.whoscored.com/Matches/1005952/Live'
-p858
-sg10
-S'4 : 1'
-p859
-sa(dp860
-g4
-S'Palermo'
-p861
-sg6
-S'Udinese'
-p862
-sg8
-S'https://www.whoscored.com/Matches/1005964/Live'
-p863
-sg10
-S'4 : 1'
-p864
-sa(dp865
-g4
-S'Juventus'
-p866
-sg6
-S'Roma'
-p867
-sg8
-S'https://www.whoscored.com/Matches/1005960/Live'
-p868
-sg10
-S'1 : 0'
-p869
-sa(dp870
-g4
-S'Carpi'
-p871
-sg6
-S'Palermo'
-p872
-sg8
-S'https://www.whoscored.com/Matches/1005978/Live'
-p873
-sg10
-S'1 : 1'
-p874
-sa(dp875
-g4
-S'Atalanta'
-p876
-sg6
-S'Sassuolo'
-p877
-sg8
-S'https://www.whoscored.com/Matches/1005982/Live'
-p878
-sg10
-S'1 : 1'
-p879
-sa(dp880
-g4
-S'Roma'
-p881
-sg6
-S'Frosinone'
-p882
-sg8
-S'https://www.whoscored.com/Matches/1005968/Live'
-p883
-sg10
-S'3 : 1'
-p884
-sa(dp885
-g4
-S'Chievo'
-p886
-sg6
-S'Juventus'
-p887
-sg8
-S'https://www.whoscored.com/Matches/1005971/Live'
-p888
-sg10
-S'0 : 4'
-p889
-sa(dp890
-g4
-S'Udinese'
-p891
-sg6
-S'Lazio'
-p892
-sg8
-S'https://www.whoscored.com/Matches/1005972/Live'
-p893
-sg10
-S'0 : 0'
-p894
-sa(dp895
-g4
-S'Torino'
-p896
-sg6
-S'Verona'
-p897
-sg8
-S'https://www.whoscored.com/Matches/1005969/Live'
-p898
-sg10
-S'0 : 0'
-p899
-sa(dp900
-g4
-S'Napoli'
-p901
-sg6
-S'Empoli'
-p902
-sg8
-S'https://www.whoscored.com/Matches/1005966/Live'
-p903
-sg10
-S'5 : 1'
-p904
-sa(dp905
+sasS'Jan'
+p855
+(lp856
+(dp857
 g4
 S'Genoa'
-p906
-sg6
-S'Fiorentina'
-p907
-sg8
-S'https://www.whoscored.com/Matches/1005967/Live'
-p908
-sg10
-S'0 : 0'
-p909
-sa(dp910
-g4
-S'Bologna'
-p911
+p858
 sg6
 S'Sampdoria'
-p912
+p859
 sg8
-S'https://www.whoscored.com/Matches/1005980/Live'
-p913
+S'https://www.whoscored.com/Matches/1006259/Live'
+p860
 sg10
-S'3 : 2'
-p914
-sa(dp915
+S'2 : 3'
+p861
+sa(dp862
 g4
-S'AC Milan'
-p916
+S'Udinese'
+p863
 sg6
-S'Inter'
-p917
+S'Atalanta'
+p864
 sg8
-S'https://www.whoscored.com/Matches/1005970/Live'
-p918
+S'https://www.whoscored.com/Matches/1006266/Live'
+p865
 sg10
-S'3 : 0'
-p919
-sasS'Nov'
-p920
-(lp921
-(dp922
+S'2 : 1'
+p866
+sa(dp867
 g4
-S'Fiorentina'
-p923
+S'Sassuolo'
+p868
 sg6
 S'Frosinone'
+p869
+sg8
+S'https://www.whoscored.com/Matches/1006265/Live'
+p870
+sg10
+S'2 : 2'
+p871
+sa(dp872
+g4
+S'Palermo'
+p873
+sg6
+S'Fiorentina'
+p874
+sg8
+S'https://www.whoscored.com/Matches/1006264/Live'
+p875
+sg10
+S'1 : 3'
+p876
+sa(dp877
+g4
+S'AC Milan'
+p878
+sg6
+S'Bologna'
+p879
+sg8
+S'https://www.whoscored.com/Matches/1006262/Live'
+p880
+sg10
+S'0 : 1'
+p881
+sa(dp882
+g4
+S'Lazio'
+p883
+sg6
+S'Carpi'
+p884
+sg8
+S'https://www.whoscored.com/Matches/1006261/Live'
+p885
+sg10
+S'0 : 0'
+p886
+sa(dp887
+g4
+S'Juventus'
+p888
+sg6
+S'Verona'
+p889
+sg8
+S'https://www.whoscored.com/Matches/1006260/Live'
+p890
+sg10
+S'3 : 0'
+p891
+sa(dp892
+g4
+S'Chievo'
+p893
+sg6
+S'Roma'
+p894
+sg8
+S'https://www.whoscored.com/Matches/1006257/Live'
+p895
+sg10
+S'3 : 3'
+p896
+sa(dp897
+g4
+S'Empoli'
+p898
+sg6
+S'Inter'
+p899
+sg8
+S'https://www.whoscored.com/Matches/1006258/Live'
+p900
+sg10
+S'0 : 1'
+p901
+sa(dp902
+g4
+S'Napoli'
+p903
+sg6
+S'Torino'
+p904
+sg8
+S'https://www.whoscored.com/Matches/1006263/Live'
+p905
+sg10
+S'2 : 1'
+p906
+sa(dp907
+g4
+S'Carpi'
+p908
+sg6
+S'Udinese'
+p909
+sg8
+S'https://www.whoscored.com/Matches/1006279/Live'
+p910
+sg10
+S'2 : 1'
+p911
+sa(dp912
+g4
+S'Fiorentina'
+p913
+sg6
+S'Lazio'
+p914
+sg8
+S'https://www.whoscored.com/Matches/1006280/Live'
+p915
+sg10
+S'1 : 3'
+p916
+sa(dp917
+g4
+S'Roma'
+p918
+sg6
+S'AC Milan'
+p919
+sg8
+S'https://www.whoscored.com/Matches/1006284/Live'
+p920
+sg10
+S'1 : 1'
+p921
+sa(dp922
+g4
+S'Inter'
+p923
+sg6
+S'Sassuolo'
 p924
 sg8
-S'https://www.whoscored.com/Matches/1006120/Live'
+S'https://www.whoscored.com/Matches/1006283/Live'
 p925
 sg10
-S'4 : 1'
+S'0 : 1'
 p926
 sa(dp927
 g4
-S'Genoa'
+S'Torino'
 p928
 sg6
-S'Napoli'
+S'Empoli'
 p929
 sg8
-S'https://www.whoscored.com/Matches/1006121/Live'
+S'https://www.whoscored.com/Matches/1006286/Live'
 p930
 sg10
-S'0 : 0'
+S'0 : 1'
 p931
 sa(dp932
 g4
-S'Bologna'
+S'Verona'
 p933
 sg6
-S'Atalanta'
+S'Palermo'
 p934
 sg8
-S'https://www.whoscored.com/Matches/1006117/Live'
+S'https://www.whoscored.com/Matches/1006282/Live'
 p935
 sg10
-S'3 : 0'
+S'0 : 1'
 p936
 sa(dp937
 g4
-S'Carpi'
+S'Frosinone'
 p938
 sg6
-S'Verona'
+S'Napoli'
 p939
 sg8
-S'https://www.whoscored.com/Matches/1006118/Live'
+S'https://www.whoscored.com/Matches/1006281/Live'
 p940
 sg10
-S'0 : 0'
+S'1 : 5'
 p941
 sa(dp942
 g4
-S'Udinese'
+S'Bologna'
 p943
 sg6
-S'Sassuolo'
+S'Chievo'
 p944
 sg8
-S'https://www.whoscored.com/Matches/1006126/Live'
+S'https://www.whoscored.com/Matches/1006278/Live'
 p945
 sg10
-S'0 : 0'
+S'0 : 1'
 p946
 sa(dp947
 g4
-S'Lazio'
+S'Atalanta'
 p948
 sg6
-S'AC Milan'
+S'Genoa'
 p949
 sg8
-S'https://www.whoscored.com/Matches/1006124/Live'
+S'https://www.whoscored.com/Matches/1006277/Live'
 p950
 sg10
-S'1 : 3'
+S'0 : 2'
 p951
 sa(dp952
 g4
-S'Chievo'
+S'Sampdoria'
 p953
 sg6
-S'Sampdoria'
+S'Juventus'
 p954
 sg8
-S'https://www.whoscored.com/Matches/1006119/Live'
+S'https://www.whoscored.com/Matches/1006285/Live'
 p955
 sg10
-S'1 : 1'
+S'1 : 2'
 p956
 sa(dp957
 g4
-S'Palermo'
+S'Atalanta'
 p958
 sg6
-S'Empoli'
+S'Inter'
 p959
 sg8
-S'https://www.whoscored.com/Matches/1006125/Live'
+S'https://www.whoscored.com/Matches/1005955/Live'
 p960
 sg10
-S'0 : 1'
+S'1 : 1'
 p961
 sa(dp962
 g4
-S'Verona'
+S'Torino'
 p963
 sg6
-S'Bologna'
+S'Frosinone'
 p964
 sg8
-S'https://www.whoscored.com/Matches/1006139/Live'
+S'https://www.whoscored.com/Matches/1005951/Live'
 p965
 sg10
-S'0 : 2'
+S'4 : 2'
 p966
 sa(dp967
 g4
-S'AC Milan'
+S'Napoli'
 p968
 sg6
-S'Atalanta'
+S'Sassuolo'
 p969
 sg8
-S'https://www.whoscored.com/Matches/1006140/Live'
+S'https://www.whoscored.com/Matches/1005965/Live'
 p970
 sg10
-S'0 : 0'
+S'3 : 1'
 p971
 sa(dp972
 g4
-S'Torino'
+S'Genoa'
 p973
 sg6
-S'Inter'
+S'Palermo'
 p974
 sg8
-S'https://www.whoscored.com/Matches/1006146/Live'
+S'https://www.whoscored.com/Matches/1005961/Live'
 p975
 sg10
-S'0 : 1'
+S'4 : 0'
 p976
 sa(dp977
 g4
-S'Sassuolo'
+S'Carpi'
 p978
 sg6
-S'Carpi'
+S'Sampdoria'
 p979
 sg8
-S'https://www.whoscored.com/Matches/1006145/Live'
+S'https://www.whoscored.com/Matches/1005963/Live'
 p980
 sg10
-S'1 : 0'
+S'2 : 1'
 p981
 sa(dp982
 g4
-S'Palermo'
+S'Bologna'
 p983
 sg6
-S'Chievo'
+S'Lazio'
 p984
 sg8
-S'https://www.whoscored.com/Matches/1006142/Live'
+S'https://www.whoscored.com/Matches/1005959/Live'
 p985
 sg10
-S'1 : 0'
+S'2 : 2'
 p986
 sa(dp987
 g4
-S'Roma'
+S'Udinese'
 p988
 sg6
-S'Lazio'
+S'Juventus'
 p989
 sg8
-S'https://www.whoscored.com/Matches/1006143/Live'
+S'https://www.whoscored.com/Matches/1005957/Live'
 p990
 sg10
-S'2 : 0'
+S'0 : 4'
 p991
 sa(dp992
 g4
-S'Empoli'
+S'Roma'
 p993
 sg6
-S'Juventus'
+S'Verona'
 p994
 sg8
-S'https://www.whoscored.com/Matches/1006137/Live'
+S'https://www.whoscored.com/Matches/1005953/Live'
 p995
 sg10
-S'1 : 3'
+S'1 : 1'
 p996
 sa(dp997
 g4
-S'Frosinone'
+S'Chievo'
 p998
 sg6
-S'Genoa'
+S'Empoli'
 p999
 sg8
-S'https://www.whoscored.com/Matches/1006138/Live'
+S'https://www.whoscored.com/Matches/1005947/Live'
 p1000
 sg10
-S'2 : 2'
+S'1 : 1'
 p1001
 sa(dp1002
 g4
-S'Napoli'
+S'AC Milan'
 p1003
 sg6
-S'Udinese'
+S'Fiorentina'
 p1004
 sg8
-S'https://www.whoscored.com/Matches/1006141/Live'
+S'https://www.whoscored.com/Matches/1005949/Live'
 p1005
 sg10
-S'1 : 0'
+S'2 : 0'
 p1006
 sa(dp1007
 g4
-S'Sampdoria'
+S'Sassuolo'
 p1008
 sg6
-S'Fiorentina'
+S'Torino'
 p1009
 sg8
-S'https://www.whoscored.com/Matches/1006144/Live'
+S'https://www.whoscored.com/Matches/1006225/Live'
 p1010
 sg10
-S'0 : 2'
+S'1 : 1'
 p1011
 sa(dp1012
 g4
-S'Bologna'
+S'Frosinone'
 p1013
 sg6
-S'Roma'
+S'Atalanta'
 p1014
 sg8
-S'https://www.whoscored.com/Matches/1006158/Live'
+S'https://www.whoscored.com/Matches/1005946/Live'
 p1015
 sg10
-S'2 : 2'
+S'0 : 0'
 p1016
 sa(dp1017
 g4
-S'Juventus'
+S'Empoli'
 p1018
 sg6
 S'AC Milan'
 p1019
 sg8
-S'https://www.whoscored.com/Matches/1006164/Live'
+S'https://www.whoscored.com/Matches/1005956/Live'
 p1020
 sg10
-S'1 : 0'
+S'2 : 2'
 p1021
 sa(dp1022
 g4
-S'Verona'
+S'Fiorentina'
 p1023
 sg6
-S'Napoli'
+S'Torino'
 p1024
 sg8
-S'https://www.whoscored.com/Matches/1006162/Live'
+S'https://www.whoscored.com/Matches/1005962/Live'
 p1025
 sg10
-S'0 : 2'
+S'2 : 0'
 p1026
 sa(dp1027
 g4
-S'Lazio'
+S'Palermo'
 p1028
 sg6
-S'Palermo'
+S'Udinese'
 p1029
 sg8
-S'https://www.whoscored.com/Matches/1006165/Live'
+S'https://www.whoscored.com/Matches/1005964/Live'
 p1030
 sg10
-S'1 : 1'
+S'4 : 1'
 p1031
 sa(dp1032
 g4
-S'Udinese'
+S'Sampdoria'
 p1033
 sg6
-S'Sampdoria'
+S'Napoli'
 p1034
 sg8
-S'https://www.whoscored.com/Matches/1006166/Live'
+S'https://www.whoscored.com/Matches/1005958/Live'
 p1035
 sg10
-S'1 : 0'
+S'2 : 4'
 p1036
 sa(dp1037
 g4
-S'Carpi'
+S'Verona'
 p1038
 sg6
-S'Chievo'
+S'Genoa'
 p1039
 sg8
-S'https://www.whoscored.com/Matches/1006159/Live'
+S'https://www.whoscored.com/Matches/1005954/Live'
 p1040
 sg10
-S'1 : 2'
+S'1 : 1'
 p1041
 sa(dp1042
 g4
-S'Fiorentina'
+S'Lazio'
 p1043
 sg6
-S'Empoli'
+S'Chievo'
 p1044
 sg8
-S'https://www.whoscored.com/Matches/1006160/Live'
+S'https://www.whoscored.com/Matches/1005952/Live'
 p1045
 sg10
-S'2 : 2'
+S'4 : 1'
 p1046
 sa(dp1047
 g4
-S'Genoa'
+S'Inter'
 p1048
 sg6
-S'Sassuolo'
+S'Carpi'
 p1049
 sg8
-S'https://www.whoscored.com/Matches/1006161/Live'
+S'https://www.whoscored.com/Matches/1005950/Live'
 p1050
 sg10
-S'2 : 1'
+S'1 : 1'
 p1051
 sa(dp1052
 g4
-S'Atalanta'
+S'Sassuolo'
 p1053
 sg6
-S'Torino'
+S'Bologna'
 p1054
 sg8
-S'https://www.whoscored.com/Matches/1006157/Live'
+S'https://www.whoscored.com/Matches/1005948/Live'
 p1055
 sg10
-S'0 : 1'
+S'0 : 2'
 p1056
 sa(dp1057
 g4
-S'Inter'
+S'Juventus'
 p1058
 sg6
-S'Frosinone'
+S'Roma'
 p1059
 sg8
-S'https://www.whoscored.com/Matches/1006163/Live'
+S'https://www.whoscored.com/Matches/1005960/Live'
 p1060
 sg10
-S'4 : 0'
+S'1 : 0'
 p1061
 sa(dp1062
 g4
-S'Torino'
+S'Carpi'
 p1063
 sg6
-S'Bologna'
+S'Palermo'
 p1064
 sg8
-S'https://www.whoscored.com/Matches/1006186/Live'
+S'https://www.whoscored.com/Matches/1005978/Live'
 p1065
 sg10
-S'2 : 0'
+S'1 : 1'
 p1066
 sa(dp1067
 g4
-S'AC Milan'
+S'Atalanta'
 p1068
 sg6
-S'Sampdoria'
+S'Sassuolo'
 p1069
 sg8
-S'https://www.whoscored.com/Matches/1006181/Live'
+S'https://www.whoscored.com/Matches/1005982/Live'
 p1070
 sg10
-S'4 : 1'
+S'1 : 1'
 p1071
 sa(dp1072
 g4
 S'Roma'
 p1073
 sg6
-S'Atalanta'
+S'Frosinone'
 p1074
 sg8
-S'https://www.whoscored.com/Matches/1006184/Live'
+S'https://www.whoscored.com/Matches/1005968/Live'
 p1075
 sg10
-S'0 : 2'
+S'3 : 1'
 p1076
 sa(dp1077
 g4
-S'Frosinone'
+S'Chievo'
 p1078
 sg6
-S'Verona'
+S'Juventus'
 p1079
 sg8
-S'https://www.whoscored.com/Matches/1006179/Live'
+S'https://www.whoscored.com/Matches/1005971/Live'
 p1080
 sg10
-S'3 : 2'
+S'0 : 4'
 p1081
 sa(dp1082
 g4
-S'Genoa'
+S'Bologna'
 p1083
 sg6
-S'Carpi'
+S'Sampdoria'
 p1084
 sg8
-S'https://www.whoscored.com/Matches/1006180/Live'
+S'https://www.whoscored.com/Matches/1005980/Live'
 p1085
 sg10
-S'1 : 2'
+S'3 : 2'
 p1086
 sa(dp1087
 g4
-S'Chievo'
+S'Udinese'
 p1088
 sg6
-S'Udinese'
+S'Lazio'
 p1089
 sg8
-S'https://www.whoscored.com/Matches/1006177/Live'
+S'https://www.whoscored.com/Matches/1005972/Live'
 p1090
 sg10
-S'2 : 3'
+S'0 : 0'
 p1091
 sa(dp1092
 g4
-S'Empoli'
+S'Torino'
 p1093
 sg6
-S'Lazio'
+S'Verona'
 p1094
 sg8
-S'https://www.whoscored.com/Matches/1006178/Live'
+S'https://www.whoscored.com/Matches/1005969/Live'
 p1095
 sg10
-S'1 : 0'
+S'0 : 0'
 p1096
 sa(dp1097
 g4
-S'Palermo'
+S'Genoa'
 p1098
 sg6
-S'Juventus'
+S'Fiorentina'
 p1099
 sg8
-S'https://www.whoscored.com/Matches/1006183/Live'
+S'https://www.whoscored.com/Matches/1005967/Live'
 p1100
 sg10
-S'0 : 3'
+S'0 : 0'
 p1101
 sa(dp1102
 g4
-S'Sassuolo'
+S'Napoli'
 p1103
 sg6
-S'Fiorentina'
+S'Empoli'
 p1104
 sg8
-S'https://www.whoscored.com/Matches/1006185/Live'
+S'https://www.whoscored.com/Matches/1005966/Live'
 p1105
 sg10
-S'1 : 1'
+S'5 : 1'
 p1106
 sa(dp1107
 g4
-S'Napoli'
+S'AC Milan'
 p1108
 sg6
 S'Inter'
 p1109
 sg8
-S'https://www.whoscored.com/Matches/1006182/Live'
+S'https://www.whoscored.com/Matches/1005970/Live'
 p1110
 sg10
-S'2 : 1'
+S'3 : 0'
 p1111
-sasS'Dec'
+sasS'Apr'
 p1112
 (lp1113
 (dp1114
 g4
-S'Lazio'
+S'Carpi'
 p1115
 sg6
-S'Juventus'
+S'Sassuolo'
 p1116
 sg8
-S'https://www.whoscored.com/Matches/1006204/Live'
+S'https://www.whoscored.com/Matches/1006155/Live'
 p1117
 sg10
-S'0 : 2'
+S'1 : 3'
 p1118
 sa(dp1119
 g4
-S'Torino'
+S'Juventus'
 p1120
 sg6
-S'Roma'
+S'Empoli'
 p1121
 sg8
-S'https://www.whoscored.com/Matches/1006206/Live'
+S'https://www.whoscored.com/Matches/1006147/Live'
 p1122
 sg10
-S'1 : 1'
+S'1 : 0'
 p1123
 sa(dp1124
 g4
-S'Inter'
+S'Udinese'
 p1125
 sg6
-S'Genoa'
+S'Napoli'
 p1126
 sg8
-S'https://www.whoscored.com/Matches/1006203/Live'
+S'https://www.whoscored.com/Matches/1006151/Live'
 p1127
 sg10
-S'1 : 0'
+S'3 : 1'
 p1128
 sa(dp1129
 g4
-S'Bologna'
+S'Fiorentina'
 p1130
 sg6
-S'Napoli'
+S'Sampdoria'
 p1131
 sg8
-S'https://www.whoscored.com/Matches/1006198/Live'
+S'https://www.whoscored.com/Matches/1006154/Live'
 p1132
 sg10
-S'3 : 2'
+S'1 : 1'
 p1133
 sa(dp1134
 g4
-S'Atalanta'
+S'Lazio'
 p1135
 sg6
-S'Palermo'
+S'Roma'
 p1136
 sg8
-S'https://www.whoscored.com/Matches/1006197/Live'
+S'https://www.whoscored.com/Matches/1006153/Live'
 p1137
 sg10
-S'3 : 0'
+S'1 : 4'
 p1138
 sa(dp1139
 g4
-S'Fiorentina'
+S'Chievo'
 p1140
 sg6
-S'Udinese'
+S'Palermo'
 p1141
 sg8
-S'https://www.whoscored.com/Matches/1006200/Live'
+S'https://www.whoscored.com/Matches/1006152/Live'
 p1142
 sg10
-S'3 : 0'
+S'3 : 1'
 p1143
 sa(dp1144
 g4
-S'Frosinone'
+S'Atalanta'
 p1145
 sg6
-S'Chievo'
+S'AC Milan'
 p1146
 sg8
-S'https://www.whoscored.com/Matches/1006201/Live'
+S'https://www.whoscored.com/Matches/1006150/Live'
 p1147
 sg10
-S'0 : 2'
+S'2 : 1'
 p1148
 sa(dp1149
 g4
-S'Verona'
+S'Genoa'
 p1150
 sg6
-S'Empoli'
+S'Frosinone'
 p1151
 sg8
-S'https://www.whoscored.com/Matches/1006202/Live'
+S'https://www.whoscored.com/Matches/1006148/Live'
 p1152
 sg10
-S'0 : 1'
+S'4 : 0'
 p1153
 sa(dp1154
 g4
-S'Sampdoria'
+S'Inter'
 p1155
 sg6
-S'Sassuolo'
+S'Torino'
 p1156
 sg8
-S'https://www.whoscored.com/Matches/1006205/Live'
+S'https://www.whoscored.com/Matches/1006156/Live'
 p1157
 sg10
-S'1 : 3'
+S'1 : 2'
 p1158
 sa(dp1159
 g4
-S'Carpi'
+S'Bologna'
 p1160
 sg6
-S'AC Milan'
+S'Verona'
 p1161
 sg8
-S'https://www.whoscored.com/Matches/1006199/Live'
+S'https://www.whoscored.com/Matches/1006149/Live'
 p1162
 sg10
-S'0 : 0'
+S'0 : 1'
 p1163
 sa(dp1164
 g4
-S'Genoa'
+S'Frosinone'
 p1165
 sg6
-S'Bologna'
+S'Inter'
 p1166
 sg8
-S'https://www.whoscored.com/Matches/1006219/Live'
+S'https://www.whoscored.com/Matches/1006173/Live'
 p1167
 sg10
 S'0 : 1'
 p1168
 sa(dp1169
 g4
-S'Palermo'
+S'Sassuolo'
 p1170
 sg6
-S'Frosinone'
+S'Genoa'
 p1171
 sg8
-S'https://www.whoscored.com/Matches/1006224/Live'
+S'https://www.whoscored.com/Matches/1006171/Live'
 p1172
 sg10
-S'4 : 1'
+S'0 : 1'
 p1173
 sa(dp1174
 g4
-S'Udinese'
+S'Chievo'
 p1175
 sg6
-S'Inter'
+S'Carpi'
 p1176
 sg8
-S'https://www.whoscored.com/Matches/1006226/Live'
+S'https://www.whoscored.com/Matches/1006169/Live'
 p1177
 sg10
-S'0 : 4'
+S'1 : 0'
 p1178
 sa(dp1179
 g4
 S'AC Milan'
 p1180
 sg6
-S'Verona'
+S'Juventus'
 p1181
 sg8
-S'https://www.whoscored.com/Matches/1006222/Live'
+S'https://www.whoscored.com/Matches/1006174/Live'
 p1182
 sg10
-S'1 : 1'
+S'1 : 2'
 p1183
 sa(dp1184
 g4
-S'Chievo'
+S'Empoli'
 p1185
 sg6
-S'Atalanta'
+S'Fiorentina'
 p1186
 sg8
-S'https://www.whoscored.com/Matches/1006217/Live'
+S'https://www.whoscored.com/Matches/1006170/Live'
 p1187
 sg10
-S'1 : 0'
+S'2 : 0'
 p1188
 sa(dp1189
 g4
-S'Empoli'
+S'Sampdoria'
 p1190
 sg6
-S'Carpi'
+S'Udinese'
 p1191
 sg8
-S'https://www.whoscored.com/Matches/1006218/Live'
+S'https://www.whoscored.com/Matches/1006176/Live'
 p1192
 sg10
-S'3 : 0'
+S'2 : 0'
 p1193
 sa(dp1194
 g4
 S'Napoli'
 p1195
 sg6
-S'Roma'
+S'Verona'
 p1196
 sg8
-S'https://www.whoscored.com/Matches/1006223/Live'
+S'https://www.whoscored.com/Matches/1006172/Live'
 p1197
 sg10
-S'0 : 0'
+S'3 : 0'
 p1198
 sa(dp1199
 g4
-S'Juventus'
+S'Torino'
 p1200
 sg6
-S'Fiorentina'
+S'Atalanta'
 p1201
 sg8
-S'https://www.whoscored.com/Matches/1006220/Live'
+S'https://www.whoscored.com/Matches/1006167/Live'
 p1202
 sg10
-S'3 : 1'
+S'2 : 1'
 p1203
 sa(dp1204
 g4
-S'Lazio'
+S'Palermo'
 p1205
 sg6
-S'Sampdoria'
+S'Lazio'
 p1206
 sg8
-S'https://www.whoscored.com/Matches/1006221/Live'
+S'https://www.whoscored.com/Matches/1006175/Live'
 p1207
 sg10
-S'1 : 1'
+S'0 : 3'
 p1208
 sa(dp1209
 g4
-S'Bologna'
+S'Roma'
 p1210
 sg6
-S'Empoli'
+S'Bologna'
 p1211
 sg8
-S'https://www.whoscored.com/Matches/1006238/Live'
+S'https://www.whoscored.com/Matches/1006168/Live'
 p1212
 sg10
-S'2 : 3'
+S'1 : 1'
 p1213
 sa(dp1214
 g4
-S'Carpi'
+S'Bologna'
 p1215
 sg6
-S'Juventus'
+S'Torino'
 p1216
 sg8
-S'https://www.whoscored.com/Matches/1006239/Live'
+S'https://www.whoscored.com/Matches/1006196/Live'
 p1217
 sg10
-S'2 : 3'
+S'0 : 1'
 p1218
 sa(dp1219
 g4
-S'Fiorentina'
+S'Carpi'
 p1220
 sg6
-S'Chievo'
+S'Genoa'
 p1221
 sg8
-S'https://www.whoscored.com/Matches/1006240/Live'
+S'https://www.whoscored.com/Matches/1006190/Live'
 p1222
 sg10
-S'2 : 0'
+S'4 : 1'
 p1223
 sa(dp1224
 g4
-S'Atalanta'
+S'Inter'
 p1225
 sg6
 S'Napoli'
 p1226
 sg8
-S'https://www.whoscored.com/Matches/1006237/Live'
+S'https://www.whoscored.com/Matches/1006192/Live'
 p1227
 sg10
-S'1 : 3'
+S'2 : 0'
 p1228
 sa(dp1229
 g4
-S'Verona'
+S'Atalanta'
 p1230
 sg6
-S'Sassuolo'
+S'Roma'
 p1231
 sg8
-S'https://www.whoscored.com/Matches/1006242/Live'
+S'https://www.whoscored.com/Matches/1006194/Live'
 p1232
 sg10
-S'1 : 1'
+S'3 : 3'
 p1233
 sa(dp1234
 g4
-S'Roma'
+S'Fiorentina'
 p1235
 sg6
-S'Genoa'
+S'Sassuolo'
 p1236
 sg8
-S'https://www.whoscored.com/Matches/1006244/Live'
+S'https://www.whoscored.com/Matches/1006195/Live'
 p1237
 sg10
-S'2 : 0'
+S'3 : 1'
 p1238
 sa(dp1239
 g4
-S'Sampdoria'
+S'Juventus'
 p1240
 sg6
 S'Palermo'
 p1241
 sg8
-S'https://www.whoscored.com/Matches/1006245/Live'
+S'https://www.whoscored.com/Matches/1006193/Live'
 p1242
 sg10
-S'2 : 0'
+S'4 : 0'
 p1243
 sa(dp1244
 g4
-S'Torino'
+S'Verona'
 p1245
 sg6
-S'Udinese'
+S'Frosinone'
 p1246
 sg8
-S'https://www.whoscored.com/Matches/1006246/Live'
+S'https://www.whoscored.com/Matches/1006189/Live'
 p1247
 sg10
-S'0 : 1'
+S'1 : 2'
 p1248
 sa(dp1249
 g4
-S'Frosinone'
+S'Udinese'
 p1250
 sg6
-S'AC Milan'
+S'Chievo'
 p1251
 sg8
-S'https://www.whoscored.com/Matches/1006241/Live'
+S'https://www.whoscored.com/Matches/1006187/Live'
 p1252
 sg10
-S'2 : 4'
+S'0 : 0'
 p1253
 sa(dp1254
 g4
-S'Inter'
+S'Lazio'
 p1255
 sg6
-S'Lazio'
+S'Empoli'
 p1256
 sg8
-S'https://www.whoscored.com/Matches/1006243/Live'
+S'https://www.whoscored.com/Matches/1006188/Live'
 p1257
 sg10
-S'1 : 2'
+S'2 : 0'
 p1258
-sasS'Oct'
-p1259
-(lp1260
-(dp1261
-g4
-S'Carpi'
-p1262
-sg6
-S'Torino'
-p1263
-sg8
-S'https://www.whoscored.com/Matches/1006037/Live'
-p1264
-sg10
-S'2 : 1'
-p1265
-sa(dp1266
-g4
-S'Chievo'
-p1267
-sg6
-S'Verona'
-p1268
-sg8
-S'https://www.whoscored.com/Matches/1006038/Live'
-p1269
-sg10
-S'1 : 1'
-p1270
-sa(dp1271
-g4
-S'Empoli'
-p1272
-sg6
-S'Sassuolo'
-p1273
-sg8
-S'https://www.whoscored.com/Matches/1006039/Live'
-p1274
-sg10
-S'1 : 0'
-p1275
-sa(dp1276
-g4
-S'Palermo'
-p1277
-sg6
-S'Roma'
-p1278
-sg8
-S'https://www.whoscored.com/Matches/1006044/Live'
-p1279
-sg10
-S'2 : 4'
-p1280
-sa(dp1281
+sa(dp1259
 g4
 S'Sampdoria'
-p1282
-sg6
-S'Inter'
-p1283
-sg8
-S'https://www.whoscored.com/Matches/1006045/Live'
-p1284
-sg10
-S'1 : 1'
-p1285
-sa(dp1286
-g4
-S'Udinese'
-p1287
-sg6
-S'Genoa'
-p1288
-sg8
-S'https://www.whoscored.com/Matches/1006046/Live'
-p1289
-sg10
-S'1 : 1'
-p1290
-sa(dp1291
-g4
-S'Juventus'
-p1292
-sg6
-S'Bologna'
-p1293
-sg8
-S'https://www.whoscored.com/Matches/1006041/Live'
-p1294
-sg10
-S'3 : 1'
-p1295
-sa(dp1296
-g4
-S'Lazio'
-p1297
-sg6
-S'Frosinone'
-p1298
-sg8
-S'https://www.whoscored.com/Matches/1006042/Live'
-p1299
-sg10
-S'2 : 0'
-p1300
-sa(dp1301
-g4
-S'AC Milan'
-p1302
-sg6
-S'Napoli'
-p1303
-sg8
-S'https://www.whoscored.com/Matches/1006043/Live'
-p1304
-sg10
-S'0 : 4'
-p1305
-sa(dp1306
-g4
-S'Fiorentina'
-p1307
-sg6
-S'Atalanta'
-p1308
-sg8
-S'https://www.whoscored.com/Matches/1006040/Live'
-p1309
-sg10
-S'3 : 0'
-p1310
-sa(dp1311
-g4
-S'Roma'
-p1312
-sg6
-S'Empoli'
-p1313
-sg8
-S'https://www.whoscored.com/Matches/1006064/Live'
-p1314
-sg10
-S'3 : 1'
-p1315
-sa(dp1316
-g4
-S'Torino'
-p1317
+p1260
 sg6
 S'AC Milan'
-p1318
+p1261
 sg8
-S'https://www.whoscored.com/Matches/1006066/Live'
-p1319
-sg10
-S'1 : 1'
-p1320
-sa(dp1321
-g4
-S'Bologna'
-p1322
-sg6
-S'Palermo'
-p1323
-sg8
-S'https://www.whoscored.com/Matches/1006058/Live'
-p1324
+S'https://www.whoscored.com/Matches/1006191/Live'
+p1262
 sg10
 S'0 : 1'
-p1325
-sa(dp1326
-g4
-S'Frosinone'
-p1327
-sg6
-S'Sampdoria'
-p1328
-sg8
-S'https://www.whoscored.com/Matches/1006059/Live'
-p1329
-sg10
-S'2 : 0'
-p1330
-sa(dp1331
-g4
-S'Genoa'
-p1332
-sg6
-S'Chievo'
-p1333
-sg8
-S'https://www.whoscored.com/Matches/1006060/Live'
-p1334
-sg10
-S'3 : 2'
-p1335
-sa(dp1336
-g4
-S'Verona'
-p1337
-sg6
-S'Udinese'
-p1338
-sg8
-S'https://www.whoscored.com/Matches/1006061/Live'
-p1339
-sg10
-S'1 : 1'
-p1340
-sa(dp1341
-g4
-S'Sassuolo'
-p1342
-sg6
-S'Lazio'
-p1343
-sg8
-S'https://www.whoscored.com/Matches/1006065/Live'
-p1344
-sg10
-S'2 : 1'
-p1345
-sa(dp1346
-g4
-S'Atalanta'
-p1347
-sg6
-S'Carpi'
-p1348
-sg8
-S'https://www.whoscored.com/Matches/1006057/Live'
-p1349
-sg10
-S'3 : 0'
-p1350
-sa(dp1351
+p1263
+sa(dp1264
 g4
 S'Napoli'
-p1352
-sg6
-S'Fiorentina'
-p1353
-sg8
-S'https://www.whoscored.com/Matches/1006063/Live'
-p1354
-sg10
-S'2 : 1'
-p1355
-sa(dp1356
-g4
-S'Inter'
-p1357
-sg6
-S'Juventus'
-p1358
-sg8
-S'https://www.whoscored.com/Matches/1006062/Live'
-p1359
-sg10
-S'0 : 0'
-p1360
-sa(dp1361
-g4
-S'Empoli'
-p1362
-sg6
-S'Genoa'
-p1363
-sg8
-S'https://www.whoscored.com/Matches/1006079/Live'
-p1364
-sg10
-S'2 : 0'
-p1365
-sa(dp1366
-g4
-S'Carpi'
-p1367
+p1265
 sg6
 S'Bologna'
-p1368
+p1266
 sg8
-S'https://www.whoscored.com/Matches/1006077/Live'
-p1369
+S'https://www.whoscored.com/Matches/1006208/Live'
+p1267
 sg10
-S'1 : 2'
-p1370
-sa(dp1371
+S'6 : 0'
+p1268
+sa(dp1269
 g4
-S'Palermo'
-p1372
+S'Sassuolo'
+p1270
+sg6
+S'Sampdoria'
+p1271
+sg8
+S'https://www.whoscored.com/Matches/1006215/Live'
+p1272
+sg10
+S'0 : 0'
+p1273
+sa(dp1274
+g4
+S'Roma'
+p1275
+sg6
+S'Torino'
+p1276
+sg8
+S'https://www.whoscored.com/Matches/1006216/Live'
+p1277
+sg10
+S'3 : 2'
+p1278
+sa(dp1279
+g4
+S'Juventus'
+p1280
+sg6
+S'Lazio'
+p1281
+sg8
+S'https://www.whoscored.com/Matches/1006214/Live'
+p1282
+sg10
+S'3 : 0'
+p1283
+sa(dp1284
+g4
+S'Genoa'
+p1285
 sg6
 S'Inter'
-p1373
+p1286
 sg8
-S'https://www.whoscored.com/Matches/1006084/Live'
-p1374
+S'https://www.whoscored.com/Matches/1006213/Live'
+p1287
 sg10
-S'1 : 1'
-p1375
-sa(dp1376
+S'1 : 0'
+p1288
+sa(dp1289
 g4
-S'Sampdoria'
-p1377
+S'Empoli'
+p1290
 sg6
 S'Verona'
+p1291
+sg8
+S'https://www.whoscored.com/Matches/1006212/Live'
+p1292
+sg10
+S'1 : 0'
+p1293
+sa(dp1294
+g4
+S'Chievo'
+p1295
+sg6
+S'Frosinone'
+p1296
+sg8
+S'https://www.whoscored.com/Matches/1006211/Live'
+p1297
+sg10
+S'5 : 1'
+p1298
+sa(dp1299
+g4
+S'Udinese'
+p1300
+sg6
+S'Fiorentina'
+p1301
+sg8
+S'https://www.whoscored.com/Matches/1006210/Live'
+p1302
+sg10
+S'2 : 1'
+p1303
+sa(dp1304
+g4
+S'Palermo'
+p1305
+sg6
+S'Atalanta'
+p1306
+sg8
+S'https://www.whoscored.com/Matches/1006207/Live'
+p1307
+sg10
+S'2 : 2'
+p1308
+sa(dp1309
+g4
+S'AC Milan'
+p1310
+sg6
+S'Carpi'
+p1311
+sg8
+S'https://www.whoscored.com/Matches/1006209/Live'
+p1312
+sg10
+S'0 : 0'
+p1313
+sa(dp1314
+g4
+S'Inter'
+p1315
+sg6
+S'Udinese'
+p1316
+sg8
+S'https://www.whoscored.com/Matches/1006236/Live'
+p1317
+sg10
+S'3 : 1'
+p1318
+sa(dp1319
+g4
+S'Frosinone'
+p1320
+sg6
+S'Palermo'
+p1321
+sg8
+S'https://www.whoscored.com/Matches/1006234/Live'
+p1322
+sg10
+S'0 : 2'
+p1323
+sa(dp1324
+g4
+S'Torino'
+p1325
+sg6
+S'Sassuolo'
+p1326
+sg8
+S'https://www.whoscored.com/Matches/1006235/Live'
+p1327
+sg10
+S'1 : 3'
+p1328
+sa(dp1329
+g4
+S'Sampdoria'
+p1330
+sg6
+S'Lazio'
+p1331
+sg8
+S'https://www.whoscored.com/Matches/1006231/Live'
+p1332
+sg10
+S'2 : 1'
+p1333
+sa(dp1334
+g4
+S'Bologna'
+p1335
+sg6
+S'Genoa'
+p1336
+sg8
+S'https://www.whoscored.com/Matches/1006229/Live'
+p1337
+sg10
+S'2 : 0'
+p1338
+sa(dp1339
+g4
+S'Atalanta'
+p1340
+sg6
+S'Chievo'
+p1341
+sg8
+S'https://www.whoscored.com/Matches/1006227/Live'
+p1342
+sg10
+S'1 : 0'
+p1343
+sa(dp1344
+g4
+S'Fiorentina'
+p1345
+sg6
+S'Juventus'
+p1346
+sg8
+S'https://www.whoscored.com/Matches/1006230/Live'
+p1347
+sg10
+S'1 : 2'
+p1348
+sa(dp1349
+g4
+S'Roma'
+p1350
+sg6
+S'Napoli'
+p1351
+sg8
+S'https://www.whoscored.com/Matches/1006233/Live'
+p1352
+sg10
+S'1 : 0'
+p1353
+sa(dp1354
+g4
+S'Verona'
+p1355
+sg6
+S'AC Milan'
+p1356
+sg8
+S'https://www.whoscored.com/Matches/1006232/Live'
+p1357
+sg10
+S'2 : 1'
+p1358
+sa(dp1359
+g4
+S'Carpi'
+p1360
+sg6
+S'Empoli'
+p1361
+sg8
+S'https://www.whoscored.com/Matches/1006228/Live'
+p1362
+sg10
+S'1 : 0'
+p1363
+sa(dp1364
+g4
+S'Udinese'
+p1365
+sg6
+S'Torino'
+p1366
+sg8
+S'https://www.whoscored.com/Matches/1006256/Live'
+p1367
+sg10
+S'1 : 5'
+p1368
+sa(dp1369
+g4
+S'Chievo'
+p1370
+sg6
+S'Fiorentina'
+p1371
+sg8
+S'https://www.whoscored.com/Matches/1006250/Live'
+p1372
+sg10
+S'0 : 0'
+p1373
+sasS'Nov'
+p1374
+(lp1375
+(dp1376
+g4
+S'Fiorentina'
+p1377
+sg6
+S'Frosinone'
 p1378
 sg8
-S'https://www.whoscored.com/Matches/1006085/Live'
+S'https://www.whoscored.com/Matches/1006120/Live'
 p1379
 sg10
 S'4 : 1'
@@ -3568,233 +3568,1409 @@ g4
 S'Udinese'
 p1382
 sg6
-S'Frosinone'
+S'Sassuolo'
 p1383
 sg8
-S'https://www.whoscored.com/Matches/1006086/Live'
+S'https://www.whoscored.com/Matches/1006126/Live'
 p1384
 sg10
-S'1 : 0'
+S'0 : 0'
 p1385
 sa(dp1386
 g4
-S'AC Milan'
+S'Genoa'
 p1387
 sg6
-S'Sassuolo'
+S'Napoli'
 p1388
 sg8
-S'https://www.whoscored.com/Matches/1006083/Live'
+S'https://www.whoscored.com/Matches/1006121/Live'
 p1389
 sg10
-S'2 : 1'
+S'0 : 0'
 p1390
 sa(dp1391
 g4
-S'Juventus'
+S'Carpi'
 p1392
 sg6
-S'Atalanta'
+S'Verona'
 p1393
 sg8
-S'https://www.whoscored.com/Matches/1006081/Live'
+S'https://www.whoscored.com/Matches/1006118/Live'
 p1394
 sg10
-S'2 : 0'
+S'0 : 0'
 p1395
 sa(dp1396
 g4
-S'Lazio'
+S'Bologna'
 p1397
 sg6
-S'Torino'
+S'Atalanta'
 p1398
 sg8
-S'https://www.whoscored.com/Matches/1006082/Live'
+S'https://www.whoscored.com/Matches/1006117/Live'
 p1399
 sg10
 S'3 : 0'
 p1400
 sa(dp1401
 g4
-S'Fiorentina'
+S'Lazio'
 p1402
 sg6
-S'Roma'
+S'AC Milan'
 p1403
 sg8
-S'https://www.whoscored.com/Matches/1006080/Live'
+S'https://www.whoscored.com/Matches/1006124/Live'
 p1404
 sg10
-S'1 : 2'
+S'1 : 3'
 p1405
 sa(dp1406
 g4
 S'Chievo'
 p1407
 sg6
-S'Napoli'
+S'Sampdoria'
 p1408
 sg8
-S'https://www.whoscored.com/Matches/1006078/Live'
+S'https://www.whoscored.com/Matches/1006119/Live'
 p1409
 sg10
-S'0 : 1'
+S'1 : 1'
 p1410
 sa(dp1411
 g4
-S'Bologna'
+S'Palermo'
 p1412
 sg6
-S'Inter'
+S'Empoli'
 p1413
 sg8
-S'https://www.whoscored.com/Matches/1006098/Live'
+S'https://www.whoscored.com/Matches/1006125/Live'
 p1414
 sg10
 S'0 : 1'
 p1415
 sa(dp1416
 g4
-S'Frosinone'
+S'Verona'
 p1417
 sg6
-S'Carpi'
+S'Bologna'
 p1418
 sg8
-S'https://www.whoscored.com/Matches/1006099/Live'
+S'https://www.whoscored.com/Matches/1006139/Live'
 p1419
 sg10
-S'2 : 1'
+S'0 : 2'
 p1420
 sa(dp1421
 g4
-S'Verona'
+S'AC Milan'
 p1422
 sg6
-S'Fiorentina'
+S'Atalanta'
 p1423
 sg8
-S'https://www.whoscored.com/Matches/1006100/Live'
+S'https://www.whoscored.com/Matches/1006140/Live'
 p1424
 sg10
-S'0 : 2'
+S'0 : 0'
 p1425
 sa(dp1426
 g4
-S'AC Milan'
+S'Torino'
 p1427
 sg6
-S'Chievo'
+S'Inter'
 p1428
 sg8
-S'https://www.whoscored.com/Matches/1006101/Live'
+S'https://www.whoscored.com/Matches/1006146/Live'
 p1429
 sg10
-S'1 : 0'
+S'0 : 1'
 p1430
 sa(dp1431
 g4
-S'Napoli'
+S'Sassuolo'
 p1432
 sg6
-S'Palermo'
+S'Carpi'
 p1433
 sg8
-S'https://www.whoscored.com/Matches/1006102/Live'
+S'https://www.whoscored.com/Matches/1006145/Live'
 p1434
 sg10
-S'2 : 0'
+S'1 : 0'
 p1435
 sa(dp1436
 g4
 S'Roma'
 p1437
 sg6
-S'Udinese'
+S'Lazio'
 p1438
 sg8
-S'https://www.whoscored.com/Matches/1006103/Live'
+S'https://www.whoscored.com/Matches/1006143/Live'
 p1439
 sg10
-S'3 : 1'
+S'2 : 0'
 p1440
 sa(dp1441
 g4
-S'Atalanta'
+S'Palermo'
 p1442
 sg6
-S'Lazio'
+S'Chievo'
 p1443
 sg8
-S'https://www.whoscored.com/Matches/1006097/Live'
+S'https://www.whoscored.com/Matches/1006142/Live'
 p1444
 sg10
-S'2 : 1'
+S'1 : 0'
 p1445
 sa(dp1446
 g4
-S'Sassuolo'
+S'Frosinone'
 p1447
 sg6
-S'Juventus'
+S'Genoa'
 p1448
 sg8
-S'https://www.whoscored.com/Matches/1006105/Live'
+S'https://www.whoscored.com/Matches/1006138/Live'
 p1449
 sg10
-S'1 : 0'
+S'2 : 2'
 p1450
 sa(dp1451
 g4
-S'Torino'
+S'Empoli'
 p1452
 sg6
-S'Genoa'
+S'Juventus'
 p1453
 sg8
-S'https://www.whoscored.com/Matches/1006106/Live'
+S'https://www.whoscored.com/Matches/1006137/Live'
 p1454
 sg10
-S'3 : 3'
+S'1 : 3'
 p1455
 sa(dp1456
 g4
-S'Sampdoria'
+S'Napoli'
 p1457
 sg6
-S'Empoli'
+S'Udinese'
 p1458
 sg8
-S'https://www.whoscored.com/Matches/1006104/Live'
+S'https://www.whoscored.com/Matches/1006141/Live'
 p1459
 sg10
-S'1 : 1'
+S'1 : 0'
 p1460
 sa(dp1461
 g4
-S'Juventus'
+S'Sampdoria'
 p1462
 sg6
-S'Torino'
+S'Fiorentina'
 p1463
 sg8
-S'https://www.whoscored.com/Matches/1006123/Live'
+S'https://www.whoscored.com/Matches/1006144/Live'
 p1464
 sg10
-S'2 : 1'
+S'0 : 2'
 p1465
 sa(dp1466
 g4
-S'Inter'
+S'Bologna'
 p1467
 sg6
 S'Roma'
 p1468
 sg8
-S'https://www.whoscored.com/Matches/1006122/Live'
+S'https://www.whoscored.com/Matches/1006158/Live'
 p1469
 sg10
-S'1 : 0'
+S'2 : 2'
 p1470
+sa(dp1471
+g4
+S'Juventus'
+p1472
+sg6
+S'AC Milan'
+p1473
+sg8
+S'https://www.whoscored.com/Matches/1006164/Live'
+p1474
+sg10
+S'1 : 0'
+p1475
+sa(dp1476
+g4
+S'Verona'
+p1477
+sg6
+S'Napoli'
+p1478
+sg8
+S'https://www.whoscored.com/Matches/1006162/Live'
+p1479
+sg10
+S'0 : 2'
+p1480
+sa(dp1481
+g4
+S'Udinese'
+p1482
+sg6
+S'Sampdoria'
+p1483
+sg8
+S'https://www.whoscored.com/Matches/1006166/Live'
+p1484
+sg10
+S'1 : 0'
+p1485
+sa(dp1486
+g4
+S'Lazio'
+p1487
+sg6
+S'Palermo'
+p1488
+sg8
+S'https://www.whoscored.com/Matches/1006165/Live'
+p1489
+sg10
+S'1 : 1'
+p1490
+sa(dp1491
+g4
+S'Genoa'
+p1492
+sg6
+S'Sassuolo'
+p1493
+sg8
+S'https://www.whoscored.com/Matches/1006161/Live'
+p1494
+sg10
+S'2 : 1'
+p1495
+sa(dp1496
+g4
+S'Fiorentina'
+p1497
+sg6
+S'Empoli'
+p1498
+sg8
+S'https://www.whoscored.com/Matches/1006160/Live'
+p1499
+sg10
+S'2 : 2'
+p1500
+sa(dp1501
+g4
+S'Carpi'
+p1502
+sg6
+S'Chievo'
+p1503
+sg8
+S'https://www.whoscored.com/Matches/1006159/Live'
+p1504
+sg10
+S'1 : 2'
+p1505
+sa(dp1506
+g4
+S'Atalanta'
+p1507
+sg6
+S'Torino'
+p1508
+sg8
+S'https://www.whoscored.com/Matches/1006157/Live'
+p1509
+sg10
+S'0 : 1'
+p1510
+sa(dp1511
+g4
+S'Inter'
+p1512
+sg6
+S'Frosinone'
+p1513
+sg8
+S'https://www.whoscored.com/Matches/1006163/Live'
+p1514
+sg10
+S'4 : 0'
+p1515
+sa(dp1516
+g4
+S'Torino'
+p1517
+sg6
+S'Bologna'
+p1518
+sg8
+S'https://www.whoscored.com/Matches/1006186/Live'
+p1519
+sg10
+S'2 : 0'
+p1520
+sa(dp1521
+g4
+S'AC Milan'
+p1522
+sg6
+S'Sampdoria'
+p1523
+sg8
+S'https://www.whoscored.com/Matches/1006181/Live'
+p1524
+sg10
+S'4 : 1'
+p1525
+sa(dp1526
+g4
+S'Roma'
+p1527
+sg6
+S'Atalanta'
+p1528
+sg8
+S'https://www.whoscored.com/Matches/1006184/Live'
+p1529
+sg10
+S'0 : 2'
+p1530
+sa(dp1531
+g4
+S'Genoa'
+p1532
+sg6
+S'Carpi'
+p1533
+sg8
+S'https://www.whoscored.com/Matches/1006180/Live'
+p1534
+sg10
+S'1 : 2'
+p1535
+sa(dp1536
+g4
+S'Frosinone'
+p1537
+sg6
+S'Verona'
+p1538
+sg8
+S'https://www.whoscored.com/Matches/1006179/Live'
+p1539
+sg10
+S'3 : 2'
+p1540
+sa(dp1541
+g4
+S'Chievo'
+p1542
+sg6
+S'Udinese'
+p1543
+sg8
+S'https://www.whoscored.com/Matches/1006177/Live'
+p1544
+sg10
+S'2 : 3'
+p1545
+sa(dp1546
+g4
+S'Empoli'
+p1547
+sg6
+S'Lazio'
+p1548
+sg8
+S'https://www.whoscored.com/Matches/1006178/Live'
+p1549
+sg10
+S'1 : 0'
+p1550
+sa(dp1551
+g4
+S'Palermo'
+p1552
+sg6
+S'Juventus'
+p1553
+sg8
+S'https://www.whoscored.com/Matches/1006183/Live'
+p1554
+sg10
+S'0 : 3'
+p1555
+sa(dp1556
+g4
+S'Sassuolo'
+p1557
+sg6
+S'Fiorentina'
+p1558
+sg8
+S'https://www.whoscored.com/Matches/1006185/Live'
+p1559
+sg10
+S'1 : 1'
+p1560
+sa(dp1561
+g4
+S'Napoli'
+p1562
+sg6
+S'Inter'
+p1563
+sg8
+S'https://www.whoscored.com/Matches/1006182/Live'
+p1564
+sg10
+S'2 : 1'
+p1565
+sasS'Dec'
+p1566
+(lp1567
+(dp1568
+g4
+S'Lazio'
+p1569
+sg6
+S'Juventus'
+p1570
+sg8
+S'https://www.whoscored.com/Matches/1006204/Live'
+p1571
+sg10
+S'0 : 2'
+p1572
+sa(dp1573
+g4
+S'Torino'
+p1574
+sg6
+S'Roma'
+p1575
+sg8
+S'https://www.whoscored.com/Matches/1006206/Live'
+p1576
+sg10
+S'1 : 1'
+p1577
+sa(dp1578
+g4
+S'Inter'
+p1579
+sg6
+S'Genoa'
+p1580
+sg8
+S'https://www.whoscored.com/Matches/1006203/Live'
+p1581
+sg10
+S'1 : 0'
+p1582
+sa(dp1583
+g4
+S'Bologna'
+p1584
+sg6
+S'Napoli'
+p1585
+sg8
+S'https://www.whoscored.com/Matches/1006198/Live'
+p1586
+sg10
+S'3 : 2'
+p1587
+sa(dp1588
+g4
+S'Verona'
+p1589
+sg6
+S'Empoli'
+p1590
+sg8
+S'https://www.whoscored.com/Matches/1006202/Live'
+p1591
+sg10
+S'0 : 1'
+p1592
+sa(dp1593
+g4
+S'Frosinone'
+p1594
+sg6
+S'Chievo'
+p1595
+sg8
+S'https://www.whoscored.com/Matches/1006201/Live'
+p1596
+sg10
+S'0 : 2'
+p1597
+sa(dp1598
+g4
+S'Fiorentina'
+p1599
+sg6
+S'Udinese'
+p1600
+sg8
+S'https://www.whoscored.com/Matches/1006200/Live'
+p1601
+sg10
+S'3 : 0'
+p1602
+sa(dp1603
+g4
+S'Atalanta'
+p1604
+sg6
+S'Palermo'
+p1605
+sg8
+S'https://www.whoscored.com/Matches/1006197/Live'
+p1606
+sg10
+S'3 : 0'
+p1607
+sa(dp1608
+g4
+S'Sampdoria'
+p1609
+sg6
+S'Sassuolo'
+p1610
+sg8
+S'https://www.whoscored.com/Matches/1006205/Live'
+p1611
+sg10
+S'1 : 3'
+p1612
+sa(dp1613
+g4
+S'Carpi'
+p1614
+sg6
+S'AC Milan'
+p1615
+sg8
+S'https://www.whoscored.com/Matches/1006199/Live'
+p1616
+sg10
+S'0 : 0'
+p1617
+sa(dp1618
+g4
+S'Genoa'
+p1619
+sg6
+S'Bologna'
+p1620
+sg8
+S'https://www.whoscored.com/Matches/1006219/Live'
+p1621
+sg10
+S'0 : 1'
+p1622
+sa(dp1623
+g4
+S'Palermo'
+p1624
+sg6
+S'Frosinone'
+p1625
+sg8
+S'https://www.whoscored.com/Matches/1006224/Live'
+p1626
+sg10
+S'4 : 1'
+p1627
+sa(dp1628
+g4
+S'Udinese'
+p1629
+sg6
+S'Inter'
+p1630
+sg8
+S'https://www.whoscored.com/Matches/1006226/Live'
+p1631
+sg10
+S'0 : 4'
+p1632
+sa(dp1633
+g4
+S'AC Milan'
+p1634
+sg6
+S'Verona'
+p1635
+sg8
+S'https://www.whoscored.com/Matches/1006222/Live'
+p1636
+sg10
+S'1 : 1'
+p1637
+sa(dp1638
+g4
+S'Empoli'
+p1639
+sg6
+S'Carpi'
+p1640
+sg8
+S'https://www.whoscored.com/Matches/1006218/Live'
+p1641
+sg10
+S'3 : 0'
+p1642
+sa(dp1643
+g4
+S'Chievo'
+p1644
+sg6
+S'Atalanta'
+p1645
+sg8
+S'https://www.whoscored.com/Matches/1006217/Live'
+p1646
+sg10
+S'1 : 0'
+p1647
+sa(dp1648
+g4
+S'Napoli'
+p1649
+sg6
+S'Roma'
+p1650
+sg8
+S'https://www.whoscored.com/Matches/1006223/Live'
+p1651
+sg10
+S'0 : 0'
+p1652
+sa(dp1653
+g4
+S'Juventus'
+p1654
+sg6
+S'Fiorentina'
+p1655
+sg8
+S'https://www.whoscored.com/Matches/1006220/Live'
+p1656
+sg10
+S'3 : 1'
+p1657
+sa(dp1658
+g4
+S'Lazio'
+p1659
+sg6
+S'Sampdoria'
+p1660
+sg8
+S'https://www.whoscored.com/Matches/1006221/Live'
+p1661
+sg10
+S'1 : 1'
+p1662
+sa(dp1663
+g4
+S'Bologna'
+p1664
+sg6
+S'Empoli'
+p1665
+sg8
+S'https://www.whoscored.com/Matches/1006238/Live'
+p1666
+sg10
+S'2 : 3'
+p1667
+sa(dp1668
+g4
+S'Carpi'
+p1669
+sg6
+S'Juventus'
+p1670
+sg8
+S'https://www.whoscored.com/Matches/1006239/Live'
+p1671
+sg10
+S'2 : 3'
+p1672
+sa(dp1673
+g4
+S'Roma'
+p1674
+sg6
+S'Genoa'
+p1675
+sg8
+S'https://www.whoscored.com/Matches/1006244/Live'
+p1676
+sg10
+S'2 : 0'
+p1677
+sa(dp1678
+g4
+S'Verona'
+p1679
+sg6
+S'Sassuolo'
+p1680
+sg8
+S'https://www.whoscored.com/Matches/1006242/Live'
+p1681
+sg10
+S'1 : 1'
+p1682
+sa(dp1683
+g4
+S'Fiorentina'
+p1684
+sg6
+S'Chievo'
+p1685
+sg8
+S'https://www.whoscored.com/Matches/1006240/Live'
+p1686
+sg10
+S'2 : 0'
+p1687
+sa(dp1688
+g4
+S'Atalanta'
+p1689
+sg6
+S'Napoli'
+p1690
+sg8
+S'https://www.whoscored.com/Matches/1006237/Live'
+p1691
+sg10
+S'1 : 3'
+p1692
+sa(dp1693
+g4
+S'Torino'
+p1694
+sg6
+S'Udinese'
+p1695
+sg8
+S'https://www.whoscored.com/Matches/1006246/Live'
+p1696
+sg10
+S'0 : 1'
+p1697
+sa(dp1698
+g4
+S'Sampdoria'
+p1699
+sg6
+S'Palermo'
+p1700
+sg8
+S'https://www.whoscored.com/Matches/1006245/Live'
+p1701
+sg10
+S'2 : 0'
+p1702
+sa(dp1703
+g4
+S'Frosinone'
+p1704
+sg6
+S'AC Milan'
+p1705
+sg8
+S'https://www.whoscored.com/Matches/1006241/Live'
+p1706
+sg10
+S'2 : 4'
+p1707
+sa(dp1708
+g4
+S'Inter'
+p1709
+sg6
+S'Lazio'
+p1710
+sg8
+S'https://www.whoscored.com/Matches/1006243/Live'
+p1711
+sg10
+S'1 : 2'
+p1712
+sasS'Oct'
+p1713
+(lp1714
+(dp1715
+g4
+S'Carpi'
+p1716
+sg6
+S'Torino'
+p1717
+sg8
+S'https://www.whoscored.com/Matches/1006037/Live'
+p1718
+sg10
+S'2 : 1'
+p1719
+sa(dp1720
+g4
+S'Chievo'
+p1721
+sg6
+S'Verona'
+p1722
+sg8
+S'https://www.whoscored.com/Matches/1006038/Live'
+p1723
+sg10
+S'1 : 1'
+p1724
+sa(dp1725
+g4
+S'Empoli'
+p1726
+sg6
+S'Sassuolo'
+p1727
+sg8
+S'https://www.whoscored.com/Matches/1006039/Live'
+p1728
+sg10
+S'1 : 0'
+p1729
+sa(dp1730
+g4
+S'Udinese'
+p1731
+sg6
+S'Genoa'
+p1732
+sg8
+S'https://www.whoscored.com/Matches/1006046/Live'
+p1733
+sg10
+S'1 : 1'
+p1734
+sa(dp1735
+g4
+S'Sampdoria'
+p1736
+sg6
+S'Inter'
+p1737
+sg8
+S'https://www.whoscored.com/Matches/1006045/Live'
+p1738
+sg10
+S'1 : 1'
+p1739
+sa(dp1740
+g4
+S'Palermo'
+p1741
+sg6
+S'Roma'
+p1742
+sg8
+S'https://www.whoscored.com/Matches/1006044/Live'
+p1743
+sg10
+S'2 : 4'
+p1744
+sa(dp1745
+g4
+S'Lazio'
+p1746
+sg6
+S'Frosinone'
+p1747
+sg8
+S'https://www.whoscored.com/Matches/1006042/Live'
+p1748
+sg10
+S'2 : 0'
+p1749
+sa(dp1750
+g4
+S'Juventus'
+p1751
+sg6
+S'Bologna'
+p1752
+sg8
+S'https://www.whoscored.com/Matches/1006041/Live'
+p1753
+sg10
+S'3 : 1'
+p1754
+sa(dp1755
+g4
+S'AC Milan'
+p1756
+sg6
+S'Napoli'
+p1757
+sg8
+S'https://www.whoscored.com/Matches/1006043/Live'
+p1758
+sg10
+S'0 : 4'
+p1759
+sa(dp1760
+g4
+S'Fiorentina'
+p1761
+sg6
+S'Atalanta'
+p1762
+sg8
+S'https://www.whoscored.com/Matches/1006040/Live'
+p1763
+sg10
+S'3 : 0'
+p1764
+sa(dp1765
+g4
+S'Roma'
+p1766
+sg6
+S'Empoli'
+p1767
+sg8
+S'https://www.whoscored.com/Matches/1006064/Live'
+p1768
+sg10
+S'3 : 1'
+p1769
+sa(dp1770
+g4
+S'Torino'
+p1771
+sg6
+S'AC Milan'
+p1772
+sg8
+S'https://www.whoscored.com/Matches/1006066/Live'
+p1773
+sg10
+S'1 : 1'
+p1774
+sa(dp1775
+g4
+S'Bologna'
+p1776
+sg6
+S'Palermo'
+p1777
+sg8
+S'https://www.whoscored.com/Matches/1006058/Live'
+p1778
+sg10
+S'0 : 1'
+p1779
+sa(dp1780
+g4
+S'Sassuolo'
+p1781
+sg6
+S'Lazio'
+p1782
+sg8
+S'https://www.whoscored.com/Matches/1006065/Live'
+p1783
+sg10
+S'2 : 1'
+p1784
+sa(dp1785
+g4
+S'Napoli'
+p1786
+sg6
+S'Fiorentina'
+p1787
+sg8
+S'https://www.whoscored.com/Matches/1006063/Live'
+p1788
+sg10
+S'2 : 1'
+p1789
+sa(dp1790
+g4
+S'Verona'
+p1791
+sg6
+S'Udinese'
+p1792
+sg8
+S'https://www.whoscored.com/Matches/1006061/Live'
+p1793
+sg10
+S'1 : 1'
+p1794
+sa(dp1795
+g4
+S'Genoa'
+p1796
+sg6
+S'Chievo'
+p1797
+sg8
+S'https://www.whoscored.com/Matches/1006060/Live'
+p1798
+sg10
+S'3 : 2'
+p1799
+sa(dp1800
+g4
+S'Frosinone'
+p1801
+sg6
+S'Sampdoria'
+p1802
+sg8
+S'https://www.whoscored.com/Matches/1006059/Live'
+p1803
+sg10
+S'2 : 0'
+p1804
+sa(dp1805
+g4
+S'Atalanta'
+p1806
+sg6
+S'Carpi'
+p1807
+sg8
+S'https://www.whoscored.com/Matches/1006057/Live'
+p1808
+sg10
+S'3 : 0'
+p1809
+sa(dp1810
+g4
+S'Inter'
+p1811
+sg6
+S'Juventus'
+p1812
+sg8
+S'https://www.whoscored.com/Matches/1006062/Live'
+p1813
+sg10
+S'0 : 0'
+p1814
+sa(dp1815
+g4
+S'Empoli'
+p1816
+sg6
+S'Genoa'
+p1817
+sg8
+S'https://www.whoscored.com/Matches/1006079/Live'
+p1818
+sg10
+S'2 : 0'
+p1819
+sa(dp1820
+g4
+S'Carpi'
+p1821
+sg6
+S'Bologna'
+p1822
+sg8
+S'https://www.whoscored.com/Matches/1006077/Live'
+p1823
+sg10
+S'1 : 2'
+p1824
+sa(dp1825
+g4
+S'Palermo'
+p1826
+sg6
+S'Inter'
+p1827
+sg8
+S'https://www.whoscored.com/Matches/1006084/Live'
+p1828
+sg10
+S'1 : 1'
+p1829
+sa(dp1830
+g4
+S'Sampdoria'
+p1831
+sg6
+S'Verona'
+p1832
+sg8
+S'https://www.whoscored.com/Matches/1006085/Live'
+p1833
+sg10
+S'4 : 1'
+p1834
+sa(dp1835
+g4
+S'Udinese'
+p1836
+sg6
+S'Frosinone'
+p1837
+sg8
+S'https://www.whoscored.com/Matches/1006086/Live'
+p1838
+sg10
+S'1 : 0'
+p1839
+sa(dp1840
+g4
+S'AC Milan'
+p1841
+sg6
+S'Sassuolo'
+p1842
+sg8
+S'https://www.whoscored.com/Matches/1006083/Live'
+p1843
+sg10
+S'2 : 1'
+p1844
+sa(dp1845
+g4
+S'Juventus'
+p1846
+sg6
+S'Atalanta'
+p1847
+sg8
+S'https://www.whoscored.com/Matches/1006081/Live'
+p1848
+sg10
+S'2 : 0'
+p1849
+sa(dp1850
+g4
+S'Lazio'
+p1851
+sg6
+S'Torino'
+p1852
+sg8
+S'https://www.whoscored.com/Matches/1006082/Live'
+p1853
+sg10
+S'3 : 0'
+p1854
+sa(dp1855
+g4
+S'Fiorentina'
+p1856
+sg6
+S'Roma'
+p1857
+sg8
+S'https://www.whoscored.com/Matches/1006080/Live'
+p1858
+sg10
+S'1 : 2'
+p1859
+sa(dp1860
+g4
+S'Chievo'
+p1861
+sg6
+S'Napoli'
+p1862
+sg8
+S'https://www.whoscored.com/Matches/1006078/Live'
+p1863
+sg10
+S'0 : 1'
+p1864
+sa(dp1865
+g4
+S'Bologna'
+p1866
+sg6
+S'Inter'
+p1867
+sg8
+S'https://www.whoscored.com/Matches/1006098/Live'
+p1868
+sg10
+S'0 : 1'
+p1869
+sa(dp1870
+g4
+S'Torino'
+p1871
+sg6
+S'Genoa'
+p1872
+sg8
+S'https://www.whoscored.com/Matches/1006106/Live'
+p1873
+sg10
+S'3 : 3'
+p1874
+sa(dp1875
+g4
+S'Sassuolo'
+p1876
+sg6
+S'Juventus'
+p1877
+sg8
+S'https://www.whoscored.com/Matches/1006105/Live'
+p1878
+sg10
+S'1 : 0'
+p1879
+sa(dp1880
+g4
+S'Roma'
+p1881
+sg6
+S'Udinese'
+p1882
+sg8
+S'https://www.whoscored.com/Matches/1006103/Live'
+p1883
+sg10
+S'3 : 1'
+p1884
+sa(dp1885
+g4
+S'Napoli'
+p1886
+sg6
+S'Palermo'
+p1887
+sg8
+S'https://www.whoscored.com/Matches/1006102/Live'
+p1888
+sg10
+S'2 : 0'
+p1889
+sa(dp1890
+g4
+S'AC Milan'
+p1891
+sg6
+S'Chievo'
+p1892
+sg8
+S'https://www.whoscored.com/Matches/1006101/Live'
+p1893
+sg10
+S'1 : 0'
+p1894
+sa(dp1895
+g4
+S'Verona'
+p1896
+sg6
+S'Fiorentina'
+p1897
+sg8
+S'https://www.whoscored.com/Matches/1006100/Live'
+p1898
+sg10
+S'0 : 2'
+p1899
+sa(dp1900
+g4
+S'Frosinone'
+p1901
+sg6
+S'Carpi'
+p1902
+sg8
+S'https://www.whoscored.com/Matches/1006099/Live'
+p1903
+sg10
+S'2 : 1'
+p1904
+sa(dp1905
+g4
+S'Atalanta'
+p1906
+sg6
+S'Lazio'
+p1907
+sg8
+S'https://www.whoscored.com/Matches/1006097/Live'
+p1908
+sg10
+S'2 : 1'
+p1909
+sa(dp1910
+g4
+S'Sampdoria'
+p1911
+sg6
+S'Empoli'
+p1912
+sg8
+S'https://www.whoscored.com/Matches/1006104/Live'
+p1913
+sg10
+S'1 : 1'
+p1914
+sa(dp1915
+g4
+S'Juventus'
+p1916
+sg6
+S'Torino'
+p1917
+sg8
+S'https://www.whoscored.com/Matches/1006123/Live'
+p1918
+sg10
+S'2 : 1'
+p1919
+sa(dp1920
+g4
+S'Inter'
+p1921
+sg6
+S'Roma'
+p1922
+sg8
+S'https://www.whoscored.com/Matches/1006122/Live'
+p1923
+sg10
+S'1 : 0'
+p1924
 sas.

@@ -38,31 +38,31 @@ class CrawlerArgsParser(object):
                         'PL_2012':'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/3389/Stages/6531/Show/England-Premier-League-2012-2013',\
                         'PL_2013':'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/3853/Stages/7794/Show/England-Premier-League-2013-2014',\
                         'PL_2014':'http://www.whoscored.com/Regions/252/Tournaments/2/Seasons/4311/Stages/9155/Show/England-Premier-League-2014-2015',\
-                        'PL_2015':'http://www.whoscored.com/Regions/252/Tournaments/2/England-Premier-League',\
+                        'PL_2015':'https://www.whoscored.com/Regions/252/Tournaments/2/Seasons/5826/Stages/12496/Show/England-Premier-League-2015-2016',\
                         'SA_2010':'http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/2626/Stages/4659/Show/Italy-Serie-A-2010-2011',\
                         'SA_2011':'http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/3054/Stages/5667/Show/Italy-Serie-A-2011-2012',\
                         'SA_2012':'http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/3512/Stages/6739/Show/Italy-Serie-A-2012-2013',\
                         'SA_2013':'http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/3978/Stages/8019/Show/Italy-Serie-A-2013-2014',\
                         'SA_2014':'http://www.whoscored.com/Regions/108/Tournaments/5/Seasons/5441/Stages/11369/Show/Italy-Serie-A-2014-2015',\
-                        'SA_2015':'http://www.whoscored.com/Regions/108/Tournaments/5/Italy-Serie-A',\
+                        'SA_2015':'https://www.whoscored.com/Regions/108/Tournaments/5/Seasons/5970/Stages/12770/Show/Italy-Serie-A-2015-2016',\
                         'LL_2010':'http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/2596/Stages/4624/Show/Spain-La-Liga-2010-2011',\
                         'LL_2011':'http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/3004/Stages/5577/Show/Spain-La-Liga-2011-2012',\
                         'LL_2012':'http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/3470/Stages/6652/Show/Spain-La-Liga-2012-2013',\
                         'LL_2013':'http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/3922/Stages/7920/Show/Spain-La-Liga-2013-2014',\
                         'LL_2014':'http://www.whoscored.com/Regions/206/Tournaments/4/Seasons/5435/Stages/11363/Show/Spain-La-Liga-2014-2015',\
-                        'LL_2015':'http://www.whoscored.com/Regions/206/Tournaments/4/Spain-La-Liga',\
+                        'LL_2015':'https://www.whoscored.com/Regions/206/Tournaments/4/Seasons/5933/Stages/12647/Show/Spain-La-Liga-2015-2016',\
                         'BL_2010':'http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/2520/Stages/4448/Show/Germany-Bundesliga-2010-2011',\
                         'BL_2011':'http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/2949/Stages/5492/Show/Germany-Bundesliga-2011-2012',\
                         'BL_2012':'http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/3424/Stages/6576/Show/Germany-Bundesliga-2012-2013',\
                         'BL_2013':'http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/3863/Stages/7806/Show/Germany-Bundesliga-2013-2014',\
                         'BL_2014':'http://www.whoscored.com/Regions/81/Tournaments/3/Seasons/4336/Stages/9192/Show/Germany-Bundesliga-2014-2015',\
-                        'BL_2015':'http://www.whoscored.com/Regions/81/Tournaments/3/Germany-Bundesliga',\
+                        'BL_2015':'https://www.whoscored.com/Regions/81/Tournaments/3/Seasons/5870/Stages/12559/Show/Germany-Bundesliga-2015-2016',\
                         'L1_2010':'http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/2417/Stages/4273/Show/France-Ligue-1-2010-2011',\
                         'L1_2011':'http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/2920/Stages/5451/Show/France-Ligue-1-2011-2012',\
                         'L1_2012':'http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/3356/Stages/6476/Show/France-Ligue-1-2012-2013',\
                         'L1_2013':'http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/3836/Stages/7771/Show/France-Ligue-1-2013-2014',\
                         'L1_2014':'http://www.whoscored.com/Regions/74/Tournaments/22/Seasons/4279/Stages/9105/Show/France-Ligue-1-2014-2015',\
-                        'L1_2015':'http://www.whoscored.com/Regions/74/Tournaments/22/France-Ligue-1',}
+                        'L1_2015':'https://www.whoscored.com/Regions/74/Tournaments/22/Seasons/5830/Stages/12501/Show/France-Ligue-1-2015-2016',}
 
 
     def __init__(self):
@@ -74,7 +74,7 @@ class CrawlerArgsParser(object):
                            choices=self.leagues,nargs='?')
         self.parser.add_argument('year', metavar='Years',type=str, nargs='?',
                             help='A year to parse. Valid years are: '+', '.join([str(i) for i in range(MIN_YEAR,MAX_YEAR)]+[' or any range of them, separated by -.']),
-                            default=str(max(range(2010,2015))),\
+                            default=str(max(range(MIN_YEAR,MAX_YEAR))),\
                             choices=self._default_ranges())
         self.parser.add_argument('-u','--update',action='store_true',help='Crawel current year on all leagues for update')
      

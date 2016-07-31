@@ -3,10 +3,10 @@ This are the constants used in our project.
 
 **MIN_YEAR** = *2010*
 
-**MAX_YEAR** = *2015*
+**MAX_YEAR** = *2016*
 
 MAX_YEAR and MIN_YEAR should be changed according to current year (up to August it should be last year) and
-MAX_YEAR - 5 , due to inforamtion that is not saved before.
+MAX_YEAR - 5 , due to information that is not saved before.
 
 **YEARS** = *[str(i) for i in range(MIN_YEAR,MAX_YEAR)]*
 
@@ -23,7 +23,7 @@ import os
 
 
 MIN_YEAR = 2010
-MAX_YEAR = 2015
+MAX_YEAR = 2016
 
 YEARS = [str(i) for i in range(MIN_YEAR,MAX_YEAR)]
 
