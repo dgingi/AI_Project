@@ -1,0 +1,22 @@
+{
+	Team_Name: <text>,
+	Fixture: <number>,
+	Date: <date>,
+	Year: <number>,
+	Players: [
+			{
+				Player_Name: <text>,
+				PA%: <number>,
+				Touches: <number>,
+				Goals: <number>,
+				Shots_on_Target: <number>,
+				...
+			},
+			...
+	],
+	Odds: 	{
+				1: <float>,
+				X: <float>,
+				2: <float>,
+			}
+}
